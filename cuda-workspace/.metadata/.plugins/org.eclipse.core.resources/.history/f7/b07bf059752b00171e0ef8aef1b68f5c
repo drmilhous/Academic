@@ -1,0 +1,301 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <thrust/device_vector.h>
+#define N 10
+#define UP 'U'
+#define LEFT 'L'
+
+typedef struct path
+	{
+	struct path * next;
+	char direction;
+	int letters[4];
+	} path;
+
+struct cell
+	{
+	int value;
+	int bitmap;
+	};
+
+typedef struct grid
+	{
+	cell ** cells;
+	short size;
+	struct grid * next;
+	} grid;
+
+void initCell(cell * c);
+__device__ grid * computeRecursive(grid * g, path * p, int x, int y);
+__device__ void eliminateValue(cell **c, int row, int col, int max, int value);
+__device__ void add(grid ** base, grid ** last, grid * newList);
+__global__ void copyCell(cell * o, cell * n)
+	{
+
+	}
+__global__ void printGrid(Grid * g)
+	{
+		int n = g->size;
+		for (int row = 0; row < n; row++)
+			{
+				for (int col = 0; col < n; col++)
+					{
+						//printf("[%02d][%02d]%02X ",row, col, c[row * N + col].bitmap);
+						cell * c = g->cells[row][col];
+						int value = c[index].value;
+						char printC = ' ';
+						if (value == -1)
+							{
+								value = c[index].bitmap;
+							}
+						else
+							printC = convert(value);
+						printf("%02X-%c ", value, printC);
+					}
+				printf("\n");
+			}
+	}
+__device__ void eliminateValue(cell **c, int row, int col, int max, int value)
+	{
+		int mask = pow(2.0, (double) value);
+		for (int r1 = 0; r1 < max; r1++)
+			{
+				if (r1 != row)
+					{
+						c[r1][col].bitmap |= mask;
+					}
+			}
+		for (int c1 = 0; c1 < max; c1++)
+			{
+				if (c1 != col)
+					{
+						c[row][c1].bitmap |= mask;
+					}
+				//x->c = ch;
+			}
+	}
+__device__ int check(grid * g, int row, int col, int number)
+	{
+		int result;
+		cell * c = &g->cells[row][col];
+		int mask = pow(2.0, (double) number);
+		int bits = c->bitmap;
+		result = (mask & bits);
+		return result;
+	}
+__device__ grid * cloneGrid(grid * g)
+	{
+		grid * g2 = (grid *) malloc(sizeof(grid));
+		g2->size = g->size;
+		cell * array = (cell *) malloc(g->size * g->size * sizeof(cell));
+		cell ** cells = (cell **) malloc( N * sizeof(cell *));
+		for (int i = 0; i < N; i++)
+			{
+				cells[i] = &array[i * N];
+			}
+		g2->cells = cells;
+		for (int row = 0; row < g->size; row++)
+			{
+				for (int col = 0; col < g->size; col++)
+					{
+						g2->cells[row][col].bitmap = g->cells[row][col].bitmap;
+						g2->cells[row][col].value = g->cells[row][col].value;
+					}
+			}
+		g2->next = NULL;
+		return g2;
+	}
+__global__ void compute(grid * g, path * p)
+	{
+
+		int x = blockIdx.x;
+		int y = threadIdx.x;
+		computeRecursive(g, p, x, y);
+	}
+__device__ grid * computeRecursive(grid * g, path * p, int x, int y)
+	{
+		grid * result = NULL;
+		grid * last = NULL;
+//cudaMalloc((void **) &result, sizeof(grid));
+		cell * current = &g->cells[x][y];
+		int checkValue = 0;
+		int value = p->letters[0];
+		grid * currentGrid = cloneGrid(g);
+		grid * previousGrid = NULL;
+		checkValue = check(currentGrid, x, y, value);
+		if (checkValue == 0)
+			{
+				current->value = value;
+				eliminateValue(currentGrid->cells, x, y, currentGrid->size, value);
+				previousGrid = cloneGrid(currentGrid);
+				if (p->direction == UP) //Do UP/DOWN
+					{
+
+						int lasty = y;
+						for (int y1 = 0; y1 < currentGrid->size; y1++) //check above
+							{
+								if (y1 != y)
+									{
+										int direction = y > y1 ? -1 : 1;
+										checkValue = 0;
+										for (int offset = 0; offset < 3; offset++)
+											{
+												value = p->letters[offset + 1];
+												lasty = (y1 + (offset * direction) + currentGrid->size) % currentGrid->size;
+												checkValue |= check(currentGrid, x, lasty, value);
+												if (checkValue == 0)
+													{
+														currentGrid->cells[x][lasty].value = value;
+														eliminateValue(currentGrid->cells, x, lasty, currentGrid->size, value);
+													}
+											}
+
+										if (checkValue == 0) //recursive call
+											{
+												if (p->next != NULL)
+													{
+														grid * temp = computeRecursive(currentGrid, p->next, x, lasty);
+														add(&result, &last, temp);
+													}
+											}
+									}
+								currentGrid = cloneGrid(previousGrid);
+							}
+					}
+				else // direction = left/right
+					{
+
+					}
+			}
+		return result;
+	}
+__device__ void add(grid ** base, grid ** last, grid * newList)
+	{
+		if (newList != NULL)
+			{
+				if (*base == NULL)
+					{
+						*base = newList;
+						*last = *base;
+					}
+				else
+					{
+						(*last)->next = newList;
+					}
+				while ((*last)->next != NULL)
+					{
+						*last = (*last)->next;
+					}
+			}
+	}
+
+/*
+ __global__ void add( int *a, int *b, int *c )
+ {
+ int tid = blockIdx.x; // handle the data at this index
+ if (tid < N)
+ c[tid] = a[tid] + b[tid];
+ }*/
+
+char convert(int x)
+	{
+		char res = 'a';
+		int amount = log2((double) x) + (int) res;
+		res = (char) amount;
+		return res;
+	}
+
+int main(void)
+	{
+		grid * g;
+		cell * array;
+		cell** cells;
+		int size = N * N;
+		int n = N;
+		cudaMallocManaged((void**) &g, sizeof(grid));
+		g->size = N;
+		cudaMallocManaged((void**) &array, size * sizeof(cell));
+		cudaMallocManaged((void **) &cells, N * sizeof(cell *));
+
+		for (int i = 0; i < N; i++)
+			{
+				cells[i] = &array[i * N];
+			}
+		path *p;
+		cudaMallocManaged((void **) &p, 2);
+		path *p2 = p++;
+
+		g->cells = cells;
+		p->next = p++;
+		p->direction = UP;
+		p->letters[0] = 4;
+		p->letters[1] = 3;
+		p->letters[2] = 1;
+		p->letters[3] = 4;
+
+		p2->next = NULL;
+		p2->direction = LEFT;
+		p2->letters[0] = 4;
+		p2->letters[1] = 2;
+		p2->letters[2] = 1;
+		p2->letters[3] = 3;
+
+		compute<<<n, n>>>(g, p);
+		cudaFree(array);
+		return 0;
+	}
+
+void test2()
+	{
+
+	}
+
+void initCell(cell * c)
+	{
+
+		for (int row = 0; row < N; row++)
+			{
+				for (int col = 0; col < N; col++)
+					{
+						c[row * N + col].value = col;
+						printf("[%02d][%02d]%02d ", row, col, c[row * N + col].bitmap);
+						c[row * N + col].value = -1;
+					}
+				printf("\n");
+			}
+	}
+/*
+ void test1()
+ {
+ cell * c = (cell *)malloc(N*N*sizeof(cell));
+ cell * dev_c;
+ cudaMalloc((void **) &dev_c, N*N*sizeof(cell));
+ initCell(c);
+ cudaMemcpy( dev_c, c, N*N * sizeof(cell), cudaMemcpyHostToDevice) ;
+ char ch = 'a';
+ ch = (char) (((int) ch) + 7);
+ removeIndex<<<10,1>>>( dev_c, 0,5,N,pow(2,7));
+ puts("");
+ cudaMemcpy( c, dev_c, N*N * sizeof(cell),cudaMemcpyDeviceToHost);
+ for (int row=0; row<N; row++)
+ {
+ for (int col=0; col<N; col++)
+ {
+ //printf("[%02d][%02d]%02X ",row, col, c[row * N + col].bitmap);
+ int index = row * N + col;
+ int value = c[index].value;
+ char printC = ' ';
+ if( value == -1)
+ {
+ value = c[index].bitmap;
+ }
+ else
+
+ printC = convert(value);
+ printf("%02X-%c ", value, printC);
+ }
+ printf("\n");
+ }
+ // free the memory allocated on the GPU
+ cudaFree( dev_c );
+ }*/

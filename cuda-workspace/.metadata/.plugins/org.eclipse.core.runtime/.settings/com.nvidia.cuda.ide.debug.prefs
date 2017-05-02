@@ -1,0 +1,4 @@
+TestingCudo.pinnedThreads=compute(g\=0x7060c0000, p\=0x7060c3040)\=(0,0,0)(0,0,0);\:
+break_on_launch=all
+eclipse.preferences.version=1
+prompt.preemption=never

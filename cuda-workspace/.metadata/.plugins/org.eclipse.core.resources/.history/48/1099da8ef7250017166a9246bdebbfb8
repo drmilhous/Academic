@@ -1,0 +1,210 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <thrust/device_vector.h>
+#define N 10
+#define UP 'U'
+#define LEFT 'L'
+
+typedef struct path{
+	struct path * next;
+	char direction;	
+	int letters[4];	
+}path;
+
+struct cell{
+int value;
+int bitmap;
+};
+
+struct grid{
+	cell ** cells;
+	short size;
+};
+
+void initCell(cell * c);
+__device__ void eliminateValue(cell **c, int row, int col,int max, int value);
+__global__ void copyCell(cell * o, cell * n)
+{
+
+}
+
+__device__ void eliminateValue(cell **c, int row, int col,int max, int value)
+{
+	for( int r1 = 0; r1 < max; r1++)
+	{
+		if( r1 != row)
+		{
+			c[r1][col].bitmap |= value;
+		}
+	}
+	for(int c1 = 0; c1 < max; c1++)
+	{
+		if(c1 != col)
+		{
+			c[row][c1].bitmap |= value;
+		}
+		//x->c = ch;
+	}
+}
+__device__ void check(grid * g, int row, int col, int number, int * result)
+{
+	cell * c = &g->cells[row][col];
+	int mask = pow(2.0, (double) number);
+	*result = (mask & c->bitmap);
+
+}
+__device__ grid * cloneGrid(grid * g)
+{
+	grid * g2;
+	cudaMalloc((void **) & g2, sizeof(grid));
+	g2->size = g->size;
+	cell * array;
+	cell ** cells;
+	cudaMalloc( (void**)&array,g->size*sizeof(cell));
+	cudaMalloc((void **)&cells, N * sizeof(cell *));
+	for(int i = 0; i < N; i++)
+	{
+		cells[i] = &array[i * N];
+	}
+	g2->cells = cells;
+	for(int row =0; row< g->size; row++)
+	{
+		for(int col = 0; col < g->size; col++)
+		{
+			g2->cells[row][col].bitmap = g->cells[row][col].bitmap;
+			g2->cells[row][col].value = g->cells[row][col].value;
+		}
+	}
+	return g2;
+
+}
+__device__ void compute(grid * g,path * p)
+{
+	thrust::device_vector<grid> validGrids();
+	int x = blockIdx.x;
+	int y = threadIdx.x;
+	cell * current = &g->cells[x][y];
+	int checkValue = 0;
+	int value = p->letters[0];
+	check(g,x,y,value,&checkValue);
+	if(checkValue == 0)
+	{
+		current->value =value;
+		eliminateValue(g->cells,x,y,g->size,value);
+		validGrids[0] = (device_ptr)*g;
+
+		if(p->direction == UP)
+		{
+			value = p->letters[1];
+			for(int y1 = 0; y1 < g->size; y1++)
+			{
+				g->cells[x][y1].value = value;
+			}
+		}
+		else
+		{
+
+		}
+	}
+}
+
+
+/*
+__global__ void add( int *a, int *b, int *c )
+{
+	int tid = blockIdx.x; // handle the data at this index
+	if (tid < N)
+		c[tid] = a[tid] + b[tid];
+}*/
+
+char convert(int x)
+{
+	char res = 'a';
+	int amount = log2((double)x) + (int)res;
+	res = (char) amount;
+	return res;
+}
+
+int main( void )
+{
+	grid * g;
+	cell * array;
+	cell** cells;
+	int size = N*N;
+	int n = N;
+	cudaMallocManaged( (void**)&g,sizeof(grid));
+	g->size = N;
+	cudaMallocManaged( (void**)&array,size*sizeof(cell));
+	cudaMallocManaged((void **)&cells, N * sizeof(cell *));
+
+	for(int i = 0; i < N; i++)
+	{
+		cells[i] = &array[i * N];
+	}
+	path *p;
+	cudaMallocManaged((void **)&p, 2);
+	g->cells = cells;
+	p->next = p++;
+	p->letters[0] = 4;
+	p->letters[1] = 3;
+	p->letters[2] = 1;
+	p->letters[3] = 4;
+	compute<<<n,n>>>(g,p);
+	cudaFree(array);
+	return 0;
+}
+
+void test2()
+{
+
+}
+
+void initCell(cell * c)
+{
+
+	for (int row=0; row<N; row++)
+		{
+			for (int col=0; col<N; col++)
+			{
+				c[row * N + col].value = col;
+				printf("[%02d][%02d]%02d ",row, col, c[row * N + col].bitmap);
+				c[row * N + col].value = -1;
+			}
+			printf("\n");
+		}
+}
+/*
+void test1()
+{
+	cell * c = (cell *)malloc(N*N*sizeof(cell));
+	cell * dev_c;
+	cudaMalloc((void **) &dev_c, N*N*sizeof(cell));
+	initCell(c);
+	cudaMemcpy( dev_c, c, N*N * sizeof(cell), cudaMemcpyHostToDevice) ;
+	char ch = 'a';
+	ch = (char) (((int) ch) + 7);
+	removeIndex<<<10,1>>>( dev_c, 0,5,N,pow(2,7));
+	puts("");
+	cudaMemcpy( c, dev_c, N*N * sizeof(cell),cudaMemcpyDeviceToHost);
+	for (int row=0; row<N; row++)
+		{
+			for (int col=0; col<N; col++)
+			{
+				//printf("[%02d][%02d]%02X ",row, col, c[row * N + col].bitmap);
+				int index = row * N + col;
+				int value = c[index].value;
+				char printC = ' ';
+				if( value == -1)
+				{
+				   value = c[index].bitmap;
+				}
+				else
+
+					printC = convert(value);
+				printf("%02X-%c ", value, printC);
+			}
+			printf("\n");
+		}
+	// free the memory allocated on the GPU
+	cudaFree( dev_c );
+}*/
