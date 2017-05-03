@@ -22,8 +22,8 @@ struct cell
 
 typedef struct grid
 	{
-	//cell ** cells;
-	cell cells[N][N];
+	cell ** cells;
+	//cell cells[N][N];
 	short size;
 	struct grid * next;
 	int xx;
@@ -107,7 +107,7 @@ grid * allocateGrid(int size)
 		grid * g2 = NULL;
 		cudaMallocManaged((void **) &g2, sizeof(grid));
 		g2->size = size;
-		/*cell * array;
+		cell * array;
 		cudaMallocManaged((void **) &array, size * size * sizeof(cell));
 		cell ** cells;
 		cudaMallocManaged((void **) &cells, size * sizeof(cell *));
@@ -116,7 +116,7 @@ grid * allocateGrid(int size)
 				cells[i] = &array[i * size];
 			}
 		g2->cells = cells;
-		*/
+		
 		for (int row = 0; row < size; row++)
 			{
 				for (int col = 0; col < size; col++)
@@ -134,14 +134,13 @@ __device__ grid * cloneGrid(grid * g)
 	{
 		grid * g2 = (grid *) malloc(sizeof(grid));
 		g2->size = g->size;
-		/*cell * array = (cell *) malloc(g->size * g2->size * sizeof(cell));
+		cell * array = (cell *) malloc(g->size * g2->size * sizeof(cell));
 		cell ** cells = (cell **) malloc(g2->size * sizeof(cell *));
 		for (int i = 0; i < g->size; i++)
 			{
 				cells[i] = &array[i * g2->size];
 			}
 		g2->cells = cells;
-		*/
 		for (int row = 0; row < g2->size; row++)
 			{
 				for (int col = 0; col < g2->size; col++)
@@ -173,8 +172,9 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 		grid * result = NULL;
 		int checkValue = 0;
 		int value = p->letters[0];
-		grid c;
-		grid * currentGrid = &c;
+		//grid c;
+		//grid * currentGrid = &c;
+		grid * currentGrid = allocateGrid(g->size);
 		cloneToGrid(g,currentGrid);
 		grid previousGrid;
 		checkValue = check(currentGrid, x, y, value);
