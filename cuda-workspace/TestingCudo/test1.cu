@@ -66,7 +66,7 @@ void printGrid(grid * g, int x, int y)
 				printf("\n");
 			}
 	}
-__device__ void eliminateValue(cell **c, int row, int col, int max, int value)
+__device__ void eliminateValue(cell c[N][N], int row, int col, int max, int value)
 	{
 		int mask = pow(2.0, (double) value);
 		for (int r1 = 0; r1 < max; r1++)
