@@ -173,7 +173,7 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 		grid * result = NULL;
 		int checkValue = 0;
 		int value = p->letters[0];
-		gric c;
+		grid c;
 		grid * currentGrid &c;
 		cloneToGrid(g,currentGrid);
 		grid previousGrid;
