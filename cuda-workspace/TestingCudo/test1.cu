@@ -199,7 +199,7 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 												if (checkValue == 0)
 													{
 														currentGrid->cells[x][lasty].value = value;
-														eliminateValue(currentGrid->cells, x, lasty, currentGrid->size, value);
+														eliminateValue(&currentGrid->cells, x, lasty, currentGrid->size, value);
 													}
 											}
 
@@ -240,7 +240,7 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 												if (checkValue == 0)
 													{
 														currentGrid->cells[lastx][y].value = value;
-														eliminateValue(currentGrid->cells, lastx, y, currentGrid->size, value);
+														eliminateValue(&currentGrid->cells, lastx, y, currentGrid->size, value);
 													}
 											}
 
