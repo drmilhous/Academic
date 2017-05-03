@@ -181,7 +181,7 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 			{
 				currentGrid->cells[x][y].value = value;
 				eliminateValue(currentGrid->cells, x, y, currentGrid->size, value);
-				cloneToGrid(currentGrid, &previousGrid);
+				cloneToGrid(currentGrid, previousGrid);
 				if (p->direction == UP) //Do UP/DOWN
 					{
 						int lasty = y;
@@ -220,7 +220,7 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 													}
 											}
 									}
-								cloneToGrid(&previousGrid, currentGrid);
+								cloneToGrid(previousGrid, currentGrid);
 							}
 					}
 				else // direction = left/right
@@ -260,7 +260,7 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 														//add(&result, &last, temp);
 													}
 											}
-										cloneToGrid(&previousGrid, currentGrid);
+										cloneToGrid(previousGrid, currentGrid);
 									}
 							}
 					}
