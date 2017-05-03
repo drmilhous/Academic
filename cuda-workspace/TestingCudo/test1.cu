@@ -22,7 +22,8 @@ struct cell
 
 typedef struct grid
 	{
-	cell ** cells;
+	//cell ** cells;
+	cell cells[N][N];
 	short size;
 	struct grid * next;
 	int xx;
@@ -38,10 +39,6 @@ __device__ void eliminateValue(cell **c, int row, int col, int max, int value);
 __device__ void add(grid ** base, grid ** last, grid * newList);
 void printGrid(grid * g, int x, int y);
 __device__ grid * cloneGrid(grid * g);
-__global__ void copyCell(cell * o, cell * n)
-	{
-
-	}
 void printGrid(grid * g, int x, int y)
 	{
 		int n = g->size;
@@ -104,17 +101,47 @@ __device__ int check(grid * g, int row, int col, int number)
 			}
 		return result;
 	}
+grid * allocateGrid(int size)
+	{
+
+		grid * g2 = NULL;
+		cudaMallocManaged((void **) &g2, sizeof(grid));
+		g2->size = size;
+		/*cell * array;
+		cudaMallocManaged((void **) &array, size * size * sizeof(cell));
+		cell ** cells;
+		cudaMallocManaged((void **) &cells, size * sizeof(cell *));
+		for (int i = 0; i < size; i++)
+			{
+				cells[i] = &array[i * size];
+			}
+		g2->cells = cells;
+		*/
+		for (int row = 0; row < size; row++)
+			{
+				for (int col = 0; col < size; col++)
+					{
+						g2->cells[row][col].bitmap = 0;
+						g2->cells[row][col].value = -1;
+					}
+			}
+		g2->next = NULL;
+		g2->ok = '0';
+		//printf("XX%p->%c\n",g2, g2->ok);
+		return g2;
+	}
 __device__ grid * cloneGrid(grid * g)
 	{
 		grid * g2 = (grid *) malloc(sizeof(grid));
 		g2->size = g->size;
-		cell * array = (cell *) malloc(g->size * g2->size * sizeof(cell));
+		/*cell * array = (cell *) malloc(g->size * g2->size * sizeof(cell));
 		cell ** cells = (cell **) malloc(g2->size * sizeof(cell *));
 		for (int i = 0; i < g->size; i++)
 			{
 				cells[i] = &array[i * g2->size];
 			}
 		g2->cells = cells;
+		*/
 		for (int row = 0; row < g2->size; row++)
 			{
 				for (int col = 0; col < g2->size; col++)
@@ -144,19 +171,18 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 		int index = y * g->size + x;
 		int set = 0;
 		grid * result = NULL;
-		//grid * last = NULL;
-
 		int checkValue = 0;
 		int value = p->letters[0];
-		grid * currentGrid = cloneGrid(g);
-		//printf("YY%p->'%d'\n",currentGrid, currentGrid->size);
-		grid * previousGrid = NULL;
+		gric c;
+		grid * currentGrid &c;
+		cloneToGrid(g,currentGrid);
+		grid previousGrid;
 		checkValue = check(currentGrid, x, y, value);
 		if (checkValue == 0)
 			{
 				currentGrid->cells[x][y].value = value;
 				eliminateValue(currentGrid->cells, x, y, currentGrid->size, value);
-				previousGrid = cloneGrid(currentGrid);
+				cloneToGrid(currentGrid, &previousGrid);
 				if (p->direction == UP) //Do UP/DOWN
 					{
 						int lasty = y;
@@ -195,7 +221,7 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 													}
 											}
 									}
-								cloneToGrid(previousGrid, currentGrid);
+								cloneToGrid(&previousGrid, currentGrid);
 							}
 					}
 				else // direction = left/right
@@ -235,7 +261,7 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 														//add(&result, &last, temp);
 													}
 											}
-										cloneToGrid(previousGrid, currentGrid);
+										cloneToGrid(&previousGrid, currentGrid);
 									}
 							}
 					}
@@ -318,34 +344,7 @@ __device__ void cloneToGrid(grid * g, grid * g2)
 					}
 			}
 	}
-grid * allocateGrid(int size)
-	{
 
-		grid * g2 = NULL;
-		cudaMallocManaged((void **) &g2, sizeof(grid));
-		g2->size = size;
-		cell * array;
-		cudaMallocManaged((void **) &array, size * size * sizeof(cell));
-		cell ** cells;
-		cudaMallocManaged((void **) &cells, size * sizeof(cell *));
-		for (int i = 0; i < size; i++)
-			{
-				cells[i] = &array[i * size];
-			}
-		g2->cells = cells;
-		for (int row = 0; row < size; row++)
-			{
-				for (int col = 0; col < size; col++)
-					{
-						g2->cells[row][col].bitmap = 0;
-						g2->cells[row][col].value = -1;
-					}
-			}
-		g2->next = NULL;
-		g2->ok = '0';
-		//printf("XX%p->%c\n",g2, g2->ok);
-		return g2;
-	}
 
 path * allocate(char c, char c1, char* c2, int direction)
 	{
