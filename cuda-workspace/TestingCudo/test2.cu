@@ -75,7 +75,8 @@ __global__ void rec(int count)
 	if(idx < N * N)
 	{
 		int * temp = (int *) malloc(1);
-		recursive(count, temp);
+		*temp = recursive(count, temp);
+		printf("Sume = %d", *temp);
 	}
 }
 int main()
