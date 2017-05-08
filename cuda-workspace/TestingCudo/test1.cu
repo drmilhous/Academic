@@ -133,6 +133,8 @@ grid * allocateGrid(int size)
 __device__ grid * cloneGrid(grid * g)
 	{
 		grid * g2 = (grid *) malloc(sizeof(grid));
+		if(g2 != NULL)
+		{
 		g2->size = g->size;
 		cell * array = (cell *) malloc(g->size * g2->size * sizeof(cell));
 		cell ** cells = (cell **) malloc(g2->size * sizeof(cell *));
@@ -151,6 +153,7 @@ __device__ grid * cloneGrid(grid * g)
 			}
 		g2->next = NULL;
 		g2->ok = '0';
+		}
 		//printf("AA%p->%d\n",g2, g2->size);
 		return g2;
 	}
@@ -175,6 +178,8 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 		//grid c;
 		//grid * currentGrid = &c;
 		grid * currentGrid = cloneGrid(g);
+		if(currentGrid != NULL)
+		{
 		grid* previousGrid = NULL;
 		checkValue = check(currentGrid, x, y, value);
 		if (checkValue == 0)
@@ -265,6 +270,11 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 							}
 					}
 			}
+		}
+		else
+		{
+			printf("Memory Allocation Error");
+		}
 		/*free(&currentGrid->cells[0]);
 		free(currentGrid->cells);
 		free(currentGrid);*/
