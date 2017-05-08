@@ -66,7 +66,7 @@ void printGrid(grid * g, int x, int y)
 				printf("\n");
 			}
 	}
-__device__ void eliminateValue(cell c[N][N], int row, int col, int max, int value)
+__device__ void eliminateValue(cell **c, int row, int col, int max, int value)
 	{
 		int mask = pow(2.0, (double) value);
 		for (int r1 = 0; r1 < max; r1++)
@@ -180,7 +180,7 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 		if (checkValue == 0)
 			{
 				currentGrid->cells[x][y].value = value;
-				eliminateValue(currentGrid->cells, x, y, currentGrid->size, value);
+				eliminateValue(&currentGrid->cells, x, y, currentGrid->size, value);
 				cloneToGrid(currentGrid, previousGrid);
 				if (p->direction == UP) //Do UP/DOWN
 					{
@@ -199,7 +199,7 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 												if (checkValue == 0)
 													{
 														currentGrid->cells[x][lasty].value = value;
-														eliminateValue(currentGrid->cells, x, lasty, currentGrid->size, value);
+														eliminateValue(&currentGrid->cells, x, lasty, currentGrid->size, value);
 													}
 											}
 
@@ -240,7 +240,7 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 												if (checkValue == 0)
 													{
 														currentGrid->cells[lastx][y].value = value;
-														eliminateValue(currentGrid->cells, lastx, y, currentGrid->size, value);
+														eliminateValue(&currentGrid->cells, lastx, y, currentGrid->size, value);
 													}
 											}
 
