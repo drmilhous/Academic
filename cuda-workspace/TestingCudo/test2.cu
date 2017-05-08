@@ -60,7 +60,7 @@ __device__ int  recursive(int all, int count, int * t)
 	{
 		int *x = (int *)malloc(all);
 		*x = count;
-		res += recursive(count, x);
+		res += recursive(all, count, x);
 		free(x);
 	}
 	else
