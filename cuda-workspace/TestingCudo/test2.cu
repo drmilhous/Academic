@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define N 10
-
+/*
 typedef struct graph{
 
 	char * data;
@@ -51,6 +51,7 @@ int main()
 	printf("Yo\n");
 	return 0;
 }*/
+*/
 __device__ int  recursive(int count, int * t)
 {
 	int res = 0;
@@ -73,7 +74,7 @@ __global__ void rec(int count)
 	int idx = blockIdx.x * blockDim.x + threadIdx.x;
 	if(idx < N * N)
 	{
-		int * temp = malloc(1);
+		int * temp = (int *) malloc(1);
 		recursive(count, temp);
 	}
 }
