@@ -59,7 +59,7 @@ int main()
 	scanf("%d", &value);
 	//cout << "Yo Yo" << endl;
 	printf("Hii\n");
-	b<<<N,N>>>(value);
+	rec<<<N,N>>>(value);
 	cudaDeviceSynchronize();
 	printf("Yo\n");
 	return 0;
