@@ -51,20 +51,6 @@ int main()
 	printf("Yo\n");
 	return 0;
 }*/
-
-int main()
-{
-	int value;
-	printf("Enter the size:");
-	scanf("%d", &value);
-	//cout << "Yo Yo" << endl;
-	printf("Hii\n");
-	rec<<<N,N>>>(value);
-	cudaDeviceSynchronize();
-	printf("Yo\n");
-	return 0;
-}
-
 __device__ void recursive(int count)
 {
 	count--;
@@ -81,4 +67,18 @@ __global__ void rec(int count)
 		recursive(count);
 	}
 }
+int main()
+{
+	int value;
+	printf("Enter the size:");
+	scanf("%d", &value);
+	//cout << "Yo Yo" << endl;
+	printf("Hii\n");
+	rec<<<N,N>>>(value);
+	cudaDeviceSynchronize();
+	printf("Yo\n");
+	return 0;
+}
+
+
 
