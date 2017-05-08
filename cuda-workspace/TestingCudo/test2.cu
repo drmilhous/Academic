@@ -58,7 +58,7 @@ __device__ int  recursive(int count, int * t)
 	count--;
 	if(count > 0)
 	{
-		int *x = malloc(count);
+		int *x = (int *)malloc(count);
 		*x = count;
 		res += recursive(count, x);
 		free(x);
