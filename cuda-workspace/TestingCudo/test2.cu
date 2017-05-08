@@ -51,20 +51,30 @@ int main()
 	printf("Yo\n");
 	return 0;
 }*/
-__device__ void recursive(int count)
+__device__ int  recursive(int count, int * t)
 {
+	int res = 0;
 	count--;
 	if(count > 0)
 	{
-		recursive(count);
+		int *x = malloc(count);
+		*x = count;
+		res += recursive(count, x);
+		free(x);
 	}
+	else
+	{
+		res = count+1;
+	}
+	return res + *t;
 }
 __global__ void rec(int count)
 {
 	int idx = blockIdx.x * blockDim.x + threadIdx.x;
 	if(idx < N * N)
 	{
-		recursive(count);
+		int * temp = malloc(1);
+		recursive(count, temp);
 	}
 }
 int main()
