@@ -52,13 +52,13 @@ int main()
 	return 0;
 }*/
 
-__device__ int  recursive(int count, int * t)
+__device__ int  recursive(int all, int count, int * t)
 {
 	int res = 0;
 	count--;
 	if(count > 0)
 	{
-		int *x = (int *)malloc(count);
+		int *x = (int *)malloc(all);
 		*x = count;
 		res += recursive(count, x);
 		free(x);
@@ -69,25 +69,28 @@ __device__ int  recursive(int count, int * t)
 	}
 	return res + *t;
 }
-__global__ void rec(int count)
+__global__ void rec(int count, int allocate)
 {
 	int idx = blockIdx.x * blockDim.x + threadIdx.x;
 	//if(idx < N * N)
 	{
-		int * temp = (int *) malloc(1);
+		int * temp = (int *) malloc(allocate);
 		*temp = 0;
-		*temp = recursive(count, temp);
-		printf("Sume = %d", *temp);
+		*temp = recursive(allocate, count, temp);
+		printf("Sume = %d\n", *temp);
 	}
 }
 int main()
 {
 	int value;
+	int allocate;
 	printf("Enter the size:");
 	scanf("%d", &value);
+	printf("Enter the Stack size:");
+	scanf("%d", &allocate);
 	//cout << "Yo Yo" << endl;
 	printf("Hii\n");
-	rec<<<N,N>>>(value);
+	rec<<<N,N>>>(value, allocate);
 	cudaDeviceSynchronize();
 	printf("Yo\n");
 	return 0;
