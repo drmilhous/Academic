@@ -161,7 +161,7 @@ __global__ void compute(grid * g, path * p, grid ** result)
 			{
 				int x = blockIdx.x;
 				int y = threadIdx.x;
-				computeRecursive(g, p, x, y, result, 2);
+				computeRecursive(g, p, x, y, result, 1);
 			}
 	}
 __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, int recCount)
