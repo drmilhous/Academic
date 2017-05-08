@@ -72,7 +72,7 @@ __device__ int  recursive(int count, int * t)
 __global__ void rec(int count)
 {
 	int idx = blockIdx.x * blockDim.x + threadIdx.x;
-	if(idx < N * N)
+	//if(idx < N * N)
 	{
 		int * temp = (int *) malloc(1);
 		*temp = recursive(count, temp);
