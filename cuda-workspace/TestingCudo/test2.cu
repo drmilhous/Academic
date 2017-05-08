@@ -51,7 +51,7 @@ int main()
 	printf("Yo\n");
 	return 0;
 }*/
-*/
+
 __device__ int  recursive(int count, int * t)
 {
 	int res = 0;
