@@ -86,6 +86,22 @@ __device__ void eliminateValue(cell **c, int row, int col, int max, int value)
 				//x->c = ch;
 			}
 	}
+__device__ int pow2(int x)
+{
+	int sum = 1;
+	if( x == 0)
+	{
+		sum = 0;
+	}
+	else
+	{
+	for(int i = 1; i < x; i++)
+	{
+		sum = sum *2;
+	}
+	}
+	return sum;
+}
 __device__ int check(grid * g, int row, int col, int number)
 	{
 		int result;
@@ -96,7 +112,8 @@ __device__ int check(grid * g, int row, int col, int number)
 			}
 		else
 			{
-				int mask = pow(2.0, (double) number);
+				//int mask = pow(2.0, (double) number);
+				int mask = pow2(number);
 				int bits = c->bitmap;
 				result = (mask & bits);
 			}
