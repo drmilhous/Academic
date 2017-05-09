@@ -214,8 +214,8 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 												if (set == 0)
 													{
 														set = 1;
-														cloneToGrid(currentGrid, res[index]);
-														res[index]->ok = '1';
+														//cloneToGrid(currentGrid, res[index]);
+														currentGrid->ok = '1';
 													}
 												if (p->next != NULL && recCount < MAX)
 													{
@@ -253,8 +253,9 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 												if (set == 0)
 													{
 														set = 1;
-														cloneToGrid(currentGrid, res[index]);
-														res[index]->ok = '1';
+														//cloneToGrid(currentGrid, res[index]);
+														//res[index]->ok = '1';
+														currentGrid->ok = '1';
 													}
 												//printGrid(currentGrid, x, y);
 												if (p->next != NULL && recCount <= MAX)
@@ -568,8 +569,9 @@ int foo(path * p)
 					{
 						if (result[i]->ok == '1')
 							{
+								int idx = (row * size + col) * 10;
 								printf("(%d,%d)\n", row, col);
-								printGrid(result[i], row, col);
+								printGrid(result[idx], row, col);
 							}
 						i++;
 					}
