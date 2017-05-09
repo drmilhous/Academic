@@ -27,9 +27,9 @@ typedef struct grid
 	//cell cells[N][N];
 	short size;
 	struct grid * next;
-	int xx;
+	//int xx;
 	char ok;
-	int yy;
+	//int yy;
 	} grid;
 
 void initCell(cell * c);
@@ -543,7 +543,7 @@ int foo(path * p)
 		 */
 		int i = 0;
 		grid **result;
-		cudaMallocManaged((void**) &result, sizeof(grid*) * size);
+		cudaMallocManaged((void**) &result, sizeof(grid*) * size * size * 10);
 		for (int i = 0; i < nBYn * 10; i++)
 			{
 				result[i] = allocateGrid(size);
