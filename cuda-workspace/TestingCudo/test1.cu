@@ -170,14 +170,14 @@ __global__ void compute(grid * g, path * p, grid ** result)
 __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, int recCount)
 	{
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
-		recCount = recCount +1 ;
+		grid * currentGrid = res[idx*10 + recCount];
+		recCount = recCount +2 ;
 		int index = y * g->size + x;
 		int set = 0;
-		grid * result = NULL;
+		//grid * result = NULL;
 		int checkValue = 0;
 		int value = p->letters[0];
 		//grid * currentGrid = cloneGrid(g);
-		grid * currentGrid = res[idx*10 + recCount];
 		cloneToGrid(g,currentGrid);
 		if(currentGrid != NULL)
 		{

@@ -80,7 +80,7 @@ __global__ void rec(int count, int allocate)
 		printf("Sume = %d\n", *temp);
 	}
 }
-int main()
+/*int main()
 {
 	int value;
 	int allocate;
@@ -98,3 +98,4 @@ int main()
 
 
 
+*/
