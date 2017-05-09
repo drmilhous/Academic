@@ -547,7 +547,7 @@ int foo(path * p)
 		int i = 0;
 		grid **result;
 		cudaMallocManaged((void**) &result, sizeof(grid*) * size * size * MAX * 3);
-		for (int i = 0; i < nBYn * 10; i++)
+		for (int i = 0; i < nBYn * MAX * 3; i++)
 			{
 				result[i] = allocateGrid(size);
 			}
