@@ -71,7 +71,7 @@ void printGrid(grid * g)
 	int sum = 1;
 	if( x == 0)
 	{
-		sum = 0;
+		sum = 1;
 	}
 	else
 	{
@@ -192,7 +192,7 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 		int base = idx * MAX + recCount;
 		grid * currentGrid = res[base +1];
 		recCount = recCount +3 ;
-		int index = y * g->size + x;
+		//int index = y * g->size + x;
 		int set = 0;
 		//grid * result = NULL;
 		int checkValue = 0;
