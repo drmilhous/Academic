@@ -181,7 +181,7 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 		cloneToGrid(g,currentGrid);
 		if(currentGrid != NULL)
 		{
-		grid* previousGrid = NULL;
+		grid* previousGrid = res[idx* 10 + recCount + 1];
 		checkValue = check(currentGrid, x, y, value);
 		if (checkValue == 0)
 			{
