@@ -108,13 +108,14 @@ grid * allocateGrid(int size)
 		grid * g2 = NULL;
 		cudaMallocManaged((void **) &g2, sizeof(grid));
 		g2->size = size;
-		cell * array;
-		cudaMallocManaged((void **) &array, size * size * sizeof(cell));
+		//cell * array;
+		//cudaMallocManaged((void **) &array, size * size * sizeof(cell));
 		cell ** cells;
 		cudaMallocManaged((void **) &cells, size * sizeof(cell *));
 		for (int i = 0; i < size; i++)
 			{
-				cells[i] = &array[i * size];
+				//cells[i] = &array[i * size];
+				cudaMallocManaged((void **) &cells[i], size * sizeof(cell));
 			}
 		g2->cells = cells;
 
@@ -502,7 +503,7 @@ path ** scanChars()
 int foo(path * p)
 	{
 
-		cudaDeviceSetLimit(cudaLimitMallocHeapSize, 128 * 1024 * 1024*4); //See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#heap-memory-allocation
+		cudaDeviceSetLimit(cudaLimitMallocHeapSize, 128 * 1024 * 1024*8); //See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#heap-memory-allocation
 
 	//cell * array;
 	//	cell** cells;
