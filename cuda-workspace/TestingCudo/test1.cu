@@ -37,12 +37,12 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 __device__ void cloneToGrid(grid * g, grid * g2);
 __device__ void eliminateValue(cell **c, int row, int col, int max, int value);
 __device__ void add(grid ** base, grid ** last, grid * newList);
-void printGrid(grid * g, int x, int y);
+//void printGrid(grid * g, int x, int y);
 __device__ grid * cloneGrid(grid * g);
-void printGrid(grid * g, int x, int y)
+void printGrid(grid * g)
 	{
 		int n = g->size;
-		printf("X=%d Y=%d %c\n", x, y, g->ok);
+		//printf("X=%d Y=%d %c\n", x, y, g->ok);
 		for (int row = 0; row < n; row++)
 			{
 				for (int col = 0; col < n; col++)
@@ -582,11 +582,12 @@ int foo(path * p)
 		printPath(p);
 		compute<<<size, size>>>(g, p, result);
 		cudaDeviceSynchronize();
-		i = 0;
+		/*i = 0;
 		for (int row = 0; row < N; row++)
 			{
 				for (int col = 0; col < N; col++)
 					{
+
 						for(int j = 0; j <12; j+=3)
 						{
 						int idx = (row * size + col) * MAX +j;
@@ -598,7 +599,15 @@ int foo(path * p)
 						i++;
 						}
 					}
-			}
+			}*/
+		for( int i = 0; i < nBYn * MAX * 3; i++)
+		{
+			if (result[i]->ok == '1')
+							{
+								//printf("(%d,%d,%d)\n", row, col, j);
+								printGrid(result[i]);
+							}
+		}
 
 		//cudaFree(array);
 		return 0;
