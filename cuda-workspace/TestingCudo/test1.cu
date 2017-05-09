@@ -569,7 +569,7 @@ int foo(path * p)
 			{
 				for (int col = 0; col < N; col++)
 					{
-						int idx = (row * size + col) * MAX;
+						int idx = (row * size + col) * MAX + 6;
 						if (result[idx]->ok == '1')
 							{
 								
