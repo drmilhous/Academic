@@ -209,7 +209,7 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 				currentGrid->cells[x][y].value = value;
 				eliminateValue(currentGrid->cells, x, y, currentGrid->size, value);
 				cloneToGrid(currentGrid, previousGrid);
-				if (p->direction == UP) //Do UP/DOWN
+				if (p->direction == LEFT) //Do UP/DOWN
 					{
 						int lasty = y;
 						for (int y1 = 0; y1 < currentGrid->size; y1++) //check above
