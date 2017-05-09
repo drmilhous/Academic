@@ -4,7 +4,7 @@
 #define N 10
 #define UP 'U'
 #define LEFT 'L'
-#define MAX 3
+#define MAX 4
 
 typedef struct path
 	{
@@ -569,9 +569,9 @@ int foo(path * p)
 			{
 				for (int col = 0; col < N; col++)
 					{
-						for(int j = 0; j < 6; j+=3)
+						for(int j = 0; j < MAX; j+=1)
 						{
-						int idx = (row * size + col) * MAX +j;
+						int idx = (row * size + col) * MAX + (j*MAX);
 						if (result[idx]->ok == '1')
 							{
 								
