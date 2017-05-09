@@ -95,7 +95,7 @@ __device__ int pow2(int x)
 	}
 	else
 	{
-	for(int i = 1; i < x; i++)
+	for(int i = 0; i < x; i++)
 	{
 		sum = sum *2;
 	}
