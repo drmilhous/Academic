@@ -171,8 +171,9 @@ __global__ void compute(grid * g, path * p, grid ** result)
 __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, int recCount)
 	{
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
-		grid * currentGrid = res[idx*10 + recCount];
-		recCount = recCount +2 ;
+		int base = idx * MAX + recCount;
+		grid * currentGrid = res[base +1];
+		recCount = recCount +3 ;
 		int index = y * g->size + x;
 		int set = 0;
 		//grid * result = NULL;
@@ -182,7 +183,7 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 		cloneToGrid(g,currentGrid);
 		if(currentGrid != NULL)
 		{
-		grid* previousGrid = res[idx* 10 + recCount + 1];
+		grid* previousGrid = res[base + 2];
 		checkValue = check(currentGrid, x, y, value);
 		if (checkValue == 0)
 			{
@@ -214,8 +215,8 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 												if (set == 0)
 													{
 														set = 1;
-														//cloneToGrid(currentGrid, res[index]);
-														currentGrid->ok = '1';
+														cloneToGrid(currentGrid, res[base]);
+														res[base]->ok = '1';
 													}
 												if (p->next != NULL && recCount < MAX)
 													{
@@ -255,7 +256,8 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 														set = 1;
 														//cloneToGrid(currentGrid, res[index]);
 														//res[index]->ok = '1';
-														currentGrid->ok = '1';
+														cloneToGrid(currentGrid, res[base]);
+														res[base]->ok = '1';
 													}
 												//printGrid(currentGrid, x, y);
 												if (p->next != NULL && recCount <= MAX)
@@ -544,7 +546,7 @@ int foo(path * p)
 		 */
 		int i = 0;
 		grid **result;
-		cudaMallocManaged((void**) &result, sizeof(grid*) * size * size * 10);
+		cudaMallocManaged((void**) &result, sizeof(grid*) * size * size * MAX * 3);
 		for (int i = 0; i < nBYn * 10; i++)
 			{
 				result[i] = allocateGrid(size);
@@ -567,9 +569,10 @@ int foo(path * p)
 			{
 				for (int col = 0; col < N; col++)
 					{
-						if (result[i]->ok == '1')
+						int idx = (row * size + col) * MAX;
+						if (result[idx]->ok == '1')
 							{
-								int idx = (row * size + col) * 10;
+								
 								printf("(%d,%d)\n", row, col);
 								printGrid(result[idx], row, col);
 							}
