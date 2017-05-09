@@ -605,6 +605,7 @@ int foo(path * p)
 			if (result[i]->ok == '1')
 							{
 								//printf("(%d,%d,%d)\n", row, col, j);
+								puts("");
 								printGrid(result[i]);
 							}
 		}
