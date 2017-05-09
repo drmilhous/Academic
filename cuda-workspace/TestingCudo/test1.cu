@@ -54,14 +54,16 @@ void printGrid(grid * g)
 						if (value < 0)
 							{
 								value = c.bitmap;
+								printf(" %03X%c", value, printC);
 							}
 						else
 							{
 								//
 								printC = convert(value);
 								value = 0;
+								printf("    %c", value, printC);
 							}
-						printf(" %03X%c", value, printC);
+						
 					}
 				printf("\n");
 			}
