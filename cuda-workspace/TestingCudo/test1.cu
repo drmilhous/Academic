@@ -569,7 +569,9 @@ int foo(path * p)
 			{
 				for (int col = 0; col < N; col++)
 					{
-						int idx = (row * size + col) * MAX +3;
+						for(int j = 0; j < 6; j+=3)
+						{
+						int idx = (row * size + col) * MAX +j;
 						if (result[idx]->ok == '1')
 							{
 								
@@ -577,6 +579,7 @@ int foo(path * p)
 								printGrid(result[idx], row, col);
 							}
 						i++;
+						}
 					}
 			}
 
