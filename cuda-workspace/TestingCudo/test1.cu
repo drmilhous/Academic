@@ -387,7 +387,7 @@ void printPath(path * p)
 				else
 					{
 						printf("[%c]->[%c%c%c]%c\n", convertChar(p->letters[0]), convertChar(p->letters[1]), convertChar(p->letters[2]), convertChar(p->letters[3]), dir);
-						printf("[%d]->[%d%d%d]%c\n", p->letters[0], p->letters[1], p->letters[2], p->letters[3], dir);
+						//printf("[%d]->[%d%d%d]%c\n", p->letters[0], p->letters[1], p->letters[2], p->letters[3], dir);
 
 					}
 				printPath(p->next);
@@ -572,7 +572,7 @@ int foo(path * p)
 						for(int j = 0; j <=15; j+=3)
 						{
 						int idx = (row * size + col) * MAX +j;
-						if (result[idx]->ok == '1')
+						//if (result[idx]->ok == '1')
 							{
 								
 								printf("(%d,%d)\n", row, col);
