@@ -584,25 +584,25 @@ int foo(path * p)
 		printPath(p);
 		compute<<<size, size>>>(g, p, result);
 		cudaDeviceSynchronize();
-		/*i = 0;
+		i = 0;
 		for (int row = 0; row < N; row++)
 			{
 				for (int col = 0; col < N; col++)
 					{
 
-						for(int j = 0; j <12; j+=3)
+						for(int j = 0; j <MAX * 3; j+=3)
 						{
 						int idx = (row * size + col) * MAX +j;
 						if (result[idx]->ok == '1')
 							{
 								printf("(%d,%d,%d)\n", row, col, j);
-								printGrid(result[idx], row, col);
+								printGrid(result[idx]);
 							}
 						i++;
 						}
 					}
-			}*/
-		for( int i = 0; i < nBYn * MAX * 3; i++)
+			}
+		/*for( int i = 0; i < nBYn * MAX * 3; i++)
 		{
 			if (result[i]->ok == '1')
 							{
@@ -611,7 +611,7 @@ int foo(path * p)
 								printGrid(result[i]);
 							}
 		}
-
+*/
 		//cudaFree(array);
 		return 0;
 	}
