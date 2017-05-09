@@ -69,7 +69,8 @@ void printGrid(grid * g, int x, int y)
 	}
 __device__ void eliminateValue(cell **c, int row, int col, int max, int value)
 	{
-		int mask = pow(2.0, (double) value);
+		//int mask = pow(2.0, (double) value);
+		int mask = pow2(value);
 		for (int r1 = 0; r1 < max; r1++)
 			{
 				if (r1 != row)
