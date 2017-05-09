@@ -61,7 +61,7 @@ void printGrid(grid * g)
 								//
 								printC = convert(value);
 								value = 0;
-								printf("    %c", printC);
+								printf("  %c  ", printC);
 							}
 						
 					}
