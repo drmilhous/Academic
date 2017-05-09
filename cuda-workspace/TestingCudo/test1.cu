@@ -237,7 +237,7 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 														cloneToGrid(currentGrid, res[base]);
 														res[base]->ok = '1';
 													}
-												if (p->next != NULL && recCount < MAX * 3)
+												if (p->next != NULL && recCount <= MAX * 3)
 													{
 														computeRecursive(currentGrid, p->next, x, lasty, res, recCount);
 													}
