@@ -67,6 +67,22 @@ void printGrid(grid * g, int x, int y)
 				printf("\n");
 			}
 	}
+	__device__ int pow2(int x)
+{
+	int sum = 1;
+	if( x == 0)
+	{
+		sum = 0;
+	}
+	else
+	{
+	for(int i = 0; i < x; i++)
+	{
+		sum = sum *2;
+	}
+	}
+	return sum;
+}
 __device__ void eliminateValue(cell **c, int row, int col, int max, int value)
 	{
 		//int mask = pow(2.0, (double) value);
@@ -87,22 +103,7 @@ __device__ void eliminateValue(cell **c, int row, int col, int max, int value)
 				//x->c = ch;
 			}
 	}
-__device__ int pow2(int x)
-{
-	int sum = 1;
-	if( x == 0)
-	{
-		sum = 0;
-	}
-	else
-	{
-	for(int i = 0; i < x; i++)
-	{
-		sum = sum *2;
-	}
-	}
-	return sum;
-}
+
 __device__ int check(grid * g, int row, int col, int number)
 	{
 		int result;
