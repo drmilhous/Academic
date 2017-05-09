@@ -593,8 +593,7 @@ int foo(path * p)
 						int idx = (row * size + col) * MAX +j;
 						if (result[idx]->ok == '1')
 							{
-								
-								printf("(%d,%d)\n", row, col);
+								printf("(%d,%d,%d)\n", row, col, j);
 								printGrid(result[idx], row, col);
 							}
 						i++;
