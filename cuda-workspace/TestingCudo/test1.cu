@@ -594,7 +594,7 @@ int foo(path * p)
 
 						for(int j = 0; j <MAX * 3; j+=3)
 						{
-						int idx = (row * size + col) * MAX +j;
+						int idx = (row * size + col) * MAX*3 +j;
 						if (result[idx]->ok == '1')
 							{
 								printf("(%d,%d,%d)\n", row, col, j);
