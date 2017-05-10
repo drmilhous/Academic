@@ -3,7 +3,7 @@
 #define N 10
 #define UP 'U'
 #define LEFT 'L'
-#define MAX 8
+#define MAX 7
 
 typedef struct path
 	{
@@ -178,14 +178,14 @@ __device__ grid * cloneGrid(grid * g)
 		}
 		return g2;
 	}
-__global__ void compute(grid * g, path * p, grid ** result)
+__global__ void compute(grid * g, path * p,path ** p2, grid ** result)
 	{
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		if (idx < N * N)
 			{
 				int x = blockIdx.x;
 				int y = threadIdx.x;
-				computeRecursive(g, p, x, y, result, 0);
+				computeRecursive(g, p,p2, x, y, result, 0);
 			}
 	}
 __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, int y, grid ** res, int recCount)
