@@ -4,6 +4,7 @@
 #define UP 'U'
 #define LEFT 'L'
 #define MAX 4
+#define MAXREC 3
 
 typedef struct path
 	{
@@ -238,7 +239,7 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 														cloneToGrid(currentGrid, res[base]);
 														res[base]->ok = '1';
 													}
-												if (p->next != NULL && recCount < MAX * 2)
+												if (p->next != NULL && recCount < MAXREC)
 													{
 														computeRecursive(currentGrid, p->next, x, lasty, res, recCount);
 													}
@@ -280,7 +281,7 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 														res[base]->ok = '1';
 													}
 												//printGrid(currentGrid, x, y);
-												if (p->next != NULL && recCount < MAX *2)
+												if (p->next != NULL && recCount < MAXREC)
 													{
 													computeRecursive(currentGrid, p->next, lastx, y, res, recCount);
 														//add(&result, &last, temp);
