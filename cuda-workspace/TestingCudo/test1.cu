@@ -191,10 +191,10 @@ __global__ void compute(grid * g, path * p,path ** p2, grid ** result)
 __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, int y, grid ** res, int recCount)
 	{
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
-		int base = idx * MAX *3 + recCount;
+		int base = idx * MAX *2 + recCount;
 		//printf("index[%02d] base[%d]\n",idx, base);
 		grid * currentGrid = res[base +1];
-		recCount = recCount +3 ;
+		recCount = recCount +2 ;
 		//int index = y * g->size + x;
 		int set = 0;
 		//grid * result = NULL;
@@ -239,7 +239,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 														cloneToGrid(currentGrid, res[base]);
 														res[base]->ok = '1';
 													}
-												if(recCount < MAX *3)
+												if(recCount < MAX *2)
 												 {
 													if (p->next != NULL )
 													{
@@ -300,7 +300,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 														res[base]->ok = '1';
 													}
 												//printGrid(currentGrid, x, y);
-												 if(recCount < MAX *3)
+												 if(recCount < MAX *2)
 												 {
 													if (p->next != NULL )
 													{
@@ -604,8 +604,8 @@ int foo(path * p, path ** p2)
 		 */
 		int i = 0;
 		grid **result;
-		cudaMallocManaged((void**) &result, sizeof(grid*) * size * size * MAX * 3);
-		for (int i = 0; i < nBYn * MAX * 3; i++)
+		cudaMallocManaged((void**) &result, sizeof(grid*) * size * size * MAX * 2);
+		for (int i = 0; i < nBYn * MAX * 2; i++)
 			{
 				result[i] = allocateGrid(size);
 			}
@@ -630,7 +630,7 @@ int foo(path * p, path ** p2)
 
 						for(int j = 0; j <MAX * 3; j+=3)
 						{
-						int idx = (row * size + col) * MAX*3 +j;
+						int idx = (row * size + col) * MAX*2 +j;
 						if (result[idx]->ok == '1')
 							{
 								printf("(%d,%d,%d)\n", row, col, j);
