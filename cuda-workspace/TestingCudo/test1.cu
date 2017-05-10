@@ -242,7 +242,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 												if (s->checkValue == 0)
 													{
 														s->currentGrid->cells[x][s->lasty].value = s->value;
-														eliminateValue(currentGrid->cells, x, s->lasty, s->currentGrid->size, s->value);
+														eliminateValue(s->currentGrid->cells, x, s->lasty, s->currentGrid->size, s->value);
 													}
 											}
 										if (s->checkValue == 0) //recursive call
@@ -294,7 +294,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 										for (s->offset = 0; s->offset < 3; s->offset++)
 											{
 												s->value = p->letters[s->offset + 1];
-												s->lastx = (x1 + (s->offset * s->direction) + s->currentGrid->size) % s->currentGrid->size;
+												s->lastx = (s->x1 + (s->offset * s->direction) + s->currentGrid->size) % s->currentGrid->size;
 												s->checkValue |= check(s->currentGrid, s->lastx, y, s->value);
 												if (s->checkValue == 0)
 													{
@@ -311,7 +311,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 														s->set = 1;
 														//cloneToGrid(currentGrid, res[index]);
 														//res[index]->ok = '1';
-														cloneToGrid(s->currentGrid, res[base]);
+														cloneToGrid(s->currentGrid, res[s->base]);
 														res[base]->ok = '1';
 													}
 												//printGrid(currentGrid, x, y);
