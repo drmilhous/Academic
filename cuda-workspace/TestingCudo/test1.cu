@@ -628,7 +628,7 @@ int foo(path * p, path ** p2)
 				for (int col = 0; col < N; col++)
 					{
 
-						for(int j = 0; j <MAX * 3; j+=3)
+						for(int j = 0; j <MAX * 2; j+=2)
 						{
 						int idx = (row * size + col) * MAX*2 +j;
 						if (result[idx]->ok == '1')
