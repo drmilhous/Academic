@@ -261,6 +261,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 									}
 								//cloneToGrid(previousGrid, currentGrid);
 								cloneToGrid(g,currentGrid);
+								currentGrid->cells[x][y].value = p->letters[0];
 								eliminateValue(currentGrid->cells, x, y, currentGrid->size, p->letters[0]);
 							}
 					}
@@ -321,6 +322,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 											}
 										//cloneToGrid(previousGrid, currentGrid);
 										cloneToGrid(g,currentGrid);
+										currentGrid->cells[x][y].value = value;
 										eliminateValue(currentGrid->cells, x, y, currentGrid->size, p->letters[0]);
 									}
 							}
