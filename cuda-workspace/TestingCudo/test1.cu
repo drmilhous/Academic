@@ -188,7 +188,7 @@ __global__ void compute(grid * g, path * p, grid ** result)
 				computeRecursive(g, p, x, y, result, 0);
 			}
 	}
-__device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, int recCount)
+__device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, int y, grid ** res, int recCount)
 	{
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		int base = idx * MAX *3 + recCount;
@@ -241,7 +241,7 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 													}
 												if (p->next != NULL && recCount < MAX * 3)
 													{
-														computeRecursive(currentGrid, p->next, x, lasty, res, recCount);
+														computeRecursive(currentGrid, p->next,nextPath, x, lasty, res, recCount);
 													}
 											}
 									}
@@ -283,7 +283,7 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 												//printGrid(currentGrid, x, y);
 												if (p->next != NULL && recCount < MAX *3)
 													{
-													computeRecursive(currentGrid, p->next, lastx, y, res, recCount);
+													computeRecursive(currentGrid, p->next,nextPath, lastx, y, res, recCount);
 														//add(&result, &last, temp);
 													}
 											}
@@ -524,7 +524,7 @@ path ** scanChars()
 		return pathList;
 	}
 
-int foo(path * p)
+int foo(path * p, path ** p2)
 	{
 
 		cudaDeviceSetLimit(cudaLimitMallocHeapSize, 128 * 1024 * 1024*8); //See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#heap-memory-allocation
@@ -583,7 +583,7 @@ int foo(path * p)
 		 }
 		 }*/
 		printPath(p);
-		compute<<<size, size>>>(g, p, result);
+		compute<<<size, size>>>(g, p,p2, result);
 		cudaDeviceSynchronize();
 		i = 0;
 		for (int row = 0; row < N; row++)
@@ -641,7 +641,7 @@ int main(void)
 		path ** p = scanChars();
 		if (p != NULL)
 			{
-				foo(p[1]);
+				foo(p[1],&p[2]);
 			}
 	}
 /*
