@@ -3,8 +3,8 @@
 #define N 10
 #define UP 'U'
 #define LEFT 'L'
-#define MAX 4
-#define MAXREC 7
+#define MAX 5
+#define MAXREC 10
 
 typedef struct path
 	{
