@@ -4,23 +4,7 @@
 #define UP 'U'
 #define LEFT 'L'
 #define MAX 6
-typedef struct state
-{
-	int idx;
-	grid * currentGrid;
-	int base;
-	int lastx;
-	int lasty;
-	int x1;
-	int y1;
-	int direction;
-	int checkValue;
-	int set;
-	int value;
-	int offset;
-	int row;
-	int col;
-}state;
+
 typedef struct path
 	{
 	struct path * next;
@@ -46,7 +30,23 @@ typedef struct grid
 	char ok;
 	//int yy;
 	} grid;
-
+typedef struct state
+{
+	int idx;
+	grid * currentGrid;
+	int base;
+	int lastx;
+	int lasty;
+	int x1;
+	int y1;
+	int direction;
+	int checkValue;
+	int set;
+	int value;
+	int offset;
+	int row;
+	int col;
+}state;
 void initCell(cell * c);
 char convert(int x);
 __device__ void computeRecursive(grid * g, path * p,path** p2, int x, int y, grid ** res, int recCount);
@@ -220,7 +220,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 		{
 		//grid* previousGrid = res[base + 2];
 		s->checkValue = check(s->currentGrid, x, y, s->value);
-		if (checkValue == 0)
+		if (s->checkValue == 0)
 			{
 				s->currentGrid->cells[x][y].value = s->value;
 				eliminateValue(s->currentGrid->cells, x, y, s->currentGrid->size, s->value);
