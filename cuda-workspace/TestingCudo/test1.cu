@@ -3,7 +3,7 @@
 #define N 10
 #define UP 'U'
 #define LEFT 'L'
-#define MAX 9
+#define MAX 8
 
 typedef struct path
 	{
