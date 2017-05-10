@@ -3,7 +3,7 @@
 #define N 10
 #define UP 'U'
 #define LEFT 'L'
-#define MAX 6
+#define MAX 7
 
 typedef struct path
 	{
@@ -239,10 +239,27 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 														cloneToGrid(currentGrid, res[base]);
 														res[base]->ok = '1';
 													}
-												if (p->next != NULL && recCount < MAX * 3)
+												if(recCount < MAX *3)
+												 {
+													if (p->next != NULL )
 													{
 														computeRecursive(currentGrid, p->next,nextPath, x, lasty, res, recCount);
+														//add(&result, &last, temp);
 													}
+													else
+													{
+														printf("Next Path %d\n", idx );
+														p = nextPath[0];
+														nextPath++;
+														for (int row = 0; row < g->size; row++)
+														{
+															for (int col = 0; col < g->size; col++)
+																{
+																	computeRecursive(currentGrid, p,nextPath, row, col, res, recCount);
+																}
+														}	
+													}
+												 }
 											}
 									}
 								cloneToGrid(previousGrid, currentGrid);
@@ -281,11 +298,27 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 														res[base]->ok = '1';
 													}
 												//printGrid(currentGrid, x, y);
-												if (p->next != NULL && recCount < MAX *3)
+												 if(recCount < MAX *3)
+												 {
+													if (p->next != NULL )
 													{
-													computeRecursive(currentGrid, p->next,nextPath, lastx, y, res, recCount);
+														computeRecursive(currentGrid, p->next,nextPath, lastx, y, res, recCount);
 														//add(&result, &last, temp);
 													}
+													else
+													{
+														printf("Next Path %d\n", idx );
+														p = nextPath[0];
+														nextPath++;
+														for (int row = 0; row < g->size; row++)
+														{
+															for (int col = 0; col < g->size; col++)
+																{
+																	computeRecursive(currentGrid, p,nextPath, row, col, res, recCount);
+																}
+														}	
+													}
+												 }
 											}
 										cloneToGrid(previousGrid, currentGrid);
 									}
