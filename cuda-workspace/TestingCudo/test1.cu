@@ -251,7 +251,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 													{
 														s->set = 1;
 														cloneToGrid(s->currentGrid, res[s->base]);
-														res[base]->ok = '1';
+														res[s->base]->ok = '1';
 													}
 												if(recCount < MAX *2)
 												 {
@@ -312,7 +312,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 														//cloneToGrid(currentGrid, res[index]);
 														//res[index]->ok = '1';
 														cloneToGrid(s->currentGrid, res[s->base]);
-														res[base]->ok = '1';
+														res[s->base]->ok = '1';
 													}
 												//printGrid(currentGrid, x, y);
 												 if(recCount < MAX *2)
@@ -331,7 +331,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 														{
 															for (s->col = 0; s->col < g->size; s->col++)
 																{
-																	computeRecursive(s->currentGrid, p,nextPath, row, col, res, recCount);
+																	computeRecursive(s->currentGrid, p,nextPath, s->row, s->col, res, recCount);
 																}
 														}	
 													}
@@ -339,7 +339,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 											}
 										//cloneToGrid(previousGrid, currentGrid);
 										cloneToGrid(g,s->currentGrid);
-										s->currentGrid->cells[x][y].s->value = p->letters[0];
+										s->currentGrid->cells[x][y].value = p->letters[0];
 										eliminateValue(s->currentGrid->cells, x, y, s->currentGrid->size, p->letters[0]);
 									}
 							}
