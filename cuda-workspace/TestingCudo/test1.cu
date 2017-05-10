@@ -3,7 +3,7 @@
 #define N 10
 #define UP 'U'
 #define LEFT 'L'
-#define MAX 7
+#define MAX 6
 
 typedef struct path
 	{
@@ -195,12 +195,9 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 		//printf("index[%02d] base[%d]\n",idx, base);
 		grid * currentGrid = res[base +1];
 		recCount = recCount +2 ;
-		//int index = y * g->size + x;
 		int set = 0;
-		//grid * result = NULL;
 		int checkValue = 0;
 		int value = p->letters[0];
-		//grid * currentGrid = cloneGrid(g);
 		cloneToGrid(g,currentGrid);
 		if(currentGrid != NULL)
 		{
