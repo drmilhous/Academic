@@ -580,7 +580,7 @@ path ** scanChars()
 int foo(path * p, path ** p2)
 	{
 
-		cudaDeviceSetLimit(cudaLimitMallocHeapSize, 128 * 1024 * 1024 * 16); //See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#heap-memory-allocation
+		cudaDeviceSetLimit(cudaLimitMallocHeapSize, 128 * 1024 * 1024 * 8); //See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#heap-memory-allocation
 
 	//cell * array;
 	//	cell** cells;
