@@ -32,20 +32,20 @@ typedef struct grid
 	} grid;
 typedef struct state
 {
-	int idx;
+	short idx;
 	grid * currentGrid;
-	int base;
-	int lastx;
-	int lasty;
-	int x1;
-	int y1;
-	int direction;
-	int checkValue;
-	int set;
-	int value;
-	int offset;
-	int row;
-	int col;
+	short base;
+	short lastx;
+	short lasty;
+	short x1;
+	short y1;
+	short direction;
+	short checkValue;
+	short set;
+	short value;
+	short offset;
+	short row;
+	short col;
 }state;
 void initCell(cell * c);
 char convert(int x);
