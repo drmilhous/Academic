@@ -350,6 +350,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 		{
 			printf("Memory Allocation Error");
 		}
+		free(s);
 		/*free(&currentGrid->cells[0]);
 		free(currentGrid->cells);
 		free(currentGrid);*/
