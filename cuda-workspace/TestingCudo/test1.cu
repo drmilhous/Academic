@@ -206,7 +206,7 @@ __global__ void compute(grid * g, path * p,path ** p2, grid ** result)
 __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, int y, grid ** res, int recCount)
 	{
 		state * s = (state *) malloc(sizeof(state));
-		if(s == NULL)
+		if(s != NULL)
 		{
 		s->idx = blockIdx.x * blockDim.x + threadIdx.x;
 		s->base = s->idx * MAX *2 + recCount;
