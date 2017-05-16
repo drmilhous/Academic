@@ -213,7 +213,6 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 		//printf("index[%02d] base[%d]\n",idx, base);
 		s->currentGrid = res[s->base +1];
 		recCount = recCount +2 ;
-		s->set = 0;
 		s->checkValue = 0;
 		s->value = p->letters[0];
 		cloneToGrid(g,s->currentGrid);
