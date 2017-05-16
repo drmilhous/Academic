@@ -210,11 +210,11 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 	{
 		//short idx;
 		//grid * currentGrid;
-		byte base;
-		byte direction;
-		byte checkValue;
+		uint8_t base;
+		uint8_t direction;
+		uint8_t checkValue;
 		//short value;
-		byte offset;
+		uint8_t offset;
 		
 		//state * s = (state *) malloc(sizeof(state));
 		//if(s != NULL)
@@ -238,8 +238,8 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 				//cloneToGrid(currentGrid, previousGrid);
 				if (p->direction == LEFT) //Do UP/DOWN
 					{
-						byte lasty = y;
-						for (byte y1 = 0;  y1 <  currentGrid->size; ( y1)++) //check above
+						uint8_t lasty = y;
+						for (uint8_t y1 = 0;  y1 <  currentGrid->size; ( y1)++) //check above
 							{
 								if ( y1 != y)
 									{
@@ -294,8 +294,8 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 					}
 				else // direction = left/right
 					{
-						byte lastx = x;
-						for (byte x1 = 0;  x1 <  currentGrid->size;  x1++) //check above
+						uint8_t lastx = x;
+						for (uint8_t x1 = 0;  x1 <  currentGrid->size;  x1++) //check above
 							{
 								if ( x1 != x)
 									{
