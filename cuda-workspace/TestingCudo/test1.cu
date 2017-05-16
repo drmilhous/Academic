@@ -41,7 +41,6 @@ typedef struct state
 	short y1;
 	short direction;
 	short checkValue;
-	short set;
 	short value;
 	short offset;
 	short row;
@@ -207,6 +206,8 @@ __global__ void compute(grid * g, path * p,path ** p2, grid ** result)
 __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, int y, grid ** res, int recCount)
 	{
 		state * s = (state *) malloc(sizeof(state));
+		if(s == NULL)
+		{
 		s->idx = blockIdx.x * blockDim.x + threadIdx.x;
 		s->base = s->idx * MAX *2 + recCount;
 		//printf("index[%02d] base[%d]\n",idx, base);
@@ -247,9 +248,8 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 											}
 										if (s->checkValue == 0) //recursive call
 											{
-												if (s->set == 0)
+												if (res[s->base]->ok == '0')
 													{
-														s->set = 1;
 														cloneToGrid(s->currentGrid, res[s->base]);
 														res[s->base]->ok = '1';
 													}
@@ -306,9 +306,8 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 										//printGrid(currentGrid, x, y);
 										if (s->checkValue == 0) //recursive call
 											{
-												if (s->set == 0)
+												if (res[s->base]->ok == '0')
 													{
-														s->set = 1;
 														//cloneToGrid(currentGrid, res[index]);
 														//res[index]->ok = '1';
 														cloneToGrid(s->currentGrid, res[s->base]);
@@ -351,6 +350,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 			printf("Memory Allocation Error");
 		}
 		free(s);
+		}
 		/*free(&currentGrid->cells[0]);
 		free(currentGrid->cells);
 		free(currentGrid);*/
