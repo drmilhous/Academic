@@ -210,10 +210,6 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 		short idx;
 		grid * currentGrid;
 		short base;
-		short lastx;
-		short lasty;
-		short x1;
-		short y1;
 		short direction;
 		short checkValue;
 		short value;
@@ -228,21 +224,21 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 		 currentGrid = res[ base +1];
 		recCount = recCount +2 ;
 		 checkValue = 0;
-		 value = p->letters[0];
+		// value = p->letters[0];
 		cloneToGrid(g, currentGrid);
 		if( currentGrid != NULL)
 		{
 		//grid* previousGrid = res[base + 2];
-		 checkValue = check( currentGrid, x, y,  value);
+		 checkValue = check( currentGrid, x, y,  p->letters[0]);
 		if ( checkValue == 0)
 			{
-				 currentGrid->cells[x][y].value =  value;
-				eliminateValue( currentGrid->cells, x, y,  currentGrid->size,  value);
+				 currentGrid->cells[x][y].value =  p->letters[0];
+				eliminateValue( currentGrid->cells, x, y,  currentGrid->size,  p->letters[0]);
 				//cloneToGrid(currentGrid, previousGrid);
 				if (p->direction == LEFT) //Do UP/DOWN
 					{
-						 lasty = y;
-						for ( y1 = 0;  y1 <  currentGrid->size; ( y1)++) //check above
+						 short lasty = y;
+						for (short y1 = 0;  y1 <  currentGrid->size; ( y1)++) //check above
 							{
 								if ( y1 != y)
 									{
@@ -250,13 +246,13 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 										 checkValue = 0;
 										for ( offset = 0;  offset < 3; ( offset)++)
 											{
-												 value = p->letters[ offset + 1];
+												 //value = p->letters[ offset + 1];
 												 lasty = ( y1 + ( offset *  direction) +  currentGrid->size) %  currentGrid->size;
-												 checkValue |= check( currentGrid, x,  lasty,  value);
+												 checkValue |= check( currentGrid, x,  lasty,  p->letters[ offset + 1]);
 												if ( checkValue == 0)
 													{
-														 currentGrid->cells[x][ lasty].value =  value;
-														eliminateValue( currentGrid->cells, x,  lasty,  currentGrid->size,  value);
+														 currentGrid->cells[x][ lasty].value =  p->letters[ offset + 1];
+														eliminateValue( currentGrid->cells, x,  lasty,  currentGrid->size,  p->letters[ offset + 1]);
 													}
 											}
 										if ( checkValue == 0) //recursive call
@@ -297,8 +293,8 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 					}
 				else // direction = left/right
 					{
-						 lastx = x;
-						for ( x1 = 0;  x1 <  currentGrid->size;  x1++) //check above
+						short lastx = x;
+						for (short x1 = 0;  x1 <  currentGrid->size;  x1++) //check above
 							{
 								if ( x1 != x)
 									{
@@ -306,13 +302,13 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 										 checkValue = 0;
 										for ( offset = 0;  offset < 3;  offset++)
 											{
-												 value = p->letters[ offset + 1];
+												 //value = p->letters[ offset + 1];
 												 lastx = ( x1 + ( offset *  direction) +  currentGrid->size) %  currentGrid->size;
-												 checkValue |= check( currentGrid,  lastx, y,  value);
+												 checkValue |= check( currentGrid,  lastx, y,  p->letters[ offset + 1]);
 												if ( checkValue == 0)
 													{
-														 currentGrid->cells[ lastx][y].value =  value;
-														eliminateValue( currentGrid->cells,  lastx, y,  currentGrid->size,  value);
+														 currentGrid->cells[ lastx][y].value =  p->letters[ offset + 1];
+														eliminateValue( currentGrid->cells,  lastx, y,  currentGrid->size,  p->letters[ offset + 1]);
 													}
 											}
 
