@@ -30,6 +30,7 @@ typedef struct grid
 	char ok;
 	//int yy;
 	} grid;
+	/*
 typedef struct state
 {
 	short idx;
@@ -46,6 +47,7 @@ typedef struct state
 	short row;
 	short col;
 }state;
+*/
 void initCell(cell * c);
 char convert(int x);
 __device__ void computeRecursive(grid * g, path * p,path** p2, int x, int y, grid ** res, int recCount);
@@ -205,70 +207,82 @@ __global__ void compute(grid * g, path * p,path ** p2, grid ** result)
 	}
 __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, int y, grid ** res, int recCount)
 	{
-		state * s = (state *) malloc(sizeof(state));
-		if(s != NULL)
-		{
-		s->idx = blockIdx.x * blockDim.x + threadIdx.x;
-		s->base = s->idx * MAX *2 + recCount;
+		short idx;
+		grid * currentGrid;
+		short base;
+		short lastx;
+		short lasty;
+		short x1;
+		short y1;
+		short direction;
+		short checkValue;
+		short value;
+		short offset;
+		
+		//state * s = (state *) malloc(sizeof(state));
+		//if(s != NULL)
+		//{
+		 idx = blockIdx.x * blockDim.x + threadIdx.x;
+		 base =  idx * MAX *2 + recCount;
 		//printf("index[%02d] base[%d]\n",idx, base);
-		s->currentGrid = res[s->base +1];
+		 currentGrid = res[ base +1];
 		recCount = recCount +2 ;
-		s->checkValue = 0;
-		s->value = p->letters[0];
-		cloneToGrid(g,s->currentGrid);
-		if(s->currentGrid != NULL)
+		 checkValue = 0;
+		 value = p->letters[0];
+		cloneToGrid(g, currentGrid);
+		if( currentGrid != NULL)
 		{
 		//grid* previousGrid = res[base + 2];
-		s->checkValue = check(s->currentGrid, x, y, s->value);
-		if (s->checkValue == 0)
+		 checkValue = check( currentGrid, x, y,  value);
+		if ( checkValue == 0)
 			{
-				s->currentGrid->cells[x][y].value = s->value;
-				eliminateValue(s->currentGrid->cells, x, y, s->currentGrid->size, s->value);
+				 currentGrid->cells[x][y].value =  value;
+				eliminateValue( currentGrid->cells, x, y,  currentGrid->size,  value);
 				//cloneToGrid(currentGrid, previousGrid);
 				if (p->direction == LEFT) //Do UP/DOWN
 					{
-						s->lasty = y;
-						for (s->y1 = 0; s->y1 < s->currentGrid->size; (s->y1)++) //check above
+						 lasty = y;
+						for ( y1 = 0;  y1 <  currentGrid->size; ( y1)++) //check above
 							{
-								if (s->y1 != y)
+								if ( y1 != y)
 									{
-										s->direction = y > s->y1 ? -1 : 1;
-										s->checkValue = 0;
-										for (s->offset = 0; s->offset < 3; (s->offset)++)
+										 direction = y >  y1 ? -1 : 1;
+										 checkValue = 0;
+										for ( offset = 0;  offset < 3; ( offset)++)
 											{
-												s->value = p->letters[s->offset + 1];
-												s->lasty = (s->y1 + (s->offset * s->direction) + s->currentGrid->size) % s->currentGrid->size;
-												s->checkValue |= check(s->currentGrid, x, s->lasty, s->value);
-												if (s->checkValue == 0)
+												 value = p->letters[ offset + 1];
+												 lasty = ( y1 + ( offset *  direction) +  currentGrid->size) %  currentGrid->size;
+												 checkValue |= check( currentGrid, x,  lasty,  value);
+												if ( checkValue == 0)
 													{
-														s->currentGrid->cells[x][s->lasty].value = s->value;
-														eliminateValue(s->currentGrid->cells, x, s->lasty, s->currentGrid->size, s->value);
+														 currentGrid->cells[x][ lasty].value =  value;
+														eliminateValue( currentGrid->cells, x,  lasty,  currentGrid->size,  value);
 													}
 											}
-										if (s->checkValue == 0) //recursive call
+										if ( checkValue == 0) //recursive call
 											{
-												if (res[s->base]->ok == '0')
+												if (res[ base]->ok == '0')
 													{
-														cloneToGrid(s->currentGrid, res[s->base]);
-														res[s->base]->ok = '1';
+														cloneToGrid( currentGrid, res[ base]);
+														res[ base]->ok = '1';
 													}
 												if(recCount < MAX *2)
 												 {
 													if (p->next != NULL )
 													{
-														computeRecursive(s->currentGrid, p->next,nextPath, x, s->lasty, res, recCount);
+														computeRecursive( currentGrid, p->next,nextPath, x,  lasty, res, recCount);
 														//add(&result, &last, temp);
 													}
 													else
 													{
-														printf("Next Path %d\n", s->idx );
+														printf("Next Path %d\n",  idx );
 														p = nextPath[0];
 														nextPath++;
-														for (s->row = 0; s->row < g->size; s->row++)
+														for (int row = 0;  row < g->size;  row++)
 														{
-															for (s->col = 0; s->col < g->size; s->col++)
+															for (int col = 0;  col < g->size;  col++)
 																{
-																	computeRecursive(s->currentGrid, p,nextPath, s->row, s->col, res, recCount);
+																	computeRecursive( currentGrid, p,nextPath,  row,  col, res, recCount);
 																}
 														}	
 													}
@@ -276,69 +290,69 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 											}
 									}
 								//cloneToGrid(previousGrid, currentGrid);
-								cloneToGrid(g,s->currentGrid);
-								s->currentGrid->cells[x][y].value = p->letters[0];
-								eliminateValue(s->currentGrid->cells, x, y, s->currentGrid->size, p->letters[0]);
+								cloneToGrid(g, currentGrid);
+								 currentGrid->cells[x][y].value = p->letters[0];
+								eliminateValue( currentGrid->cells, x, y,  currentGrid->size, p->letters[0]);
 							}
 					}
 				else // direction = left/right
 					{
-						s->lastx = x;
-						for (s->x1 = 0; s->x1 < s->currentGrid->size; s->x1++) //check above
+						 lastx = x;
+						for ( x1 = 0;  x1 <  currentGrid->size;  x1++) //check above
 							{
-								if (s->x1 != x)
+								if ( x1 != x)
 									{
-										s->direction = x > s->x1 ? -1 : 1;
-										s->checkValue = 0;
-										for (s->offset = 0; s->offset < 3; s->offset++)
+										 direction = x >  x1 ? -1 : 1;
+										 checkValue = 0;
+										for ( offset = 0;  offset < 3;  offset++)
 											{
-												s->value = p->letters[s->offset + 1];
-												s->lastx = (s->x1 + (s->offset * s->direction) + s->currentGrid->size) % s->currentGrid->size;
-												s->checkValue |= check(s->currentGrid, s->lastx, y, s->value);
-												if (s->checkValue == 0)
+												 value = p->letters[ offset + 1];
+												 lastx = ( x1 + ( offset *  direction) +  currentGrid->size) %  currentGrid->size;
+												 checkValue |= check( currentGrid,  lastx, y,  value);
+												if ( checkValue == 0)
 													{
-														s->currentGrid->cells[s->lastx][y].value = s->value;
-														eliminateValue(s->currentGrid->cells, s->lastx, y, s->currentGrid->size, s->value);
+														 currentGrid->cells[ lastx][y].value =  value;
+														eliminateValue( currentGrid->cells,  lastx, y,  currentGrid->size,  value);
 													}
 											}
 
 										//printGrid(currentGrid, x, y);
-										if (s->checkValue == 0) //recursive call
+										if ( checkValue == 0) //recursive call
 											{
-												if (res[s->base]->ok == '0')
+												if (res[ base]->ok == '0')
 													{
 														//cloneToGrid(currentGrid, res[index]);
 														//res[index]->ok = '1';
-														cloneToGrid(s->currentGrid, res[s->base]);
-														res[s->base]->ok = '1';
+														cloneToGrid( currentGrid, res[ base]);
+														res[ base]->ok = '1';
 													}
 												//printGrid(currentGrid, x, y);
 												 if(recCount < MAX *2)
 												 {
 													if (p->next != NULL )
 													{
-														computeRecursive(s->currentGrid, p->next,nextPath, s->lastx, y, res, recCount);
+														computeRecursive( currentGrid, p->next,nextPath,  lastx, y, res, recCount);
 														//add(&result, &last, temp);
 													}
 													else
 													{
-														printf("Next Path %d\n", s->idx );
+														printf("Next Path %d\n",  idx );
 														p = nextPath[0];
 														nextPath++;
-														for (s->row = 0; s->row < g->size; s->row++)
+														for (int row = 0;  row < g->size;  row++)
 														{
-															for (s->col = 0; s->col < g->size; s->col++)
+															for (int col = 0;  col < g->size;  col++)
 																{
-																	computeRecursive(s->currentGrid, p,nextPath, s->row, s->col, res, recCount);
+																	computeRecursive( currentGrid, p,nextPath,  row,  col, res, recCount);
 																}
 														}	
 													}
 												 }
 											}
 										//cloneToGrid(previousGrid, currentGrid);
-										cloneToGrid(g,s->currentGrid);
-										s->currentGrid->cells[x][y].value = p->letters[0];
-										eliminateValue(s->currentGrid->cells, x, y, s->currentGrid->size, p->letters[0]);
+										cloneToGrid(g, currentGrid);
+										 currentGrid->cells[x][y].value = p->letters[0];
+										eliminateValue( currentGrid->cells, x, y,  currentGrid->size, p->letters[0]);
 									}
 							}
 					}
@@ -348,8 +362,8 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 		{
 			printf("Memory Allocation Error");
 		}
-		free(s);
-		}
+		//free(s);
+		//}
 		/*free(&currentGrid->cells[0]);
 		free(currentGrid->cells);
 		free(currentGrid);*/
