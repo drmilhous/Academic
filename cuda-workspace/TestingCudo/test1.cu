@@ -212,7 +212,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 		short base;
 		short direction;
 		short checkValue;
-		short value;
+		//short value;
 		short offset;
 		
 		//state * s = (state *) malloc(sizeof(state));
