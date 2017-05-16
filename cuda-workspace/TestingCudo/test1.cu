@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <cstdint>
 #define N 10
 #define UP 'U'
 #define LEFT 'L'
