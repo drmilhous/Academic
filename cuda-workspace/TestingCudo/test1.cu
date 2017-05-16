@@ -4,6 +4,7 @@
 #define UP 'U'
 #define LEFT 'L'
 #define MAX 7
+#define currentGrid (res[ base +1])
 
 typedef struct path
 	{
@@ -208,7 +209,7 @@ __global__ void compute(grid * g, path * p,path ** p2, grid ** result)
 __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, int y, grid ** res, int recCount)
 	{
 		//short idx;
-		grid * currentGrid;
+		//grid * currentGrid;
 		short base;
 		short direction;
 		short checkValue;
@@ -221,7 +222,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 		 //idx = blockIdx.x * blockDim.x + threadIdx.x;
 		 base =  (blockIdx.x * blockDim.x + threadIdx.x) * MAX *2 + recCount;
 		//printf("index[%02d] base[%d]\n",idx, base);
-		 currentGrid = res[ base +1];
+		// currentGrid = res[ base +1];
 		recCount = recCount +2 ;
 		 checkValue = 0;
 		// value = p->letters[0];
