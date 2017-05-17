@@ -190,16 +190,13 @@ __global__ void compute(grid * g, path * p, grid ** result)
 	}
 __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, int recCount)
 	{
-		int idx = blockIdx.x * blockDim.x + threadIdx.x;
+		uint8_t idx = blockIdx.x * blockDim.x + threadIdx.x;
 		int base = idx * MAX *3 + recCount;
 		//printf("index[%02d] base[%d]\n",idx, base);
 		grid * currentGrid = res[base +1];
 		recCount = recCount +3 ;
-		//int index = y * g->size + x;
-		int set = 0;
-		//grid * result = NULL;
-		int checkValue = 0;
-		int value = p->letters[0];
+		uint8_t checkValue = 0;
+		uint8_t value = p->letters[0];
 		//grid * currentGrid = cloneGrid(g);
 		cloneToGrid(g,currentGrid);
 		if(currentGrid != NULL)
@@ -233,9 +230,8 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 											}
 										if (checkValue == 0) //recursive call
 											{
-												if (set == 0)
+												if (res[base]->ok == '0')
 													{
-														set = 1;
 														cloneToGrid(currentGrid, res[base]);
 														res[base]->ok = '1';
 													}
@@ -272,19 +268,14 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 										//printGrid(currentGrid, x, y);
 										if (checkValue == 0) //recursive call
 											{
-												if (set == 0)
+												if (res[base]->ok == '0')
 													{
-														set = 1;
-														//cloneToGrid(currentGrid, res[index]);
-														//res[index]->ok = '1';
 														cloneToGrid(currentGrid, res[base]);
 														res[base]->ok = '1';
 													}
-												//printGrid(currentGrid, x, y);
 												if (p->next != NULL && recCount < MAX *3)
 													{
 													computeRecursive(currentGrid, p->next, lastx, y, res, recCount);
-														//add(&result, &last, temp);
 													}
 											}
 										cloneToGrid(previousGrid, currentGrid);
