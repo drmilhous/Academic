@@ -213,7 +213,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 		
 		//grid * currentGrid;
 		uint8_t base;
-		uint8_t direction;
+		int8_t direction;
 		uint8_t checkValue;
 		//short value;
 		uint8_t offset;
