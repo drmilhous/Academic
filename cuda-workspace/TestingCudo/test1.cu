@@ -559,11 +559,10 @@ path ** scanChars()
 		fclose(database);
 		return pathList;
 	}
-
-int foo(path * p)
+int foo(path * p, path ** p2)
 	{
 
-		cudaDeviceSetLimit(cudaLimitMallocHeapSize, 128 * 1024 * 1024*8); //See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#heap-memory-allocation
+		cudaDeviceSetLimit(cudaLimitMallocHeapSize, 128 * 1024 * 1024 * 8); //See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#heap-memory-allocation
 
 	//cell * array;
 	//	cell** cells;
@@ -603,11 +602,14 @@ int foo(path * p)
 		 */
 		int i = 0;
 		grid **result;
-		cudaMallocManaged((void**) &result, sizeof(grid*) * size * size * MAX * 3);
-		for (int i = 0; i < nBYn * MAX * 3; i++)
+		int allocedSize = sizeof(grid*) * size * size * MAX * 2;
+		cudaMallocManaged((void**) &result, allocedSize);
+		printf("Allocated %d bytes %d\n",allocedSize);
+		for (int i = 0; i < nBYn * MAX * 2; i++)
 			{
 				result[i] = allocateGrid(size);
 			}
+		printf("Done init\n");
 		/*for (int row = 0; row < N; row++)
 		 {
 		 for (int col = 0; col < N; col++)
@@ -619,7 +621,7 @@ int foo(path * p)
 		 }
 		 }*/
 		printPath(p);
-		compute<<<size, size>>>(g, p, result);
+		compute<<<size, size>>>(g, p,p2, result);
 		cudaDeviceSynchronize();
 		i = 0;
 		for (int row = 0; row < N; row++)
@@ -627,9 +629,9 @@ int foo(path * p)
 				for (int col = 0; col < N; col++)
 					{
 
-						for(int j = 0; j <MAX * 3; j+=3)
+						for(int j = 0; j <MAX * 2; j+=2)
 						{
-						int idx = (row * size + col) * MAX*3 +j;
+						int idx = (row * size + col) * MAX*2 +j;
 						if (result[idx]->ok == '1')
 							{
 								printf("(%d,%d,%d)\n", row, col, j);
@@ -652,7 +654,6 @@ int foo(path * p)
 		//cudaFree(array);
 		return 0;
 	}
-
 void test2()
 	{
 
