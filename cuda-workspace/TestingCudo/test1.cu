@@ -213,7 +213,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 		
 		//grid * currentGrid;
 		uint8_t base;
-		./int8_t direction;
+		int8_t direction;
 		uint8_t checkValue;
 		//short value;
 		uint8_t offset;
@@ -241,7 +241,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 				//cloneToGrid(currentGrid, previousGrid);
 				if (p->direction == LEFT) //Do UP/DOWN
 					{
-						uint8_t lasty = y;
+						int8_t lasty = y;
 						for (uint8_t y1 = 0;  y1 <  currentGrid->size; ( y1)++) //check above
 							{
 								if ( y1 != y)
@@ -351,7 +351,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 											}
 										//cloneToGrid(previousGrid, currentGrid);
 										cloneToGrid(g, currentGrid);
-										 currentGrid->cells[x][y].value = p->letters[0];
+										currentGrid->cells[x][y].value = p->letters[0];
 										eliminateValue( currentGrid->cells, x, y,  currentGrid->size, p->letters[0]);
 									}
 							}
