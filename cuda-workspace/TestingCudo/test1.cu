@@ -240,10 +240,30 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 														cloneToGrid(currentGrid, res[base]);
 														res[base]->ok = '1';
 													}
-												if (p->next != NULL && recCount < MAX * 3)
+												//if (p->next != NULL && recCount < MAX * 3)
+												//	{
+												//		computeRecursive(currentGrid, p->next, x, lasty, res, recCount);
+												//	}
+												if(recCount < MAX *3)
+												 {
+													if (p->next != NULL )
 													{
-														computeRecursive(currentGrid, p->next, x, lasty, res, recCount);
+														computeRecursive( currentGrid, p->next,nextPath,  lastx, y, res, recCount);
 													}
+													else
+													{
+														printf("Next Path %d\n",  blockIdx.x * blockDim.x + threadIdx.x );
+														p = nextPath[0];
+														nextPath++;
+														for (uint8_t row = 0;  row < g->size;  row++)
+														{
+															for (uint8_t col = 0;  col < g->size;  col++)
+																{
+																	computeRecursive( currentGrid, p,nextPath,  row,  col, res, recCount);
+																}
+														}	
+													}
+												 }
 											}
 									}
 								cloneToGrid(previousGrid, currentGrid);
@@ -278,10 +298,30 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 														cloneToGrid(currentGrid, res[base]);
 														res[base]->ok = '1';
 													}
-												if (p->next != NULL && recCount < MAX *3)
+												//if (p->next != NULL && recCount < MAX *3)
+												//	{
+												//	computeRecursive(currentGrid, p->next, lastx, y, res, recCount);
+												//	}
+												if(recCount < MAX *3)
+												 {
+													if (p->next != NULL )
 													{
-													computeRecursive(currentGrid, p->next, lastx, y, res, recCount);
+														computeRecursive( currentGrid, p->next,nextPath,  lastx, y, res, recCount);
 													}
+													else
+													{
+														printf("Next Path %d\n",  blockIdx.x * blockDim.x + threadIdx.x );
+														p = nextPath[0];
+														nextPath++;
+														for (uint8_t row = 0;  row < g->size;  row++)
+														{
+															for (uint8_t col = 0;  col < g->size;  col++)
+																{
+																	computeRecursive( currentGrid, p,nextPath,  row,  col, res, recCount);
+																}
+														}	
+													}
+												 }
 											}
 										cloneToGrid(previousGrid, currentGrid);
 									}
