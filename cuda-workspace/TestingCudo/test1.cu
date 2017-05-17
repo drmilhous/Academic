@@ -183,18 +183,18 @@ __device__ grid * cloneGrid(grid * g)
 		}
 		return g2;
 	}
-__global__ void compute(grid * g, path * p, grid ** result)
+__global__ void compute(grid * g, path * p,path ** p2, grid ** result)
 	{
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		if (idx < N * N)
 			{
 				int x = blockIdx.x;
 				int y = threadIdx.x;
-				computeRecursive(g, p, x, y, result, 0);
+				computeRecursive(g, p,p2, x, y, result, 0);
 			}
 	}
-__device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, int recCount)
-	{
+__device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, int y, grid ** res, int recCount)
+{
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		int base = idx * MAX *3 + recCount;
 		//printf("index[%02d] base[%d]\n",idx, base);
