@@ -211,14 +211,14 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 				cloneToGrid(currentGrid, previousGrid);
 				if (p->direction == LEFT) //Do UP/DOWN
 					{
-						int lasty = y;
-						for (int y1 = 0; y1 < currentGrid->size; y1++) //check above
+						uint8_t lasty = y;
+						for (uint8_t y1 = 0; y1 < currentGrid->size; y1++) //check above
 							{
 								if (y1 != y)
 									{
-										int direction = y > y1 ? -1 : 1;
+										uint8_t direction = y > y1 ? -1 : 1;
 										checkValue = 0;
-										for (int offset = 0; offset < 3; offset++)
+										for (uint8_t offset = 0; offset < 3; offset++)
 											{
 												value = p->letters[offset + 1];
 												lasty = (y1 + (offset * direction) + currentGrid->size) % currentGrid->size;
@@ -247,14 +247,14 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 					}
 				else // direction = left/right
 					{
-						int lastx = x;
-						for (int x1 = 0; x1 < currentGrid->size; x1++) //check above
+						uint8_t lastx = x;
+						for (uint8_t x1 = 0; x1 < currentGrid->size; x1++) //check above
 							{
 								if (x1 != x)
 									{
-										int direction = x > x1 ? -1 : 1;
+										int8_t direction = x > x1 ? -1 : 1;
 										checkValue = 0;
-										for (int offset = 0; offset < 3; offset++)
+										for (uint8_t offset = 0; offset < 3; offset++)
 											{
 												value = p->letters[offset + 1];
 												lastx = (x1 + (offset * direction) + currentGrid->size) % currentGrid->size;
