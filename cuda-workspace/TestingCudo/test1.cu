@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #define N 10
 #define UP 'U'
 #define LEFT 'L'
@@ -190,7 +191,7 @@ __global__ void compute(grid * g, path * p, grid ** result)
 	}
 __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, int recCount)
 	{
-		uint8_t idx = blockIdx.x * blockDim.x + threadIdx.x;
+		int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		int base = idx * MAX *3 + recCount;
 		//printf("index[%02d] base[%d]\n",idx, base);
 		grid * currentGrid = res[base +1];
