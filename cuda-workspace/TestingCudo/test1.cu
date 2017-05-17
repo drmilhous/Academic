@@ -120,6 +120,10 @@ __device__ int check(grid * g, int row, int col, int number)
 				int mask = pow2(number);
 				int bits = c->bitmap;
 				result = (mask & bits);
+				if(result != 0)
+				{
+					result = 1;
+				}
 			}
 		return result;
 	}
@@ -216,7 +220,7 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 							{
 								if (y1 != y)
 									{
-										uint8_t direction = y > y1 ? -1 : 1;
+										int8_t direction = y > y1 ? -1 : 1;
 										checkValue = 0;
 										for (uint8_t offset = 0; offset < 3; offset++)
 											{
