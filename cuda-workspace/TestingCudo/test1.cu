@@ -242,7 +242,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 				if (p->direction == LEFT) //Do UP/DOWN
 					{
 						int8_t lasty = y;
-						for (uint8_t y1 = 0;  y1 <  currentGrid->size; ( y1)++) //check above
+						for (int8_t y1 = 0;  y1 <  currentGrid->size; ( y1)++) //check above
 							{
 								if ( y1 != y)
 									{
