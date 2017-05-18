@@ -604,7 +604,7 @@ int foo(path * p, path ** p2)
 		grid **result;
 		int allocedSize = sizeof(grid*) * size * size * MAX * 3;
 		cudaMallocManaged((void**) &result, allocedSize);
-		printf("Allocated %d bytes %d\n",allocedSize);
+		printf("Allocated %d bytes\n",allocedSize);
 		for (int i = 0; i < nBYn * MAX * 3; i++)
 			{
 				result[i] = allocateGrid(size);
@@ -621,8 +621,8 @@ int foo(path * p, path ** p2)
 		 }
 		 }*/
 		//printPath(p);
+		printPath(&p[0]);
 		printPath(&p[1]);
-		printPath(&p[2]);
 				
 		compute<<<size, size>>>(g, p,p2, result);
 		cudaDeviceSynchronize();
