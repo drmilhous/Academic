@@ -315,7 +315,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 
 														printf("p = %p, next = %p\n", p, nextPath[0]);
 														p = nextPath[0];
-														nextPath = &nextPath[1];
+														nextPath = nextPath++;
 														//printf("p = %p, next = %pX\n", p, nextPath[0]);
 														for (uint8_t row = 0;  row < g->size;  row++)
 														{
