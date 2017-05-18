@@ -532,13 +532,13 @@ path * getPath(char * line)
 	}
 path ** scanChars()
 	{
-		char test[100] = "HEBJCE  -> BJAGDHCHJEGJ";
+		//char test[100] = "HEBJCE  -> BJAGDHCHJEGJ";
 		int count = 100;
 		int index = 0;
 		path ** pathList;
 		cudaMallocManaged((void **) &pathList, (sizeof(path *)) * count);
-		path * p = getPath(test);
-		printPath(p);
+		//path * p = getPath(test);
+		//printPath(p);
 		/*char str[100];
 		 scanf("%[^\t\n]99", str);
 		 str[99] = 0;
@@ -553,7 +553,7 @@ path ** scanChars()
 				perror("opening database");
 				return NULL;
 			}
-		int max = 10;
+		int max = 100;
 		while (EOF != fscanf(database, "%[^\n]\n", buffer) && index < max)
 			{
 				char * b = buffer;
