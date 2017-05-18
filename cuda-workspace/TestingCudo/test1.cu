@@ -253,16 +253,22 @@ __global__ void compute(grid * g, path * p,path ** p2, grid ** result)
 			{
 				int x = blockIdx.x;
 				int y = threadIdx.x;
-				//computeRecursive(g, p,p2, x, y, result, 0);
+				computeRecursive(g, p,p2, x, y, result, 0);
 				//printPath2(p);
-				p2++;
-				printPath2(p2[0]);
+				//p2++;
+				//printPath2(p2[0]);
 			}
 	}
 __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, int y, grid ** res, int recCount)
 {
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		int base = idx * MAX *3 + recCount;
+		uint8_t rec = (p->next == NULL);
+		if(rec == 1)
+		{
+			p = nextPath[0];
+			nextPath++;
+		}
 		//printf("index[%02d] base[%d]\n",idx, base);
 		grid * currentGrid = res[base +1];
 		recCount = recCount +3 ;
@@ -313,15 +319,15 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 												//	}
 												if(recCount < MAX *3)
 												 {
-													if (p->next != NULL )
+													if (rec == 0)
 													{
 														computeRecursive( currentGrid, p->next,nextPath,  x, lasty, res, recCount);
 													}
 													else
 													{
-														printf("Next Path %d\n",  blockIdx.x * blockDim.x + threadIdx.x );
-														p = nextPath[0];
-														nextPath++;
+														//printf("Next Path %d\n",  blockIdx.x * blockDim.x + threadIdx.x );
+														//p = nextPath[0];
+														//nextPath++;
 														for (uint8_t row = 0;  row < g->size;  row++)
 														{
 															for (uint8_t col = 0;  col < g->size;  col++)
@@ -371,19 +377,18 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 												//	}
 												if(recCount < MAX *3)
 												 {
-													if (p->next != NULL )
+													if (rec == 0)
 													{
 														computeRecursive( currentGrid, p->next,nextPath,  lastx, y, res, recCount);
 													}
 													else
 													{
-														printf("Next Path %d\n",  blockIdx.x * blockDim.x + threadIdx.x );
+														//printf("Next Path %d\n",  blockIdx.x * blockDim.x + threadIdx.x );
 
-														printf("p = %p, next = %p\n", p, nextPath[0]);
-														p = nextPath[0];
-														nextPath++;
-														printf("p = %p, next = %pX\n", p, &nextPath[0]);
-														printPath2(nextPath[0]);
+														//printf("p = %p, next = %p\n", p, nextPath[0]);
+														
+														//printf("p = %p, next = %pX\n", p, &nextPath[0]);
+														//printPath2(nextPath[0]);
 														for (uint8_t row = 0;  row < g->size;  row++)
 														{
 															for (uint8_t col = 0;  col < g->size;  col++)
