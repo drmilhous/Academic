@@ -40,6 +40,29 @@ __device__ void eliminateValue(cell **c, int row, int col, int max, int value);
 __device__ void add(grid ** base, grid ** last, grid * newList);
 //void printGrid(grid * g, int x, int y);
 __device__ grid * cloneGrid(grid * g);
+__global__ void printPath(path * p)
+	{
+		if (p != NULL)
+			{
+				char dir = p->direction == UP ? 'U' : 'L';
+				if (p->domain != NULL)
+					{
+						printf("[%s]->[%s]\n", p->domain, p->pass);
+					}
+				int value = (int) p->letters[0];
+				if (value > 30)
+					{
+						printf("[%c]->[%c%c%c]%c\n", p->letters[0], p->letters[1], p->letters[2], p->letters[3], dir);
+					}
+				else
+					{
+						printf("[%c]->[%c%c%c]%c\n", convertChar(p->letters[0]), convertChar(p->letters[1]), convertChar(p->letters[2]), convertChar(p->letters[3]), dir);
+						//printf("[%d]->[%d%d%d]%c\n", p->letters[0], p->letters[1], p->letters[2], p->letters[3], dir);
+
+					}
+				printPath(p->next);
+			}
+	}
 void printGrid(grid * g)
 	{
 		int n = g->size;
@@ -317,6 +340,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 														p = nextPath[0];
 														nextPath++;
 														printf("p = %p, next = %pX\n", p, &nextPath[0]);
+														printPath(nextPath[0]);
 														for (uint8_t row = 0;  row < g->size;  row++)
 														{
 															for (uint8_t col = 0;  col < g->size;  col++)
@@ -431,29 +455,7 @@ path * allocate(char c, char c1, char* c2, int direction)
 		p->pass = NULL;
 		return p;
 	}
-void printPath(path * p)
-	{
-		if (p != NULL)
-			{
-				char dir = p->direction == UP ? 'U' : 'L';
-				if (p->domain != NULL)
-					{
-						printf("[%s]->[%s]\n", p->domain, p->pass);
-					}
-				int value = (int) p->letters[0];
-				if (value > 30)
-					{
-						printf("[%c]->[%c%c%c]%c\n", p->letters[0], p->letters[1], p->letters[2], p->letters[3], dir);
-					}
-				else
-					{
-						printf("[%c]->[%c%c%c]%c\n", convertChar(p->letters[0]), convertChar(p->letters[1]), convertChar(p->letters[2]), convertChar(p->letters[3]), dir);
-						//printf("[%d]->[%d%d%d]%c\n", p->letters[0], p->letters[1], p->letters[2], p->letters[3], dir);
 
-					}
-				printPath(p->next);
-			}
-	}
 path * getPath(char * line)
 	{
 		char * domain = line;
