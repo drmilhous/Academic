@@ -263,7 +263,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 {
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		int base = idx * MAX *3 + recCount;
-		uint8_t rec = (p->next == NULL);
+		uint8_t rec = (p->next == NULL) ? 1 : 0;
 		if(rec == 1)
 		{
 			p = nextPath[0];
