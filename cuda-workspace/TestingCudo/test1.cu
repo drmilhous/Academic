@@ -420,7 +420,7 @@ __device__ void cloneToGrid(grid * g, grid * g2)
 path * allocate(char c, char c1, char* c2, int direction)
 	{
 		path *p;
-		cudaMallocManaged((void **) &p, 1);
+		cudaMallocManaged((void **) &p, 1 * sizeof(path));
 		p->next = NULL;
 		p->letters[0] = convertUpper(c);
 		p->letters[1] = convertUpper(c1);
