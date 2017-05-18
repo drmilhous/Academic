@@ -40,6 +40,13 @@ __device__ void eliminateValue(cell **c, int row, int col, int max, int value);
 __device__ void add(grid ** base, grid ** last, grid * newList);
 //void printGrid(grid * g, int x, int y);
 __device__ grid * cloneGrid(grid * g);
+char convertChar(char u)
+	{
+		int x = (int) u;
+		int A = (int) 'A';
+		x = x + A;
+		return (char) x;
+	}
 void printPath(path * p)
 	{
 		if (p != NULL)
@@ -432,13 +439,7 @@ int convertUpper(char u)
 		x = x - A;
 		return x;
 	}
-char convertChar(char u)
-	{
-		int x = (int) u;
-		int A = (int) 'A';
-		x = x + A;
-		return (char) x;
-	}
+
 
 char convert(int x)
 	{
