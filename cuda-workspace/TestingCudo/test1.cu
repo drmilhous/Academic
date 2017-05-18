@@ -383,7 +383,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 													}
 													else
 													{
-														//printf("Next Path %d\n",  blockIdx.x * blockDim.x + threadIdx.x );
+														printf("Next Path %d\n",  blockIdx.x * blockDim.x + threadIdx.x );
 
 														//printf("p = %p, next = %p\n", p, nextPath[0]);
 														
