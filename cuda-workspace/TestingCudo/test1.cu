@@ -63,6 +63,37 @@ __global__ void printPath(path * p)
 				printPath(p->next);
 			}
 	}
+__device__ char convertChar2(char u)
+	{
+		int x = (int) u;
+		int A = (int) 'A';
+		x = x + A;
+		return (char) x;
+	}
+__device__ void printPath2(path * p)
+	{
+		if (p != NULL)
+			{
+				char dir = p->direction == UP ? 'U' : 'L';
+				if (p->domain != NULL)
+					{
+						printf("[%s]->[%s]\n", p->domain, p->pass);
+					}
+				int value = (int) p->letters[0];
+				if (value > 30)
+					{
+						printf("[%c]->[%c%c%c]%c\n", p->letters[0], p->letters[1], p->letters[2], p->letters[3], dir);
+					}
+				else
+					{
+						printf("[%c]->[%c%c%c]%c\n", convertChar2(p->letters[0]), convertChar2(p->letters[1]), convertChar2(p->letters[2]), convertChar2(p->letters[3]), dir);
+						//printf("[%d]->[%d%d%d]%c\n", p->letters[0], p->letters[1], p->letters[2], p->letters[3], dir);
+
+					}
+				printPath2(p->next);
+			}
+	}
+
 void printGrid(grid * g)
 	{
 		int n = g->size;
@@ -340,7 +371,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 														p = nextPath[0];
 														nextPath++;
 														printf("p = %p, next = %pX\n", p, &nextPath[0]);
-														printPath(nextPath[0]);
+														printPath2(nextPath[0]);
 														for (uint8_t row = 0;  row < g->size;  row++)
 														{
 															for (uint8_t col = 0;  col < g->size;  col++)
