@@ -4,7 +4,7 @@
 #define N 10
 #define UP 'U'
 #define LEFT 'L'
-#define MAX 7
+#define MAX 8
 
 typedef struct path
 	{
