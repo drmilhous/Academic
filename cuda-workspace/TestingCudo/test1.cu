@@ -178,18 +178,18 @@ __device__ grid * cloneGrid(grid * g)
 		}
 		return g2;
 	}
-__global__ void compute(grid * g, path * p, grid ** result)
+__global__ void compute(grid * g, path * p,path ** p2, grid ** result)
 	{
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		if (idx < N * N)
 			{
 				int x = blockIdx.x;
 				int y = threadIdx.x;
-				computeRecursive(g, p, x, y, result, 0);
+				computeRecursive(g, p,p2, x, y, result, 0);
 			}
 	}
-__device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, int recCount)
-	{
+__device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, int y, grid ** res, int recCount)
+{
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		int base = idx * MAX *3 + recCount;
 		//printf("index[%02d] base[%d]\n",idx, base);
@@ -202,6 +202,12 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 		int value = p->letters[0];
 		//grid * currentGrid = cloneGrid(g);
 		cloneToGrid(g,currentGrid);
+		uint8_t rec = (p->next == NULL) ? 1 : 0;
+		if(rec == 1)
+		{
+			p = nextPath[0];
+			nextPath++;
+		}
 		if(currentGrid != NULL)
 		{
 		grid* previousGrid = res[base + 2];
@@ -239,10 +245,24 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 														cloneToGrid(currentGrid, res[base]);
 														res[base]->ok = '1';
 													}
-												if (p->next != NULL && recCount < MAX * 3)
+												if(recCount < MAX *3)
+												 {
+													if (rec == 0)
 													{
 														computeRecursive(currentGrid, p->next, x, lasty, res, recCount);
 													}
+													else
+													{
+														printf("Next Path %d\n",  blockIdx.x * blockDim.x + threadIdx.x );
+														for (int row = 0;  row < g->size;  row++)
+														{
+															for (int col = 0;  col < g->size;  col++)
+																{
+																	computeRecursive( currentGrid, p,nextPath,  row,  col, res, recCount);
+																}
+														}	
+													}
+												 }
 											}
 									}
 								cloneToGrid(previousGrid, currentGrid);
@@ -268,24 +288,32 @@ __device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, 
 														eliminateValue(currentGrid->cells, lastx, y, currentGrid->size, value);
 													}
 											}
-
-										//printGrid(currentGrid, x, y);
 										if (checkValue == 0) //recursive call
 											{
 												if (set == 0)
 													{
 														set = 1;
-														//cloneToGrid(currentGrid, res[index]);
-														//res[index]->ok = '1';
 														cloneToGrid(currentGrid, res[base]);
 														res[base]->ok = '1';
 													}
-												//printGrid(currentGrid, x, y);
-												if (p->next != NULL && recCount < MAX *3)
-													{
-													computeRecursive(currentGrid, p->next, lastx, y, res, recCount);
-														//add(&result, &last, temp);
+												if(recCount < MAX *3)
+												{
+													if (rec == 0)
+														{
+														computeRecursive(currentGrid, p->next, lastx, y, res, recCount);
 													}
+													else
+													{
+													printf("Next Path %d\n",  blockIdx.x * blockDim.x + threadIdx.x );
+														for (int row = 0;  row < g->size;  row++)
+														{
+															for (int col = 0;  col < g->size;  col++)
+																{
+																	computeRecursive( currentGrid, p,nextPath,  row,  col, res, recCount);
+																}
+														}		
+													}
+												}
 											}
 										cloneToGrid(previousGrid, currentGrid);
 									}
@@ -507,64 +535,20 @@ path ** scanChars()
 								cudaFree(pathList);
 								pathList = temp;
 								count *= 1.5;
-
 							}
-
-						//printf("> %s\n", buffer);
-						//	getPath(buffer);
 					}
 			}
-
-		/*for (int i = 0; i < count; i++)
-		 {
-		 printPath(pathList[i]);
-		 }*/
 		printf("Count is  = %d\n", index);
 		fclose(database);
 		return pathList;
 	}
 
-int foo(path * p)
+int foo(path * p, path ** p2)
 	{
-
 		cudaDeviceSetLimit(cudaLimitMallocHeapSize, 128 * 1024 * 1024*8); //See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#heap-memory-allocation
-
-	//cell * array;
-	//	cell** cells;
 		int nBYn = N * N;
 		int size = N;
 		grid * g = allocateGrid(size);
-		/*cudaMallocManaged((void**) &g, sizeof(grid));
-		 g->size = N;
-		 cudaMallocManaged((void**) &array, nBYn * sizeof(cell));
-		 cudaMallocManaged((void **) &cells, size * sizeof(cell *));
-
-		 for (int i = 0; i < size; i++)
-		 {
-		 cells[i] = &array[i * size];
-		 }
-		 g->cells = cells;
-		 */
-
-		/*	path *p;
-		 cudaMallocManaged((void **) &p, 2);
-		 path *p2 = p++;
-
-
-		 p->next = p++;
-		 p->direction = UP;
-		 p->letters[0] = 4;
-		 p->letters[1] = 3;
-		 p->letters[2] = 1;
-		 p->letters[3] = 4;
-
-		 p2->next = NULL;
-		 p2->direction = LEFT;
-		 p2->letters[0] = 4;
-		 p2->letters[1] = 2;
-		 p2->letters[2] = 1;
-		 p2->letters[3] = 3;
-		 */
 		int i = 0;
 		grid **result;
 		cudaMallocManaged((void**) &result, sizeof(grid*) * size * size * MAX * 3);
@@ -572,18 +556,8 @@ int foo(path * p)
 			{
 				result[i] = allocateGrid(size);
 			}
-		/*for (int row = 0; row < N; row++)
-		 {
-		 for (int col = 0; col < N; col++)
-		 {
-		 printf("(%d,,%d)\n", row, col);
-		 if (result[i] != NULL)
-		 printGrid(result[i], row, col);
-		 i++;
-		 }
-		 }*/
 		printPath(p);
-		compute<<<size, size>>>(g, p, result);
+		compute<<<size, size>>>(g, p,p2, result);
 		cudaDeviceSynchronize();
 		i = 0;
 		for (int row = 0; row < N; row++)
@@ -603,79 +577,14 @@ int foo(path * p)
 						}
 					}
 			}
-		/*for( int i = 0; i < nBYn * MAX * 3; i++)
-		{
-			if (result[i]->ok == '1')
-							{
-								//printf("(%d,%d,%d)\n", row, col, j);
-								puts("");
-								printGrid(result[i]);
-							}
-		}
-*/
-		//cudaFree(array);
 		return 0;
 	}
 
-void test2()
-	{
-
-	}
-
-/*void initCell(cell * c)
- {
-
- for (int row = 0; row < N; row++)
- {
- for (int col = 0; col < N; col++)
- {
- c[row * N + col].value = col;
- printf("[%02d][%02d]%02d ", row, col, c[row * N + col].bitmap);
- c[row * N + col].value = -1;
- }
- printf("\n");
- }
- }*/
 int main(void)
 	{
 		path ** p = scanChars();
 		if (p != NULL)
 			{
-				foo(p[1]);
+				foo(p[0], &p[1]);
 			}
 	}
-/*
- void test1()
- {
- cell * c = (cell *)malloc(N*N*sizeof(cell));
- cell * dev_c;
- cudaMalloc((void **) &dev_c, N*N*sizeof(cell));
- initCell(c);
- cudaMemcpy( dev_c, c, N*N * sizeof(cell), cudaMemcpyHostToDevice) ;
- char ch = 'a';
- ch = (char) (((int) ch) + 7);
- removeIndex<<<10,1>>>( dev_c, 0,5,N,pow(2,7));
- puts("");
- cudaMemcpy( c, dev_c, N*N * sizeof(cell),cudaMemcpyDeviceToHost);
- for (int row=0; row<N; row++)
- {
- for (int col=0; col<N; col++)
- {
- //printf("[%02d][%02d]%02X ",row, col, c[row * N + col].bitmap);
- int index = row * N + col;
- int value = c[index].value;
- char printC = ' ';
- if( value == -1)
- {
- value = c[index].bitmap;
- }
- else
-
- printC = convert(value);
- printf("%02X-%c ", value, printC);
- }
- printf("\n");
- }
- // free the memory allocated on the GPU
- cudaFree( dev_c );
- }*/
