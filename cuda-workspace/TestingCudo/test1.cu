@@ -40,7 +40,7 @@ __device__ void eliminateValue(cell **c, int row, int col, int max, int value);
 __device__ void add(grid ** base, grid ** last, grid * newList);
 //void printGrid(grid * g, int x, int y);
 __device__ grid * cloneGrid(grid * g);
-__global__ void printPath(path * p)
+void printPath(path * p)
 	{
 		if (p != NULL)
 			{
