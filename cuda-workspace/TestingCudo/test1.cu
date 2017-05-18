@@ -552,8 +552,8 @@ int foo(path * p, path ** p2)
 		grid * g = allocateGrid(size);
 		int i = 0;
 		grid **result;
-		cudaMallocManaged((void**) &result, sizeof(grid*) * size * size * MAX * 3);
-		for (int i = 0; i < nBYn * MAX * 3; i++)
+		cudaMallocManaged((void**) &result, sizeof(grid*) * size * size * MAX * 5);
+		for (int i = 0; i < nBYn * MAX * 5; i++)
 			{
 				result[i] = allocateGrid(size);
 			}
@@ -567,9 +567,9 @@ int foo(path * p, path ** p2)
 				for (int col = 0; col < N; col++)
 					{
 
-						for(int j = 0; j <MAX * 3; j+=3)
+						for(int j = 0; j <MAX * 4; j+=3)
 						{
-						int idx = (row * size + col) * MAX*3 +j;
+						int idx = (row * size + col) * MAX*4 +j;
 						if (result[idx]->ok == '1')
 							{
 								printf("(%d,%d,%d)\n", row, col, j);
