@@ -250,7 +250,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 												 {
 													if (rec == 0)
 													{
-														computeRecursive(currentGrid, p->next, x, lasty, res, recCount);
+														computeRecursive(currentGrid, p->next,nextPath, x, lasty, res, recCount);
 													}
 													else
 													{
@@ -301,7 +301,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 												{
 													if (rec == 0)
 														{
-														computeRecursive(currentGrid, p->next, lastx, y, res, recCount);
+														computeRecursive(currentGrid, p->next,nextPath, lastx, y, res, recCount);
 													}
 													else
 													{
