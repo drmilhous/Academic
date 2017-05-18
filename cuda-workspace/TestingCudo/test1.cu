@@ -3,7 +3,8 @@
 #include <stdint.h>
 #define N 10
 #define UP 'U'
-#define LEFT 'L'
+#define LEFT 
+'L'
 #define MAX 9
 
 typedef struct path
@@ -325,7 +326,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 													}
 													else
 													{
-														//printf("Next Path %d\n",  blockIdx.x * blockDim.x + threadIdx.x );
+														printf("Next Path %d\n",  blockIdx.x * blockDim.x + threadIdx.x );
 														//p = nextPath[0];
 														//nextPath++;
 														for (uint8_t row = 0;  row < g->size;  row++)
