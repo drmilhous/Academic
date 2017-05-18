@@ -3,8 +3,7 @@
 #include <stdint.h>
 #define N 10
 #define UP 'U'
-#define LEFT 
-'L'
+#define LEFT 'L'
 #define MAX 9
 
 typedef struct path
