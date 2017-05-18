@@ -79,8 +79,10 @@ __device__ char convertChar2(char u)
 	}
 __device__ void printPath2(path * p)
 	{
+		printf("Pointer %p ",p);
 		if (p != NULL)
 			{
+				
 				char dir = p->direction == UP ? 'U' : 'L';
 				if (p->domain != NULL)
 					{
