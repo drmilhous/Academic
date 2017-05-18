@@ -623,9 +623,10 @@ int foo(path * p, path ** p2)
 		 }
 		 }*/
 		//printPath(p);
+			cudaDeviceSynchronize();
 		printPath(&p[0]);
 		printPath(&p[1]);
-		cudaDeviceSynchronize();		
+			
 		compute<<<size, size>>>(g, p,p2, result);
 		cudaDeviceSynchronize();
 		i = 0;
