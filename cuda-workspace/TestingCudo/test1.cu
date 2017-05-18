@@ -551,11 +551,13 @@ path ** scanChars()
 					}
 			}
 
-		/*for (int i = 0; i < count; i++)
+		for (int i = 0; i < count; i++)
 		 {
-		 printPath(pathList[i]);
-		 }*/
-		printf("Count is  = %d\n", index);
+		 
+		 	printPath(pathList[i]);
+		 }
+
+		printf("\nCount is  = %d\n", index);
 		fclose(database);
 		return pathList;
 	}
