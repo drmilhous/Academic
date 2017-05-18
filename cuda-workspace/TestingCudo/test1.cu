@@ -684,7 +684,7 @@ int main(void)
 		path ** p = scanChars();
 		if (p != NULL)
 			{
-				foo(p[1], &p[1]);
+				foo(p[0], &p[0]);
 			}
 	}
 /*
