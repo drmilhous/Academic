@@ -4,7 +4,7 @@
 #define N 10
 #define UP 'U'
 #define LEFT 'L'
-#define MAX 9
+#define MAX 7
 
 typedef struct path
 	{
@@ -734,7 +734,7 @@ int main(void)
 		path ** p = scanChars();
 		if (p != NULL)
 			{
-				foo(p[1], &p[2]);
+				foo(p[0], &p[1]);
 			}
 	}
 /*
