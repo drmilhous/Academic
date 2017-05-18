@@ -203,7 +203,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 		int value = p->letters[0];
 		//grid * currentGrid = cloneGrid(g);
 		cloneToGrid(g,currentGrid);
-		uint8_t rec = (p->next == NULL) ? 1 : 0;
+		int rec = (p->next == NULL) ? 1 : 0;
 		if(rec == 1)
 		{
 			p = nextPath[0];
@@ -558,6 +558,7 @@ int foo(path * p, path ** p2)
 				result[i] = allocateGrid(size);
 			}
 		printPath(p);
+		printPath(&p[1]);
 		compute<<<size, size>>>(g, p,p2, result);
 		cudaDeviceSynchronize();
 		i = 0;
