@@ -383,7 +383,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 														{
 															for (uint8_t col = 0;  col < g->size;  col++)
 																{
-																	//computeRecursive( currentGrid, p,nextPath,  row,  col, res, recCount);
+																	computeRecursive( currentGrid, p,nextPath,  row,  col, res, recCount);
 																}
 														}	
 													}
