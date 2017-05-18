@@ -274,7 +274,8 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 		recCount = recCount +3 ;
 		uint8_t checkValue = 0;
 		res[base]->ok= '0';
-		uint8_t value = p->letters[0];
+		int8_t ok = 0; 
+		int8_t value = p->letters[0];
 		//grid * currentGrid = cloneGrid(g);
 		cloneToGrid(g,currentGrid);
 		if(currentGrid != NULL)
@@ -289,13 +290,13 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 				if (p->direction == LEFT) //Do UP/DOWN
 					{
 						int8_t lasty = y;
-						for (uint8_t y1 = 0; y1 < currentGrid->size; y1++) //check above
+						for (int8_t y1 = 0; y1 < currentGrid->size; y1++) //check above
 							{
 								if (y1 != y)
 									{
 										int8_t direction = y > y1 ? -1 : 1;
 										checkValue = 0;
-										for (uint8_t offset = 0; offset < 3; offset++)
+										for (int8_t offset = 0; offset < 3; offset++)
 											{
 												value = p->letters[offset + 1];
 												lasty = (y1 + (offset * direction) + currentGrid->size) % currentGrid->size;
@@ -308,10 +309,11 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 											}
 										if (checkValue == 0) //recursive call
 											{
-												if (res[base]->ok == '0')
+												if (ok == 0)
 													{
 														cloneToGrid(currentGrid, res[base]);
 														res[base]->ok = '1';
+														ok = 1;
 													}
 												//if (p->next != NULL && recCount < MAX * 3)
 												//	{
@@ -328,9 +330,9 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 														printf("Next Path %d\n",  blockIdx.x * blockDim.x + threadIdx.x );
 														//p = nextPath[0];
 														//nextPath++;
-														for (uint8_t row = 0;  row < g->size;  row++)
+														for (int8_t row = 0;  row < g->size;  row++)
 														{
-															for (uint8_t col = 0;  col < g->size;  col++)
+															for (int8_t col = 0;  col < g->size;  col++)
 																{
 																	computeRecursive( currentGrid, p,nextPath,  row,  col, res, recCount);
 																}
@@ -345,13 +347,13 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 				else // direction = left/right
 					{
 						int8_t lastx = x;
-						for (uint8_t x1 = 0; x1 < currentGrid->size; x1++) //check above
+						for (int8_t x1 = 0; x1 < currentGrid->size; x1++) //check above
 							{
 								if (x1 != x)
 									{
 										int8_t direction = x > x1 ? -1 : 1;
 										checkValue = 0;
-										for (uint8_t offset = 0; offset < 3; offset++)
+										for (int8_t offset = 0; offset < 3; offset++)
 											{
 												value = p->letters[offset + 1];
 												lastx = (x1 + (offset * direction) + currentGrid->size) % currentGrid->size;
@@ -366,10 +368,11 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 										//printGrid(currentGrid, x, y);
 										if (checkValue == 0) //recursive call
 											{
-												if (res[base]->ok == '0')
+												if (ok == 0)
 													{
 														cloneToGrid(currentGrid, res[base]);
 														res[base]->ok = '1';
+														ok = 1;
 													}
 												//if (p->next != NULL && recCount < MAX *3)
 												//	{
@@ -389,9 +392,9 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 														
 														//printf("p = %p, next = %pX\n", p, &nextPath[0]);
 														//printPath2(nextPath[0]);
-														for (uint8_t row = 0;  row < g->size;  row++)
+														for (int8_t row = 0;  row < g->size;  row++)
 														{
-															for (uint8_t col = 0;  col < g->size;  col++)
+															for (int8_t col = 0;  col < g->size;  col++)
 																{
 																	computeRecursive( currentGrid, p,nextPath,  row,  col, res, recCount);
 																}
