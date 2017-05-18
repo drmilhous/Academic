@@ -544,7 +544,7 @@ path ** scanChars()
 									{
 										temp[i] = pathList[i];
 									}
-								cudeDeviceSynchronize();
+								cudaDeviceSynchronize();
 								cudaFree(pathList);
 								pathList = temp;
 								count *= 1.5;
