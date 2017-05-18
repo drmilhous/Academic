@@ -215,7 +215,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 				cloneToGrid(currentGrid, previousGrid);
 				if (p->direction == LEFT) //Do UP/DOWN
 					{
-						uint8_t lasty = y;
+						int8_t lasty = y;
 						for (uint8_t y1 = 0; y1 < currentGrid->size; y1++) //check above
 							{
 								if (y1 != y)
@@ -248,7 +248,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 												 {
 													if (p->next != NULL )
 													{
-														computeRecursive( currentGrid, p->next,nextPath,  lastx, y, res, recCount);
+														computeRecursive( currentGrid, p->next,nextPath,  x, lasty, res, recCount);
 													}
 													else
 													{
@@ -678,7 +678,7 @@ int main(void)
 		path ** p = scanChars();
 		if (p != NULL)
 			{
-				foo(p[1]);
+				foo(p[1], &p[1]);
 			}
 	}
 /*
