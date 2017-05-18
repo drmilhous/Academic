@@ -538,6 +538,7 @@ path ** scanChars()
 		path ** pathList;
 		cudaMallocManaged((void **) &pathList, (sizeof(path *)) * count);
 		//path * p = getPath(test);
+		path * p;
 		//printPath(p);
 		/*char str[100];
 		 scanf("%[^\t\n]99", str);
