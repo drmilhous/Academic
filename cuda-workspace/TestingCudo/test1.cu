@@ -251,7 +251,7 @@ __global__ void compute(grid * g, path * p,path ** p2, grid ** result)
 			{
 				int x = blockIdx.x;
 				int y = threadIdx.x;
-				computeRecursive(g, p,p2, x, y, result, 0);
+				//computeRecursive(g, p,p2, x, y, result, 0);
 				printPath2(p);
 			}
 	}
