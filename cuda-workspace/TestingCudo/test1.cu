@@ -537,7 +537,7 @@ path ** scanChars()
 		int count = 100;
 		int index = 0;
 		path ** pathList;
-		cudaMallocManaged((void **) &pathList, (sizeof(path *)) * count);
+		cudaMallocManaged((void **) &pathList, (sizeof(path *)) * count * 2);
 		//path * p = getPath(test);
 		path * p;
 		//printPath(p);
