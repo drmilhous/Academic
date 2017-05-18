@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #define N 10
 #define UP 'U'
 #define LEFT 'L'
@@ -33,7 +34,7 @@ typedef struct grid
 
 void initCell(cell * c);
 char convert(int x);
-__device__ void computeRecursive(grid * g, path * p, int x, int y, grid ** res, int recCount);
+__device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, int y, grid ** res, int recCount);
 __device__ void cloneToGrid(grid * g, grid * g2);
 __device__ void eliminateValue(cell **c, int row, int col, int max, int value);
 __device__ void add(grid ** base, grid ** last, grid * newList);
