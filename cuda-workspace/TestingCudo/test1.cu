@@ -205,11 +205,11 @@ __device__ void computeIterative(grid * g, path * p, int x, int y, grid ** res, 
 				currentGrid->cells[x][y].value = value;
 				eliminateValue(currentGrid->cells, x, y, currentGrid->size, value);
 				cloneToGrid(currentGrid, previousGrid);
-				int lasty = y;
-				int lastx = x;
 				int direction;
 				for (int z = 0; z < currentGrid->size; z++) //check above
 							{
+								int lasty = y;
+								int lastx = x;
 								checkValue = 0;
 								if (p->direction == LEFT) //Do UP/DOWN
 									direction = lasty > z ? -1 : 1;
