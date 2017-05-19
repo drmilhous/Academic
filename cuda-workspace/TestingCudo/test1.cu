@@ -193,7 +193,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 {
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		int base = idx * MAX *4 + recCount;
-		printf("index[%02d] base[%d]\n",idx, base);
+		
 		grid * currentGrid = res[base +1];
 		recCount = recCount +3 ;
 		//int index = y * g->size + x;
@@ -208,6 +208,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 		{
 			p = nextPath[0];
 			nextPath++;
+			printf("index[%02d] base[%d] recCount %d\n",idx, base, recCount);
 		}
 		if(currentGrid != NULL)
 		{
