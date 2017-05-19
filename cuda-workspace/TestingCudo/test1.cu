@@ -223,12 +223,12 @@ __device__ void computeIterative(grid * g, path * p, int x, int y, grid ** res, 
 									else
 										lastx = (z + (offset * direction) + currentGrid->size) % currentGrid->size;
 									checkValue |= check(currentGrid, lastx, lasty, value);
+									if (checkValue == 0)
+										{
+											currentGrid->cells[lastx][lasty].value = value;
+											eliminateValue(currentGrid->cells, lastx, lasty, currentGrid->size, value);
+										}
 								}
-								if (checkValue == 0)
-									{
-										currentGrid->cells[lastx][lasty].value = value;
-										eliminateValue(currentGrid->cells, lastx, lasty, currentGrid->size, value);
-									}
 								if (checkValue == 0) //recursive call
 										{
 											if (set == 0)
