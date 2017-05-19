@@ -205,7 +205,7 @@ __device__ void computeRecursive(grid * g, path * p, path ** nextPath, int x, in
 		grid* previousGrid = res[base + 2];
 		if(currentGrid->ok == '1' || previousGrid->ok == '1')
         {
-            printf("error!\n")
+            printf("error!\n");
         }
 		cloneToGrid(g,currentGrid);
 		int rec = (p->next == NULL) ? 1 : 0;
