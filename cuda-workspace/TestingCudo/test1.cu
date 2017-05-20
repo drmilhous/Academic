@@ -120,7 +120,6 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 			{
 				currentGrid->cells[x][y].value = value;
 				eliminateValue(currentGrid->cells, x, y, currentGrid->size, value);
-				cloneToGrid(currentGrid, previousGrid);
 				int direction;
 				if (p->direction == LEFT) //Do UP/DOWN
 					z = loc->ny;
