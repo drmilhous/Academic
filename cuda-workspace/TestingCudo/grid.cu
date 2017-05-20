@@ -1,4 +1,6 @@
 #include "grid.h"
+#ifndef GRID
+#define GRID
 __device__ int pow2(int x)
 {
 	int sum = 1;
@@ -15,3 +17,4 @@ __device__ int pow2(int x)
 	}
 	return sum;
 }
+#endif
