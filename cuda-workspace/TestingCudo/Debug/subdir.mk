@@ -4,17 +4,14 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CU_SRCS += \
-../grid.cu \
 ../test1.cu \
 ../test2.cu 
 
 OBJS += \
-./grid.o \
 ./test1.o \
 ./test2.o 
 
 CU_DEPS += \
-./grid.d \
 ./test1.d \
 ./test2.d 
 
