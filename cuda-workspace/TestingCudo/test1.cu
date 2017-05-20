@@ -33,10 +33,10 @@ typedef struct grid
 	} grid;
 typedef struct location
 {
-	int8_t x;
-	int8_t nx;
-	int8_t y;
-	int8_t ny;
+	int x;
+	int nx;
+	int y;
+	int ny;
 	struct location * next;
 	struct grid * currentG;
 	path * p;
