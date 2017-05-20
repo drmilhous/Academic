@@ -83,7 +83,7 @@ __device__ void computeIterative(grid * g, path * p, int x, int y, grid ** res, 
 		grid * currentGrid = res[base +1];
 		recCount = recCount +3 ;
 		int set = 0;
-		int checkValue = 0;
+		int checkValue = 0; 
 		int value = p->letters[0];
 		cloneToGrid(g,currentGrid);
 		grid* previousGrid = res[base + 2];
