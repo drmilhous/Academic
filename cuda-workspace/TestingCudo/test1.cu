@@ -233,7 +233,7 @@ int foo(path * p)
 
 		int i = 0;
 		location * larray;
-		cudaManagedMalloc((void **) &larray,sizeof(location) * nBYn);
+		cudaMallocManaged((void **) &larray,sizeof(location) * nBYn);
 		for (int row = 0; row < N; row++)
 			{
 				for (int col = 0; col < N; col++)
