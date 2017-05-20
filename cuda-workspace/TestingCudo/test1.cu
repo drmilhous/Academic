@@ -122,9 +122,9 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 				cloneToGrid(currentGrid, previousGrid);
 				int direction;
 				if (p->direction == LEFT) //Do UP/DOWN
-					z = y;
+					z = loc->ny;
 				else
-					z = x;
+					z = loc->nx;
 				int lasty = y;
 				int lastx = x;
 				checkValue = 0;
