@@ -4,7 +4,7 @@
 #define N 10
 #define UP 'U'
 #define LEFT 'L'
-#define MAX 6
+#define MAX 2
 
 typedef struct path
 	{
@@ -34,8 +34,11 @@ typedef struct grid
 typedef struct location
 {
 	int8_t x;
+	int8_t nx;
 	int8_t y;
+	int8_t ny;
 	struct location * next;
+	struct grid * currentG;
 	path * p;
 }location;
 
@@ -66,72 +69,116 @@ int main(void)
 			}
 	}
 
-__global__ void compute(grid * g, path * p, grid ** result)
+__global__ void compute(grid * g,location * l, path * p)
 	{
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		if (idx < N * N)
 			{
 				int x = blockIdx.x;
 				int y = threadIdx.x;
-				computeIterative(g, p, x, y, result, 0);
+				computeIterative(g, p, l);
 			}
 	}
-__device__ void computeIterative(grid * g, path * p, int x, int y, grid ** res, int recCount)
+__device__ void computeIterative(grid * g, path * p, location * loc)
 	{
-		int idx = blockIdx.x * blockDim.x + threadIdx.x;
-		int base = idx * MAX *3 + recCount;
-		grid * currentGrid = res[base +1];
-		recCount = recCount +3 ;
-		int set = 0;
-		int checkValue = 0; 
-		int value = p->letters[0];
+		loc->p = p;
+		if (p->direction == LEFT) //Do UP/DOWN
+		{
+			loc->nx = 0;
+			loc->ny = loc->y;
+		}						
+		else
+		{
+			loc->nx = loc->x;
+			loc->ny = 0;
+		}
+		location * temp; 						
+		int checkValue;
+		int value;
+		int z;
+		int done = 0;
+		//int idx = blockIdx.x * blockDim.x + threadIdx.x;
+		//int base = idx * MAX *3 + recCount;
+		grid * currentGrid = allocateGrid(g->size);
+		grid* previousGrid = allocateGrid(g->size);
 		cloneToGrid(g,currentGrid);
-		grid* previousGrid = res[base + 2];
-		checkValue = check(currentGrid, x, y, value);
-		if (checkValue == 0)
+		loc->currentG = allocateGrid(g->size);
+		//recCount = recCount +3 ;
+		//int set = 0;
+		int count = 0;
+		while(done == 0)
+		{
+			cloneToGrid(loc->currentG, currentGrid);
+			value = p->letters[0];
+			checkValue = check(currentGrid, x, y, value);
+			if (checkValue == 0)
 			{
 				currentGrid->cells[x][y].value = value;
 				eliminateValue(currentGrid->cells, x, y, currentGrid->size, value);
 				cloneToGrid(currentGrid, previousGrid);
 				int direction;
-				for (int z = 0; z < currentGrid->size; z++) //check above
+				if (p->direction == LEFT) //Do UP/DOWN
+					z = y;
+				else
+					z = x;
+				int lasty = y;
+				int lastx = x;
+				checkValue = 0;
+				if (p->direction == LEFT) //Do UP/DOWN
+					direction = lasty > z ? -1 : 1;
+				else
+					direction = lastx > z ? -1 : 1;
+				for (int offset = 0; offset < 3; offset++)
+					{
+						value = p->letters[offset + 1];
+						if (p->direction == LEFT) //Do UP/DOWN
+							lasty = (z + (offset * direction) + currentGrid->size) % currentGrid->size;
+						else
+							lastx = (z + (offset * direction) + currentGrid->size) % currentGrid->size;
+						checkValue |= check(currentGrid, lastx, lasty, value);
+						if (checkValue == 0)
 							{
-								int lasty = y;
-								int lastx = x;
-								checkValue = 0;
-								if (p->direction == LEFT) //Do UP/DOWN
-									direction = lasty > z ? -1 : 1;
-								else
-									direction = lastx > z ? -1 : 1;
-								for (int offset = 0; offset < 3; offset++)
-								{
-									value = p->letters[offset + 1];
-									if (p->direction == LEFT) //Do UP/DOWN
-										lasty = (z + (offset * direction) + currentGrid->size) % currentGrid->size;
-									else
-										lastx = (z + (offset * direction) + currentGrid->size) % currentGrid->size;
-									checkValue |= check(currentGrid, lastx, lasty, value);
-									if (checkValue == 0)
-										{
-											currentGrid->cells[lastx][lasty].value = value;
-											eliminateValue(currentGrid->cells, lastx, lasty, currentGrid->size, value);
-										}
-								}
-								if (checkValue == 0) //recursive call
-										{
-											if (set == 0)
-												{
-													set = 1;
-													cloneToGrid(currentGrid, res[base]);
-													res[base]->ok = '1';
-												}
-												/*if (p->next != NULL && recCount < MAX * 3)
-													{
-														computeRecursive(currentGrid, p->next, x, lasty, res, recCount);
-													}*/
-										}
-								cloneToGrid(previousGrid, currentGrid);
+								currentGrid->cells[lastx][lasty].value = value;
+								eliminateValue(currentGrid->cells, lastx, lasty, currentGrid->size, value);
 							}
+					}
+					if (checkValue == 0 && count < MAX) //rec value
+						{
+										//cloneToGrid(currentGrid, res[base]
+							temp = malloc(sizeof(location));
+							temp->next = loc;
+							loc = temp;
+							printGrid(currentGrid);
+							count ++;
+						}
+					cloneToGrid(previousGrid, currentGrid);
+				}
+			if(p->direction == LEFT)
+			{
+				loc->nx++;
+				z = loc->nx;
+			}
+			else
+			{
+				loc->ny++;
+				z = loc->ny;
+			}
+			if(z == g->size)
+				{
+					if(loc->next == NULL)
+					{
+						done = 1;
+					}
+					else
+					{
+						temp = loc->next;
+						free(loc->currentG);
+						free(loc);
+						loc = temp;
+						count --;
+					}
+				}
+			}	
 		}
 	}
 
@@ -181,17 +228,22 @@ int foo(path * p)
 		grid * g = allocateGrid(size);
 
 		int i = 0;
-		grid **result;
-		cudaMallocManaged((void**) &result, sizeof(grid*) * size * size * MAX * 3);
-		for (int i = 0; i < nBYn * MAX * 3; i++)
+		location * larray;
+		cudaManagedMalloc((void **) &larray,sizeof(location) * nBYn);
+		for (int row = 0; row < N; row++)
 			{
-				result[i] = allocateGrid(size);
+				for (int col = 0; col < N; col++)
+					{
+						int offset = row * N + col;
+						larray[offset].x = row;
+						larray[offset].y = col;
+					}
 			}
 
 		printPath(p);
-		compute<<<size, size>>>(g, p, result);
+		compute<<<1, 2>>>(g, p, larray);
 		cudaDeviceSynchronize();
-		i = 0;
+		/*i = 0;
 		for (int row = 0; row < N; row++)
 			{
 				for (int col = 0; col < N; col++)
@@ -209,6 +261,7 @@ int foo(path * p)
 						}
 					}
 			}
+			*/
 		/*for( int i = 0; i < nBYn * MAX * 3; i++)
 		{
 			if (result[i]->ok == '1')

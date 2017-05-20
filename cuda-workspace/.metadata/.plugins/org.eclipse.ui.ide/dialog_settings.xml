@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<list key="installedFeatures">
-		<item value="com.nvidia.cuda.ide.feature:8.0.0.201701130639"/>
+		<item value="com.nvidia.cuda.ide.feature:8.0.0.201701120033"/>
 		<item value="org.eclipse.cdt.build.crossgcc:8.4.0.201406111759"/>
 		<item value="org.eclipse.cdt.gdb:8.5.0.201409172108"/>
 		<item value="org.eclipse.cdt.launch.remote:8.5.0.201409172108"/>
@@ -26,7 +26,7 @@
 		<item value="569" key="DIALOG_WIDTH"/>
 		<item value="false" key="TOGGLE_SELECTED"/>
 		<item value="382" key="DIALOG_HEIGHT"/>
-		<item value="4463" key="DIALOG_X_ORIGIN"/>
+		<item value="2411" key="DIALOG_X_ORIGIN"/>
 		<item value="642" key="DIALOG_Y_ORIGIN"/>
 	</section>
 	<section name="ResourceNavigator">
