@@ -4,7 +4,7 @@
 #define N 10
 #define UP 'U'
 #define LEFT 'L'
-#define MAX 3
+#define MAX 2
 
 typedef struct path
 	{
@@ -146,11 +146,11 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 								eliminateValue(currentGrid->cells, lastx, lasty, currentGrid->size, value);
 							}
 					}
-					if(checkValue == 0)
-					{
-						printGrid(currentGrid);	
-					}
-					if (checkValue == 0 && count < MAX && 1 == 0) //rec value
+					//if(checkValue == 0)
+					//{
+					//	printGrid(currentGrid);	
+					//}
+					if (checkValue == 0 && count < MAX) //rec value
 						{
 										//cloneToGrid(currentGrid, res[base]
 							if(p->next != NULL)
