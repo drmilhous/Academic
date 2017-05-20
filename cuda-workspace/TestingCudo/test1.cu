@@ -149,7 +149,7 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 					if (checkValue == 0 && count < MAX) //rec value
 						{
 										//cloneToGrid(currentGrid, res[base]
-							if(p->next != null)
+							if(p->next != NULL)
 							{
 							temp = (location *)malloc(sizeof(location));
 							temp->x = lastx;
