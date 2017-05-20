@@ -46,8 +46,8 @@ void initCell(cell * c);
 char convert(int x);
 __device__ int pow2(int x);
 void printGrid(grid * g);
-__global__ void compute(grid * g, path * p, grid ** result);
-__device__ void computeIterative(grid * g, path * p, int x, int y, grid ** res, int recCount);
+__global__ void compute(grid * g, path * p, location * loc);
+__device__ void computeIterative(grid * g, path * p, location * loc);
 __device__ void cloneToGrid(grid * g, grid * g2);
 __device__ void eliminateValue(cell **c, int row, int col, int max, int value);
 __device__ void add(grid ** base, grid ** last, grid * newList);
@@ -146,6 +146,8 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 						{
 										//cloneToGrid(currentGrid, res[base]
 							temp = malloc(sizeof(location));
+							temp->currentG = allocateGrid(g-size);
+							cloneToGrid(currentGrid,temp->currentG);
 							temp->next = loc;
 							loc = temp;
 							printGrid(currentGrid);
