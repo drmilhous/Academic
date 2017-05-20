@@ -45,7 +45,8 @@ typedef struct location
 void initCell(cell * c);
 char convert(int x);
 __device__ int pow2(int x);
-void printGrid(grid * g);
+__device__ void printGrid(grid * g);
+__device__ char convert(int x);
 __global__ void compute(grid * g, path * p, location * loc);
 __device__ void computeIterative(grid * g, path * p, location * loc);
 __device__ void cloneToGrid(grid * g, grid * g2);
@@ -324,7 +325,7 @@ char convertChar(char u)
 		return (char) x;
 	}
 
-char convert(int x)
+__device__ char convert(int x)
 	{
 		char res = 'a';
 		if (x >= 0)
@@ -520,7 +521,7 @@ __device__ int pow2(int x)
 	return sum;
 }
 
-void printGrid(grid * g)
+__device__ void printGrid(grid * g)
 	{
 		int n = g->size;
 		//printf("X=%d Y=%d %c\n", x, y, g->ok);
