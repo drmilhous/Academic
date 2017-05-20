@@ -182,7 +182,6 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 						loc = temp;
 						count --;
 					}
-				}
 			}	
 		}
 	}
