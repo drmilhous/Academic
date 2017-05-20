@@ -82,7 +82,7 @@ __global__ void compute(grid * g, path * p,location * l)
 	}
 __device__ void computeIterative(grid * g, path * p, location * loc)
 	{
-		
+		int i = 0;
 		if (p->direction == LEFT) //Do UP/DOWN
 		{
 			loc->nx = 0;
@@ -110,6 +110,7 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 		int count = 0;
 		while(done == 0)
 		{
+			i++;
 			cloneToGrid(loc->currentG, currentGrid);
 			x = loc->x;
 			y = loc->y;
@@ -201,6 +202,10 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 						count --;
 					}
 			}
+			}
+			if(i > 100)
+			{
+				done = 1;
 			}	
 		}
 	}
