@@ -132,7 +132,7 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 					direction = lasty > z ? -1 : 1;
 				else
 					direction = lastx > z ? -1 : 1;
-				for (int offset = 0; offset < 3; offset++)
+				for (int offset = 0; offset < 3 && checkValue == 0; offset++)
 					{
 						value = p->letters[offset + 1];
 						if (p->direction == LEFT) //Do UP/DOWN
@@ -161,13 +161,13 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 				}
 			if(p->direction == LEFT)
 			{
-				loc->nx++;
-				z = loc->nx;
+				loc->ny++;
+				z = loc->ny;
 			}
 			else
 			{
-				loc->ny++;
-				z = loc->ny;
+				loc->nx++;
+				z = loc->nx;
 			}
 			if(z == g->size)
 				{
