@@ -58,7 +58,8 @@ all: TestingCudo
 TestingCudo: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: NVCC Linker'
-	/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -link -o  "TestingCudo" $(OBJS) $(USER_OBJS) $(LIBS)
+	/Developer/NVIDIA/CUDA-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -link -o  "TestingCudo" $(OBJS) $(USER_OBJS) $(LIBS)
+	@if [ $(shell uname -s) = "Darwin" ]; then dsymutil $@; fi
 	@echo 'Finished building target: $@'
 	@echo ' '
 
