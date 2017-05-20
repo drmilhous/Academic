@@ -146,7 +146,11 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 								eliminateValue(currentGrid->cells, lastx, lasty, currentGrid->size, value);
 							}
 					}
-					if (checkValue == 0 && count < MAX) //rec value
+					if(checkValue == 0)
+					{
+						printGrid(currentGrid);	
+					}
+					if (checkValue == 0 && count < MAX && 1 == 0) //rec value
 						{
 										//cloneToGrid(currentGrid, res[base]
 							if(p->next != NULL)
