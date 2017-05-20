@@ -72,11 +72,11 @@ int main(void)
 
 __global__ void compute(grid * g, path * p,location * l)
 	{
-		int idx = blockIdx.x * blockDim.x + threadIdx.x;
+		//int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		if (idx < N * N)
 			{
-				int x = blockIdx.x;
-				int y = threadIdx.x;
+				//int x = blockIdx.x;
+				//int y = threadIdx.x;
 				computeIterative(g, p, l);
 			}
 	}
@@ -168,6 +168,17 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 						temp = (location *)malloc(sizeof(location));
 						temp->x = lastx;
 						temp->y = lasty;
+						if (p->next->direction == LEFT) //Do UP/DOWN
+						{
+							temp->nx = 0;
+							temp->ny = temp->y;
+						}						
+						else
+						{
+							temp->nx = temp->x;
+							temp->ny = 0;
+						}
+						printf("Next x=%d y=%d nx=%d ny=%d",temp->x,temp->y,temp->nx,temp-ny);
 						temp->p = p->next;
 						temp->currentG = allocateGridDevice(g->size);
 						cloneToGrid(currentGrid,temp->currentG);
