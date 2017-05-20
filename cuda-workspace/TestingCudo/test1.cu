@@ -1,35 +1,11 @@
 #include <stdio.h>
+#include "grid.h"
 #include <stdlib.h>
 #define N 10
 #define UP 'U'
 #define LEFT 'L'
 #define MAX 6
 
-typedef struct path
-	{
-	struct path * next;
-	char direction;
-	int letters[4];
-	char * domain;
-	char * pass;
-	} path;
-
-struct cell
-	{
-	int value;
-	int bitmap;
-	};
-
-typedef struct grid
-	{
-	cell ** cells;
-	//cell cells[N][N];
-	short size;
-	struct grid * next;
-	//int xx;
-	char ok;
-	//int yy;
-	} grid;
 
 void initCell(cell * c);
 char convert(int x);
@@ -68,22 +44,7 @@ void printGrid(grid * g)
 				printf("\n");
 			}
 	}
-	__device__ int pow2(int x)
-{
-	int sum = 1;
-	if( x == 0)
-	{
-		sum = 1;
-	}
-	else
-	{
-	for(int i = 0; i < x; i++)
-	{
-		sum = sum *2;
-	}
-	}
-	return sum;
-}
+
 __device__ void eliminateValue(cell **c, int row, int col, int max, int value)
 	{
 		//int mask = pow(2.0, (double) value);
@@ -124,21 +85,16 @@ __device__ int check(grid * g, int row, int col, int number)
 	}
 grid * allocateGrid(int size)
 	{
-
 		grid * g2 = NULL;
 		cudaMallocManaged((void **) &g2, sizeof(grid));
 		g2->size = size;
-		//cell * array;
-		//cudaMallocManaged((void **) &array, size * size * sizeof(cell));
 		cell ** cells;
 		cudaMallocManaged((void **) &cells, size * sizeof(cell *));
 		for (int i = 0; i < size; i++)
 			{
-				//cells[i] = &array[i * size];
 				cudaMallocManaged((void **) &cells[i], size * sizeof(cell));
 			}
 		g2->cells = cells;
-
 		for (int row = 0; row < size; row++)
 			{
 				for (int col = 0; col < size; col++)
@@ -149,7 +105,6 @@ grid * allocateGrid(int size)
 			}
 		g2->next = NULL;
 		g2->ok = '0';
-		//printf("XX%p->%c\n",g2, g2->ok);
 		return g2;
 	}
 __device__ grid * cloneGrid(grid * g)
@@ -244,7 +199,6 @@ __device__ void computeIterative(grid * g, path * p, int x, int y, grid ** res, 
 										}
 								cloneToGrid(previousGrid, currentGrid);
 							}
-				
 		}
 	}
 __device__ void add(grid ** base, grid ** last, grid * newList)
