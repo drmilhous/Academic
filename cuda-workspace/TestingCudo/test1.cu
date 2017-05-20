@@ -150,24 +150,27 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 					//{
 					//	printGrid(currentGrid);	
 					//}
-					if (checkValue == 0 && count < MAX) //rec value
-						{
-										//cloneToGrid(currentGrid, res[base]
-							if(p->next != NULL)
-							{
-							temp = (location *)malloc(sizeof(location));
-							temp->x = lastx;
-							temp->y = lasty;
-							temp->p = p->next;
-							temp->currentG = allocateGridDevice(g->size);
-							cloneToGrid(currentGrid,temp->currentG);
-							temp->next = loc;
-							loc = temp;
-							printGrid(currentGrid);
-							count ++;
-							}
-						}
+					
 				}
+			if (checkValue == 0 && count < MAX) //rec value
+				{
+							//cloneToGrid(currentGrid, res[base]
+				if(p->next != NULL)
+					{
+						temp = (location *)malloc(sizeof(location));
+						temp->x = lastx;
+						temp->y = lasty;
+						temp->p = p->next;
+						temp->currentG = allocateGridDevice(g->size);
+						cloneToGrid(currentGrid,temp->currentG);
+						temp->next = loc;
+						loc = temp;
+						printGrid(currentGrid);
+						count ++;
+					}
+				}
+			else
+			{
 			if(p->direction == LEFT)
 			{
 				loc->ny++;
@@ -192,6 +195,7 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 						loc = temp;
 						count --;
 					}
+			}
 			}	
 		}
 	}
