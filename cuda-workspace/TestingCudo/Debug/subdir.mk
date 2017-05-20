@@ -20,8 +20,8 @@ CU_DEPS += \
 %.o: ../%.cu
 	@echo 'Building file: $<'
 	@echo 'Invoking: NVCC Compiler'
-	/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "$(@:%.o=%.d)" "$<"
-	/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "$@" "$<"
+	/usr/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "$(@:%.o=%.d)" "$<"
+	/usr/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
