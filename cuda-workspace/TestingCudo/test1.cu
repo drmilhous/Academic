@@ -82,7 +82,7 @@ __global__ void compute(grid * g, path * p,location * l)
 	}
 __device__ void computeIterative(grid * g, path * p, location * loc)
 	{
-		loc->p = p;
+		
 		if (p->direction == LEFT) //Do UP/DOWN
 		{
 			loc->nx = 0;
@@ -101,9 +101,9 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 		//int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		//int base = idx * MAX *3 + recCount;
 		grid * currentGrid = allocateGridDevice(g->size);
-		grid* previousGrid = allocateGridDevice(g->size);
 		cloneToGrid(g,currentGrid);
 		loc->currentG = allocateGridDevice(g->size);
+		loc->p = p;
 		//recCount = recCount +3 ;
 		//int set = 0;
 		int x,y;
@@ -113,6 +113,7 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 			cloneToGrid(loc->currentG, currentGrid);
 			x = loc->x;
 			y = loc->y;
+			p = loc->p;
 			value = p->letters[0];
 			checkValue = check(currentGrid, x, y, value);
 			if (checkValue == 0)
@@ -149,15 +150,20 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 					if (checkValue == 0 && count < MAX) //rec value
 						{
 										//cloneToGrid(currentGrid, res[base]
+							if(p->next != null)
+							{
 							temp = (location *)malloc(sizeof(location));
+							temp->x = lastx;
+							temp->y = lasty;
+							temp->p = p->next;
 							temp->currentG = allocateGridDevice(g->size);
 							cloneToGrid(currentGrid,temp->currentG);
 							temp->next = loc;
 							loc = temp;
 							printGrid(currentGrid);
 							count ++;
+							}
 						}
-					cloneToGrid(previousGrid, currentGrid);
 				}
 			if(p->direction == LEFT)
 			{
