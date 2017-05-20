@@ -178,7 +178,7 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 							temp->nx = temp->x;
 							temp->ny = 0;
 						}
-						printf("Next x=%d y=%d nx=%d ny=%d",temp->x,temp->y,temp->nx,temp-ny);
+						printf("Next x=%d y=%d nx=%d ny=%d",temp->x,temp->y,temp->nx,temp->ny);
 						temp->p = p->next;
 						temp->currentG = allocateGridDevice(g->size);
 						cloneToGrid(currentGrid,temp->currentG);
