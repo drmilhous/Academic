@@ -246,7 +246,7 @@ int foo(path * p)
 			}
 
 		printPath(p);
-		compute<<<1, 2>>>(g, p, larray);
+		compute<<<1, 1>>>(g, p, larray);
 		cudaDeviceSynchronize();
 		/*i = 0;
 		for (int row = 0; row < N; row++)
