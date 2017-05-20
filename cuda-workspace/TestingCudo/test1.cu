@@ -52,7 +52,7 @@ __device__ void cloneToGrid(grid * g, grid * g2);
 __device__ void eliminateValue(cell **c, int row, int col, int max, int value);
 __device__ void add(grid ** base, grid ** last, grid * newList);
 __device__ int check(grid * g, int row, int col, int number);
-__device___	grid * allocateGridDevice(int size);
+__device__	grid * allocateGridDevice(int size);
 //void printGrid(grid * g, int x, int y);
 __device__ grid * cloneGrid(grid * g);
 grid * allocateGrid(int size);
@@ -574,7 +574,7 @@ void printGrid(grid * g)
 		g2->ok = '0';
 		return g2;
 	}
-__device___	grid * allocateGridDevice(int size)
+__device__	grid * allocateGridDevice(int size)
 	{
 		grid * g2 = NULL;
 		malloc((void **) &g2, sizeof(grid));
