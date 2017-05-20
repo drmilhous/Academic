@@ -216,7 +216,7 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 			}
 			if(i > 100)
 			{
-				done = 1;
+				//done = 1;
 			}	
 		}
 	}
