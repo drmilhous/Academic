@@ -48,10 +48,12 @@ __device__ void computeIterative(grid * g, path * p, int x, int y, grid ** res, 
 __device__ void cloneToGrid(grid * g, grid * g2);
 __device__ void eliminateValue(cell **c, int row, int col, int max, int value);
 __device__ void add(grid ** base, grid ** last, grid * newList);
+__device__ int check(grid * g, int row, int col, int number);
 //void printGrid(grid * g, int x, int y);
 __device__ grid * cloneGrid(grid * g);
 grid * allocateGrid(int size);
 path * getPath(char * line);
+void printPath(path * p);
 path ** scanChars();
 int foo(path * p);
 
@@ -484,7 +486,7 @@ void printGrid(grid * g)
 								value = 0;
 								printf("  %c  ", printC);
 							}
-						
+
 					}
 				printf("\n");
 			}
