@@ -577,13 +577,13 @@ void printGrid(grid * g)
 __device__	grid * allocateGridDevice(int size)
 	{
 		grid * g2 = NULL;
-		malloc((void **) &g2, sizeof(grid));
+		g2 = (grid *) malloc(sizeof(grid));
 		g2->size = size;
 		cell ** cells;
-		malloc((void **) &cells, size * sizeof(cell *));
+		cells = (cell **) malloc(size * sizeof(cell *));
 		for (int i = 0; i < size; i++)
 			{
-				malloc((void **) &cells[i], size * sizeof(cell));
+				cells[i] = (cell*) malloc(size * sizeof(cell));
 			}
 		g2->cells = cells;
 		for (int row = 0; row < size; row++)
