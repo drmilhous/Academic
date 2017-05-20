@@ -52,6 +52,7 @@ __device__ void cloneToGrid(grid * g, grid * g2);
 __device__ void eliminateValue(cell **c, int row, int col, int max, int value);
 __device__ void add(grid ** base, grid ** last, grid * newList);
 __device__ int check(grid * g, int row, int col, int number);
+__device___	grid * allocateGridDevice(int size);
 //void printGrid(grid * g, int x, int y);
 __device__ grid * cloneGrid(grid * g);
 grid * allocateGrid(int size);
@@ -99,10 +100,10 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 		int done = 0;
 		//int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		//int base = idx * MAX *3 + recCount;
-		grid * currentGrid = allocateGrid(g->size);
-		grid* previousGrid = allocateGrid(g->size);
+		grid * currentGrid = allocateGridDevice(g->size);
+		grid* previousGrid = allocateGridDevice(g->size);
 		cloneToGrid(g,currentGrid);
-		loc->currentG = allocateGrid(g->size);
+		loc->currentG = allocateGridDevice(g->size);
 		//recCount = recCount +3 ;
 		//int set = 0;
 		int x,y;
@@ -149,7 +150,7 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 						{
 										//cloneToGrid(currentGrid, res[base]
 							temp = (location *)malloc(sizeof(location));
-							temp->currentG = allocateGrid(g->size);
+							temp->currentG = allocateGridDevice(g->size);
 							cloneToGrid(currentGrid,temp->currentG);
 							temp->next = loc;
 							loc = temp;
@@ -559,6 +560,30 @@ void printGrid(grid * g)
 		for (int i = 0; i < size; i++)
 			{
 				cudaMallocManaged((void **) &cells[i], size * sizeof(cell));
+			}
+		g2->cells = cells;
+		for (int row = 0; row < size; row++)
+			{
+				for (int col = 0; col < size; col++)
+					{
+						g2->cells[row][col].bitmap = 0;
+						g2->cells[row][col].value = -1;
+					}
+			}
+		g2->next = NULL;
+		g2->ok = '0';
+		return g2;
+	}
+__device___	grid * allocateGridDevice(int size)
+	{
+		grid * g2 = NULL;
+		malloc((void **) &g2, sizeof(grid));
+		g2->size = size;
+		cell ** cells;
+		malloc((void **) &cells, size * sizeof(cell *));
+		for (int i = 0; i < size; i++)
+			{
+				malloc((void **) &cells[i], size * sizeof(cell));
 			}
 		g2->cells = cells;
 		for (int row = 0; row < size; row++)
