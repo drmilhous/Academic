@@ -105,10 +105,13 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 		loc->currentG = allocateGrid(g->size);
 		//recCount = recCount +3 ;
 		//int set = 0;
+		int x,y;
 		int count = 0;
 		while(done == 0)
 		{
 			cloneToGrid(loc->currentG, currentGrid);
+			x = loc->x;
+			y = loc->y;
 			value = p->letters[0];
 			checkValue = check(currentGrid, x, y, value);
 			if (checkValue == 0)
