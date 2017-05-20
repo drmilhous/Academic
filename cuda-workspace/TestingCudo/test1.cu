@@ -72,7 +72,7 @@ int main(void)
 
 __global__ void compute(grid * g, path * p,location * l)
 	{
-		//int idx = blockIdx.x * blockDim.x + threadIdx.x;
+		int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		if (idx < N * N)
 			{
 				//int x = blockIdx.x;
