@@ -114,6 +114,8 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 			x = loc->x;
 			y = loc->y;
 			p = loc->p;
+			int lasty = y;
+			int lastx = x;
 			value = p->letters[0];
 			checkValue = check(currentGrid, x, y, value);
 			if (checkValue == 0)
@@ -125,8 +127,7 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 					z = loc->ny;
 				else
 					z = loc->nx;
-				int lasty = y;
-				int lastx = x;
+				
 				checkValue = 0;
 				if (p->direction == LEFT) //Do UP/DOWN
 					direction = lasty > z ? -1 : 1;
