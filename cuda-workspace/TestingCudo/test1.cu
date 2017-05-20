@@ -43,7 +43,6 @@ typedef struct location
 }location;
 
 void initCell(cell * c);
-char convert(int x);
 __device__ int pow2(int x);
 __device__ void printGrid(grid * g);
 __device__ char convert(int x);
