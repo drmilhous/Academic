@@ -1,4 +1,6 @@
 
+#ifndef GRID
+#define GRID
 typedef struct path
 	{
 	struct path * next;
@@ -33,3 +35,5 @@ typedef struct location
 }location;
 
 __device__ int pow2(int x);
+
+#endif

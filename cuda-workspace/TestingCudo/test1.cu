@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "grid.h"
+#include <grid.h>
 #include <stdlib.h>
 #define N 10
 #define UP 'U'
