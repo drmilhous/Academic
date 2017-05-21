@@ -4,7 +4,7 @@
 #define N 10
 #define UP 'U'
 #define LEFT 'L'
-#define MAX 3
+#define MAX 2
 
 typedef struct path
 	{
@@ -279,7 +279,7 @@ int foo(path * p)
 		int size = N;
 		grid * g = allocateGrid(size);
 
-		int i = 0;
+		//int i = 0;
 		location * larray;
 		cudaMallocManaged((void **) &larray,sizeof(location) * nBYn);
 		for (int row = 0; row < N; row++)
