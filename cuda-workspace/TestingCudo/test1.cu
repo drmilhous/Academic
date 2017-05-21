@@ -4,7 +4,7 @@
 #define N 10
 #define UP 'U'
 #define LEFT 'L'
-#define MAX 1
+#define MAX 2
 
 typedef struct path
 	{
@@ -160,10 +160,15 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 					//}
 					
 				}
+			if(checkValue == 0 && count == MAX)
+			{
+				i ++;
+			}
 			if (checkValue == 0 && count < MAX) //rec value
 				{
 				printGrid(currentGrid);
 							//cloneToGrid(currentGrid, res[base]
+				
 				if(p->next != NULL)
 					{
 						temp = (location *)malloc(sizeof(location));
@@ -214,12 +219,9 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 						count --;
 					}
 			}
-			}
-			if(i > 100)
-			{
-				//done = 1;
 			}	
 		}
+		printf("The total is %d\n",i);
 	}
 
 
