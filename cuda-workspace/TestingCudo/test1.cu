@@ -63,6 +63,16 @@ int foo(path * p);
 
 int main(void)
 	{
+		int deviceCount; 
+		cudaGetDeviceCount(&deviceCount); 
+		int device; 
+		for (device = 0; device < deviceCount; ++device) 
+		{ 
+			cudaDeviceProp deviceProp; 
+			cudaGetDeviceProperties(&deviceProp, device); 
+			printf("Device %d has compute capability %d.%d.\n", device, deviceProp.major, deviceProp.minor); 
+		}//	 - See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/#multi-device-system
+		cudaSetDevice(1);
 		path ** p = scanChars();
 		if (p != NULL)
 			{
