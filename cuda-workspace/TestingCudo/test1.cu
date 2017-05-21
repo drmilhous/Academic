@@ -46,7 +46,7 @@ void initCell(cell * c);
 __device__ int pow2(int x);
 __device__ void printGrid(grid * g);
 __device__ char convert(int x);
-__global__ void compute(grid * g, path * p, location * loc);
+__global__ void compute2(grid * g, path * p, location * loc);
 __device__ void computeIterative(grid * g, path * p, location * loc);
 __device__ void cloneToGrid(grid * g, grid * g2);
 __device__ void eliminateValue(cell **c, int row, int col, int max, int value);
@@ -70,7 +70,7 @@ int main(void)
 			}
 	}
 
-__global__ void compute(grid * g, path * p,location * l)
+__global__ void compute2(grid * g, path * p,location * l)
 	{
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		if (idx < N * N)
@@ -283,7 +283,7 @@ int foo(path * p)
 			}
 
 		printPath(p);
-		compute<<<1, 1>>>(g, p, larray);
+		compute2<<<1, 1>>>(g, p, larray);
 		cudaDeviceSynchronize();
 		/*i = 0;
 		for (int row = 0; row < N; row++)
