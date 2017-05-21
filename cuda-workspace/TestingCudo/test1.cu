@@ -162,6 +162,7 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 				}
 			if (checkValue == 0 && count < MAX) //rec value
 				{
+				printGrid(currentGrid);
 							//cloneToGrid(currentGrid, res[base]
 				if(p->next != NULL)
 					{
@@ -184,7 +185,7 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 						cloneToGrid(currentGrid,temp->currentG);
 						temp->next = loc;
 						loc = temp;
-						printGrid(currentGrid);
+						
 						count ++;
 					}
 				}
