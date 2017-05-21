@@ -138,4 +138,5 @@
     /Developer/NVIDIA/CUDA-8.0/bin/../include/texture_fetch_functions.h \
     /Developer/NVIDIA/CUDA-8.0/bin/../include/texture_indirect_functions.h \
     /Developer/NVIDIA/CUDA-8.0/bin/../include/surface_indirect_functions.h \
-    /Developer/NVIDIA/CUDA-8.0/bin/../include/device_launch_parameters.h
+    /Developer/NVIDIA/CUDA-8.0/bin/../include/device_launch_parameters.h \
+    ../grid.h
