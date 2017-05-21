@@ -26,15 +26,11 @@ typedef struct grid
 	char ok;
 	//int yy;
 	} grid;
-
 typedef struct location
 {
-	int x;
-	int nx;
-	int y;
-	int ny;
+	int8_t x;
+	int8_t y;
 	struct location * next;
-	struct grid * currentG;
 	path * p;
 }location;
 

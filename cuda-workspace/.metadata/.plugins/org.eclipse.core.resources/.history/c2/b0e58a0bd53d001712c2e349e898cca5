@@ -1,12 +1,11 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include "grid.h"
 #define N 10
 #define UP 'U'
 #define LEFT 'L'
 #define MAX 3
-/*
+
 typedef struct path
 	{
 	struct path * next;
@@ -32,7 +31,6 @@ typedef struct grid
 	char ok;
 	//int yy;
 	} grid;
-
 typedef struct location
 {
 	int x;
@@ -43,7 +41,7 @@ typedef struct location
 	struct grid * currentG;
 	path * p;
 }location;
-*/
+
 void initCell(cell * c);
 __device__ int pow2(int x);
 __device__ void printGrid(grid * g);
@@ -65,14 +63,14 @@ int foo(path * p);
 
 int main(void)
 	{
-		int deviceCount;
-		cudaGetDeviceCount(&deviceCount);
-		int device;
-		for (device = 0; device < deviceCount; ++device)
-		{
-			cudaDeviceProp deviceProp;
-			cudaGetDeviceProperties(&deviceProp, device);
-			printf("Device %d has compute capability %d.%d.\n", device, deviceProp.major, deviceProp.minor);
+		int deviceCount; 
+		cudaGetDeviceCount(&deviceCount); 
+		int device; 
+		for (device = 0; device < deviceCount; ++device) 
+		{ 
+			cudaDeviceProp deviceProp; 
+			cudaGetDeviceProperties(&deviceProp, device); 
+			printf("Device %d has compute capability %d.%d.\n", device, deviceProp.major, deviceProp.minor); 
 		}//	 - See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/#multi-device-system
 		cudaSetDevice(1);
 		path ** p = scanChars();
@@ -99,13 +97,13 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 		{
 			loc->nx = 0;
 			loc->ny = loc->y;
-		}
+		}						
 		else
 		{
 			loc->nx = loc->x;
 			loc->ny = 0;
 		}
-		location * temp;
+		location * temp; 						
 		int checkValue;
 		int value;
 		int z;
@@ -125,7 +123,7 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 			cloneToGrid(loc->currentG, currentGrid);
 			x = loc->x;
 			y = loc->y;
-
+			
 			p = loc->p;
 			int lasty = y;
 			int lastx = x;
@@ -167,9 +165,9 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 					}
 					//if(checkValue == 0)
 					//{
-					//	printGrid(currentGrid);
+					//	printGrid(currentGrid);	
 					//}
-
+					
 				}
 			if(checkValue == 0 && count == MAX)
 			{
@@ -178,9 +176,9 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 			}
 			if (checkValue == 0 && count < MAX) //rec value
 				{
-
+				
 							//cloneToGrid(currentGrid, res[base]
-
+				
 				if(p->next != NULL)
 					{
 						temp = (location *)malloc(sizeof(location));
@@ -190,7 +188,7 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 						{
 							temp->nx = 0;
 							temp->ny = temp->y;
-						}
+						}						
 						else
 						{
 							temp->nx = temp->x;
@@ -202,7 +200,7 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 						cloneToGrid(currentGrid,temp->currentG);
 						temp->next = loc;
 						loc = temp;
-
+						
 						count ++;
 					}
 				}
@@ -231,7 +229,7 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 						count --;
 					}
 			}
-			}
+			}	
 		}
 		printf("The total is %d\n",i);
 	}

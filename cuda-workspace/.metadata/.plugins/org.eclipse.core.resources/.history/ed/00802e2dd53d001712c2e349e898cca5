@@ -32,7 +32,7 @@ typedef struct grid
 	char ok;
 	//int yy;
 	} grid;
-
+	*/
 typedef struct location
 {
 	int x;
@@ -43,7 +43,7 @@ typedef struct location
 	struct grid * currentG;
 	path * p;
 }location;
-*/
+
 void initCell(cell * c);
 __device__ int pow2(int x);
 __device__ void printGrid(grid * g);
