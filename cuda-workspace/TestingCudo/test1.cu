@@ -110,7 +110,6 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 		int count = 0;
 		while(done == 0)
 		{
-			i++;
 			cloneToGrid(loc->currentG, currentGrid);
 			x = loc->x;
 			y = loc->y;
