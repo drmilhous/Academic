@@ -6,44 +6,6 @@
 #define UP 'U'
 #define LEFT 'L'
 #define MAX 3
-/*
-typedef struct path
-	{
-	struct path * next;
-	char direction;
-	int letters[4];
-	char * domain;
-	char * pass;
-	} path;
-
-struct cell
-	{
-	int value;
-	int bitmap;
-	};
-
-typedef struct grid
-	{
-	cell ** cells;
-	//cell cells[N][N];
-	short size;
-	struct grid * next;
-	//int xx;
-	char ok;
-	//int yy;
-	} grid;
-
-typedef struct location
-{
-	int x;
-	int nx;
-	int y;
-	int ny;
-	struct location * next;
-	struct grid * currentG;
-	path * p;
-}location;
-*/
 void initCell(cell * c);
 __device__ int pow2(int x);
 __device__ void printGrid(grid * g);
@@ -94,6 +56,7 @@ __global__ void compute2(grid * g, path * p,location * l)
 	}
 __device__ void computeIterative(grid * g, path * p, location * loc)
 	{
+		int breaker = 0;
 		int i = 0;
 		if (p->direction == LEFT) //Do UP/DOWN
 		{
@@ -122,6 +85,7 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 		int count = 0;
 		while(done == 0)
 		{
+			breaker++;
 			cloneToGrid(loc->currentG, currentGrid);
 			x = loc->x;
 			y = loc->y;
@@ -234,6 +198,10 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 			}
 		}
 		printf("The total is %d\n",i);
+		if(breaker == 10000)
+		{
+			done = 1;
+		}
 	}
 
 
