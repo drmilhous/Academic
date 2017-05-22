@@ -228,7 +228,7 @@ __device__ void computeIterative(grid ** result, int gridSize,grid * g, path * p
 			printf("Breaker %d\n",breaker);
 			bmax *= 2;
 		}
-		if(breaker == 2147483648)
+		if(breaker == 10000)
 		{
 			done = 1;
 			printf("Breaker Max hit!");
@@ -246,7 +246,7 @@ int foo(path * p)
 		int nBYn = N * N;
 		int size = N;
 		grid * g = allocateGrid(size);
-		int gridSize = 10000;
+		int gridSize = 100;
 		grid ** result;
 		int i;
 		
