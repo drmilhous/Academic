@@ -136,7 +136,7 @@ __device__ void computeIterative(grid ** result, int gridSize,grid * g, path * p
 				if(printcount < gridSize)
 				{
 					cloneToGrid(currentGrid,result[printcount]);
-					result[printcount].ok = '1';
+					result[printcount]->ok = '1';
 					//printGrid(currentGrid);
 					printcount++;
 				}
@@ -274,7 +274,7 @@ int foo(path * p)
 		cudaDeviceSynchronize();
 		for(i = 0; i < gridSize; i++)
 		{
-			if(result[i].ok == '1')
+			if(result[i]->ok == '1')
 			{
 				printGrid(result[i]);
 			}
