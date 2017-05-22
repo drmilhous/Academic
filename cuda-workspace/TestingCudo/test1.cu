@@ -15,7 +15,7 @@ __device__	grid * allocateGridDevice(int size);
 void printGrid(grid * g);
 __device__ int pow2(int x);
 __device__ grid * cloneGrid(grid * g);
-__device__ char convert(int x);
+char convert(int x);
 int foo(path * p);
 int main(void)
 	{
@@ -349,7 +349,7 @@ __device__ void add(grid ** base, grid ** last, grid * newList)
 			}
 	}
 
-__device__ char convert(int x)
+char convert(int x)
 	{
 		char res = 'a';
 		if (x >= 0)
