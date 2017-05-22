@@ -57,6 +57,8 @@ __global__ void compute2(grid * g, path * p,location * l)
 __device__ void computeIterative(grid * g, path * p, location * loc)
 	{
 		int breaker = 0;
+		location * freeHead = NULL;
+		location * freeTail = NULL;
 		int i = 0;
 		if (p->direction == LEFT) //Do UP/DOWN
 		{
@@ -147,7 +149,20 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 
 				if(p->next != NULL)
 					{
-						temp = (location *)malloc(sizeof(location));
+						if(freeHead == NULL)
+						{
+							temp = (location *)malloc(sizeof(location));
+							temp->currentG = allocateGridDevice(g->size);
+							printf("Allocated Block\n");
+						}
+						else
+						{
+							temp = freeHead;
+							if(freeHead->next != NULL)
+							{
+								freeHead = freeHead->next;
+							}
+						}
 						temp->x = lastx;
 						temp->y = lasty;
 						if (p->next->direction == LEFT) //Do UP/DOWN
@@ -162,7 +177,7 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 						}
 						//printf("Next x=%d y=%d nx=%d ny=%d\n",temp->x,temp->y,temp->nx,temp->ny);
 						temp->p = p->next;
-						temp->currentG = allocateGridDevice(g->size);
+						
 						cloneToGrid(currentGrid,temp->currentG);
 						temp->next = loc;
 						loc = temp;
@@ -189,8 +204,19 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 					else
 					{
 						temp = loc->next;
-						free(loc->currentG);
-						free(loc);
+						if(freeHead == NULL)
+						{
+							freeHead = loc;
+							freeTail = loc;
+						}
+						else
+						{
+							freeTail->next = loc;
+							freeTail = loc;
+							freeTail->next = NULL;
+						}
+						//free(loc->currentG);
+						//free(loc);
 						loc = temp;
 						count --;
 					}
