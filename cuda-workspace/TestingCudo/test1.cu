@@ -185,7 +185,7 @@ __device__ void computeIterative(grid ** result, int gridSize, grid * g, path * 
 								count++;
 							}
 					}
-				else if(checkValue != 0)
+				else 
 					{
 						if (p->direction == LEFT)
 							{
@@ -195,7 +195,7 @@ __device__ void computeIterative(grid ** result, int gridSize, grid * g, path * 
 							{
 								z = loc->nx;
 							}
-						if (z == g->size)
+						if (z == g->size || count == MAX)
 							{
 								if (loc->next == NULL)
 									{
