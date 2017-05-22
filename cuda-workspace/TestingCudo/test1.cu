@@ -5,7 +5,7 @@
 #define MAX 1
 #define N 10
 void initCell(cell * c);
-__global__ void compute2(grid * g, path * p, location * loc);
+__global__ void compute2(grid ** result, int gridSize, grid * g, path * p,location * l);
 __device__ void computeIterative(grid ** result, int gridSize,grid * g, path * p, location * loc);
 __device__ void add(grid ** base, grid ** last, grid * newList);
 __device__ void cloneToGrid(grid * g, grid * g2);
@@ -256,7 +256,7 @@ int foo(path * p)
 			result[i] = allocateGrid(size);
 		}
 		//int i = 0;
-		
+
 		location * larray;
 		cudaMallocManaged((void **) &larray,sizeof(location) * nBYn);
 		for (int row = 0; row < N; row++)
