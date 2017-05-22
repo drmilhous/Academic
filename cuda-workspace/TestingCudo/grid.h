@@ -1,6 +1,6 @@
 
 #ifndef GRID
-#define GRID
+#define GRI
 #define UP 'U'
 #define LEFT 'L'
 
