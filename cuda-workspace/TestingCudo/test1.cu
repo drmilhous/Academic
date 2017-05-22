@@ -57,6 +57,7 @@ __global__ void compute2(grid * g, path * p,location * l)
 __device__ void computeIterative(grid * g, path * p, location * loc)
 	{
 		int breaker = 0;
+		int bmax = 2;
 		location * freeHead = NULL;
 		location * freeTail = NULL;
 		int i = 0;
@@ -222,8 +223,12 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 					}
 			}
 			}
-		
-		if(breaker == 100000)
+		if(bmax == breaker)
+		{
+			printf("Breaker %d\n",breaker);
+			bmax *= 2;
+		}
+		if(breaker == 2147483648)
 		{
 			done = 1;
 			printf("Breaker Max hit!");
