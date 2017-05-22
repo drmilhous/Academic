@@ -140,7 +140,7 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 			if(checkValue == 0 && count == MAX)
 			{
 				i ++;
-				printGrid(currentGrid);
+				//printGrid(currentGrid);
 			}
 			if (checkValue == 0 && count < MAX) //rec value
 				{
@@ -223,7 +223,7 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 			}
 			}
 		
-		if(breaker == 10000)
+		if(breaker == 100000)
 		{
 			done = 1;
 		}
