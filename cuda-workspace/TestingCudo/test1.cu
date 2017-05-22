@@ -214,8 +214,9 @@ __device__ void computeIterative(grid ** result, int gridSize, grid * g, path * 
 												freeTail->next = loc;
 												freeTail = loc;
 												freeTail->next = NULL;
-												loc = temp;
+												
 											}
+										loc = temp;
 										//free(loc->currentG);
 										//free(loc);
 										
