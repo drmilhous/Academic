@@ -185,7 +185,7 @@ __device__ void computeIterative(grid ** result, int gridSize, grid * g, path * 
 								count++;
 							}
 					}
-				else
+				else if(checkValue != 0)
 					{
 						if (p->direction == LEFT)
 							{
