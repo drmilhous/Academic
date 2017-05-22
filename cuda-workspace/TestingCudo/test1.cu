@@ -222,12 +222,14 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 					}
 			}
 			}
-		}
-		printf("The total is %d\n",i);
+		
 		if(breaker == 10000)
 		{
 			done = 1;
 		}
+		}
+		printf("The total is %d\n",i);
+		
 	}
 
 
