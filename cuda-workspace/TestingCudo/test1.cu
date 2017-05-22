@@ -498,8 +498,10 @@ __device__ int check(grid * g, int row, int col, int number)
 	{
 		int n = g->size;
 		//printf("X=%d Y=%d %c\n", x, y, g->ok);
+		printf("-- Grid -- \n");
 		for (int row = 0; row < n; row++)
 			{
+				printf("%01d# ", row)
 				for (int col = 0; col < n; col++)
 					{
 						cell c = g->cells[row][col];
