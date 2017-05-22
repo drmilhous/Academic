@@ -6,7 +6,7 @@
 #define N 10
 void initCell(cell * c);
 __global__ void compute2(grid * g, path * p, location * loc);
-__device__ void computeIterative(grid * g, path * p, location * loc);
+__device__ void computeIterative(grid ** result, int gridSize,grid * g, path * p, location * loc);
 __device__ void add(grid ** base, grid ** last, grid * newList);
 __device__ void cloneToGrid(grid * g, grid * g2);
 __device__ void eliminateValue(cell **c, int row, int col, int max, int value);
@@ -35,17 +35,17 @@ int main(void)
 				foo(p[1]);
 			}
 	}
-__global__ void compute2(grid * g, path * p,location * l)
+__global__ void compute2(grid ** result, int gridSize, grid * g, path * p,location * l)
 	{
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		if (idx < N * N)
 			{
 				//int x = blockIdx.x;
 				//int y = threadIdx.x;
-				computeIterative(g, p, l);
+				computeIterative(result, gridSize, g, p, l);
 			}
 	}
-__device__ void computeIterative(grid * g, path * p, location * loc)
+__device__ void computeIterative(grid ** result, int gridSize,grid * g, path * p, location * loc)
 	{
 		int breaker = 0;
 		int bmax = 2;
@@ -133,9 +133,10 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 			if(checkValue == 0 && count == MAX)
 			{
 				i ++;
-				if(printcount < 100)
+				if(printcount < gridSize)
 				{
-					printGrid(currentGrid);
+					cloneToGrid(currentGrid,result[printcount]);
+					//printGrid(currentGrid);
 					printcount++;
 				}
 				else
@@ -244,7 +245,14 @@ int foo(path * p)
 		int nBYn = N * N;
 		int size = N;
 		grid * g = allocateGrid(size);
-
+		int gridSize = 10000;
+		grid ** result;
+		int i;
+		cudaMallocManaged((void **) &larray,sizeof(grid *) * gridSize);
+		for(i = 0; i < gridSize; i++)
+		{
+			result[i] = allocateGrid(size);
+		}
 		//int i = 0;
 		location * larray;
 		cudaMallocManaged((void **) &larray,sizeof(location) * nBYn);
@@ -259,8 +267,15 @@ int foo(path * p)
 			}
 
 		printPath(p);
-		compute2<<<1, 1>>>(g, p, larray);
+		compute2<<<1, 1>>>(result,gridSize, g, p, larray);
 		cudaDeviceSynchronize();
+		for(i = 0; i < gridSize; i++)
+		{
+			if(result[i] == '1')
+			{
+				printGrid(result[i]);
+			}
+		}
 		/*i = 0;
 		for (int row = 0; row < N; row++)
 			{
@@ -279,7 +294,7 @@ int foo(path * p)
 						}
 					}
 			}
-			*/
+		*/	
 		/*for( int i = 0; i < nBYn * MAX * 3; i++)
 		{
 			if (result[i]->ok == '1')
