@@ -5,7 +5,7 @@
 #define N 10
 #define UP 'U'
 #define LEFT 'L'
-#define MAX 2
+#define MAX 3
 void initCell(cell * c);
 __device__ int pow2(int x);
 __device__ void printGrid(grid * g);
