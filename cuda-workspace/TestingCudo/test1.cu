@@ -1,13 +1,12 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include "grid.h"
+#include <grid.h>
 #define MAX 3
 #define N 10
 void initCell(cell * c);
 __global__ void compute2(grid * g, path * p, location * loc);
 __device__ void computeIterative(grid * g, path * p, location * loc);
-extern __device__	grid * allocateGridDevice(int size);
 int foo(path * p);
 int main(void)
 	{
