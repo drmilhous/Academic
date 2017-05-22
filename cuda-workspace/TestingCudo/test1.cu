@@ -195,7 +195,7 @@ __device__ void computeIterative(grid ** result, int gridSize, grid * g, path * 
 							{
 								z = loc->nx;
 							}
-						if (z == g->size || count == MAX)
+						if (z == g->size)
 							{
 								if (loc->next == NULL)
 									{
@@ -214,10 +214,11 @@ __device__ void computeIterative(grid ** result, int gridSize, grid * g, path * 
 												freeTail->next = loc;
 												freeTail = loc;
 												freeTail->next = NULL;
+												loc = temp;
 											}
 										//free(loc->currentG);
 										//free(loc);
-										loc = temp;
+										
 										count--;
 									}
 							}
