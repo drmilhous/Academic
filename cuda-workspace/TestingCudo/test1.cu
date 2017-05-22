@@ -12,7 +12,7 @@ __device__ void cloneToGrid(grid * g, grid * g2);
 __device__ void eliminateValue(cell **c, int row, int col, int max, int value);
 __device__ int check(grid * g, int row, int col, int number);
 __device__	grid * allocateGridDevice(int size);
-__device__ void printGrid(grid * g);
+void printGrid(grid * g);
 __device__ int pow2(int x);
 __device__ grid * cloneGrid(grid * g);
 __device__ char convert(int x);
@@ -137,7 +137,7 @@ __device__ void computeIterative(grid ** result, int gridSize,grid * g, path * p
 				{
 					cloneToGrid(currentGrid,result[printcount]);
 					result[printcount]->ok = '1';
-					//printGrid(currentGrid);
+					//prinotGrid(currentGrid);
 					printcount++;
 				}
 				else
@@ -494,7 +494,7 @@ __device__ int check(grid * g, int row, int col, int number)
 		return result;
 	}
 
-__device__ void printGrid(grid * g)
+ void printGrid(grid * g)
 	{
 		int n = g->size;
 		//printf("X=%d Y=%d %c\n", x, y, g->ok);
