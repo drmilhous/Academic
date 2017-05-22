@@ -143,12 +143,10 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 					done =1 ;
 				}
 			}
-			if (checkValue == 0 && count < MAX) //rec value
+			if (checkValue == 0) //rec value
 				{
-
 							//cloneToGrid(currentGrid, res[base]
-
-				if(p->next != NULL)
+				if(p->next != NULL && count < MAX)
 					{
 						if(freeHead == NULL)
 						{
