@@ -249,12 +249,14 @@ int foo(path * p)
 		int gridSize = 10000;
 		grid ** result;
 		int i;
-		cudaMallocManaged((void **) &larray,sizeof(grid *) * gridSize);
+		
+		cudaMallocManaged((void **) &result,sizeof(grid *) * gridSize);
 		for(i = 0; i < gridSize; i++)
 		{
 			result[i] = allocateGrid(size);
 		}
 		//int i = 0;
+		
 		location * larray;
 		cudaMallocManaged((void **) &larray,sizeof(location) * nBYn);
 		for (int row = 0; row < N; row++)
