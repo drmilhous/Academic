@@ -35,7 +35,6 @@ int main(void)
 				foo(p[1]);
 			}
 	}
-
 __global__ void compute2(grid * g, path * p,location * l)
 	{
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
@@ -50,6 +49,7 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 	{
 		int breaker = 0;
 		int bmax = 2;
+		int printcount = 0;
 		location * freeHead = NULL;
 		location * freeTail = NULL;
 		int i = 0;
@@ -133,7 +133,15 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 			if(checkValue == 0 && count == MAX)
 			{
 				i ++;
-				//printGrid(currentGrid);
+				if(printcount < 10)
+				{
+					printGrid(currentGrid);
+					printcount++;
+				}
+				else
+				{
+					done =1 ;
+				}
 			}
 			if (checkValue == 0 && count < MAX) //rec value
 				{
