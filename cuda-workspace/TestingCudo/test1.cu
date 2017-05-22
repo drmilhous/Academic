@@ -133,7 +133,7 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 			if(checkValue == 0 && count == MAX)
 			{
 				i ++;
-				if(printcount < 10)
+				if(printcount < 100)
 				{
 					printGrid(currentGrid);
 					printcount++;
