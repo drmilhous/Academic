@@ -1,6 +1,9 @@
 
 #ifndef GRID
 #define GRID
+#define UP 'U'
+#define LEFT 'L'
+
 typedef struct path
 	{
 	struct path * next;

@@ -44,6 +44,19 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<fileInfo id="com.nvidia.cuda.ide.on_path.configuration.debug.1407031712.62029009" name="test1.cu" rcbsApplicability="disable" resourcePath="test1.cu" toolsToInvoke="nvcc.compiler.base.589244272.567862886">
+						<tool id="nvcc.compiler.base.589244272.567862886" name="NVCC Compiler" superClass="nvcc.compiler.base.589244272">
+							<inputType id="nvcc.compiler.input.cu.317801606" superClass="nvcc.compiler.input.cu"/>
+							<inputType id="nvcc.compiler.input.cpp.619940607" superClass="nvcc.compiler.input.cpp"/>
+							<inputType id="nvcc.compiler.input.c.1404357324" superClass="nvcc.compiler.input.c"/>
+						</tool>
+						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.1010286752" name="Resource Custom Build Step">
+							<inputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.inputtype.1914046378" name="Resource Custom Build Step Input Type">
+								<additionalInput kind="additionalinputdependency" paths="grid.d"/>
+							</inputType>
+							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.1248152160" name="Resource Custom Build Step Output Type"/>
+						</tool>
+					</fileInfo>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="com.nvidia.cuda.ide.build.project.ICudaProjectConfiguration">

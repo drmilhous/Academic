@@ -3,11 +3,9 @@
 #include <stdlib.h>
 #include "grid.h"
 #define MAX 3
-#define N 10
 void initCell(cell * c);
 __global__ void compute2(grid * g, path * p, location * loc);
 __device__ void computeIterative(grid * g, path * p, location * loc);
-extern __device__	grid * allocateGridDevice(int size);
 int foo(path * p);
 int main(void)
 	{
@@ -33,7 +31,7 @@ __global__ void compute2(grid * g, path * p,location * l)
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		if (idx < N * N)
 			{
-				//int x = blockIdx.x;
+				//int x = blockIdx.x; 
 				//int y = threadIdx.x;
 				computeIterative(g, p, l);
 			}
@@ -162,7 +160,7 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 						}
 						//printf("Next x=%d y=%d nx=%d ny=%d\n",temp->x,temp->y,temp->nx,temp->ny);
 						temp->p = p->next;
-
+						
 						cloneToGrid(currentGrid,temp->currentG);
 						temp->next = loc;
 						loc = temp;
@@ -219,7 +217,7 @@ __device__ void computeIterative(grid * g, path * p, location * loc)
 		}
 		}
 		printf("The total is %d\n",i);
-
+		
 	}
 
 

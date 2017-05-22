@@ -1,6 +1,7 @@
 #include "grid.h"
-#ifndef GRID
-#define GRID
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
 path ** scanChars()
 	{
 		char test[100] = "HEBJCE  -> BJAGDHCHJEGJ";
@@ -382,4 +383,3 @@ __device__ void printGrid(grid * g)
 				printf("\n");
 			}
 	}
-#endif
