@@ -11340,3 +11340,1996 @@ org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
 !SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:18:07.428
 !MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+!SESSION 2017-05-22 09:20:30.111 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -keyring /Users/miller/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -keyring /Users/miller/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2017-05-22 09:20:37.003
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.jface 2 0 2017-05-22 09:21:18.766
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2017-05-22 09:21:18.766
+!MESSAGE A conflict occurred for F3:
+Binding(F3,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.opendecl,Open Declaration,
+		Open an editor on the selected element's declaration(s),
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@7db679,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(F3,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.opendecl,Open Declaration,
+		Open an editor on the selected element's declaration(s),
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@7db679,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2017-05-22 09:21:18.766
+!MESSAGE A conflict occurred for COMMAND+SHIFT+G:
+Binding(COMMAND+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.findrefs,References,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@7dc9b41a,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(COMMAND+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.findrefs,References,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@7dc9b41a,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2017-05-22 09:21:18.766
+!MESSAGE A conflict occurred for ALT+COMMAND+I:
+Binding(ALT+COMMAND+I,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.include.browser,Open Include Browser,
+		Open an include browser on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@2f97e3de,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(ALT+COMMAND+I,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.include.browser,Open Include Browser,
+		Open an include browser on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@2f97e3de,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2017-05-22 09:21:18.766
+!MESSAGE A conflict occurred for COMMAND+G:
+Binding(COMMAND+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.finddecl,Declaration,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@2f09907,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(COMMAND+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.finddecl,Declaration,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@2f09907,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2017-05-22 09:21:18.766
+!MESSAGE A conflict occurred for ALT+COMMAND+R:
+Binding(ALT+COMMAND+R,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.text.rename.element,Rename - Refactoring ,
+		Rename the selected element,
+		Category(org.eclipse.cdt.ui.category.refactoring,Refactor - C++,C/C++ Refactorings,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6f53295e,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,cocoa,system)
+Binding(ALT+COMMAND+R,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.text.rename.element,Rename - Refactoring ,
+		Rename the selected element,
+		Category(org.eclipse.cdt.ui.category.refactoring,Refactor - C++,C/C++ Refactorings,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6f53295e,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,cocoa,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2017-05-22 09:21:18.766
+!MESSAGE A conflict occurred for F4:
+Binding(F4,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.type.hierarchy,Open Type Hierarchy,
+		Open a type hierarchy on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@5f8a29ca,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(F4,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.type.hierarchy,Open Type Hierarchy,
+		Open a type hierarchy on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@5f8a29ca,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2017-05-22 09:21:18.766
+!MESSAGE A conflict occurred for ALT+CTRL+H:
+Binding(ALT+CTRL+H,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.call.hierarchy,Open Call Hierarchy,
+		Open the call hierarchy for the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@4f93a8f6,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,cocoa,system)
+Binding(ALT+CTRL+H,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.call.hierarchy,Open Call Hierarchy,
+		Open the call hierarchy for the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@4f93a8f6,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,cocoa,system)
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:21:24.873
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:21:24.874
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:21:25.291
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:21:25.291
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:21:29.173
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:21:29.173
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:21:29.474
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:21:29.474
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:21:29.951
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:21:29.952
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:21:30.280
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:21:30.281
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:22:35.811
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:22:35.812
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:22:36.226
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:22:36.226
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:23:04.579
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:23:04.579
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:23:04.888
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:23:04.888
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:23:16.641
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:23:16.641
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:23:17.060
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:23:17.061
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:23:20.264
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:23:20.264
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:23:20.565
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:23:20.565
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:27:57.896
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:27:57.896
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:27:58.295
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:27:58.295
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:28:55.121
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:28:55.122
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:28:55.520
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:28:55.520
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:29:05.914
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:29:05.914
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:29:06.319
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:29:06.320
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:29:09.634
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:29:09.635
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:29:09.941
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:29:09.941
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.core 1 0 2017-05-22 09:29:34.019
+!MESSAGE Indexed 'TestingCudo' (3 sources, 61 headers) in 0.693 sec: 1,577 declarations; 2,858 references; 0 unresolved inclusions; 6 syntax errors; 35 unresolved names (0.78%)
+
+!ENTRY com.nvidia.cuda.ide.build 4 0 2017-05-22 09:34:15.364
+!MESSAGE Adding CUDA Toolkit 8.0 (id=com.nvidia.cuda.ide.toolchain.eight_zero.exe.release) to the list of preferred toolchains
+
+!ENTRY org.eclipse.cdt.ui 4 0 2017-05-22 09:37:05.503
+!MESSAGE Error in CDT UI during reconcile
+!STACK 0
+java.lang.ClassCastException: org.eclipse.cdt.internal.core.dom.parser.ProblemBinding cannot be cast to org.eclipse.cdt.internal.core.index.IIndexFragmentBinding
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CPPCompositesFactory.getCompositeEvaluation(CPPCompositesFactory.java:423)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CPPCompositesFactory.getCompositeEvaluation(CPPCompositesFactory.java:259)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.TemplateInstanceUtil.convert(TemplateInstanceUtil.java:106)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.TemplateInstanceUtil.convert(TemplateInstanceUtil.java:86)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CPPCompositesFactory.getCompositeBinding(CPPCompositesFactory.java:517)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CPPCompositesFactory.getCompositeType(CPPCompositesFactory.java:150)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassType$CPPBaseDelegate.getBaseClassType(CompositeCPPClassType.java:82)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassType$CPPBaseDelegate.getBaseClass(CompositeCPPClassType.java:72)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.AbstractCPPClassSpecializationScope.getBases(AbstractCPPClassSpecializationScope.java:167)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPClassSpecialization.getBases(CPPClassSpecialization.java:236)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.ClassTypeHelper.getBases(ClassTypeHelper.java:245)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.BaseClassLookup.lookupInBaseClass(BaseClassLookup.java:215)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.BaseClassLookup.lookupInBaseClasses(BaseClassLookup.java:59)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.lookup(CPPSemantics.java:1038)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.EvalID.resolveName(EvalID.java:379)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.EvalID.instantiate(EvalID.java:342)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateValue(CPPTemplates.java:1028)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.EvalFixed.instantiate(EvalFixed.java:170)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateArgument(CPPTemplates.java:1261)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateArguments(CPPTemplates.java:1230)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveDeferredClassInstance(CPPTemplates.java:2764)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2694)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknownMember(CPPTemplates.java:2719)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2697)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.createSpecialization(CPPTemplates.java:946)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecialization.specializeMember(CompositeCPPClassSpecialization.java:123)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.AbstractCPPClassSpecializationScope.getBindings(AbstractCPPClassSpecializationScope.java:130)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecializationScope.getBindings(CompositeCPPClassSpecializationScope.java:104)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.getBindingsFromScope(CPPSemantics.java:1260)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.lookup(CPPSemantics.java:1008)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.resolveUnknownName(CPPSemantics.java:3927)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknownMember(CPPTemplates.java:2741)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2697)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateArgument(CPPTemplates.java:1268)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateArguments(CPPTemplates.java:1230)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveDeferredClassInstance(CPPTemplates.java:2764)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2694)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknownMember(CPPTemplates.java:2719)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2697)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateArgument(CPPTemplates.java:1268)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateArguments(CPPTemplates.java:1230)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveDeferredClassInstance(CPPTemplates.java:2764)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2694)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknownMember(CPPTemplates.java:2719)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2697)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.createSpecialization(CPPTemplates.java:946)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecialization.specializeMember(CompositeCPPClassSpecialization.java:123)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.AbstractCPPClassSpecializationScope.getBindings(AbstractCPPClassSpecializationScope.java:130)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecializationScope.getBindings(CompositeCPPClassSpecializationScope.java:104)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.getBindingsFromScope(CPPSemantics.java:1260)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.lookup(CPPSemantics.java:1008)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.resolveUnknownName(CPPSemantics.java:3927)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknownMember(CPPTemplates.java:2741)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2697)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.createSpecialization(CPPTemplates.java:946)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecialization.specializeMember(CompositeCPPClassSpecialization.java:123)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1370)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateTypes(CPPTemplates.java:1168)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1316)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.createSpecialization(CPPTemplates.java:912)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecialization.specializeMember(CompositeCPPClassSpecialization.java:123)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.AbstractCPPClassSpecializationScope.specializeMembers(AbstractCPPClassSpecializationScope.java:217)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.AbstractCPPClassSpecializationScope.getConstructors(AbstractCPPClassSpecializationScope.java:261)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecializationScope.getConstructors(CompositeCPPClassSpecializationScope.java:116)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecialization.getConstructors(CompositeCPPClassSpecialization.java:164)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.ClassTypeHelper.getConstructors(ClassTypeHelper.java:251)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.Conversions.copyInitializationOfClass(Conversions.java:640)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.FunctionCost.performUDC(FunctionCost.java:103)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.resolveFunction(CPPSemantics.java:2506)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.resolveAmbiguities(CPPSemantics.java:2137)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.resolveBinding(CPPSemantics.java:305)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.resolveBinding(CPPVisitor.java:1375)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.createBinding(CPPVisitor.java:302)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTName.createIntermediateBinding(CPPASTName.java:61)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTNameBase.resolveBinding(CPPASTNameBase.java:107)
+	at org.eclipse.cdt.internal.ui.editor.SemanticToken.getBinding(SemanticToken.java:47)
+	at org.eclipse.cdt.internal.ui.editor.SemanticHighlightings$ExternalSDKHighlighting.consumes(SemanticHighlightings.java:1398)
+	at org.eclipse.cdt.internal.ui.editor.SemanticHighlightingReconciler$PositionCollector.visitNode(SemanticHighlightingReconciler.java:185)
+	at org.eclipse.cdt.internal.ui.editor.SemanticHighlightingReconciler$PositionCollector.visit(SemanticHighlightingReconciler.java:162)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTName.accept(CPPASTName.java:167)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIdExpression.accept(CPPASTIdExpression.java:79)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionCallExpression.accept(CPPASTFunctionCallExpression.java:188)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTUnaryExpression.accept(CPPASTUnaryExpression.java:137)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTBinaryExpression.accept(CPPASTBinaryExpression.java:170)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIfStatement.accept(CPPASTIfStatement.java:139)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:202)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:265)
+	at org.eclipse.cdt.internal.ui.editor.SemanticHighlightingReconciler.reconcilePositions(SemanticHighlightingReconciler.java:397)
+	at org.eclipse.cdt.internal.ui.editor.SemanticHighlightingReconciler.reconciled(SemanticHighlightingReconciler.java:352)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3015)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:37:05.881
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:37:05.882
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:37:06.381
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:37:06.381
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.core 4 0 2017-05-22 09:37:26.933
+!MESSAGE Error while parsing /Users/miller/Academic/cuda-workspace/Sample/src/particleSystem_cuda.cu.:Error while parsing /Developer/NVIDIA/CUDA-8.0/include/thrust/iterator/discard_iterator.h.
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.EvalFunctionSet.isConstantExpression(EvalFunctionSet.java:137)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPEvaluation.areAllConstantExpressions(CPPEvaluation.java:97)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.EvalFunctionCall.computeForFunctionCall(EvalFunctionCall.java:235)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.EvalFunctionCall.getValue(EvalFunctionCall.java:149)
+	at org.eclipse.cdt.internal.core.dom.parser.Value.create(Value.java:428)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.SemanticUtil.getValueOfInitializer(SemanticUtil.java:798)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPParameter.getDefaultValue(CPPParameter.java:250)
+	at org.eclipse.cdt.internal.core.pdom.dom.cpp.PDOMCPPParameter.<init>(PDOMCPPParameter.java:61)
+	at org.eclipse.cdt.internal.core.pdom.dom.cpp.PDOMCPPFunction.setParameters(PDOMCPPFunction.java:221)
+	at org.eclipse.cdt.internal.core.pdom.dom.cpp.PDOMCPPFunction.initData(PDOMCPPFunction.java:129)
+	at org.eclipse.cdt.internal.core.pdom.dom.cpp.PDOMCPPLinkage$ConfigureFunction.run(PDOMCPPLinkage.java:250)
+	at org.eclipse.cdt.internal.core.pdom.dom.cpp.PDOMCPPLinkage.handlePostProcesses(PDOMCPPLinkage.java:911)
+	at org.eclipse.cdt.internal.core.pdom.dom.cpp.PDOMCPPLinkage.addBinding(PDOMCPPLinkage.java:345)
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMFile.createPDOMName(PDOMFile.java:515)
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMFile.addNames(PDOMFile.java:482)
+	at org.eclipse.cdt.internal.core.pdom.WritablePDOM.addFileContent(WritablePDOM.java:155)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.setFileContent(WritableCIndex.java:87)
+	at org.eclipse.cdt.internal.core.pdom.PDOMWriter.storeFileInIndex(PDOMWriter.java:616)
+	at org.eclipse.cdt.internal.core.pdom.PDOMWriter.storeSymbolsInIndex(PDOMWriter.java:316)
+	at org.eclipse.cdt.internal.core.pdom.PDOMWriter.addSymbols(PDOMWriter.java:273)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.writeToIndex(AbstractIndexerTask.java:1277)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.parseFile(AbstractIndexerTask.java:1094)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.parseLinkage(AbstractIndexerTask.java:898)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:554)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:161)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMRebuildTask.run(PDOMRebuildTask.java:90)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:137)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.cdt.core 1 0 2017-05-22 09:37:27.734
+!MESSAGE Indexed 'Sample' (5 sources, 802 headers) in 74.4 sec: 65,081 declarations; 136,585 references; 0 unresolved inclusions; 202 syntax errors; 2,134 unresolved names (1%)
+
+!ENTRY org.eclipse.cdt.ui 4 0 2017-05-22 09:37:57.417
+!MESSAGE Error in CDT UI during reconcile
+!STACK 0
+java.lang.ClassCastException: org.eclipse.cdt.internal.core.dom.parser.ProblemBinding cannot be cast to org.eclipse.cdt.internal.core.index.IIndexFragmentBinding
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CPPCompositesFactory.getCompositeEvaluation(CPPCompositesFactory.java:423)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CPPCompositesFactory.getCompositeEvaluation(CPPCompositesFactory.java:259)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.TemplateInstanceUtil.convert(TemplateInstanceUtil.java:106)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.TemplateInstanceUtil.convert(TemplateInstanceUtil.java:86)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CPPCompositesFactory.getCompositeBinding(CPPCompositesFactory.java:517)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CPPCompositesFactory.getCompositeType(CPPCompositesFactory.java:150)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassType$CPPBaseDelegate.getBaseClassType(CompositeCPPClassType.java:82)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassType$CPPBaseDelegate.getBaseClass(CompositeCPPClassType.java:72)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.AbstractCPPClassSpecializationScope.getBases(AbstractCPPClassSpecializationScope.java:167)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPClassSpecialization.getBases(CPPClassSpecialization.java:236)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.ClassTypeHelper.getBases(ClassTypeHelper.java:245)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.BaseClassLookup.lookupInBaseClass(BaseClassLookup.java:215)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.BaseClassLookup.lookupInBaseClasses(BaseClassLookup.java:59)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.lookup(CPPSemantics.java:1038)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.EvalID.resolveName(EvalID.java:379)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.EvalID.instantiate(EvalID.java:342)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateValue(CPPTemplates.java:1028)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.EvalFixed.instantiate(EvalFixed.java:170)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateArgument(CPPTemplates.java:1261)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateArguments(CPPTemplates.java:1230)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveDeferredClassInstance(CPPTemplates.java:2764)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2694)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknownMember(CPPTemplates.java:2719)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2697)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.createSpecialization(CPPTemplates.java:946)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecialization.specializeMember(CompositeCPPClassSpecialization.java:123)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.AbstractCPPClassSpecializationScope.getBindings(AbstractCPPClassSpecializationScope.java:130)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecializationScope.getBindings(CompositeCPPClassSpecializationScope.java:104)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.getBindingsFromScope(CPPSemantics.java:1260)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.lookup(CPPSemantics.java:1008)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.resolveUnknownName(CPPSemantics.java:3927)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknownMember(CPPTemplates.java:2741)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2697)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateArgument(CPPTemplates.java:1268)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateArguments(CPPTemplates.java:1230)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveDeferredClassInstance(CPPTemplates.java:2764)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2694)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknownMember(CPPTemplates.java:2719)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2697)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateArgument(CPPTemplates.java:1268)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateArguments(CPPTemplates.java:1230)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveDeferredClassInstance(CPPTemplates.java:2764)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2694)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknownMember(CPPTemplates.java:2719)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2697)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.createSpecialization(CPPTemplates.java:946)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecialization.specializeMember(CompositeCPPClassSpecialization.java:123)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.AbstractCPPClassSpecializationScope.getBindings(AbstractCPPClassSpecializationScope.java:130)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecializationScope.getBindings(CompositeCPPClassSpecializationScope.java:104)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.getBindingsFromScope(CPPSemantics.java:1260)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.lookup(CPPSemantics.java:1008)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.resolveUnknownName(CPPSemantics.java:3927)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknownMember(CPPTemplates.java:2741)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2697)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.createSpecialization(CPPTemplates.java:946)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecialization.specializeMember(CompositeCPPClassSpecialization.java:123)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1370)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateTypes(CPPTemplates.java:1168)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1316)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.createSpecialization(CPPTemplates.java:912)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecialization.specializeMember(CompositeCPPClassSpecialization.java:123)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.AbstractCPPClassSpecializationScope.specializeMembers(AbstractCPPClassSpecializationScope.java:217)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.AbstractCPPClassSpecializationScope.getConstructors(AbstractCPPClassSpecializationScope.java:261)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecializationScope.getConstructors(CompositeCPPClassSpecializationScope.java:116)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecialization.getConstructors(CompositeCPPClassSpecialization.java:164)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.ClassTypeHelper.getConstructors(ClassTypeHelper.java:251)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.Conversions.copyInitializationOfClass(Conversions.java:640)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.FunctionCost.performUDC(FunctionCost.java:103)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.resolveFunction(CPPSemantics.java:2506)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.resolveAmbiguities(CPPSemantics.java:2137)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.resolveBinding(CPPSemantics.java:305)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.resolveBinding(CPPVisitor.java:1375)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.createBinding(CPPVisitor.java:302)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTName.createIntermediateBinding(CPPASTName.java:61)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTNameBase.resolveBinding(CPPASTNameBase.java:107)
+	at org.eclipse.cdt.internal.ui.editor.SemanticToken.getBinding(SemanticToken.java:47)
+	at org.eclipse.cdt.internal.ui.editor.SemanticHighlightings$ExternalSDKHighlighting.consumes(SemanticHighlightings.java:1398)
+	at org.eclipse.cdt.internal.ui.editor.SemanticHighlightingReconciler$PositionCollector.visitNode(SemanticHighlightingReconciler.java:185)
+	at org.eclipse.cdt.internal.ui.editor.SemanticHighlightingReconciler$PositionCollector.visit(SemanticHighlightingReconciler.java:162)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTName.accept(CPPASTName.java:167)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIdExpression.accept(CPPASTIdExpression.java:79)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionCallExpression.accept(CPPASTFunctionCallExpression.java:188)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTUnaryExpression.accept(CPPASTUnaryExpression.java:137)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTBinaryExpression.accept(CPPASTBinaryExpression.java:170)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIfStatement.accept(CPPASTIfStatement.java:139)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:202)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:265)
+	at org.eclipse.cdt.internal.ui.editor.SemanticHighlightingReconciler.reconcilePositions(SemanticHighlightingReconciler.java:397)
+	at org.eclipse.cdt.internal.ui.editor.SemanticHighlightingReconciler.reconciled(SemanticHighlightingReconciler.java:352)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3015)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.ui 4 0 2017-05-22 09:38:14.097
+!MESSAGE Error in CDT UI during reconcile
+!STACK 0
+java.lang.ClassCastException: org.eclipse.cdt.internal.core.dom.parser.ProblemBinding cannot be cast to org.eclipse.cdt.internal.core.index.IIndexFragmentBinding
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CPPCompositesFactory.getCompositeEvaluation(CPPCompositesFactory.java:423)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CPPCompositesFactory.getCompositeEvaluation(CPPCompositesFactory.java:259)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.TemplateInstanceUtil.convert(TemplateInstanceUtil.java:106)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.TemplateInstanceUtil.convert(TemplateInstanceUtil.java:86)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CPPCompositesFactory.getCompositeBinding(CPPCompositesFactory.java:517)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CPPCompositesFactory.getCompositeType(CPPCompositesFactory.java:150)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassType$CPPBaseDelegate.getBaseClassType(CompositeCPPClassType.java:82)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassType$CPPBaseDelegate.getBaseClass(CompositeCPPClassType.java:72)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.AbstractCPPClassSpecializationScope.getBases(AbstractCPPClassSpecializationScope.java:167)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPClassSpecialization.getBases(CPPClassSpecialization.java:236)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.ClassTypeHelper.getBases(ClassTypeHelper.java:245)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.BaseClassLookup.lookupInBaseClass(BaseClassLookup.java:215)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.BaseClassLookup.lookupInBaseClasses(BaseClassLookup.java:59)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.lookup(CPPSemantics.java:1038)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.EvalID.resolveName(EvalID.java:379)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.EvalID.instantiate(EvalID.java:342)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateValue(CPPTemplates.java:1028)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.EvalFixed.instantiate(EvalFixed.java:170)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateArgument(CPPTemplates.java:1261)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateArguments(CPPTemplates.java:1230)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveDeferredClassInstance(CPPTemplates.java:2764)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2694)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknownMember(CPPTemplates.java:2719)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2697)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.createSpecialization(CPPTemplates.java:946)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecialization.specializeMember(CompositeCPPClassSpecialization.java:123)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.AbstractCPPClassSpecializationScope.getBindings(AbstractCPPClassSpecializationScope.java:130)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecializationScope.getBindings(CompositeCPPClassSpecializationScope.java:104)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.getBindingsFromScope(CPPSemantics.java:1260)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.lookup(CPPSemantics.java:1008)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.resolveUnknownName(CPPSemantics.java:3927)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknownMember(CPPTemplates.java:2741)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2697)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateArgument(CPPTemplates.java:1268)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateArguments(CPPTemplates.java:1230)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveDeferredClassInstance(CPPTemplates.java:2764)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2694)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknownMember(CPPTemplates.java:2719)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2697)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateArgument(CPPTemplates.java:1268)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateArguments(CPPTemplates.java:1230)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveDeferredClassInstance(CPPTemplates.java:2764)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2694)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknownMember(CPPTemplates.java:2719)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2697)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.createSpecialization(CPPTemplates.java:946)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecialization.specializeMember(CompositeCPPClassSpecialization.java:123)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.AbstractCPPClassSpecializationScope.getBindings(AbstractCPPClassSpecializationScope.java:130)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecializationScope.getBindings(CompositeCPPClassSpecializationScope.java:104)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.getBindingsFromScope(CPPSemantics.java:1260)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.lookup(CPPSemantics.java:1008)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.resolveUnknownName(CPPSemantics.java:3927)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknownMember(CPPTemplates.java:2741)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2697)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.createSpecialization(CPPTemplates.java:946)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecialization.specializeMember(CompositeCPPClassSpecialization.java:123)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1370)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateTypes(CPPTemplates.java:1168)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1316)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.createSpecialization(CPPTemplates.java:912)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecialization.specializeMember(CompositeCPPClassSpecialization.java:123)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.AbstractCPPClassSpecializationScope.specializeMembers(AbstractCPPClassSpecializationScope.java:217)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.AbstractCPPClassSpecializationScope.getConstructors(AbstractCPPClassSpecializationScope.java:261)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecializationScope.getConstructors(CompositeCPPClassSpecializationScope.java:116)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecialization.getConstructors(CompositeCPPClassSpecialization.java:164)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.ClassTypeHelper.getConstructors(ClassTypeHelper.java:251)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.Conversions.copyInitializationOfClass(Conversions.java:640)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.FunctionCost.performUDC(FunctionCost.java:103)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.resolveFunction(CPPSemantics.java:2506)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.resolveAmbiguities(CPPSemantics.java:2137)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.resolveBinding(CPPSemantics.java:305)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.resolveBinding(CPPVisitor.java:1375)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.createBinding(CPPVisitor.java:302)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTName.createIntermediateBinding(CPPASTName.java:61)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTNameBase.resolveBinding(CPPASTNameBase.java:107)
+	at org.eclipse.cdt.internal.ui.editor.SemanticToken.getBinding(SemanticToken.java:47)
+	at org.eclipse.cdt.internal.ui.editor.SemanticHighlightings$ExternalSDKHighlighting.consumes(SemanticHighlightings.java:1398)
+	at org.eclipse.cdt.internal.ui.editor.SemanticHighlightingReconciler$PositionCollector.visitNode(SemanticHighlightingReconciler.java:185)
+	at org.eclipse.cdt.internal.ui.editor.SemanticHighlightingReconciler$PositionCollector.visit(SemanticHighlightingReconciler.java:162)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTName.accept(CPPASTName.java:167)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIdExpression.accept(CPPASTIdExpression.java:79)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionCallExpression.accept(CPPASTFunctionCallExpression.java:188)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTUnaryExpression.accept(CPPASTUnaryExpression.java:137)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTBinaryExpression.accept(CPPASTBinaryExpression.java:170)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIfStatement.accept(CPPASTIfStatement.java:139)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:202)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:265)
+	at org.eclipse.cdt.internal.ui.editor.SemanticHighlightingReconciler.reconcilePositions(SemanticHighlightingReconciler.java:397)
+	at org.eclipse.cdt.internal.ui.editor.SemanticHighlightingReconciler.reconciled(SemanticHighlightingReconciler.java:352)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3015)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:41:07.495
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:41:07.495
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:41:07.895
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:41:07.896
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:41:11.961
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:41:11.961
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:41:12.364
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:41:12.365
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:47:07.268
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:47:07.269
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:47:07.667
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:47:07.667
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:47:12.139
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:47:12.140
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:47:12.439
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:47:12.440
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:47:21.520
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:47:21.521
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:47:21.827
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:47:21.827
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:47:54.602
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:47:54.603
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 4 2017-05-22 09:47:55.005
+!MESSAGE Error
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:50)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:90)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:304)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.logOpen(BuildConsolePartitioner.java:501)
+	at org.eclipse.cdt.internal.ui.buildconsole.BuildConsolePartitioner$1.run(BuildConsolePartitioner.java:449)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3983)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3660)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2017-05-22 09:47:55.005
+!MESSAGE Could not write file: /home/mmiller/cuda-workspace/.metadata/.plugins/org.eclipse.cdt.ui.
+
+!ENTRY org.eclipse.cdt.ui 4 0 2017-05-22 09:48:16.943
+!MESSAGE Error in CDT UI during reconcile
+!STACK 0
+java.lang.ClassCastException: org.eclipse.cdt.internal.core.dom.parser.ProblemBinding cannot be cast to org.eclipse.cdt.internal.core.index.IIndexFragmentBinding
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CPPCompositesFactory.getCompositeEvaluation(CPPCompositesFactory.java:423)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CPPCompositesFactory.getCompositeEvaluation(CPPCompositesFactory.java:259)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.TemplateInstanceUtil.convert(TemplateInstanceUtil.java:106)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.TemplateInstanceUtil.convert(TemplateInstanceUtil.java:86)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CPPCompositesFactory.getCompositeBinding(CPPCompositesFactory.java:517)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CPPCompositesFactory.getCompositeType(CPPCompositesFactory.java:150)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassType$CPPBaseDelegate.getBaseClassType(CompositeCPPClassType.java:82)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassType$CPPBaseDelegate.getBaseClass(CompositeCPPClassType.java:72)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.AbstractCPPClassSpecializationScope.getBases(AbstractCPPClassSpecializationScope.java:167)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPClassSpecialization.getBases(CPPClassSpecialization.java:236)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.ClassTypeHelper.getBases(ClassTypeHelper.java:245)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.BaseClassLookup.lookupInBaseClass(BaseClassLookup.java:215)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.BaseClassLookup.lookupInBaseClasses(BaseClassLookup.java:59)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.lookup(CPPSemantics.java:1038)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.EvalID.resolveName(EvalID.java:379)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.EvalID.instantiate(EvalID.java:342)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateValue(CPPTemplates.java:1028)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.EvalFixed.instantiate(EvalFixed.java:170)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateArgument(CPPTemplates.java:1261)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateArguments(CPPTemplates.java:1230)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveDeferredClassInstance(CPPTemplates.java:2764)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2694)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknownMember(CPPTemplates.java:2719)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2697)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.createSpecialization(CPPTemplates.java:946)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecialization.specializeMember(CompositeCPPClassSpecialization.java:123)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.AbstractCPPClassSpecializationScope.getBindings(AbstractCPPClassSpecializationScope.java:130)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecializationScope.getBindings(CompositeCPPClassSpecializationScope.java:104)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.getBindingsFromScope(CPPSemantics.java:1260)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.lookup(CPPSemantics.java:1008)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.resolveUnknownName(CPPSemantics.java:3927)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknownMember(CPPTemplates.java:2741)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2697)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateArgument(CPPTemplates.java:1268)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateArguments(CPPTemplates.java:1230)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveDeferredClassInstance(CPPTemplates.java:2764)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2694)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknownMember(CPPTemplates.java:2719)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2697)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateArgument(CPPTemplates.java:1268)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateArguments(CPPTemplates.java:1230)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveDeferredClassInstance(CPPTemplates.java:2764)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2694)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknownMember(CPPTemplates.java:2719)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2697)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.createSpecialization(CPPTemplates.java:946)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecialization.specializeMember(CompositeCPPClassSpecialization.java:123)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.AbstractCPPClassSpecializationScope.getBindings(AbstractCPPClassSpecializationScope.java:130)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecializationScope.getBindings(CompositeCPPClassSpecializationScope.java:104)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.getBindingsFromScope(CPPSemantics.java:1260)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.lookup(CPPSemantics.java:1008)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.resolveUnknownName(CPPSemantics.java:3927)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknownMember(CPPTemplates.java:2741)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.resolveUnknown(CPPTemplates.java:2697)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1341)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.createSpecialization(CPPTemplates.java:946)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecialization.specializeMember(CompositeCPPClassSpecialization.java:123)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1370)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateTypes(CPPTemplates.java:1168)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.instantiateType(CPPTemplates.java:1316)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.createSpecialization(CPPTemplates.java:912)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecialization.specializeMember(CompositeCPPClassSpecialization.java:123)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.AbstractCPPClassSpecializationScope.specializeMembers(AbstractCPPClassSpecializationScope.java:217)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.AbstractCPPClassSpecializationScope.getConstructors(AbstractCPPClassSpecializationScope.java:261)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecializationScope.getConstructors(CompositeCPPClassSpecializationScope.java:116)
+	at org.eclipse.cdt.internal.core.index.composite.cpp.CompositeCPPClassSpecialization.getConstructors(CompositeCPPClassSpecialization.java:164)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.ClassTypeHelper.getConstructors(ClassTypeHelper.java:251)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.Conversions.copyInitializationOfClass(Conversions.java:640)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.FunctionCost.performUDC(FunctionCost.java:103)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.resolveFunction(CPPSemantics.java:2506)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.resolveAmbiguities(CPPSemantics.java:2137)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.resolveBinding(CPPSemantics.java:305)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.resolveBinding(CPPVisitor.java:1375)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.createBinding(CPPVisitor.java:302)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTName.createIntermediateBinding(CPPASTName.java:61)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTNameBase.resolveBinding(CPPASTNameBase.java:107)
+	at org.eclipse.cdt.internal.ui.editor.SemanticToken.getBinding(SemanticToken.java:47)
+	at org.eclipse.cdt.internal.ui.editor.SemanticHighlightings$ExternalSDKHighlighting.consumes(SemanticHighlightings.java:1398)
+	at org.eclipse.cdt.internal.ui.editor.SemanticHighlightingReconciler$PositionCollector.visitNode(SemanticHighlightingReconciler.java:185)
+	at org.eclipse.cdt.internal.ui.editor.SemanticHighlightingReconciler$PositionCollector.visit(SemanticHighlightingReconciler.java:162)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTName.accept(CPPASTName.java:167)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIdExpression.accept(CPPASTIdExpression.java:79)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionCallExpression.accept(CPPASTFunctionCallExpression.java:188)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTUnaryExpression.accept(CPPASTUnaryExpression.java:137)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTBinaryExpression.accept(CPPASTBinaryExpression.java:170)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIfStatement.accept(CPPASTIfStatement.java:139)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:202)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:265)
+	at org.eclipse.cdt.internal.ui.editor.SemanticHighlightingReconciler.reconcilePositions(SemanticHighlightingReconciler.java:397)
+	at org.eclipse.cdt.internal.ui.editor.SemanticHighlightingReconciler.reconciled(SemanticHighlightingReconciler.java:352)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3015)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)

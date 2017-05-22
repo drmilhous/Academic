@@ -1,12 +1,21 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include <grid.h>
+#include "grid.h"
 #define MAX 3
 #define N 10
 void initCell(cell * c);
 __global__ void compute2(grid * g, path * p, location * loc);
 __device__ void computeIterative(grid * g, path * p, location * loc);
+__device__ void add(grid ** base, grid ** last, grid * newList);
+__device__ void cloneToGrid(grid * g, grid * g2);
+__device__ void eliminateValue(cell **c, int row, int col, int max, int value);
+__device__ int check(grid * g, int row, int col, int number);
+__device__	grid * allocateGridDevice(int size);
+__device__ void printGrid(grid * g);
+__device__ int pow2(int x);
+__device__ grid * cloneGrid(grid * g);
+__device__ char convert(int x);
 int foo(path * p);
 int main(void)
 	{
@@ -280,4 +289,213 @@ int foo(path * p)
 	}
 
 
+__device__ int pow2(int x)
+{
+	int sum = 1;
+	if( x == 0)
+	{
+		sum = 1;
+	}
+	else
+	{
+	for(int i = 0; i < x; i++)
+	{
+		sum = sum *2;
+	}
+	}
+	return sum;
+}
+__device__ void add(grid ** base, grid ** last, grid * newList)
+	{
+		if (newList != NULL)
+			{
+				if (*base == NULL)
+					{
+						*base = newList;
+						*last = *base;
+					}
+				else
+					{
+						(*last)->next = newList;
+					}
+				while ((*last)->next != NULL)
+					{
+						*last = (*last)->next;
+					}
+			}
+	}
 
+__device__ char convert(int x)
+	{
+		char res = 'a';
+		if (x >= 0)
+			{
+				//int amount = log2((double) x) + (int) res;
+				int amount = int(x) + (int) res;
+
+				res = (char) amount;
+			}
+		else
+			{
+				res = ' ';
+			}
+		return res;
+	}
+
+__device__ void cloneToGrid(grid * g, grid * g2)
+	{
+		g2->size = g->size;
+		g2->ok = g->ok;
+		for (int row = 0; row < g->size; row++)
+			{
+				for (int col = 0; col < g->size; col++)
+					{
+						g2->cells[row][col].bitmap = g->cells[row][col].bitmap;
+						g2->cells[row][col].value = g->cells[row][col].value;
+					}
+			}
+	}
+
+
+	grid * allocateGrid(int size)
+	{
+		grid * g2 = NULL;
+		cudaMallocManaged((void **) &g2, sizeof(grid));
+		g2->size = size;
+		cell ** cells;
+		cudaMallocManaged((void **) &cells, size * sizeof(cell *));
+		for (int i = 0; i < size; i++)
+			{
+				cudaMallocManaged((void **) &cells[i], size * sizeof(cell));
+			}
+		g2->cells = cells;
+		for (int row = 0; row < size; row++)
+			{
+				for (int col = 0; col < size; col++)
+					{
+						g2->cells[row][col].bitmap = 0;
+						g2->cells[row][col].value = -1;
+					}
+			}
+		g2->next = NULL;
+		g2->ok = '0';
+		return g2;
+	}
+
+__device__	grid * allocateGridDevice(int size)
+	{
+		grid * g2 = NULL;
+		g2 = (grid *) malloc(sizeof(grid));
+		g2->size = size;
+		cell ** cells;
+		cells = (cell **) malloc(size * sizeof(cell *));
+		for (int i = 0; i < size; i++)
+			{
+				cells[i] = (cell*) malloc(size * sizeof(cell));
+			}
+		g2->cells = cells;
+		for (int row = 0; row < size; row++)
+			{
+				for (int col = 0; col < size; col++)
+					{
+						g2->cells[row][col].bitmap = 0;
+						g2->cells[row][col].value = -1;
+					}
+			}
+		g2->next = NULL;
+		g2->ok = '0';
+		return g2;
+	}
+
+__device__ grid * cloneGrid(grid * g)
+	{
+		grid * g2 = (grid *) malloc(sizeof(grid));
+		if(g2 != NULL)
+		{
+		g2->size = g->size;
+		cell * array = (cell *) malloc(g->size * g2->size * sizeof(cell));
+		cell ** cells = (cell **) malloc(g2->size * sizeof(cell *));
+		for (int i = 0; i < g->size; i++)
+			{
+				cells[i] = &array[i * g2->size];
+			}
+		g2->cells = cells;
+		for (int row = 0; row < g2->size; row++)
+			{
+				for (int col = 0; col < g2->size; col++)
+					{
+						g2->cells[row][col].bitmap = g->cells[row][col].bitmap;
+						g2->cells[row][col].value = g->cells[row][col].value;
+					}
+			}
+		g2->next = NULL;
+		g2->ok = '0';
+		}
+		return g2;
+	}
+
+__device__ void eliminateValue(cell **c, int row, int col, int max, int value)
+	{
+		int mask = pow2(value);
+		for (int r1 = 0; r1 < max; r1++)
+			{
+				if (r1 != row)
+					{
+						c[r1][col].bitmap |= mask;
+					}
+			}
+		for (int c1 = 0; c1 < max; c1++)
+			{
+				if (c1 != col)
+					{
+						c[row][c1].bitmap |= mask;
+					}
+			}
+	}
+
+__device__ int check(grid * g, int row, int col, int number)
+	{
+		int result;
+		cell * c = &g->cells[row][col];
+		if (c->value >= 0 && c->value != number)
+			{
+				result = 1;
+			}
+		else
+			{
+				int mask = pow2(number);
+				int bits = c->bitmap;
+				result = (mask & bits);
+			}
+		return result;
+	}
+
+__device__ void printGrid(grid * g)
+	{
+		int n = g->size;
+		//printf("X=%d Y=%d %c\n", x, y, g->ok);
+		for (int row = 0; row < n; row++)
+			{
+				for (int col = 0; col < n; col++)
+					{
+						cell c = g->cells[row][col];
+						//printf("[%02d][%02d]%02X ",row, col, c[row * N + col].bitmap);
+						int value = c.value;
+						char printC = ' ';
+						if (value < 0)
+							{
+								value = c.bitmap;
+								printf(" %03X%c", value, printC);
+							}
+						else
+							{
+								//
+								printC = convert(value);
+								value = 0;
+								printf("  %c  ", printC);
+							}
+
+					}
+				printf("\n");
+			}
+	}

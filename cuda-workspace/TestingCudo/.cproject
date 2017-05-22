@@ -28,11 +28,17 @@
 								<option defaultValue="nvcc.compiler.optimization.level.none" id="nvcc.compiler.optimization.level.337818979" name="Optimization Level" superClass="nvcc.compiler.optimization.level" valueType="enumerated"/>
 								<option id="nvcc.compiler.pic.304366308" name="Position Independent Code (-fPIC)" superClass="nvcc.compiler.pic"/>
 								<option id="nvcc.compiler.cpp11option.728209612" name="Enable C++11 support (-std=c++11)" superClass="nvcc.compiler.cpp11option" value="true" valueType="boolean"/>
+								<option id="nvcc.compiler.include.paths.1931209020" name="Include paths (-I)" superClass="nvcc.compiler.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}&quot;"/>
+								</option>
 								<inputType id="nvcc.compiler.input.cu.792139933" superClass="nvcc.compiler.input.cu"/>
 								<inputType id="nvcc.compiler.input.cpp.1957689795" superClass="nvcc.compiler.input.cpp"/>
 								<inputType id="nvcc.compiler.input.c.244240385" superClass="nvcc.compiler.input.c"/>
 							</tool>
 							<tool id="nvcc.linker.base.256142420" name="NVCC Linker" superClass="nvcc.linker.base">
+								<option id="nvcc.linker.option.libs.234988296" name="Libraries (-l)" superClass="nvcc.linker.option.libs" valueType="libs">
+									<listOptionValue builtIn="false" value="grid.h"/>
+								</option>
 								<inputType id="nvcc.linker.input.925652226" superClass="nvcc.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -44,19 +50,6 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="com.nvidia.cuda.ide.on_path.configuration.debug.1407031712.62029009" name="test1.cu" rcbsApplicability="disable" resourcePath="test1.cu" toolsToInvoke="nvcc.compiler.base.589244272.567862886">
-						<tool id="nvcc.compiler.base.589244272.567862886" name="NVCC Compiler" superClass="nvcc.compiler.base.589244272">
-							<inputType id="nvcc.compiler.input.cu.317801606" superClass="nvcc.compiler.input.cu"/>
-							<inputType id="nvcc.compiler.input.cpp.619940607" superClass="nvcc.compiler.input.cpp"/>
-							<inputType id="nvcc.compiler.input.c.1404357324" superClass="nvcc.compiler.input.c"/>
-						</tool>
-						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.1010286752" name="Resource Custom Build Step">
-							<inputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.inputtype.1914046378" name="Resource Custom Build Step Input Type">
-								<additionalInput kind="additionalinputdependency" paths="grid.d"/>
-							</inputType>
-							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.1248152160" name="Resource Custom Build Step Output Type"/>
-						</tool>
-					</fileInfo>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="com.nvidia.cuda.ide.build.project.ICudaProjectConfiguration">

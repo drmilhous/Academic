@@ -1,491 +1,68 @@
-22:20:51 **** Build of configuration Debug for project TestingCudo ****
+09:47:11 **** Build of configuration Debug for project TestingCudo ****
 Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
 make all 
-Building file: ../grid.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "grid.d" "../grid.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "grid.o" "../grid.cu"
-Finished building: ../grid.cu
- 
 Building file: ../test1.cu
 Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "test1.d" "../test1.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "test1.o" "../test1.cu"
-Finished building: ../test1.cu
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc -I"/Users/miller/Academic/cuda-workspace/TestingCudo" -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "test1.d" "../test1.cu"
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc -I"/Users/miller/Academic/cuda-workspace/TestingCudo" -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "test1.o" "../test1.cu"
+ptxas fatal   : Unresolved extern function '_Z18allocateGridDevicei'
+make: *** [test1.o] Error 255
+09:47:20 **** Clean-only build of configuration Debug for project Sample ****
+make clean 
+rm -rf  ./src/particleSystem.o ./src/particleSystem_cuda.o ./src/particles.o ./src/render_particles.o ./src/shaders.o  ./src/particleSystem_cuda.d  ./src/particleSystem.d ./src/particles.d ./src/render_particles.d ./src/shaders.d  Sample
  
-Building file: ../test2.cu
+09:47:20 **** Clean-only build of configuration Debug for project TestingCudo ****
+Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
+make clean 
+rm -rf  ./test1.o ./test2.o  ./test1.d ./test2.d  TestingCudo
+ 
+09:47:25 **** Build of configuration Debug for project Sample ****
+make all 
+Building file: ../src/particleSystem.cpp
 Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "test2.d" "../test2.cu"
-../test2.cu:44:1: warning: '/*' within block comment [-Wcomment]
-/*
-^
-1 warning generated.
-../test2.cu:44:1: warning: '/*' within block comment [-Wcomment]
-/*
-^
-1 warning generated.
-../test2.cu:44:1: warning: '/*' within block comment [-Wcomment]
-/*
-^
-1 warning generated.
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "test2.o" "../test2.cu"
-../test2.cu:44:1: warning: '/*' within block comment [-Wcomment]
-/*
-^
-1 warning generated.
-../test2.cu(74): warning: variable "idx" was declared but never referenced
-
-../test2.cu:44:1: warning: '/*' within block comment [-Wcomment]
-/*
-^
-1 warning generated.
-../test2.cu(74): warning: variable "idx" was declared but never referenced
-
-../test2.cu:44:1: warning: '/*' within block comment [-Wcomment]
-/*
-^
-1 warning generated.
-../test2.cu(74): warning: variable "idx" was declared but never referenced
-
-ptxas warning : Stack size for entry function '_Z3recii' cannot be statically determined
-ptxas warning : Stack size for entry function '_Z3recii' cannot be statically determined
-Finished building: ../test2.cu
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc -I"/Developer/NVIDIA/CUDA-8.0/samples/5_Simulations" -I"/Developer/NVIDIA/CUDA-8.0/samples/common/inc" -I"/Users/miller/Academic/cuda-workspace/Sample" -G -g -O0 -gencode arch=compute_52,code=sm_52  -odir "src" -M -o "src/particleSystem.d" "../src/particleSystem.cpp"
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc -I"/Developer/NVIDIA/CUDA-8.0/samples/5_Simulations" -I"/Developer/NVIDIA/CUDA-8.0/samples/common/inc" -I"/Users/miller/Academic/cuda-workspace/Sample" -G -g -O0 --compile  -x c++ -o  "src/particleSystem.o" "../src/particleSystem.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/particleSystem.cpp
  
-Building target: TestingCudo
+Building file: ../src/particleSystem_cuda.cu
+Invoking: NVCC Compiler
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc -I"/Developer/NVIDIA/CUDA-8.0/samples/5_Simulations" -I"/Developer/NVIDIA/CUDA-8.0/samples/common/inc" -I"/Users/miller/Academic/cuda-workspace/Sample" -G -g -O0 -gencode arch=compute_52,code=sm_52  -odir "src" -M -o "src/particleSystem_cuda.d" "../src/particleSystem_cuda.cu"
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc -I"/Developer/NVIDIA/CUDA-8.0/samples/5_Simulations" -I"/Developer/NVIDIA/CUDA-8.0/samples/common/inc" -I"/Users/miller/Academic/cuda-workspace/Sample" -G -g -O0 --compile --relocatable-device-code=false -gencode arch=compute_52,code=compute_52 -gencode arch=compute_52,code=sm_52  -x cu -o  "src/particleSystem_cuda.o" "../src/particleSystem_cuda.cu"
+Finished building: ../src/particleSystem_cuda.cu
+ 
+Building file: ../src/particles.cpp
+Invoking: NVCC Compiler
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc -I"/Developer/NVIDIA/CUDA-8.0/samples/5_Simulations" -I"/Developer/NVIDIA/CUDA-8.0/samples/common/inc" -I"/Users/miller/Academic/cuda-workspace/Sample" -G -g -O0 -gencode arch=compute_52,code=sm_52  -odir "src" -M -o "src/particles.d" "../src/particles.cpp"
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc -I"/Developer/NVIDIA/CUDA-8.0/samples/5_Simulations" -I"/Developer/NVIDIA/CUDA-8.0/samples/common/inc" -I"/Users/miller/Academic/cuda-workspace/Sample" -G -g -O0 --compile  -x c++ -o  "src/particles.o" "../src/particles.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/particles.cpp
+ 
+Building file: ../src/render_particles.cpp
+Invoking: NVCC Compiler
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc -I"/Developer/NVIDIA/CUDA-8.0/samples/5_Simulations" -I"/Developer/NVIDIA/CUDA-8.0/samples/common/inc" -I"/Users/miller/Academic/cuda-workspace/Sample" -G -g -O0 -gencode arch=compute_52,code=sm_52  -odir "src" -M -o "src/render_particles.d" "../src/render_particles.cpp"
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc -I"/Developer/NVIDIA/CUDA-8.0/samples/5_Simulations" -I"/Developer/NVIDIA/CUDA-8.0/samples/common/inc" -I"/Users/miller/Academic/cuda-workspace/Sample" -G -g -O0 --compile  -x c++ -o  "src/render_particles.o" "../src/render_particles.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/render_particles.cpp
+ 
+Building file: ../src/shaders.cpp
+Invoking: NVCC Compiler
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc -I"/Developer/NVIDIA/CUDA-8.0/samples/5_Simulations" -I"/Developer/NVIDIA/CUDA-8.0/samples/common/inc" -I"/Users/miller/Academic/cuda-workspace/Sample" -G -g -O0 -gencode arch=compute_52,code=sm_52  -odir "src" -M -o "src/shaders.d" "../src/shaders.cpp"
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc -I"/Developer/NVIDIA/CUDA-8.0/samples/5_Simulations" -I"/Developer/NVIDIA/CUDA-8.0/samples/common/inc" -I"/Users/miller/Academic/cuda-workspace/Sample" -G -g -O0 --compile  -x c++ -o  "src/shaders.o" "../src/shaders.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/shaders.cpp
+ 
+Building target: Sample
 Invoking: NVCC Linker
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -link -o  "TestingCudo"  ./grid.o ./test1.o ./test2.o   
-Finished building target: TestingCudo
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc --cudart static -L"/Developer/NVIDIA/CUDA-8.0/samples/common/lib/darwin" -Xlinker -framework -Xlinker GLUT -Xlinker -framework -Xlinker OpenGL --relocatable-device-code=false -gencode arch=compute_52,code=compute_52 -gencode arch=compute_52,code=sm_52 -link -o  "Sample"  ./src/particleSystem.o ./src/particleSystem_cuda.o ./src/particles.o ./src/render_particles.o ./src/shaders.o  /Developer/NVIDIA/CUDA-8.0/samples/common/lib/darwin/libGLEW.a 
+Finished building target: Sample
  
-22:21:18 **** Incremental Build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make all 
-make: Nothing to be done for `all'.
-22:21:26 **** Incremental Build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make all 
-make: Nothing to be done for `all'.
-22:22:20 **** Clean-only build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make clean 
-rm -rf  ./grid.o ./test1.o ./test2.o  ./grid.d ./test1.d ./test2.d  TestingCudo
- 
-22:22:44 **** Build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make all 
-Building file: ../grid.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "grid.d" "../grid.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "grid.o" "../grid.cu"
-Finished building: ../grid.cu
- 
-Building file: ../test1.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "test1.d" "../test1.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "test1.o" "../test1.cu"
-Finished building: ../test1.cu
- 
-Building file: ../test2.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "test2.d" "../test2.cu"
-../test2.cu:44:1: warning: '/*' within block comment [-Wcomment]
-/*
-^
-1 warning generated.
-../test2.cu:44:1: warning: '/*' within block comment [-Wcomment]
-/*
-^
-1 warning generated.
-../test2.cu:44:1: warning: '/*' within block comment [-Wcomment]
-/*
-^
-1 warning generated.
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "test2.o" "../test2.cu"
-../test2.cu:44:1: warning: '/*' within block comment [-Wcomment]
-/*
-^
-1 warning generated.
-../test2.cu(74): warning: variable "idx" was declared but never referenced
-
-../test2.cu:44:1: warning: '/*' within block comment [-Wcomment]
-/*
-^
-1 warning generated.
-../test2.cu(74): warning: variable "idx" was declared but never referenced
-
-../test2.cu:44:1: warning: '/*' within block comment [-Wcomment]
-/*
-^
-1 warning generated.
-../test2.cu(74): warning: variable "idx" was declared but never referenced
-
-ptxas warning : Stack size for entry function '_Z3recii' cannot be statically determined
-ptxas warning : Stack size for entry function '_Z3recii' cannot be statically determined
-Finished building: ../test2.cu
- 
-Building target: TestingCudo
-Invoking: NVCC Linker
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -link -o  "TestingCudo"  ./grid.o ./test1.o ./test2.o   
-Finished building target: TestingCudo
- 
-22:24:06 **** Clean-only build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make clean 
-rm -rf  ./grid.o ./test1.o ./test2.o  ./grid.d ./test1.d ./test2.d  TestingCudo
- 
-22:24:12 **** Build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make all 
-Building file: ../grid.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "grid.d" "../grid.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "grid.o" "../grid.cu"
-Finished building: ../grid.cu
- 
-Building file: ../test1.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "test1.d" "../test1.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "test1.o" "../test1.cu"
-Finished building: ../test1.cu
- 
-Building file: ../test2.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "test2.d" "../test2.cu"
-../test2.cu:44:1: warning: '/*' within block comment [-Wcomment]
-/*
-^
-1 warning generated.
-../test2.cu:44:1: warning: '/*' within block comment [-Wcomment]
-/*
-^
-1 warning generated.
-../test2.cu:44:1: warning: '/*' within block comment [-Wcomment]
-/*
-^
-1 warning generated.
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "test2.o" "../test2.cu"
-../test2.cu:44:1: warning: '/*' within block comment [-Wcomment]
-/*
-^
-1 warning generated.
-../test2.cu(74): warning: variable "idx" was declared but never referenced
-
-../test2.cu:44:1: warning: '/*' within block comment [-Wcomment]
-/*
-^
-1 warning generated.
-../test2.cu(74): warning: variable "idx" was declared but never referenced
-
-../test2.cu:44:1: warning: '/*' within block comment [-Wcomment]
-/*
-^
-1 warning generated.
-../test2.cu(74): warning: variable "idx" was declared but never referenced
-
-ptxas warning : Stack size for entry function '_Z3recii' cannot be statically determined
-ptxas warning : Stack size for entry function '_Z3recii' cannot be statically determined
-Finished building: ../test2.cu
- 
-Building target: TestingCudo
-Invoking: NVCC Linker
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -link -o  "TestingCudo"  ./grid.o ./test1.o ./test2.o   
-Finished building target: TestingCudo
- 
-22:25:08 **** Clean-only build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make clean 
-rm -rf  ./grid.o ./test1.o ./test2.o  ./grid.d ./test1.d ./test2.d  TestingCudo
- 
-22:25:13 **** Build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make all 
-Building file: ../grid.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "grid.d" "../grid.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "grid.o" "../grid.cu"
-Finished building: ../grid.cu
- 
-Building file: ../test1.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "test1.d" "../test1.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "test1.o" "../test1.cu"
-../test1.cu(36): error: invalid redeclaration of type name "location"
-../grid.h(35): here
-
-1 error detected in the compilation of "/var/folders/h7/4mqrvtg12n52hghwpbkkjbl00000gp/T//tmpxft_0000f7dd_00000000-9_test1.compute_52.cpp1.ii".
-make: *** [test1.o] Error 2
-22:26:06 **** Clean-only build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make clean 
-rm -rf  ./grid.o ./test1.o ./test2.o  ./grid.d ./test1.d ./test2.d  TestingCudo
- 
-22:26:10 **** Build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make all 
-Building file: ../grid.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "grid.d" "../grid.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "grid.o" "../grid.cu"
-Finished building: ../grid.cu
- 
-Building file: ../test1.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "test1.d" "../test1.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "test1.o" "../test1.cu"
-Finished building: ../test1.cu
- 
-Building file: ../test2.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "test2.d" "../test2.cu"
-../test2.cu:44:1: warning: '/*' within block comment [-Wcomment]
-/*
-^
-1 warning generated.
-../test2.cu:44:1: warning: '/*' within block comment [-Wcomment]
-/*
-^
-1 warning generated.
-../test2.cu:44:1: warning: '/*' within block comment [-Wcomment]
-/*
-^
-1 warning generated.
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "test2.o" "../test2.cu"
-../test2.cu:44:1: warning: '/*' within block comment [-Wcomment]
-/*
-^
-1 warning generated.
-../test2.cu(74): warning: variable "idx" was declared but never referenced
-
-../test2.cu:44:1: warning: '/*' within block comment [-Wcomment]
-/*
-^
-1 warning generated.
-../test2.cu(74): warning: variable "idx" was declared but never referenced
-
-../test2.cu:44:1: warning: '/*' within block comment [-Wcomment]
-/*
-^
-1 warning generated.
-../test2.cu(74): warning: variable "idx" was declared but never referenced
-
-ptxas warning : Stack size for entry function '_Z3recii' cannot be statically determined
-ptxas warning : Stack size for entry function '_Z3recii' cannot be statically determined
-Finished building: ../test2.cu
- 
-Building target: TestingCudo
-Invoking: NVCC Linker
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -link -o  "TestingCudo"  ./grid.o ./test1.o ./test2.o   
-Finished building target: TestingCudo
- 
-09:06:45 **** Clean-only build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make clean 
-rm -rf  ./grid.o ./test1.o ./test2.o  ./grid.d ./test1.d ./test2.d  TestingCudo
- 
-09:06:50 **** Build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make all 
-Building file: ../grid.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "grid.d" "../grid.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "grid.o" "../grid.cu"
-Finished building: ../grid.cu
- 
-Building file: ../test1.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "test1.d" "../test1.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "test1.o" "../test1.cu"
-ptxas fatal   : Unresolved extern function '_Z18allocateGridDevicei'
-make: *** [test1.o] Error 255
-09:09:58 **** Clean-only build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make clean 
-rm -rf  ./grid.o ./test1.o ./test2.o  ./grid.d ./test1.d ./test2.d  TestingCudo
- 
-09:10:03 **** Build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make all 
-Building file: ../grid.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "grid.d" "../grid.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "grid.o" "../grid.cu"
-../grid.cu(297): error: identifier "UP" is undefined
-
-../grid.cu(297): error: identifier "LEFT" is undefined
-
-../grid.cu(334): error: identifier "UP" is undefined
-
-3 errors detected in the compilation of "/var/folders/h7/4mqrvtg12n52hghwpbkkjbl00000gp/T//tmpxft_000119ba_00000000-9_grid.compute_52.cpp1.ii".
-make: *** [grid.o] Error 2
-09:10:56 **** Clean-only build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make clean 
-rm -rf  ./grid.o ./test1.o ./test2.o  ./grid.d ./test1.d ./test2.d  TestingCudo
- 
-09:11:00 **** Build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make all 
-Building file: ../grid.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "grid.d" "../grid.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "grid.o" "../grid.cu"
-../grid.cu(11): error: identifier "FILE" is undefined
-
-../grid.cu(11): error: identifier "database" is undefined
-
-../grid.cu(14): error: identifier "fopen" is undefined
-
-../grid.cu(18): error: identifier "perror" is undefined
-
-../grid.cu(22): error: identifier "EOF" is undefined
-
-../grid.cu(22): error: identifier "fscanf" is undefined
-
-../grid.cu(61): error: identifier "printf" is undefined
-
-../grid.cu(62): error: identifier "fclose" is undefined
-
-../grid.cu(337): error: identifier "printf" is undefined
-
-../grid.cu(342): error: identifier "printf" is undefined
-
-../grid.cu(346): error: identifier "printf" is undefined
-
-../grid.cu(369): error: identifier "printf" is undefined
-
-../grid.cu(376): error: identifier "printf" is undefined
-
-../grid.cu(380): error: identifier "printf" is undefined
-
-14 errors detected in the compilation of "/var/folders/h7/4mqrvtg12n52hghwpbkkjbl00000gp/T//tmpxft_00011a49_00000000-5_grid.cpp4.ii".
-make: *** [grid.o] Error 2
-09:11:36 **** Incremental Build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make all 
-Building file: ../grid.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "grid.d" "../grid.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "grid.o" "../grid.cu"
-Finished building: ../grid.cu
- 
-Building file: ../test1.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "test1.d" "../test1.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "test1.o" "../test1.cu"
-ptxas fatal   : Unresolved extern function '_Z18allocateGridDevicei'
-make: *** [test1.o] Error 255
-09:12:22 **** Clean-only build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make clean 
-rm -rf  ./grid.o ./test1.o ./test2.o  ./grid.d ./test1.d ./test2.d  TestingCudo
- 
-09:12:22 **** Incremental Build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make all 
-Building file: ../grid.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "grid.d" "../grid.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "grid.o" "../grid.cu"
-Finished building: ../grid.cu
- 
-Building file: ../test1.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "test1.d" "../test1.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "test1.o" "../test1.cu"
-ptxas fatal   : Unresolved extern function '_Z18allocateGridDevicei'
-make: *** [test1.o] Error 255
-09:12:43 **** Incremental Build of configuration Debug for project TestingCudo ****
+09:47:53 **** Build of configuration Debug for project TestingCudo ****
 Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
 make all 
 Building file: ../test1.cu
 Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "test1.d" "../test1.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "test1.o" "../test1.cu"
-ptxas fatal   : Unresolved extern function '_Z18allocateGridDevicei'
-make: *** [test1.o] Error 255
-09:13:00 **** Clean-only build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make clean 
-rm -rf  ./grid.o ./test1.o ./test2.o  ./grid.d ./test1.d ./test2.d  TestingCudo
- 
-09:13:04 **** Build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make all 
-Building file: ../grid.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "grid.d" "../grid.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "grid.o" "../grid.cu"
-Finished building: ../grid.cu
- 
-Building file: ../test1.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "test1.d" "../test1.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "test1.o" "../test1.cu"
-ptxas fatal   : Unresolved extern function '_Z18allocateGridDevicei'
-make: *** [test1.o] Error 255
-09:14:28 **** Incremental Build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make all 
-Building file: ../test1.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "test1.d" "../test1.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "test1.o" "../test1.cu"
-../test1.cu(32): error: identifier "N" is undefined
-
-../test1.cu(228): error: identifier "N" is undefined
-
-2 errors detected in the compilation of "/var/folders/h7/4mqrvtg12n52hghwpbkkjbl00000gp/T//tmpxft_00011dac_00000000-9_test1.compute_52.cpp1.ii".
-make: *** [test1.o] Error 2
-09:15:30 **** Clean-only build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make clean 
-rm -rf  ./grid.o ./test1.o ./test2.o  ./grid.d ./test1.d ./test2.d  TestingCudo
- 
-09:15:36 **** Build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make all 
-Building file: ../grid.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "grid.d" "../grid.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "grid.o" "../grid.cu"
-Finished building: ../grid.cu
- 
-Building file: ../test1.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "test1.d" "../test1.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "test1.o" "../test1.cu"
-ptxas fatal   : Unresolved extern function '_Z18allocateGridDevicei'
-make: *** [test1.o] Error 255
-09:17:12 **** Clean-only build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make clean 
-rm -rf  ./grid.o ./test1.o ./test2.o  ./grid.d ./test1.d ./test2.d  TestingCudo
- 
-09:17:20 **** Clean-only build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make clean 
-rm -rf  ./grid.o ./test1.o ./test2.o  ./grid.d ./test1.d ./test2.d  TestingCudo
- 
-09:17:20 **** Build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make all 
-Building file: ../grid.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "grid.d" "../grid.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "grid.o" "../grid.cu"
-Finished building: ../grid.cu
- 
-Building file: ../test1.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "test1.d" "../test1.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "test1.o" "../test1.cu"
-ptxas fatal   : Unresolved extern function '_Z18allocateGridDevicei'
-make: *** [test1.o] Error 255
-09:18:06 **** Incremental Build of configuration Debug for project TestingCudo ****
-Info: Configuration "Debug" uses tool-chain "CUDA Toolkit on the path" that is unsupported on this system, attempting to build anyway.
-make all 
-Building file: ../test1.cu
-Invoking: NVCC Compiler
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "test1.d" "../test1.cu"
-/Developer/NVIDIA/CUDA-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "test1.o" "../test1.cu"
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc -I"/Users/miller/Academic/cuda-workspace/TestingCudo" -G -g -O0 -std=c++11 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -odir "." -M -o "test1.d" "../test1.cu"
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc -I"/Users/miller/Academic/cuda-workspace/TestingCudo" -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_50,code=compute_50 -gencode arch=compute_52,code=compute_52 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52  -x cu -o  "test1.o" "../test1.cu"
 ptxas fatal   : Unresolved extern function '_Z18allocateGridDevicei'
 make: *** [test1.o] Error 255

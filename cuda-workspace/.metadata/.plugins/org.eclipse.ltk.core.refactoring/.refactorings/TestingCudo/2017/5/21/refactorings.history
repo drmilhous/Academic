@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;TestingCudo/grid.cu&apos; to &apos;grid.cuh&apos;" description="Rename resource &apos;grid.cu&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="grid.cu" name="grid.cuh" stamp="1495464419859" updateReferences="true"/>
+</session>
