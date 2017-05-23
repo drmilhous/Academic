@@ -274,6 +274,7 @@ int foo(path * p)
 		cudaDeviceSynchronize();
 		for (i = 0; i < gridSize; i++)
 			{
+				printf("Grid #%d", i);
 				if (result[i]->ok == '1')
 					{
 						printGrid(result[i]);
