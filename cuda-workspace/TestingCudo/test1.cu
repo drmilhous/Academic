@@ -50,7 +50,6 @@ __device__ void computeIterative(grid ** result, int gridSize, grid * g, path * 
 		int breaker = 0;
 		int bmax = 2;
 		int printcount = 0;
-		location * freeHead = NULL;
 		location * freeTail = NULL;
 		int i = 0;
 		if (p->direction == LEFT) //Do UP/DOWN
@@ -196,7 +195,7 @@ __device__ void computeIterative(grid ** result, int gridSize, grid * g, path * 
 							{
 								z = loc->nx;
 							}
-						if (z == g->size)
+						if (z == g->size) //pop off the list
 							{
 								if (loc->next == NULL)
 									{
@@ -208,13 +207,16 @@ __device__ void computeIterative(grid ** result, int gridSize, grid * g, path * 
 										if (freeHead == NULL)
 											{
 												freeHead = loc;
-												freeTail = loc;
+												freeHead->next = NULL;
 											}
 										else
 											{
-												freeTail->next = loc;
-												freeTail = loc;
-												freeTail->next = NULL;
+												
+												loc->next = freeHead;
+												freeHead = loc;
+												//freeHead->next = loc;
+												//freeTail = loc;
+												//freeTail->next = NULL;
 												
 											}
 										loc = temp;
