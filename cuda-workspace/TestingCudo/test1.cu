@@ -50,7 +50,7 @@ __device__ void computeIterative(grid ** result, int gridSize, grid * g, path * 
 		int breaker = 0;
 		int bmax = 2;
 		int printcount = 0;
-		location * freeTail = NULL;
+		location * freeHead = NULL;
 		int i = 0;
 		if (p->direction == LEFT) //Do UP/DOWN
 			{
