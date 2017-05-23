@@ -229,16 +229,16 @@ __device__ void computeIterative(grid ** result, int gridSize, grid * g, path * 
 									}
 							}
 					}
-				/*if (bmax == breaker)
+				if (bmax == breaker)
 					{
 						printf("Breaker %d\n", breaker);
 						bmax *= 2;
 					}
-				if (breaker == 10000)
+				if (breaker == 1000000)
 					{
 						done = 1;
 						printf("Breaker Max hit!");
-					}*/
+					}
 			}
 		printf("The total is %d\n", i);
 
