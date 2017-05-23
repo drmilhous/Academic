@@ -249,7 +249,7 @@ int foo(path * p)
 		int nBYn = N * N;
 		int size = N;
 		grid * g = allocateGrid(size);
-		int gridSize = 100;
+		int gridSize = 10000;
 		grid ** result;
 		int i;
 
