@@ -134,7 +134,7 @@ __device__ void computeIterative(grid ** result, int gridSize, grid * g, path * 
 				if (checkValue == 0 && count == MAX)
 					{
 						i++;
-						if (printcount < gridSize)
+						if (printcount < gridSize-1)
 							{
 								//printf("breaker@@ = %d\n", breaker);
 								cloneToGrid(currentGrid, result[printcount]);
