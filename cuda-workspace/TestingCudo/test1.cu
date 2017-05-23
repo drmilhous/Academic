@@ -45,11 +45,12 @@ __global__ void compute2(grid ** result, int gridSize, grid * g, path * p, locat
 				computeIterative(result, gridSize, g, p, l);
 			}
 	}
-__device__ void computeIterative(grid ** result, int gridSize, grid * g, path * p, location * loc)
+__device__ void computeIterative(grid ** result, int gridSize, grid * g, path * p, location * baseLoc)
 	{
 		int breaker = 0;
 		int bmax = 2;
 		int printcount = 0;
+		location * loc = baseLoc;
 		location * freeHead = NULL;
 		int i = 0;
 		if (p->direction == LEFT) //Do UP/DOWN
@@ -228,7 +229,7 @@ __device__ void computeIterative(grid ** result, int gridSize, grid * g, path * 
 									}
 							}
 					}
-				if (bmax == breaker)
+				/*if (bmax == breaker)
 					{
 						printf("Breaker %d\n", breaker);
 						bmax *= 2;
@@ -237,7 +238,7 @@ __device__ void computeIterative(grid ** result, int gridSize, grid * g, path * 
 					{
 						done = 1;
 						printf("Breaker Max hit!");
-					}
+					}*/
 			}
 		printf("The total is %d\n", i);
 
@@ -277,9 +278,10 @@ int foo(path * p)
 		cudaDeviceSynchronize();
 		for (i = 0; i < gridSize; i++)
 			{
-				printf("Grid #%d", i);
+				
 				if (result[i]->ok == '1')
 					{
+						printf("Grid #%d", i);
 						printGrid(result[i]);
 					}
 			}
