@@ -169,13 +169,14 @@ __device__ void computeIterative(grid ** result, int gridSize, grid * g, path * 
 								temp->y = lasty;
 								if (p->next->direction == LEFT) //Do UP/DOWN
 									{
-										temp->nx = 0;
-										temp->ny = temp->y;
+										
+										temp->nx = temp->x;
+										temp->ny = 0;	
 									}
 								else
 									{
-										temp->nx = temp->x;
-										temp->ny = 0;
+										temp->nx = 0;
+										temp->ny = temp->y;
 									}
 								//printf("Next x=%d y=%d nx=%d ny=%d\n",temp->x,temp->y,temp->nx,temp->ny);
 								temp->p = p->next;
