@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include "grid.h"
-#define MAX 2
+#define MAX 4
 #define N 10
 void initCell(cell * c);
 __global__ void compute2(grid ** result, int gridSize, grid * g, path * p, location * l);
