@@ -139,9 +139,10 @@ __device__ void computeIterative(returnResult * res, grid * g, path * p, locatio
 						i++;
 						//if (printcount < gridSize-1)
 							{
-								//printf("breaker@@ = %d\n", breaker);
-								cloneToGrid(currentGrid, result[printcount % gridSize]);
-								result[printcount% gridSize]->ok = '1';
+								int offset = printcount % gridSize;
+								printf("breaker@@ = %d offset %d\n", breaker, offset);
+								cloneToGrid(currentGrid, result[offset]);
+								result[offset]->ok = '1';
 								//prinotGrid(currentGrid);
 								printcount++;
 							}
