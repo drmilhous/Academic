@@ -41,6 +41,14 @@ typedef struct location
 	struct grid * currentG;
 	path * p;
 }location;
+
+typedef struct returnResult
+{
+	grid ** result;
+	int size;
+	int threads;
+}returnResult;
+
 grid * allocateGrid(int size);
 
 char convertChar(char u);

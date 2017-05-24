@@ -5,8 +5,8 @@
 #define MAX 4
 #define N 10
 void initCell(cell * c);
-__global__ void compute2(grid ** result, int gridSize, grid * g, path * p, location * l);
-__device__ void computeIterative(grid ** result, int gridSize, grid * g, path * p, location * loc);
+__global__ void compute2(returnResult * res, grid * g, path * p, location * l);
+__device__ void computeIterative(returnResult * res, grid * g, path * p, location * baseLoc);
 __device__ void add(grid ** base, grid ** last, grid * newList);
 __device__ void cloneToGrid(grid * g, grid * g2);
 __device__ void eliminateValue(cell **c, int row, int col, int max, int value);
@@ -35,18 +35,21 @@ int main(void)
 				foo(p[1]);
 			}
 	}
-__global__ void compute2(grid ** result, int gridSize, grid * g, path * p, location * l)
+__global__ void compute2(returnResult * res, grid * g, path * p, location * l)
 	{
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		if (idx < N * N)
 			{
 				//int x = blockIdx.x;
 				//int y = threadIdx.x;
-				computeIterative(result, gridSize, g, p, l);
+				computeIterative(res, g, p, l);
 			}
 	}
-__device__ void computeIterative(grid ** result, int gridSize, grid * g, path * p, location * baseLoc)
+__device__ void computeIterative(returnResult * res, grid * g, path * p, location * baseLoc)
 	{
+		int idx = blockIdx.x * blockDim.x + threadIdx.x;
+		grid ** result = res->result + (res->size/res->threads * idx);
+		int gridSize = res->size/res->threads;
 		int breaker = 0;
 		int bmax = 2;
 		int printcount = 0;
@@ -246,6 +249,8 @@ __device__ void computeIterative(grid ** result, int gridSize, grid * g, path * 
 
 int foo(path * p)
 	{
+		returnResult * res;
+		cudaMallocManaged((void **) &res, 1);
 		cudaDeviceSetLimit(cudaLimitMallocHeapSize, 128 * 1024 * 1024 * 8); //See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#heap-memory-allocation
 		int nBYn = N * N;
 		int size = N;
@@ -266,18 +271,18 @@ int foo(path * p)
 					}
 			}
 		printPath(p);
-		int gridSize = 1057;
+		res->result = result;
+		res->girdSize = gridSize;
+		res->threads = 2;
+		int gridSize = 1057 * res->threads;
 		//for(int gridSize = 1000; gridSize < 1000000; gridSize++)
 		{
-			cudaMallocManaged((void **) &result, sizeof(grid *) * gridSize);
+			cudaMallocManaged((void **) &result, sizeof(grid *) * gridSize );
 			for (i = 0; i < gridSize; i++)
 				{
 					result[i] = allocateGrid(size);
 				}
-		
-		
-		
-			compute2<<<1, 1>>>(result,gridSize, g, p, larray);
+			compute2<<<1, res->threads>>>(res, g, p, larray);
 			cudaDeviceSynchronize();
 			for (i = 0; i < gridSize; i++)
 				{		
