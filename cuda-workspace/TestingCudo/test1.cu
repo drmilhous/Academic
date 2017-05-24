@@ -272,7 +272,7 @@ int foo(path * p)
 			}
 		printPath(p);
 		
-		res->threads = 2;
+		res->threads = 4;
 		int gridSize = 1057 * res->threads;
 		//for(int gridSize = 1000; gridSize < 1000000; gridSize++)
 		{
