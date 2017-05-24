@@ -284,12 +284,12 @@ int foo(path * p)
 					if (result[i]->ok == '1')
 						{
 						last = i;
-						//printf("Grid #%d", i);
-						//printGrid(result[i]);
+						printf("Grid #%d", i);
+						printGrid(result[i]);
 					}
 				}
 			printf("Size %d Grid #%d", gridSize, last);
-			printGrid(result[last]);
+			//printGrid(result[last]);
 		}
 		/*i = 0;
 		 for (int row = 0; row < N; row++)
