@@ -38,7 +38,7 @@ int main(void)
 __global__ void compute2(returnResult * res, grid * g, path * p, location * l)
 	{
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
-		if (idx < N * N)
+		if (idx < 1)
 			{
 				//int x = blockIdx.x;
 				//int y = threadIdx.x;
@@ -273,11 +273,11 @@ int foo(path * p)
 		printPath(p);
 		
 		res->threads = 1;
-		int gridSize = 1057 * res->threads;
-		//for(int gridSize = 1000; gridSize < 1000000; gridSize++)
+		//int gridSize = 1057 * res->threads;
+		for(int gridSize = 1000 * res->threads; gridSize < 1057; gridSize++)
 		{
 			cudaMallocManaged((void **) &result, sizeof(grid *) * gridSize * 2 );
-			for (i = 0; i < gridSize; i++)
+			for (i = 0; i < gridSize * 2; i++)
 				{
 					result[i] = allocateGrid(size);
 				}
