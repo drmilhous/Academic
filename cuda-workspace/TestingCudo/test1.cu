@@ -53,7 +53,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path * p, locatio
 		int breaker = 0;
 		int bmax = 2;
 		int printcount = 0;
-		location * loc = baseLoc;
+		location * loc = &baseLoc[idx];
 		location * freeHead = NULL;
 		int i = 0;
 		if (p->direction == LEFT) //Do UP/DOWN
