@@ -286,7 +286,7 @@ int foo(path * p)
 			res->result = result;
 			res->size = gridSize;
 			compute2<<<1, res->threads>>>(res, g, p, larray);
-			//cudaDeviceSynchronize();
+			cudaDeviceSynchronize();
 			for (i = 0; i < gridSize; i++)
 				{		
 					if (result[i]->ok == '1')
