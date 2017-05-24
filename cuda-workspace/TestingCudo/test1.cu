@@ -137,17 +137,17 @@ __device__ void computeIterative(returnResult * res, grid * g, path * p, locatio
 				if (checkValue == 0 && count == MAX)
 					{
 						i++;
-						if (printcount < gridSize-1)
+						//if (printcount < gridSize-1)
 							{
 								//printf("breaker@@ = %d\n", breaker);
-								cloneToGrid(currentGrid, result[printcount]);
-								result[printcount]->ok = '1';
+								cloneToGrid(currentGrid, result[printcount % res->size]);
+								result[printcount% res->size]->ok = '1';
 								//prinotGrid(currentGrid);
 								printcount++;
 							}
-						else
+						//else
 							{
-								done = 1;
+						//		done = 1;
 							}
 					}
 				if (checkValue == 0 && count < MAX) //rec value
