@@ -276,14 +276,17 @@ int foo(path * p)
 		
 		res->threads = 1;
 		int gridSize = 1057 * res->threads;
+		for(int breaker =1000; breaker < 10000; breaker+=2 )
 		//for(int gridSize = 1000; gridSize < 1057; gridSize++)
 		{
+			
 			cudaMallocManaged((void **) &result, sizeof(grid *) * gridSize * 2 );
 			for (i = 0; i < gridSize * 2; i++)
 				{
 					result[i] = allocateGrid(size);
 				}
 			res->result = result;
+			res->breaker = breaker;
 			res->size = gridSize;
 			compute2<<<1, res->threads>>>(res, g, p, larray);
 			cudaDeviceSynchronize();
@@ -292,12 +295,15 @@ int foo(path * p)
 					if (result[i]->ok == '1')
 						{
 						last = i;
-						printf("Grid #%d", i);
-						printGrid(result[i]);
+						//printf("Grid #%d", i);
+						//printGrid(result[i]);
 					}
 				}
 			printf("Size %d Grid #%d", gridSize, last);
-			//printGrid(result[last]);
+			printf("Grid #%d", 0);
+			printGrid(result[0]);
+			printf("Grid #%d", last);
+			printGrid(result[last]);
 		}
 		/*i = 0;
 		 for (int row = 0; row < N; row++)

@@ -47,6 +47,7 @@ typedef struct returnResult
 	grid ** result;
 	int size;
 	int threads;
+	int breaker;
 }returnResult;
 
 grid * allocateGrid(int size);
