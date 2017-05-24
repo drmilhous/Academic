@@ -239,7 +239,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path * p, locatio
 						printf("Breaker %d PrintCount  %d\n", breaker, printcount);
 						bmax *= 1.2;
 					}
-				if (breaker == 20000)
+				if (breaker == 10000)
 					{
 						done = 1;
 						printf("Breaker Max hit!");
