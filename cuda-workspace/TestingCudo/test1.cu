@@ -279,9 +279,9 @@ int foo(path * p)
 		for(int breaker =1000; breaker < 10000; breaker+=2 )
 		//for(int gridSize = 1000; gridSize < 1057; gridSize++)
 		{
-			
-			cudaMallocManaged((void **) &result, sizeof(grid *) * gridSize * 2 );
-			for (i = 0; i < gridSize * 2; i++)
+			printf("Starting %d\n", breaker);
+			cudaMallocManaged((void **) &result, sizeof(grid *) * gridSize);
+			for (i = 0; i < gridSize; i++)
 				{
 					result[i] = allocateGrid(size);
 				}
