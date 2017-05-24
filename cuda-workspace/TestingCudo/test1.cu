@@ -48,7 +48,8 @@ __global__ void compute2(returnResult * res, grid * g, path * p, location * l)
 __device__ void computeIterative(returnResult * res, grid * g, path * p, location * baseLoc)
 	{
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
-		grid ** result = res->result + (res->size/res->threads * idx);
+		int xx = res->size/res->threads * idx;
+		grid ** result = &res->result[xx];
 		int gridSize = res->size/res->threads;
 		int breaker = 0;
 		int bmax = 2;
