@@ -271,8 +271,7 @@ int foo(path * p)
 					}
 			}
 		printPath(p);
-		res->result = result;
-		res->size = gridSize;
+		
 		res->threads = 2;
 		int gridSize = 1057 * res->threads;
 		//for(int gridSize = 1000; gridSize < 1000000; gridSize++)
@@ -282,6 +281,8 @@ int foo(path * p)
 				{
 					result[i] = allocateGrid(size);
 				}
+			res->result = result;
+			res->size = gridSize;
 			compute2<<<1, res->threads>>>(res, g, p, larray);
 			cudaDeviceSynchronize();
 			for (i = 0; i < gridSize; i++)
