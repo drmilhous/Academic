@@ -58,13 +58,13 @@ __device__ void computeIterative(returnResult * res, grid * g, path * p, locatio
 		int i = 0;
 		if (p->direction == LEFT) //Do UP/DOWN
 			{
-				loc->nx = 0;
-				loc->ny = loc->y;
+				loc->nx = loc->x;
+				loc->ny = 0;
 			}
 		else
 			{
-				loc->nx = loc->x;
-				loc->ny = 0;
+				loc->nx = 0;
+				loc->ny = loc->y;
 			}
 		location * temp;
 		int checkValue;
@@ -272,7 +272,7 @@ int foo(path * p)
 			}
 		printPath(p);
 		
-		res->threads = 4;
+		res->threads = 2;
 		int gridSize = 1057 * res->threads;
 		//for(int gridSize = 1000; gridSize < 1000000; gridSize++)
 		{
