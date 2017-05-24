@@ -266,7 +266,7 @@ int foo(path * p)
 					}
 			}
 		printPath(p);
-		for(gridSize = 1000; gridSize < 1000000; gridSize++)
+		for(int gridSize = 1000; gridSize < 1000000; gridSize++)
 		{
 			cudaMallocManaged((void **) &result, sizeof(grid *) * gridSize);
 			for (i = 0; i < gridSize; i++)
