@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include "grid.h"
-#define MAX 4
+#define MAX 3
 #define N 10
 void initCell(cell * c);
 __global__ void compute2(returnResult * res, grid * g, path * p, location * l);
@@ -237,11 +237,11 @@ __device__ void computeIterative(returnResult * res, grid * g, path * p, locatio
 						printf("Breaker %d PrintCount  %d\n", breaker, printcount);
 						bmax *= 1.2;
 					}
-				if (breaker == 7000)
+				/*if (breaker == 7000)
 					{
 						done = 1;
 						printf("Breaker Max hit!");
-					}
+					}*/
 			}
 		printf("The total is %d\n", i);
 
