@@ -241,8 +241,8 @@ __device__ void computeIterative(returnResult * res, grid * g, path * p, locatio
 					}
 				if (breaker == 20000)
 					{
-					//	done = 1;
-					//	printf("Breaker Max hit!");
+						done = 1;
+						printf("Breaker Max hit!");
 					}
 			}
 		printf("The total is %d\n", i);
