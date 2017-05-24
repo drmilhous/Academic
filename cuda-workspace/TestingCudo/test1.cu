@@ -274,7 +274,7 @@ int foo(path * p)
 		
 		res->threads = 1;
 		//int gridSize = 1057 * res->threads;
-		for(int gridSize = 1000 * res->threads; gridSize < 1057; gridSize++)
+		for(int gridSize = 1000; gridSize < 1057; gridSize++)
 		{
 			cudaMallocManaged((void **) &result, sizeof(grid *) * gridSize * 2 );
 			for (i = 0; i < gridSize * 2; i++)
