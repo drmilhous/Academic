@@ -250,17 +250,10 @@ int foo(path * p)
 		int nBYn = N * N;
 		int size = N;
 		grid * g = allocateGrid(size);
-		int gridSize = 10000;
+		
 		grid ** result;
 		int i;
-
-		cudaMallocManaged((void **) &result, sizeof(grid *) * gridSize);
-		for (i = 0; i < gridSize; i++)
-			{
-				result[i] = allocateGrid(size);
-			}
-		//int i = 0;
-
+		int last = 0;
 		location * larray;
 		cudaMallocManaged((void **) &larray, sizeof(location) * nBYn);
 		for (int row = 0; row < N; row++)
@@ -272,19 +265,31 @@ int foo(path * p)
 						larray[offset].y = col;
 					}
 			}
-
 		printPath(p);
-		compute2<<<1, 1>>>(result,gridSize, g, p, larray);
-		cudaDeviceSynchronize();
-		for (i = 0; i < gridSize; i++)
-			{
-				
-				if (result[i]->ok == '1')
-					{
-						printf("Grid #%d", i);
-						printGrid(result[i]);
+		for(gridSize = 1000; gridSize < 1000000; gridSize++)
+		{
+			cudaMallocManaged((void **) &result, sizeof(grid *) * gridSize);
+			for (i = 0; i < gridSize; i++)
+				{
+					result[i] = allocateGrid(size);
+				}
+		
+		
+		
+			compute2<<<1, 1>>>(result,gridSize, g, p, larray);
+			cudaDeviceSynchronize();
+			for (i = 0; i < gridSize; i++)
+				{		
+					if (result[i]->ok == '1')
+						{
+						last = i;
+						//printf("Grid #%d", i);
+						//printGrid(result[i]);
 					}
-			}
+				}
+			printf("Size %d Grid #%d", gridSize, last);
+			printGrid(result[last]);
+		}
 		/*i = 0;
 		 for (int row = 0; row < N; row++)
 		 {
