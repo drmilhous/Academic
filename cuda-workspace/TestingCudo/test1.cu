@@ -27,6 +27,7 @@ int main(void)
 		int size = 10;
 		grid ** result;
 		int i;
+		int last = 0; 
 		int gridSize;
 		res->threads = 1;
 		returnResult * res;
