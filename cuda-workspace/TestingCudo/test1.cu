@@ -24,8 +24,9 @@ __global__ void testIter(returnResult * res)
 	grid ** temp = res->result;
 	for(int i = 0; i < res->breaker; i++)
 	{
-		cloneToGrid(g, temp[i]);
-		temp[i]-> ok = '1';
+		int index = i % res->size;
+		cloneToGrid(g, temp[index]);
+		temp[index]-> ok = '1';
 	}
 }
 int main(void)
@@ -58,8 +59,6 @@ int main(void)
 					if (result[i]->ok == '1')
 						{
 						last = i;
-						//printf("Grid #%d", i);
-						//printGrid(result[i]);
 					}
 				}
 			printf("Size %d Grid #%d", gridSize, last);
