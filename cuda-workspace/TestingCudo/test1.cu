@@ -12,27 +12,32 @@ __device__ void cloneToGrid(grid * g, grid * g2);
 __device__ void eliminateValue(cell **c, int row, int col, int max, int value);
 __device__ int check(grid * g, int row, int col, int number);
 __device__ grid * allocateGridDevice(int size);
-__global__ testIter(returnResult * res);
+__global__ void testIter(returnResult * res);
 void printGrid(grid * g);
 __device__ int pow2(int x);
 __device__ grid * cloneGrid(grid * g);
 char convert(int x);
 int foo(path * p);
-__global__ testIter(returnResult * res)
+__global__ void testIter(returnResult * res)
 {
 
 }
 int main(void)
 	{
+		int size = 10;
+		grid ** result;
+		int i;
+		int gridSize;
+		res->threads = 1;
 		returnResult * res;
 		cudaMallocManaged((void **) &res, 1);
 		cudaDeviceSetLimit(cudaLimitMallocHeapSize, 128 * 1024 * 1024 * 8);
-		grid ** result;
+		gridSize = 1057 * res->threads;
+		cudaMallocManaged((void **) &result, sizeof(grid *) * gridSize);
 		for(int breaker =1000; breaker < 10000; breaker+=2 )
 		{
 			printf("Starting %d\n", breaker);
-			cudaMallocManaged((void **) &result, sizeof(grid *) * gridSize);
-			for (int i = 0; i < gridSize; i++)
+			for (i = 0; i < gridSize; i++)
 				{
 					result[i] = allocateGrid(size);
 				}
@@ -41,6 +46,20 @@ int main(void)
 			res->size = gridSize;
 			testIter<<<1, res->threads>>>(res);
 			cudaDeviceSynchronize();
+			for (i = 0; i < gridSize; i++)
+				{		
+					if (result[i]->ok == '1')
+						{
+						last = i;
+						//printf("Grid #%d", i);
+						//printGrid(result[i]);
+					}
+				}
+			printf("Size %d Grid #%d", gridSize, last);
+			printf("Grid #%d", 0);
+			printGrid(result[0]);
+			printf("Grid #%d", last);
+			printGrid(result[last]);
 		}
 		
 	}
