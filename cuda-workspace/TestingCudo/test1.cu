@@ -338,7 +338,7 @@ int foo(path * p)
 			{
 				result[i] = allocateGrid(size);
 			}
-		for(int breaker =10000; breaker < 100000; breaker+=5000 )
+		for(int breaker =100000; breaker < 10000000; breaker+=5000 )
 		//for(int gridSize = 1000; gridSize < 1057; gridSize++)
 		{
 			//int breaker = 1000000;
@@ -362,6 +362,7 @@ int foo(path * p)
 			printGrid(result[0]);
 			printf("Grid #%d", last);
 			printGrid(result[last]);
+			printf("Done %d\n", breaker);
 		}
 		/*i = 0;
 		 for (int row = 0; row < N; row++)
