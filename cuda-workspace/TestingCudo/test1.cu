@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <time.h>
 #include "grid.h"
 #define MAX 3
 #define N 10
@@ -338,10 +339,11 @@ int foo(path * p)
 			{
 				result[i] = allocateGrid(size);
 			}
-		//for(int breaker =100000; breaker < 10000000; breaker+=50000)
-		int breaker = 100000000;
+		for(int breaker =100000; breaker < 10000000; breaker+=100000)
+		//int breaker = 100000000;
 		//for(int gridSize = 1000; gridSize < 1057; gridSize++)
 		{
+			clock_t begin = clock();
 			//int breaker = 1000000;
 			printf("Starting %d\n", breaker);
 			res->result = result;
@@ -363,7 +365,10 @@ int foo(path * p)
 			printGrid(result[0]);
 			printf("Grid #%d", last);
 			printGrid(result[last]);
-			printf("Done %d\n", breaker);
+			//printf("Done %d\n", breaker);
+			clock_t end = clock();
+			double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+			printf("Time spent %d iterations %d\n",time_spent,breaker);
 		}
 		/*i = 0;
 		 for (int row = 0; row < N; row++)
