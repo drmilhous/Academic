@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include "grid.h"
-#define MAX 3
+#define MAX 1
 #define N 10
 void initCell(cell * c);
 __global__ void compute2(returnResult * res, grid * g, path * p, location * l);
@@ -17,8 +17,35 @@ __device__ int pow2(int x);
 __device__ grid * cloneGrid(grid * g);
 char convert(int x);
 int foo(path * p);
+__global__ testIter(returnResult * res)
+{
+
+}
 int main(void)
 	{
+		returnResult * res;
+		cudaMallocManaged((void **) &res, 1);
+		cudaDeviceSetLimit(cudaLimitMallocHeapSize, 128 * 1024 * 1024 * 8);
+		grid ** result;
+		for(int breaker =1000; breaker < 10000; breaker+=2 )
+		//for(int gridSize = 1000; gridSize < 1057; gridSize++)
+		{
+			printf("Starting %d\n", breaker);
+			cudaMallocManaged((void **) &result, sizeof(grid *) * gridSize);
+			for (i = 0; i < gridSize; i++)
+				{
+					result[i] = allocateGrid(size);
+				}
+			res->result = result;
+			res->breaker = breaker;
+			res->size = gridSize;
+			testIter<<<1, res->threads>>>(res);
+			cudaDeviceSynchronize();
+		}
+		
+	}
+void bar()
+{
 		int deviceCount;
 		cudaGetDeviceCount(&deviceCount);
 		int device;
