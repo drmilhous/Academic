@@ -31,6 +31,10 @@ __global__ void testIter(returnResult * res)
 }
 int main(void)
 	{
+		bar();
+	}
+void foobared()
+	{
 		int size = 10;
 		grid ** result;
 		int i;
@@ -80,7 +84,7 @@ void bar()
 				cudaGetDeviceProperties(&deviceProp, device);
 				printf("Device %d has compute capability %d.%d.\n", device, deviceProp.major, deviceProp.minor);
 			} //	 - See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/#multi-device-system
-				//cudaSetDevice(1);
+		cudaSetDevice(1);
 		path ** p = scanChars();
 		if (p != NULL)
 			{
@@ -337,7 +341,6 @@ int foo(path * p)
 		//for(int gridSize = 1000; gridSize < 1057; gridSize++)
 		{
 			printf("Starting %d\n", breaker);
-			
 			res->result = result;
 			res->breaker = breaker;
 			res->size = gridSize;
