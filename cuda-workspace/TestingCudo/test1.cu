@@ -328,15 +328,16 @@ int foo(path * p)
 		
 		res->threads = 1;
 		int gridSize = 1057 * res->threads;
-		for(int breaker =1000; breaker < 10000; breaker+=2 )
+		cudaMallocManaged((void **) &result, sizeof(grid *) * gridSize);
+		for (i = 0; i < gridSize; i++)
+			{
+				result[i] = allocateGrid(size);
+			}
+		for(int breaker =1000; breaker < 100000; breaker+=1000 )
 		//for(int gridSize = 1000; gridSize < 1057; gridSize++)
 		{
 			printf("Starting %d\n", breaker);
-			cudaMallocManaged((void **) &result, sizeof(grid *) * gridSize);
-			for (i = 0; i < gridSize; i++)
-				{
-					result[i] = allocateGrid(size);
-				}
+			
 			res->result = result;
 			res->breaker = breaker;
 			res->size = gridSize;
