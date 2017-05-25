@@ -42,13 +42,13 @@ int main(void)
 		cudaDeviceSetLimit(cudaLimitMallocHeapSize, 128 * 1024 * 1024 * 8);
 		gridSize = 1057 * res->threads;
 		cudaMallocManaged((void **) &result, sizeof(grid *) * gridSize);
-		for(int breaker =1050; breaker < 10000; breaker+=2 )
-		{
-			printf("Starting %d\n", breaker);
-			for (i = 0; i < gridSize; i++)
+		for (i = 0; i < gridSize; i++)
 				{
 					result[i] = allocateGrid(size);
 				}
+		for(int breaker =1050; breaker < 10000; breaker+=2 )
+		{
+			printf("Starting %d\n", breaker);
 			res->result = result;
 			res->breaker = breaker;
 			res->size = gridSize;
