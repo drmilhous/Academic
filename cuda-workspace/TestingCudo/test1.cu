@@ -368,7 +368,7 @@ int foo(path * p)
 			//printf("Done %d\n", breaker);
 			clock_t end = clock();
 			double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-			printf("Time spent %d iterations %d\n",time_spent,breaker);
+			printf("Time spent %lf iterations %d\n",time_spent,breaker);
 		}
 		/*i = 0;
 		 for (int row = 0; row < N; row++)
