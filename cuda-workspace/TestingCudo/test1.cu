@@ -17,6 +17,7 @@ void printGrid(grid * g);
 __device__ int pow2(int x);
 __device__ grid * cloneGrid(grid * g);
 char convert(int x);
+void bar();
 int foo(path * p);
 __global__ void testIter(returnResult * res)
 {
