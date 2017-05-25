@@ -12,6 +12,7 @@ __device__ void cloneToGrid(grid * g, grid * g2);
 __device__ void eliminateValue(cell **c, int row, int col, int max, int value);
 __device__ int check(grid * g, int row, int col, int number);
 __device__ grid * allocateGridDevice(int size);
+__global__ testIter(returnResult * res);
 void printGrid(grid * g);
 __device__ int pow2(int x);
 __device__ grid * cloneGrid(grid * g);
@@ -28,11 +29,10 @@ int main(void)
 		cudaDeviceSetLimit(cudaLimitMallocHeapSize, 128 * 1024 * 1024 * 8);
 		grid ** result;
 		for(int breaker =1000; breaker < 10000; breaker+=2 )
-		//for(int gridSize = 1000; gridSize < 1057; gridSize++)
 		{
 			printf("Starting %d\n", breaker);
 			cudaMallocManaged((void **) &result, sizeof(grid *) * gridSize);
-			for (i = 0; i < gridSize; i++)
+			for (int i = 0; i < gridSize; i++)
 				{
 					result[i] = allocateGrid(size);
 				}
