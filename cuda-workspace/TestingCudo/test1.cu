@@ -20,7 +20,13 @@ char convert(int x);
 int foo(path * p);
 __global__ void testIter(returnResult * res)
 {
-
+	grid *  g = allocateGridDevice(res->result[0].size);
+	grid ** temp = res->result;
+	for(int i = 0; i < res->breaker; i++)
+	{
+		cloneToGrid(g, temp[i]);
+		temp[i]-> ok = '1';
+	}
 }
 int main(void)
 	{
@@ -29,8 +35,8 @@ int main(void)
 		int i;
 		int last = 0; 
 		int gridSize;
-		res->threads = 1;
 		returnResult * res;
+		res->threads = 1;
 		cudaMallocManaged((void **) &res, 1);
 		cudaDeviceSetLimit(cudaLimitMallocHeapSize, 128 * 1024 * 1024 * 8);
 		gridSize = 1057 * res->threads;
