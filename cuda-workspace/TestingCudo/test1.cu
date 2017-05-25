@@ -46,7 +46,7 @@ int main(void)
 				{
 					result[i] = allocateGrid(size);
 				}
-		for(int breaker =1050; breaker < 10000; breaker+=2 )
+		for(int breaker =1050; breaker < 1000000; breaker+=1000 )
 		{
 			printf("Starting %d\n", breaker);
 			res->result = result;
