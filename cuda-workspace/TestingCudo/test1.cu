@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "grid.h"
-#define MAX 3
+#define MAX 4
 #define N 10
 void initCell(cell * c);
 __global__ void compute2(returnResult * res, grid * g, path * p, location * l);
@@ -345,7 +345,7 @@ int foo(path * p)
 		//for(int gridSize = 1000; gridSize < 1057; gridSize++)
 		{
 			clock_t begin = clock();
-			int breaker = 5000;
+			int breaker = 20000;
 			printf("Starting %d\n", breaker);
 			res->result = result;
 			res->breaker = breaker;
