@@ -218,7 +218,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path * p, locatio
 						{
 							z = loc->nx;
 						}
-				if (checkValue == 0 && count < MAX && z <= g->size) //rec value
+				if (checkValue == 0 && count < MAX && z < g->size) //rec value
 					{
 						//cloneToGrid(currentGrid, res[base]
 						
