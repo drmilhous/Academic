@@ -335,7 +335,7 @@ int foo(path * p)
 		
 		res->threads = nBYn;
 		//int gridSize = 1 * res->threads;
-		int gridSize = 13509 * res->threads;
+		int gridSize = 100 * res->threads;
 		int amount = gridSize * sizeof(grid *);
 		printf("Grid Size %d\n", sizeof(grid));
 		cudaMallocManaged((void **) &result, amount);
