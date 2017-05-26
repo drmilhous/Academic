@@ -96,7 +96,7 @@ void bar()
 __global__ void compute2(returnResult * res, grid * g, path * p, location * l)
 	{
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
-		if (idx < 1)
+		if (idx < res->threads)
 			{
 				//int x = blockIdx.x;
 				//int y = threadIdx.x;
