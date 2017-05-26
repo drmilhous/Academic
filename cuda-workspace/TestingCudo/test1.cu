@@ -210,7 +210,15 @@ __device__ void computeIterative(returnResult * res, grid * g, path * p, locatio
 						//		done = 1;
 							}
 					}
-				if (checkValue == 0 && count < MAX) //rec value
+				if (p->direction == LEFT)
+						{
+							z = loc->ny;
+						}
+					else
+						{
+							z = loc->nx;
+						}
+				if (checkValue == 0 && count < MAX && z <= g->size) //rec value
 					{
 						//cloneToGrid(currentGrid, res[base]
 						
@@ -254,14 +262,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path * p, locatio
 					}
 				else 
 					{
-						if (p->direction == LEFT)
-							{
-								z = loc->ny;
-							}
-						else
-							{
-								z = loc->nx;
-							}
+						
 						if (z == g->size) //pop off the list
 							{
 								if (loc->next == NULL)
