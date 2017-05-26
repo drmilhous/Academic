@@ -334,7 +334,7 @@ int foo(path * p)
 		printPath(p);
 		
 		res->threads = 26*26;
-		int gridSize = 100 * res->threads;
+		int gridSize = 1 * res->threads;
 		//int gridSize = 13509 * 10;
 		int amount = gridSize * sizeof(grid *);
 		printf("Grid Size %d\n", sizeof(grid));
