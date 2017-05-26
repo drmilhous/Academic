@@ -347,14 +347,18 @@ int foo(path * p)
 		//int breaker = 100000000;
 		//for(int gridSize = 1000; gridSize < 1057; gridSize++)
 		{
-			clock_t begin = clock();
+			
 			int breaker = 100000;
 			printf("Starting %d\n", breaker);
 			res->result = result;
 			res->breaker = breaker;
 			res->size = gridSize;
+			clock_t begin = clock();
 			compute2<<<1, res->threads>>>(res, g, p, larray);
 			cudaDeviceSynchronize();
+			clock_t end = clock();
+			double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+			printf("Time spent %lf iteration Max %d\n",time_spent,breaker);
 			for (i = 0; i < gridSize; i++)
 				{		
 					if (result[i]->ok == '1')
@@ -370,9 +374,7 @@ int foo(path * p)
 			printf("Grid #%d", last);
 			printGrid(result[last]);*/
 			//printf("Done %d\n", breaker);
-			clock_t end = clock();
-			double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-			printf("Time spent %lf iterations %d\n",time_spent,breaker);
+			
 		}
 		/*i = 0;
 		 for (int row = 0; row < N; row++)
