@@ -333,7 +333,7 @@ int foo(path * p)
 			}
 		printPath(p);
 		
-		res->threads = 2;
+		res->threads = 10;
 		int gridSize = 1057 * res->threads;
 		//int gridSize = 13509 * 10;
 		int amount = gridSize * sizeof(grid *);
