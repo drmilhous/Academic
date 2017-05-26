@@ -213,6 +213,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path * p, locatio
 				if (checkValue == 0 && count < MAX) //rec value
 					{
 						//cloneToGrid(currentGrid, res[base]
+						
 						if (p->next != NULL)
 							{
 								if (freeHead == NULL)
@@ -248,6 +249,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path * p, locatio
 								temp->next = loc;
 								loc = temp;
 								count++;
+								printf("Push count=%d loc %p \n", count,loc);
 							}
 					}
 				else 
@@ -285,10 +287,8 @@ __device__ void computeIterative(returnResult * res, grid * g, path * p, locatio
 												
 											}
 										loc = temp;
-										//free(loc->currentG);
-										//free(loc);
-										
 										count--;
+										printf("Pop count=%d loc %p \n", count,loc);
 									}
 							}
 					}
@@ -339,12 +339,12 @@ int foo(path * p)
 			{
 				result[i] = allocateGrid(size);
 			}
-		for(int breaker =100000; breaker < 10000000; breaker+=100000)
+		//for(int breaker =100000; breaker < 10000000; breaker+=100000)
 		//int breaker = 100000000;
 		//for(int gridSize = 1000; gridSize < 1057; gridSize++)
 		{
 			clock_t begin = clock();
-			//int breaker = 1000000;
+			int breaker = 5000;
 			printf("Starting %d\n", breaker);
 			res->result = result;
 			res->breaker = breaker;
