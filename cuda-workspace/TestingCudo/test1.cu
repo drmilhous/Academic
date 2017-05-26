@@ -4,7 +4,7 @@
 #include <time.h>
 #include "grid.h"
 #define MAX 2
-#define N 26
+#define N 10
 void initCell(cell * c);
 __global__ void compute2(returnResult * res, grid * g, path * p, location * l);
 __device__ void computeIterative(returnResult * res, grid * g, path * p, location * baseLoc);
@@ -333,9 +333,9 @@ int foo(path * p)
 			}
 		printPath(p);
 		
-		res->threads = 26*26;
-		int gridSize = 1 * res->threads;
-		//int gridSize = 13509 * 10;
+		res->threads = nBYn;
+		//int gridSize = 1 * res->threads;
+		int gridSize = 13509 * res->threads;
 		int amount = gridSize * sizeof(grid *);
 		printf("Grid Size %d\n", sizeof(grid));
 		cudaMallocManaged((void **) &result, amount);
