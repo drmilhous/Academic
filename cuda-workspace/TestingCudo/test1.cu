@@ -304,7 +304,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path * p, locatio
 						printf("Breaker Max hit!");
 					}
 			}
-		printf("The total is %d\n", i);
+		printf("The total is %d breaker %d\n", i, breaker);
 
 	}
 
