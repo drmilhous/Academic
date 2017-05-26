@@ -249,7 +249,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path * p, locatio
 								temp->next = loc;
 								loc = temp;
 								count++;
-								printf("Push count=%d loc %p \n", count,loc);
+								printf("Push count=%d loc x%d y%d nx%d ny%d \n", count,loc->x, loc->y, loc->nx, loc->ny);
 							}
 					}
 				else 
@@ -288,7 +288,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path * p, locatio
 											}
 										loc = temp;
 										count--;
-										printf("Pop count=%d loc %p \n", count,loc);
+										printf("Pop count=%d loc x%d y%d nx%d ny%d \n", count,loc->x, loc->y, loc->nx, loc->ny);
 									}
 							}
 					}
