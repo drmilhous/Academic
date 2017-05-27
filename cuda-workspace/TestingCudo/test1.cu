@@ -387,7 +387,7 @@ int foo(path ** p)
 		printPath(p[1]);
 		printPath(p[2]);
 		printPath(p[3]);
-		res->threads = 10;
+		res->threads = 1;
 		//res->threads = nBYn;
 		//int gridSize = 100;
 		int gridSize = 1 * res->threads;
@@ -409,8 +409,8 @@ int foo(path ** p)
 			res->breaker = breaker;
 			res->size = gridSize;
 			clock_t begin = clock();
-			//compute2<<<1, res->threads>>>(res, g, p, larray);
-			compute2<<<10, 10>>>(res, g, p, larray);
+			compute2<<<1, res->threads>>>(res, g, p, larray);
+			//compute2<<<10, 10>>>(res, g, p, larray);
 			cudaDeviceSynchronize();
 			clock_t end = clock();
 			double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
