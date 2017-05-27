@@ -387,7 +387,7 @@ int foo(path ** p)
 		printPath(p[1]);
 		printPath(p[2]);
 		printPath(p[3]);
-		res->threads = 100;
+		res->threads = 10;
 		//res->threads = nBYn;
 		//int gridSize = 100;
 		int gridSize = 1 * res->threads;
