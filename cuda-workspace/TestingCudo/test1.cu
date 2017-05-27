@@ -88,9 +88,10 @@ void bar()
 			} //	 - See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/#multi-device-system
 		cudaSetDevice(0);
 		path ** p = scanChars();
+		p++;
 		if (p != NULL)
 			{
-				foo(&p[1]);
+				foo(p);
 			}
 	}
 __global__ void compute2(returnResult * res, grid * g, path ** pathlist, location * l)
