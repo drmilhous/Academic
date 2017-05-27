@@ -19,7 +19,7 @@ __device__ int pow2(int x);
 __device__ grid * cloneGrid(grid * g);
 char convert(int x);
 void bar();
-int foo(path * p);
+int foo(path ** p);
 __global__ void testIter(returnResult * res)
 {
 	grid *  g = allocateGridDevice(res->result[0]->size);
@@ -88,10 +88,9 @@ void bar()
 			} //	 - See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/#multi-device-system
 		cudaSetDevice(0);
 		path ** p = scanChars();
-		p++;
 		if (p != NULL)
 			{
-				foo(p);
+				foo(&p[1]);
 			}
 	}
 __global__ void compute2(returnResult * res, grid * g, path ** pathlist, location * l)
