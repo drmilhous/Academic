@@ -196,6 +196,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 						cloneToGrid(currentGrid, result[offset]);
 						result[offset]->ok = '1';
 						printcount++;
+						done = 1;
 					}
 				if(loc->full == PART)
 				{
@@ -385,10 +386,10 @@ int foo(path ** p)
 		printPath(p[1]);
 		printPath(p[2]);
 		printPath(p[3]);
-		res->threads = 1;
+		res->threads = 100;
 		//res->threads = nBYn;
-		int gridSize = 100;
-		//int gridSize = 100 * res->threads;
+		//int gridSize = 100;
+		int gridSize = 2 * res->threads;
 		int amount = gridSize * sizeof(grid *);
 		printf("Grid Size %d\n", sizeof(grid));
 		cudaMallocManaged((void **) &result, amount);
@@ -401,7 +402,7 @@ int foo(path ** p)
 		//for(int gridSize = 1000; gridSize < 1057; gridSize++)
 		{
 			
-			int breaker = 1000000;
+			int breaker = 9000000;
 			printf("Starting %d\n", breaker);
 			res->result = result;
 			res->breaker = breaker;
