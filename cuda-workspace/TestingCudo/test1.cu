@@ -86,7 +86,7 @@ void bar()
 				cudaGetDeviceProperties(&deviceProp, device);
 				printf("Device %d has compute capability %d.%d.\n", device, deviceProp.major, deviceProp.minor);
 			} //	 - See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/#multi-device-system
-		cudaSetDevice(1);
+		cudaSetDevice(2);
 		path ** p = scanChars();
 		if (p != NULL)
 			{
@@ -198,6 +198,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 						cloneToGrid(currentGrid, result[offset]);
 						result[offset]->ok = '1';
 						printcount++;
+						done = 1;
 					}
 				if(loc->full == PART)
 				{
@@ -350,7 +351,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 					}
 				if (breaker == res->breaker)
 					{
-						done = 1;
+					//	done = 1;
 						printf("Breaker Max hit!");
 					}
 			}
