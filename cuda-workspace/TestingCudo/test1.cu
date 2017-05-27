@@ -409,7 +409,7 @@ int foo(path ** p)
 			res->breaker = breaker;
 			res->size = gridSize;
 			clock_t begin = clock();
-			compute2<<<1, res->threads>>>(res, g, p, larray);
+			//compute2<<<1, res->threads>>>(res, g, p, larray);
 			compute2<<<10, 10>>>(res, g, p, larray);
 			cudaDeviceSynchronize();
 			clock_t end = clock();
