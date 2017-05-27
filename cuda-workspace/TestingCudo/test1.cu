@@ -196,7 +196,6 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 						cloneToGrid(currentGrid, result[offset]);
 						result[offset]->ok = '1';
 						printcount++;
-						done = 1;
 					}
 				if(loc->full == PART)
 				{
