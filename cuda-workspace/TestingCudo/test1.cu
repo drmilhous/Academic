@@ -275,7 +275,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 									{
 										temp = (location *) malloc(sizeof(location));
 										temp->currentG = allocateGridDevice(g->size);
-										printf("Allocated Block\n");
+									//	printf("Allocated Block\n");
 									}
 								else
 									{
@@ -383,6 +383,8 @@ int foo(path ** p)
 		larray[0].full = FULL;
 		printPath(p[0]);
 		printPath(p[1]);
+		printPath(p[2]);
+		printPath(p[3]);
 		res->threads = 1;
 		//res->threads = nBYn;
 		int gridSize = 100;
