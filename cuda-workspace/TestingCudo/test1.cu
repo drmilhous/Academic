@@ -392,7 +392,7 @@ int foo(path ** p)
 		//int gridSize = 100;
 		int gridSize = 1 * res->threads;
 		int amount = gridSize * sizeof(grid *);
-		printf("Grid Size %d\n", (int)sizeof(grid));
+		printf("Allocated Bytes %d\n", amount;
 		cudaMallocManaged((void **) &result, amount);
 		for (i = 0; i < gridSize; i++)
 			{
@@ -410,6 +410,7 @@ int foo(path ** p)
 			res->size = gridSize;
 			clock_t begin = clock();
 			compute2<<<1, res->threads>>>(res, g, p, larray);
+			compute2<<<10, 10>>>(res, g, p, larray);
 			cudaDeviceSynchronize();
 			clock_t end = clock();
 			double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
