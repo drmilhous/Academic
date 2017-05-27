@@ -299,7 +299,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 										temp->ny = temp->y;
 									}
 								//printf("Next x=%d y=%d nx=%d ny=%d\n",temp->x,temp->y,temp->nx,temp->ny);
-								temp->full = loc->full;
+								//temp->full = loc->full;
 								temp->p = nextLoc;
 								cloneToGrid(currentGrid, temp->currentG);
 								temp->next = loc;
