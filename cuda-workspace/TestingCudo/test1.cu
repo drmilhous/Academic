@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "grid.h"
-#define MAX 2
+#define MAX 1
 #define N 10
 void initCell(cell * c);
 __global__ void compute2(returnResult * res, grid * g, path ** pathList, location * l);
@@ -376,6 +376,7 @@ int foo(path ** p)
 						larray[offset].full = PART;
 					}
 			}
+		p[0].full = FULL;
 		printPath(p[0]);
 		printPath(p[1]);
 		res->threads = 1;
