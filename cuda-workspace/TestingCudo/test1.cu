@@ -139,10 +139,12 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		loc->p = p;
 		loc->next = NULL;
 		int x, y;
+		int pop;
 		int count = 0;
 		while (done == 0)
 			{
 				breaker++;
+				pop = 0;
 				cloneToGrid(loc->currentG, currentGrid);
 				x = loc->x;
 				y = loc->y;
@@ -195,16 +197,61 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 						result[offset]->ok = '1';
 						printcount++;
 					}
-				if (p->direction == LEFT)
+				if(loc->full == PART)
+				{
+					if (p->direction == LEFT)
 						{
 							loc->ny++;
-							z = loc->ny;
+							if (loc->ny == g->size)
+								pop = 1; 
 						}
 					else
 						{
 							loc->nx++;
-							z = loc->nx;
+							if (loc->nx == g->size)
+								pop = 1;
 						}
+				}
+				else
+				{
+					if (p->direction == LEFT)
+						{
+							loc->ny++;
+							if(loc->ny == g->size)
+							{
+								loc->ny = 0;
+								loc->y++;
+								if(loc->y == g->size)
+								{
+									loc->y = 0;
+									loc->x++;
+									if(loc->x == g->size)
+									{
+										pop = 1;
+									}	
+								}
+							}
+						}
+					else
+						{
+							loc->nx++;
+							if(loc->nx == g->size)
+							{
+								loc->nx = 0;
+								loc->x++;
+								if(loc->x == g->size)
+								{
+									loc->x = 0;
+									loc->y++;
+									if(loc->y == g->size)
+									{
+										pop = 1;
+									}	
+								}
+							}
+						}
+				}
+				
 				if (checkValue == 0 && count < MAX && z < g->size) //rec value
 					{
 						uint8_t type = PART;
@@ -264,7 +311,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 				else 
 					{
 						
-						if (z == g->size) //pop off the list
+						if (pop == 1) //pop off the list
 							{
 								if (loc->next == NULL) //bottom of the stack
 									{
