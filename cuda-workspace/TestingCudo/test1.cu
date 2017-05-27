@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "grid.h"
-#define MAX 0
+#define MAX 1
 #define N 10
 void initCell(cell * c);
 __global__ void compute2(returnResult * res, grid * g, path ** pathList, location * l);
@@ -252,7 +252,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 						}
 				}
 				
-				if (checkValue == 0 && count < MAX && z < g->size) //rec value
+				if (checkValue == 0 && count < MAX && pop == 0) //rec value
 					{
 						uint8_t type = PART;
 						path * nextLoc = NULL;
