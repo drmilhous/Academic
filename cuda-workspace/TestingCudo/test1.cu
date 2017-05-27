@@ -109,6 +109,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		path * p = pathList[baseIndex];//first path
 		
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
+		printf("Index %d\n", idx);
 		int xx = res->size/res->threads * idx;
 		grid ** result = &res->result[xx];
 		int gridSize = res->size/res->threads;
