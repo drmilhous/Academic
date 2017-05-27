@@ -376,7 +376,7 @@ int foo(path ** p)
 						larray[offset].full = PART;
 					}
 			}
-		p[0].full = FULL;
+		p[0]->full = FULL;
 		printPath(p[0]);
 		printPath(p[1]);
 		res->threads = 1;
