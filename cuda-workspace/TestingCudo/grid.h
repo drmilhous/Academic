@@ -4,6 +4,8 @@
 
 #define UP 'U'
 #define LEFT 'L'
+#define FULL 1
+#define PART 0
 
 typedef struct path
 	{
@@ -40,6 +42,7 @@ typedef struct location
 	struct location * next;
 	struct grid * currentG;
 	path * p;
+	uint8_t full;
 }location;
 
 typedef struct returnResult

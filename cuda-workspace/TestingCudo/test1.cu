@@ -6,8 +6,8 @@
 #define MAX 2
 #define N 10
 void initCell(cell * c);
-__global__ void compute2(returnResult * res, grid * g, path * p, location * l);
-__device__ void computeIterative(returnResult * res, grid * g, path * p, location * baseLoc);
+__global__ void compute2(returnResult * res, grid * g, path ** pathList, location * l);
+__device__ void computeIterative(returnResult * res, grid * g, path ** pathList, location * baseLoc);
 __device__ void add(grid ** base, grid ** last, grid * newList);
 __device__ void cloneToGrid(grid * g, grid * g2);
 __device__ void eliminateValue(cell **c, int row, int col, int max, int value);
@@ -90,21 +90,24 @@ void bar()
 		path ** p = scanChars();
 		if (p != NULL)
 			{
-				foo(p[1]);
+				foo(&p[1]);
 			}
 	}
-__global__ void compute2(returnResult * res, grid * g, path * p, location * l)
+__global__ void compute2(returnResult * res, grid * g, path ** pathlist, location * l)
 	{
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		if (idx < res->threads)
 			{
 				//int x = blockIdx.x;
 				//int y = threadIdx.x;
-				computeIterative(res, g, p, l);
+				computeIterative(res, g, pathlist, l);
 			}
 	}
-__device__ void computeIterative(returnResult * res, grid * g, path * p, location * baseLoc)
+__device__ void computeIterative(returnResult * res, grid * g, path ** pathList, location * baseLoc)
 	{
+		int baseIndex = 0;
+		path * p = pathList[baseIndex];//first path
+		
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		int xx = res->size/res->threads * idx;
 		grid ** result = &res->result[xx];
@@ -115,6 +118,11 @@ __device__ void computeIterative(returnResult * res, grid * g, path * p, locatio
 		location * loc = &baseLoc[idx];
 		location * freeHead = NULL;
 		int i = 0;
+		int checkValue;
+		int value;
+		int z;
+		int done = 0;
+		location * temp;
 		if (p->direction == LEFT) //Do UP/DOWN
 			{
 				loc->nx = loc->x;
@@ -125,20 +133,11 @@ __device__ void computeIterative(returnResult * res, grid * g, path * p, locatio
 				loc->nx = 0;
 				loc->ny = loc->y;
 			}
-		location * temp;
-		int checkValue;
-		int value;
-		int z;
-		int done = 0;
-		//int idx = blockIdx.x * blockDim.x + threadIdx.x;
-		//int base = idx * MAX *3 + recCount;
 		grid * currentGrid = allocateGridDevice(g->size);
 		cloneToGrid(g, currentGrid);
 		loc->currentG = allocateGridDevice(g->size);
 		loc->p = p;
 		loc->next = NULL;
-		//recCount = recCount +3 ;
-		//int set = 0;
 		int x, y;
 		int count = 0;
 		while (done == 0)
@@ -147,7 +146,6 @@ __device__ void computeIterative(returnResult * res, grid * g, path * p, locatio
 				cloneToGrid(loc->currentG, currentGrid);
 				x = loc->x;
 				y = loc->y;
-
 				p = loc->p;
 				int lasty = y;
 				int lastx = x;
@@ -161,12 +159,12 @@ __device__ void computeIterative(returnResult * res, grid * g, path * p, locatio
 						if (p->direction == LEFT) //Do UP/DOWN
 							{
 								z = loc->ny;
-								loc->ny++;
+								
 							}
 						else
 							{
 								z = loc->nx;
-								loc->nx++;
+								
 							}
 						checkValue = 0;
 						if (p->direction == LEFT) //Do UP/DOWN
@@ -187,43 +185,45 @@ __device__ void computeIterative(returnResult * res, grid * g, path * p, locatio
 										eliminateValue(currentGrid->cells, lastx, lasty, currentGrid->size, value);
 									}
 							}
-						//if(checkValue == 0)
-						//{
-						//	printGrid(currentGrid);
-						//}
-
 					}
 				if (checkValue == 0 && count == MAX)
 					{
 						i++;
-						//if (printcount < gridSize-1)
-							{
-								int offset = printcount % gridSize;
-								//printf("breaker@@ = %d offset %d\n", breaker, offset);
-								cloneToGrid(currentGrid, result[offset]);
-								result[offset]->ok = '1';
-								//prinotGrid(currentGrid);
-								printcount++;
-							}
-						//else
-							{
-						//		done = 1;
-							}
+						int offset = printcount % gridSize;
+						//printf("breaker@@ = %d offset %d\n", breaker, offset);
+						cloneToGrid(currentGrid, result[offset]);
+						result[offset]->ok = '1';
+						printcount++;
 					}
 				if (p->direction == LEFT)
 						{
+							loc->ny++;
 							z = loc->ny;
 						}
 					else
 						{
+							loc->nx++;
 							z = loc->nx;
 						}
 				if (checkValue == 0 && count < MAX && z < g->size) //rec value
 					{
-						//cloneToGrid(currentGrid, res[base]
-						
+						uint8_t type = PART;
+						path * nextLoc = NULL;
 						if (p->next != NULL)
 							{
+								nextLoc = p->next;
+							}
+						else
+						{
+							baseIndex++;
+							if(pathList[baseIndex] != NULL)
+							{
+								nextLoc = pathList[baseIndex];
+								type = FULL;
+							}
+						}
+						if(nextLoc != NULL)
+						{
 								if (freeHead == NULL)
 									{
 										temp = (location *) malloc(sizeof(location));
@@ -238,11 +238,11 @@ __device__ void computeIterative(returnResult * res, grid * g, path * p, locatio
 												freeHead = freeHead->next;
 											}
 									}
+								temp->full = type;
 								temp->x = lastx;
 								temp->y = lasty;
-								if (p->next->direction == LEFT) //Do UP/DOWN
+								if (nextLoc->direction == LEFT) //Do UP/DOWN
 									{
-										
 										temp->nx = temp->x;
 										temp->ny = 0;	
 									}
@@ -252,20 +252,21 @@ __device__ void computeIterative(returnResult * res, grid * g, path * p, locatio
 										temp->ny = temp->y;
 									}
 								//printf("Next x=%d y=%d nx=%d ny=%d\n",temp->x,temp->y,temp->nx,temp->ny);
-								temp->p = p->next;
+								temp->full = loc->full;
+								temp->p = nextLoc;
 								cloneToGrid(currentGrid, temp->currentG);
 								temp->next = loc;
 								loc = temp;
 								count++;
 								//printf("Push count=%d loc x%d y%d nx%d ny%d \n", count,loc->x, loc->y, loc->nx, loc->ny);
-							}
+						}
 					}
 				else 
 					{
 						
 						if (z == g->size) //pop off the list
 							{
-								if (loc->next == NULL)
+								if (loc->next == NULL) //bottom of the stack
 									{
 										done = 1;
 									}
@@ -281,11 +282,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path * p, locatio
 											{
 												
 												loc->next = freeHead;
-												freeHead = loc;
-												//freeHead->next = loc;
-												//freeTail = loc;
-												//freeTail->next = NULL;
-												
+												freeHead = loc;												
 											}
 										loc = temp;
 										count--;
@@ -308,7 +305,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path * p, locatio
 
 	}
 
-int foo(path * p)
+int foo(path ** p)
 	{
 		returnResult * res;
 		cudaMallocManaged((void **) &res, 1);
@@ -329,13 +326,15 @@ int foo(path * p)
 						int offset = row * N + col;
 						larray[offset].x = row;
 						larray[offset].y = col;
+						larray[offset].full = PART;
 					}
 			}
-		printPath(p);
-		
-		res->threads = nBYn;
-		//int gridSize = 1 * res->threads;
-		int gridSize = 100 * res->threads;
+		printPath(p[0]);
+		printPath(p[1]);
+		res->threads = 1;
+		//res->threads = nBYn;
+		int gridSize = 10000;
+		//int gridSize = 100 * res->threads;
 		int amount = gridSize * sizeof(grid *);
 		printf("Grid Size %d\n", sizeof(grid));
 		cudaMallocManaged((void **) &result, amount);
