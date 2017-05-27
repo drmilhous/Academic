@@ -381,7 +381,7 @@ int foo(path ** p)
 		printPath(p[1]);
 		res->threads = 1;
 		//res->threads = nBYn;
-		int gridSize = 10000;
+		int gridSize = 100;
 		//int gridSize = 100 * res->threads;
 		int amount = gridSize * sizeof(grid *);
 		printf("Grid Size %d\n", sizeof(grid));
@@ -395,7 +395,7 @@ int foo(path ** p)
 		//for(int gridSize = 1000; gridSize < 1057; gridSize++)
 		{
 			
-			int breaker = 90000000;
+			int breaker = 900000;
 			printf("Starting %d\n", breaker);
 			res->result = result;
 			res->breaker = breaker;
