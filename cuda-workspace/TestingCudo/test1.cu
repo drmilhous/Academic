@@ -313,6 +313,10 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 						
 						if (pop == 1) //pop off the list
 							{
+								if(loc->full == FULL)
+								{
+									baseIndex--;
+								}
 								if (loc->next == NULL) //bottom of the stack
 									{
 										done = 1;
