@@ -3,8 +3,9 @@
 #include <stdlib.h>
 #include <time.h>
 #include "grid.h"
-#define MAX 18
+#define MAX 13
 #define N 10
+int allocated = 0;
 void initCell(cell * c);
 __global__ void compute2(returnResult * res, grid * g, path ** pathList, location * l);
 __device__ void computeIterative(returnResult * res, grid * g, path ** pathList, location * baseLoc);
@@ -52,6 +53,7 @@ void foobared()
 				{
 					result[i] = allocateGrid(size);
 				}
+		printf("Allocated Bytes %d\n", allocated);
 		for(int breaker =1050; breaker < 1000000; breaker+=1000 )
 		{
 			printf("Starting %d\n", breaker);
@@ -372,7 +374,7 @@ int foo(path ** p)
 		printPath(p[1]);
 		printPath(p[2]);
 		printPath(p[3]);
-		res->threads = 1;
+		res->threads = 2;
 		//res->threads = nBYn;
 		//int gridSize = 100;
 		int gridSize = 1 * res->threads;
@@ -388,7 +390,7 @@ int foo(path ** p)
 		//for(int gridSize = 1000; gridSize < 1057; gridSize++)
 		{
 			
-			int breaker = 9000000;
+			int breaker = 10000;
 			printf("Starting %d\n", breaker);
 			res->result = result;
 			res->breaker = breaker;
@@ -520,13 +522,16 @@ __device__ void cloneToGrid(grid * g, grid * g2)
 grid * allocateGrid(int size)
 	{
 		grid * g2 = NULL;
+		allocated += (int)sizeof(grid);
 		cudaMallocManaged((void **) &g2, sizeof(grid));
 		g2->size = size;
 		cell ** cells;
 		cudaMallocManaged((void **) &cells, size * sizeof(cell *));
+		allocated += (int)  size * sizeof(cell *);
 		for (int i = 0; i < size; i++)
 			{
 				cudaMallocManaged((void **) &cells[i], size * sizeof(cell));
+				allocated += (int) size * sizeof(cell);
 			}
 		g2->cells = cells;
 		for (int row = 0; row < size; row++)
