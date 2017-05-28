@@ -415,7 +415,7 @@ int foo(path ** p)
 						larray[offset].full = PART;
 					}
 			}
-		larray[0].full = PART;
+		larray[0].full = FULL;
 		printPath(p[0]);
 		printPath(p[1]);
 		printPath(p[2]);
@@ -424,7 +424,7 @@ int foo(path ** p)
 		//res->threads = 100;
 		//res->threads = nBYn;
 		//int gridSize = 100;
-		int gridSize = 1000 * res->threads;
+		int gridSize = 10000 * res->threads;
 		int amount = gridSize * sizeof(grid *);
 		printf("Allocated Bytes %d\n", amount);
 		cudaMallocManaged((void **) &result, amount);
