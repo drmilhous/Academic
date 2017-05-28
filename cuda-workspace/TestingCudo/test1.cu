@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "grid.h"
-#define MAX 15
+#define MAX 13
 #define N 10
 int allocated = 0;
 void initCell(cell * c);
@@ -377,7 +377,7 @@ int foo(path ** p)
 		res->threads = 100;
 		//res->threads = nBYn;
 		//int gridSize = 100;
-		int gridSize = 1 * res->threads;
+		int gridSize = 100 * res->threads;
 		int amount = gridSize * sizeof(grid *);
 		printf("Allocated Bytes %d\n", amount);
 		cudaMallocManaged((void **) &result, amount);
@@ -390,7 +390,7 @@ int foo(path ** p)
 		//for(int gridSize = 1000; gridSize < 1057; gridSize++)
 		{
 			
-			int breaker = 10000;
+			int breaker = 100000;
 			printf("Starting %d\n", breaker);
 			res->result = result;
 			res->breaker = breaker;
