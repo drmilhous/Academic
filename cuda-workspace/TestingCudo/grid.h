@@ -55,7 +55,7 @@ typedef struct returnResult
 	int threads;
 	int breaker;
 	location * locationStack;
-	grid * gridStack;
+	grid ** gridStack;
 }returnResult;
 
 grid * allocateGrid(int size);
