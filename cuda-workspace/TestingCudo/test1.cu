@@ -212,7 +212,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 					else
 						{
 							loc->nx++;
-							if (loc->nx .= g->size)
+							if (loc->nx >= g->size)
 								pop = 1;
 						}
 				}
