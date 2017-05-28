@@ -424,7 +424,7 @@ int foo(path ** p)
 		//res->threads = 100;
 		//res->threads = nBYn;
 		//int gridSize = 100;
-		int gridSize = 10 * res->threads;
+		int gridSize = 1000 * res->threads;
 		int amount = gridSize * sizeof(grid *);
 		printf("Allocated Bytes %d\n", amount);
 		cudaMallocManaged((void **) &result, amount);
