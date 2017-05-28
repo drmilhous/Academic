@@ -413,7 +413,7 @@ int foo(path ** p)
 						larray[offset].full = PART;
 					}
 			}
-		larray[0].full = FULL;
+		larray[0].full = PART;
 		printPath(p[0]);
 		printPath(p[1]);
 		printPath(p[2]);
