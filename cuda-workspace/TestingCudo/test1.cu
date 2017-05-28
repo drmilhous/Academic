@@ -158,7 +158,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 			{
 				breaker++;
 				pop = 0;
-				cloneToGrid(gridStack[count], currentGrid);
+				cloneToGrid(&gridStack[count], currentGrid);
 				//currentGrid = gridStack[count];
 				p = loc->p;
 				int lasty = loc->y;
@@ -310,7 +310,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 								//temp->full = loc->full;
 								temp->p = nextLoc;
 								//cloneToGrid(currentGrid, temp->currentG);
-								cloneToGrid(currentGrid, gridStack[count]);
+								cloneToGrid(currentGrid, &gridStack[count]);
 								//temp->next = loc;
 								//loc = temp;
 								
