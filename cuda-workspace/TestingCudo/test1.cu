@@ -263,7 +263,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 								if (freeHead == NULL)
 									{
 										temp = (location *) malloc(sizeof(location));
-										temp->device = DEV;
+										temp->dev = DEV;
 										temp->currentG = allocateGridDevice(g->size);
 									//	printf("Allocated Block\n");
 									}
@@ -376,7 +376,7 @@ int foo(path ** p)
 						larray[offset].x = row;
 						larray[offset].y = col;
 						larray[offset].full = PART;
-						larray[offset].device = DEV;
+						larray[offset].dev = DEV;
 					}
 			}
 		larray[0].full = FULL;

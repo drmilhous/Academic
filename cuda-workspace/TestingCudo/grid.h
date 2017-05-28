@@ -46,7 +46,7 @@ typedef struct location
 	struct grid * currentG;
 	path * p;
 	uint8_t full;
-	uint8_t device;
+	uint8_t dev;
 }location;
 
 typedef struct returnResult
