@@ -148,7 +148,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		grid * currentGrid = allocateGridDevice(g->size);
 		//grid * currentGrid = gridStack[count];
 		cloneToGrid(g, currentGrid);
-		cloneToGrid(currentGrid, &gridStack[count]);
+		cloneToGrid(currentGrid, gridStack[count]);
 		//loc->currentG = gridStack[count];
 		loc->p = p;
 		loc->next = NULL;
