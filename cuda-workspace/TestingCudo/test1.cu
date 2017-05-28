@@ -88,7 +88,9 @@ void bar()
 				cudaGetDeviceProperties(&deviceProp, device);
 				printf("Device %d has compute capability %d.%d.\n", device, deviceProp.major, deviceProp.minor);
 			} //	 - See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/#multi-device-system
-		cudaSetDevice(1);
+		int device = 0;
+		printf("Starting on device %d MAX=%d \n", device,MAX);
+		cudaSetDevice(device);
 		path ** p = scanChars();
 		if (p != NULL)
 			{
@@ -447,7 +449,7 @@ int foo(path ** p)
 		//for(int gridSize = 1000; gridSize < 1057; gridSize++)
 		{
 			
-			int breaker = 100000*10*10;
+			int breaker = 100000*10*10*10;
 			printf("Starting %d\n", breaker);
 			res->result = result;
 			res->breaker = breaker;
