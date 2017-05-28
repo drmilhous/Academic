@@ -420,7 +420,7 @@ int foo(path ** p)
 		printPath(p[1]);
 		printPath(p[2]);
 		printPath(p[3]);
-		res->threads =2 ;
+		res->threads =10;
 		//res->threads = 100;
 		//res->threads = nBYn;
 		//int gridSize = 100;
@@ -447,7 +447,7 @@ int foo(path ** p)
 		//for(int gridSize = 1000; gridSize < 1057; gridSize++)
 		{
 			
-			int breaker = 100000;
+			int breaker = 100000*10;
 			printf("Starting %d\n", breaker);
 			res->result = result;
 			res->breaker = breaker;
