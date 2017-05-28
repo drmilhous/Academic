@@ -156,7 +156,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		
 		while (done == 0)
 			{
-				loc = locStack[index];
+				loc = &locStack[index];
 				breaker++;
 				pop = 0;
 				cloneToGrid(gridStack[count], currentGrid);
