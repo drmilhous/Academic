@@ -156,6 +156,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		
 		while (done == 0)
 			{
+				loc = locStack[index];
 				breaker++;
 				pop = 0;
 				cloneToGrid(gridStack[count], currentGrid);
@@ -333,12 +334,12 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 									}
 								}
 								count--;
-								if(count >= 0)
+								if(count < 0)
 									{		
-										loc = &locStack[count];
+								/*		loc = &locStack[count];
 									}
 									else
-									{
+									{*/
 										done = 1;
 									}
 								printf("Pop count=%d loc x%d y%d nx%d ny%d \n", count,loc->x, loc->y, loc->nx, loc->ny);
