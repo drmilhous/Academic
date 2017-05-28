@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "grid.h"
-#define MAX 6
+#define MAX 7
 #define N 10
 int allocated = 0;
 void initCell(cell * c);
