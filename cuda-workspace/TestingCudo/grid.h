@@ -7,6 +7,8 @@
 #define LEFT 'L'
 #define FULL 1
 #define PART 0
+#define DEV 0
+#define MANAGED 1
 
 typedef struct path
 	{
@@ -44,6 +46,7 @@ typedef struct location
 	struct grid * currentG;
 	path * p;
 	uint8_t full;
+	uint8_t device;
 }location;
 
 typedef struct returnResult

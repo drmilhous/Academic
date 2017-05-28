@@ -263,6 +263,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 								if (freeHead == NULL)
 									{
 										temp = (location *) malloc(sizeof(location));
+										temp->device = DEV;
 										temp->currentG = allocateGridDevice(g->size);
 									//	printf("Allocated Block\n");
 									}
@@ -344,11 +345,13 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		printf("The total is %d breaker %d\n", i, breaker);
 		while(freeHead != NULL)
 		{
-			free(loc);
+			if(loc->dev == MANAGED)
+				free(loc);
 			loc = freeHead;
 			freeHead = freeHead->next;
 		}
-		free(loc);
+		if(loc->dev == MANAGED)
+			free(loc);
 	}
 
 int foo(path ** p)
@@ -373,6 +376,7 @@ int foo(path ** p)
 						larray[offset].x = row;
 						larray[offset].y = col;
 						larray[offset].full = PART;
+						larray[offset].device = DEV;
 					}
 			}
 		larray[0].full = FULL;
