@@ -429,6 +429,10 @@ int foo(path ** p)
 		amount = res->threads * sizeof(grid *) * (N+1);
 		printf("Allocated Bytes for GStack %d\n", amount);
 		cudaMallocManaged((void **) &res->gridStack, amount);
+		for (i = 0; i < res->threads * (N+1); i++)
+			{
+				res->gridStack[i] = allocateGrid(size);
+			}
 		amount = sizeof(location) * (N+1) * res->threads;
 		printf("Allocated Bytes for LStack %d\n", amount);
 		cudaMallocManaged((void **) &res->locationStack, amount);	
