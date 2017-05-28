@@ -194,7 +194,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 					{
 						i++;
 						int offset = printcount % gridSize;
-						//printf("breaker@@ = %d offset %d\n", breaker, offset);
+						printf("breaker@@ = %d offset %d\n", breaker, offset);
 						cloneToGrid(currentGrid, result[offset]);
 						result[offset]->ok = '1';
 						printcount++;
@@ -374,6 +374,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 					}
 			}
 		printf("The total is %d breaker %d\n", i, breaker);
+		free()
 		/*while(freeHead != NULL && loc != freeHead)
 		{
 			if(loc->dev == MANAGED)
