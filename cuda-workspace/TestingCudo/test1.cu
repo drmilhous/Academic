@@ -206,13 +206,13 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 					if (p->direction == LEFT)
 						{
 							loc->ny++;
-							if (loc->ny == g->size)
+							if (loc->ny >= g->size)
 								pop = 1; 
 						}
 					else
 						{
 							loc->nx++;
-							if (loc->nx == g->size)
+							if (loc->nx .= g->size)
 								pop = 1;
 						}
 				}
@@ -221,15 +221,15 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 					if (p->direction == LEFT)
 						{
 							loc->ny++;
-							if(loc->ny == g->size)
+							if(loc->ny >= g->size)
 							{
 								loc->ny = 0;
 								loc->y++;
-								if(loc->y == g->size)
+								if(loc->y >= g->size)
 								{
 									loc->y = 0;
 									loc->x++;
-									if(loc->x == g->size)
+									if(loc->x >= g->size)
 									{
 										pop = 1;
 									}	
@@ -239,15 +239,15 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 					else
 						{
 							loc->nx++;
-							if(loc->nx == g->size)
+							if(loc->nx >= g->size)
 							{
 								loc->nx = 0;
 								loc->x++;
-								if(loc->x == g->size)
+								if(loc->x >= g->size)
 								{
 									loc->x = 0;
 									loc->y++;
-									if(loc->y == g->size)
+									if(loc->y >= g->size)
 									{
 										pop = 1;
 									}	
