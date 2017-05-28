@@ -343,7 +343,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 					}
 			}
 		printf("The total is %d breaker %d\n", i, breaker);
-		while(freeHead != NULL)
+		while(freeHead != NULL && loc != freeHead)
 		{
 			if(loc->dev == MANAGED)
 				free(loc);
