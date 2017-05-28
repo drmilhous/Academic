@@ -323,7 +323,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 						
 						if (pop == 1) //pop off the list
 							{
-								printf("Pop count=%d loc x%d y%d nx%d ny%d \n", count,loc->x, loc->y, loc->nx, loc->ny);
+								
 								if(loc->full == FULL)
 								{
 									baseIndex--;
@@ -332,19 +332,16 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 										done =1 ;
 									}
 								}
-								else
-								{
-									count--;
-									if(count >= 0)
-									{
-										
+								count--;
+								if(count >= 0)
+									{		
 										loc = &locStack[count];
 									}
 									else
 									{
 										done = 1;
 									}
-								}
+								printf("Pop count=%d loc x%d y%d nx%d ny%d \n", count,loc->x, loc->y, loc->nx, loc->ny);
 								/*if (loc->next == NULL) //bottom of the stack
 									{
 										done = 1;
@@ -371,7 +368,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 					}
 				if (bmax == breaker)
 					{
-						printf("Breaker %d PrintCount  %d\n", breaker, printcount);
+						//printf("Breaker %d PrintCount  %d\n", breaker, printcount);
 						bmax *= 1.2;
 					}
 				if (breaker == res->breaker)
