@@ -98,8 +98,6 @@ __global__ void compute2(returnResult * res, grid * g, path ** pathlist, locatio
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		if (idx < res->threads)
 			{
-				//int x = blockIdx.x;
-				//int y = threadIdx.x;
 				computeIterative(res, g, pathlist, l);
 			}
 	}
@@ -122,7 +120,6 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		int i = 0;
 		int checkValue;
 		int value;
-		int z;
 		int done = 0;
 		location * temp;
 		if (p->direction == LEFT) //Do UP/DOWN
@@ -140,7 +137,6 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		loc->currentG = allocateGridDevice(g->size);
 		loc->p = p;
 		loc->next = NULL;
-		int x, y;
 		int pop;
 		int count = 0;
 		while (done == 0)
@@ -148,40 +144,28 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 				breaker++;
 				pop = 0;
 				cloneToGrid(loc->currentG, currentGrid);
-				x = loc->x;
-				y = loc->y;
 				p = loc->p;
-				int lasty = y;
-				int lastx = x;
+				int lasty = loc->y;
+				int lastx = loc->x;
 				value = p->letters[0];
-				checkValue = check(currentGrid, x, y, value);
+				checkValue = check(currentGrid, loc->x, loc->y, value);
 				if (checkValue == 0)
 					{
-						currentGrid->cells[x][y].value = value;
-						eliminateValue(currentGrid->cells, x, y, currentGrid->size, value);
+						currentGrid->cells[loc->x][loc->y].value = value;
+						eliminateValue(currentGrid->cells, loc->x, loc->y, currentGrid->size, value);
 						int direction;
-						if (p->direction == LEFT) //Do UP/DOWN
-							{
-								z = loc->ny;
-								
-							}
-						else
-							{
-								z = loc->nx;
-								
-							}
 						checkValue = 0;
 						if (p->direction == LEFT) //Do UP/DOWN
-							direction = y > z ? -1 : 1;
+							direction = loc->y > loc->ny ? -1 : 1;
 						else
-							direction = x > z ? -1 : 1;
+							direction = loc->x > loc->nx ? -1 : 1;
 						for (int offset = 0; offset < 3 && checkValue == 0; offset++)
 							{
 								value = p->letters[offset + 1];
 								if (p->direction == LEFT) //Do UP/DOWN
-									lasty = (z + (offset * direction) + currentGrid->size) % currentGrid->size;
+									lasty = (loc->ny + (offset * direction) + currentGrid->size) % currentGrid->size;
 								else
-									lastx = (z + (offset * direction) + currentGrid->size) % currentGrid->size;
+									lastx = (loc->nx + (offset * direction) + currentGrid->size) % currentGrid->size;
 								checkValue |= check(currentGrid, lastx, lasty, value);
 								if (checkValue == 0)
 									{
