@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "grid.h"
-#define MAX 17
+#define MAX 22
 #define N 10
 int allocated = 0;
 void initCell(cell * c);
@@ -420,7 +420,7 @@ int foo(path ** p)
 		printPath(p[1]);
 		printPath(p[2]);
 		printPath(p[3]);
-		res->threads =10;
+		res->threads =20;
 		//res->threads = 100;
 		//res->threads = nBYn;
 		//int gridSize = 100;
@@ -447,7 +447,7 @@ int foo(path ** p)
 		//for(int gridSize = 1000; gridSize < 1057; gridSize++)
 		{
 			
-			int breaker = 100000*10;
+			int breaker = 100000*10*10;
 			printf("Starting %d\n", breaker);
 			res->result = result;
 			res->breaker = breaker;
