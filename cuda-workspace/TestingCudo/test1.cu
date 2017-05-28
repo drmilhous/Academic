@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "grid.h"
-#define MAX 8
+#define MAX 10
 #define N 10
 int allocated = 0;
 void initCell(cell * c);
@@ -111,7 +111,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		
 		int xx = res->size/res->threads * idx;
-		printf("Index %d xx = %d\n", idx, xx);
+		//printf("Index %d xx = %d\n", idx, xx);
 		grid ** result = &res->result[xx];
 		int gridSize = res->size/res->threads;
 		int breaker = 0;
