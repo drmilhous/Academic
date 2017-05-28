@@ -111,14 +111,24 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		
 		int xx = res->size/res->threads * idx;
-		//printf("Index %d xx = %d\n", idx, xx);
+		int index = g->size * (N+1);
+		grid * gridStack = &res->gridStack[index];
+		location * locStack = &res->locationStack[index];
+		printf("Index %d xx = %d gridIndex\n", idx, xx, index);
 		grid ** result = &res->result[xx];
 		int gridSize = res->size/res->threads;
 		int breaker = 0;
 		int bmax = 2;
 		int printcount = 0;
-		location * loc = &baseLoc[idx];
-		location * freeHead = NULL;
+		int count = 0;
+		//location * loc = &baseLoc[idx];
+		location * loc = locStack[count];
+		//copy location data
+		loc->x = baseLoc[idx].x;
+		loc->y = baseLoc[idx].y;
+		loc->full = baseLoc[idx].full;
+
+		//location * freeHead = NULL;
 		int i = 0;
 		int checkValue;
 		int value;
@@ -134,18 +144,22 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 				loc->nx = 0;
 				loc->ny = loc->y;
 			}
+		
 		grid * currentGrid = allocateGridDevice(g->size);
+		//grid * currentGrid = gridStack[count];
 		cloneToGrid(g, currentGrid);
-		loc->currentG = allocateGridDevice(g->size);
+		cloneToGrid(currentGrid, gridStack[count]);
+		//loc->currentG = gridStack[count];
 		loc->p = p;
 		loc->next = NULL;
 		int pop;
-		int count = 0;
+		
 		while (done == 0)
 			{
 				breaker++;
 				pop = 0;
-				cloneToGrid(loc->currentG, currentGrid);
+				cloneToGrid(gridStack[count], currentGrid);
+				//currentGrid = gridStack[count];
 				p = loc->p;
 				int lasty = loc->y;
 				int lastx = loc->x;
@@ -260,11 +274,12 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 						}
 						if(nextLoc != NULL)
 						{
-								if (freeHead == NULL)
+							/*	if (freeHead == NULL)
 									{
 										temp = (location *) malloc(sizeof(location));
 										temp->dev = DEV;
 										temp->currentG = allocateGridDevice(g->size);
+									//	temp = gridStack[count];
 									//	printf("Allocated Block\n");
 									}
 								else
@@ -274,7 +289,10 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 											{
 												freeHead = freeHead->next;
 											}
-									}
+									}*/
+								count++;
+								temp = locStack[count];
+								//temp->curr
 								temp->full = type;
 								temp->x = lastx;
 								temp->y = lasty;
@@ -291,10 +309,11 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 								//printf("Next x=%d y=%d nx=%d ny=%d\n",temp->x,temp->y,temp->nx,temp->ny);
 								//temp->full = loc->full;
 								temp->p = nextLoc;
-								cloneToGrid(currentGrid, temp->currentG);
-								temp->next = loc;
-								loc = temp;
-								count++;
+								//cloneToGrid(currentGrid, temp->currentG);
+								cloneToGrid(currentGrid, gridStack[count]);
+								//temp->next = loc;
+								//loc = temp;
+								
 								//printf("Push count=%d loc x%d y%d nx%d ny%d \n", count,loc->x, loc->y, loc->nx, loc->ny);
 						}
 					}
@@ -307,7 +326,19 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 								{
 									baseIndex--;
 								}
-								if (loc->next == NULL) //bottom of the stack
+								else
+								{
+									count--;
+									if(count >= 0)
+									{
+										loc = locStack[count];
+									}
+									else
+									{
+										done = 1;
+									}
+								}
+								/*if (loc->next == NULL) //bottom of the stack
 									{
 										done = 1;
 									}
@@ -328,7 +359,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 										loc = temp;
 										count--;
 										//printf("Pop count=%d loc x%d y%d nx%d ny%d \n", count,loc->x, loc->y, loc->nx, loc->ny);
-									}
+									}*/
 							}
 					}
 				if (bmax == breaker)
@@ -343,7 +374,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 					}
 			}
 		printf("The total is %d breaker %d\n", i, breaker);
-		while(freeHead != NULL && loc != freeHead)
+		/*while(freeHead != NULL && loc != freeHead)
 		{
 			if(loc->dev == MANAGED)
 				free(loc);
@@ -351,7 +382,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 			freeHead = freeHead->next;
 		}
 		if(loc->dev == MANAGED)
-			free(loc);
+			free(loc);*/
 	}
 
 int foo(path ** p)
@@ -376,7 +407,6 @@ int foo(path ** p)
 						larray[offset].x = row;
 						larray[offset].y = col;
 						larray[offset].full = PART;
-						larray[offset].dev = DEV;
 					}
 			}
 		larray[0].full = FULL;
@@ -384,10 +414,11 @@ int foo(path ** p)
 		printPath(p[1]);
 		printPath(p[2]);
 		printPath(p[3]);
-		res->threads = 100;
+		res->threads =1 ;
+		//res->threads = 100;
 		//res->threads = nBYn;
 		//int gridSize = 100;
-		int gridSize = 100 * res->threads;
+		int gridSize = 10 * res->threads;
 		int amount = gridSize * sizeof(grid *);
 		printf("Allocated Bytes %d\n", amount);
 		cudaMallocManaged((void **) &result, amount);
@@ -395,6 +426,12 @@ int foo(path ** p)
 			{
 				result[i] = allocateGrid(size);
 			}
+		amount = res->threads * sizeof(grid *) * (N+1);
+		printf("Allocated Bytes for GStack %d\n", amount);
+		cudaMallocManaged((void **) &res->gridStack, amount);
+		amount = sizeof(location) * (N+1) * res->threads;
+		printf("Allocated Bytes for LStack %d\n", amount);
+		cudaMallocManaged((void **) &res->locationStack, amount);	
 		//for(int breaker =100000; breaker < 10000000; breaker+=100000)
 		//int breaker = 100000000;
 		//for(int gridSize = 1000; gridSize < 1057; gridSize++)
@@ -406,8 +443,8 @@ int foo(path ** p)
 			res->breaker = breaker;
 			res->size = gridSize;
 			clock_t begin = clock();
-			//compute2<<<1, res->threads>>>(res, g, p, larray);
-			compute2<<<10, 10>>>(res, g, p, larray);
+			compute2<<<1, res->threads>>>(res, g, p, larray);
+			//compute2<<<10, 10>>>(res, g, p, larray);
 			cudaDeviceSynchronize();
 			clock_t end = clock();
 			double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;

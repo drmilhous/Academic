@@ -46,7 +46,6 @@ typedef struct location
 	struct grid * currentG;
 	path * p;
 	uint8_t full;
-	uint8_t dev;
 }location;
 
 typedef struct returnResult
@@ -55,6 +54,8 @@ typedef struct returnResult
 	int size;
 	int threads;
 	int breaker;
+	location * locationStack;
+	grid * gridStack;
 }returnResult;
 
 grid * allocateGrid(int size);
