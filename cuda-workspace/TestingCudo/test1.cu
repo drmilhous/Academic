@@ -291,7 +291,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 											}
 									}*/
 								count++;
-								temp = locStack[count];
+								temp = &locStack[count];
 								//temp->curr
 								temp->full = type;
 								temp->x = lastx;
@@ -331,7 +331,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 									count--;
 									if(count >= 0)
 									{
-										loc = locStack[count];
+										loc = &locStack[count];
 									}
 									else
 									{
