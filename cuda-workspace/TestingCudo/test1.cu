@@ -327,6 +327,10 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 								if(loc->full == FULL)
 								{
 									baseIndex--;
+									if(baseIndex < 0)
+									{
+										done =1 ;
+									}
 								}
 								else
 								{
