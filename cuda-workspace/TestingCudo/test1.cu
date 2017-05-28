@@ -358,7 +358,7 @@ int foo(path ** p)
 	{
 		returnResult * res;
 		cudaMallocManaged((void **) &res, 1);
-		cudaDeviceSetLimit(cudaLimitMallocHeapSize, 128 * 1024 * 1024 * 8); //See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#heap-memory-allocation
+	//	cudaDeviceSetLimit(cudaLimitMallocHeapSize, 128 * 1024 * 1024 * 8); //See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#heap-memory-allocation
 		int nBYn = N * N;
 		int size = N;
 		grid * g = allocateGrid(size);
