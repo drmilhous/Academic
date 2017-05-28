@@ -46,7 +46,7 @@ void foobared()
 		returnResult * res;
 		cudaMallocManaged((void **) &res, 1);
 		res->threads = 1;
-		cudaDeviceSetLimit(cudaLimitMallocHeapSize, 128 * 1024 * 1024 * 8);
+		cudaDeviceSetLimit(cudaLimitMallocHeapSize, 128 * 1024 * 1024 * 16);
 		gridSize = 1057 * res->threads;
 		cudaMallocManaged((void **) &result, sizeof(grid *) * gridSize);
 		for (i = 0; i < gridSize; i++)
