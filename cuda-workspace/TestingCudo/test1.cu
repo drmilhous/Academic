@@ -447,7 +447,7 @@ int foo(path ** p)
 		//for(int gridSize = 1000; gridSize < 1057; gridSize++)
 		{
 			
-			int breaker = 5000;
+			int breaker = 5000000;
 			printf("Starting %d\n", breaker);
 			res->result = result;
 			res->breaker = breaker;
