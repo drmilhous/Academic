@@ -342,6 +342,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 									{*/
 										done = 1;
 									}
+								loc = &locStack[count];//comment me out
 								printf("Pop count=%d loc x%d y%d nx%d ny%d \n", count,loc->x, loc->y, loc->nx, loc->ny);
 								/*if (loc->next == NULL) //bottom of the stack
 									{
