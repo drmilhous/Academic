@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "grid.h"
-#define MAX 9
+#define MAX 12
 #define N 10
 int allocated = 0;
 void initCell(cell * c);
@@ -111,7 +111,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		
 		int xx = res->size/res->threads * idx;
-		int index = idx * (N+1);
+		int index = idx * (MAX+1);
 		grid ** gridStack = &res->gridStack[index];
 		location * locStack = &res->locationStack[index];
 		printf("Index %d xx = %d gridIndex\n", idx, xx, index);
@@ -432,14 +432,14 @@ int foo(path ** p)
 			{
 				result[i] = allocateGrid(size);
 			}
-		amount = res->threads * sizeof(grid *) * (N+1);
+		amount = res->threads * sizeof(grid *) * (MAX+1);
 		printf("Allocated Bytes for GStack %d\n", amount);
 		cudaMallocManaged((void **) &res->gridStack, amount);
-		for (i = 0; i < res->threads * (N+1); i++)
+		for (i = 0; i < res->threads * (MAX+1); i++)
 			{
 				res->gridStack[i] = allocateGrid(size);
 			}
-		amount = sizeof(location) * (N+1) * res->threads;
+		amount = sizeof(location) * (MAX+1) * res->threads;
 		printf("Allocated Bytes for LStack %d\n", amount);
 		cudaMallocManaged((void **) &res->locationStack, amount);	
 		//for(int breaker =100000; breaker < 10000000; breaker+=100000)
