@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "grid.h"
-#define MAX 13
+#define MAX 10
 #define N 10
 int allocated = 0;
 void initCell(cell * c);
@@ -342,7 +342,13 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 					}
 			}
 		printf("The total is %d breaker %d\n", i, breaker);
-
+		while(freeHead != NULL)
+		{
+			free(loc);
+			loc = freeHead;
+			freeHead = freeHead->next;
+		}
+		free(loc);
 	}
 
 int foo(path ** p)
