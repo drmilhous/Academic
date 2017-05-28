@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "grid.h"
-#define MAX 1
+#define MAX 2
 #define N 10
 int allocated = 0;
 void initCell(cell * c);
@@ -164,7 +164,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 				p = loc->p;
 				int lasty = loc->y;
 				int lastx = loc->x;
-				printf("Count=%d loc x%d y%d nx%d ny%d \n", count,loc->x, loc->y, loc->nx, loc->ny);
+			//	printf("Count=%d loc x%d y%d nx%d ny%d \n", count,loc->x, loc->y, loc->nx, loc->ny);
 				value = p->letters[0];
 				checkValue = check(currentGrid, loc->x, loc->y, value);
 				if (checkValue == 0)
@@ -316,7 +316,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 								//temp->next = loc;
 								//loc = temp;
 								
-								printf("Push count=%d loc x%d y%d nx%d ny%d \n", count,loc->x, loc->y, loc->nx, loc->ny);
+							//	printf("Push count=%d loc x%d y%d nx%d ny%d \n", count,loc->x, loc->y, loc->nx, loc->ny);
 						}
 					}
 				else 
@@ -342,8 +342,8 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 									{*/
 										done = 1;
 									}
-								loc = &locStack[count];//comment me out
-								printf("Pop count=%d loc x%d y%d nx%d ny%d \n", count,loc->x, loc->y, loc->nx, loc->ny);
+								//loc = &locStack[count];//comment me out
+								//printf("Pop count=%d loc x%d y%d nx%d ny%d \n", count,loc->x, loc->y, loc->nx, loc->ny);
 								/*if (loc->next == NULL) //bottom of the stack
 									{
 										done = 1;
