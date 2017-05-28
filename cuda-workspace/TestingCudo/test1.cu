@@ -122,7 +122,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		int printcount = 0;
 		int count = 0;
 		//location * loc = &baseLoc[idx];
-		location * loc = locStack[count];
+		location * loc = &locStack[count];
 		//copy location data
 		loc->x = baseLoc[idx].x;
 		loc->y = baseLoc[idx].y;
