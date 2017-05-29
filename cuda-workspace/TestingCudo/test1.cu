@@ -320,7 +320,6 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 				if (bmax == breaker)
 					{
 						//printf("Breaker %d PrintCount  %d\n", breaker, printcount);
-						res->total = breaker;
 						bmax *= 1.2;
 					}
 				if (breaker == res->breaker)
@@ -330,7 +329,6 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 						printf("Breaker Max hit!");
 					}
 			}
-		res->done = 1;
 		printf("The total is %d breaker %d\n", i, breaker);
 	}
 
