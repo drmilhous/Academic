@@ -14,7 +14,7 @@ __device__ void cloneToGrid(grid * g, grid * g2);
 __device__ void eliminateValue(cell **c, int row, int col, int max, int value);
 __device__ int check(grid * g, int row, int col, int number);
 __device__ grid * allocateGridDevice(int size);
-__device__ int updateLocation(location * loc, path * p);
+__device__ int updateLocation(location * loc, path * p, int size);
 __global__ void testIter(returnResult * res);
 void printGrid(grid * g);
 __device__ int pow2(int x);
@@ -202,7 +202,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 						printcount++;
 						//done = 1;
 					}
-				pop = updateLocation(loc, p);
+				pop = updateLocation(loc, p, g->size);
 				if (checkValue == 0 && count < MAX && pop == 0) //rec value
 					{
 						uint8_t type = PART;
@@ -391,7 +391,7 @@ int foo(path ** p, int MAX)
 		return 0;
 	}
 
-__device__ int updateLocation(location * loc, path * p)
+__device__ int updateLocation(location * loc, path * p, int size)
 	{
 		int pop = 0;
 		if (loc->full == PART)
@@ -399,13 +399,13 @@ __device__ int updateLocation(location * loc, path * p)
 						if (p->direction == LEFT)
 							{
 								loc->ny++;
-								if (loc->ny >= g->size)
+								if (loc->ny >= size)
 									pop = 1;
 							}
 						else
 							{
 								loc->nx++;
-								if (loc->nx >= g->size)
+								if (loc->nx >= size)
 									pop = 1;
 							}
 					}
@@ -414,15 +414,15 @@ __device__ int updateLocation(location * loc, path * p)
 						if (p->direction == LEFT)
 							{
 								loc->ny++;
-								if (loc->ny >= g->size)
+								if (loc->ny >= size)
 									{
 										loc->ny = 0;
 										loc->y++;
-										if (loc->y >= g->size)
+										if (loc->y >= size)
 											{
 												loc->y = 0;
 												loc->x++;
-												if (loc->x >= g->size)
+												if (loc->x >= size)
 													{
 														pop = 1;
 													}
@@ -432,15 +432,15 @@ __device__ int updateLocation(location * loc, path * p)
 						else
 							{
 								loc->nx++;
-								if (loc->nx >= g->size)
+								if (loc->nx >= size)
 									{
 										loc->nx = 0;
 										loc->x++;
-										if (loc->x >= g->size)
+										if (loc->x >= size)
 											{
 												loc->x = 0;
 												loc->y++;
-												if (loc->y >= g->size)
+												if (loc->y >= size)
 													{
 														pop = 1;
 													}
