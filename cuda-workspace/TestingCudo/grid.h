@@ -50,6 +50,8 @@ typedef struct location
 
 typedef struct returnResult
 {
+	int total;
+	int done;
 	grid ** result;
 	int size;
 	int threads;
