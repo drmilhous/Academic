@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
 #include "grid.h"
 #define MAX 25
 #define N 10
@@ -400,6 +401,7 @@ int foo(path ** p)
 			//compute2<<<10, 10>>>(res, g, p, larray);
 			while(res->done == 0)
 			{
+				sleep(10);
 				printf("Count = %d", res->total);
 			}
 			cudaDeviceSynchronize();
