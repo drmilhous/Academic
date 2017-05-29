@@ -79,6 +79,7 @@ void foobared()
 	}
 void bar()
 	{
+		int MAX = 5;
 		int deviceCount;
 		cudaGetDeviceCount(&deviceCount);
 		int device;
@@ -94,7 +95,7 @@ void bar()
 		path ** p = scanChars();
 		if (p != NULL)
 			{
-				foo(&p[1]);
+				foo(&p[1],MAX);
 			}
 	}
 __global__ void compute2(returnResult * res, grid * g, path ** pathlist, location * l)
@@ -333,9 +334,8 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		printf("The total is %d breaker %d\n", i, breaker);
 	}
 
-int foo(path ** p)
+int foo(path ** p, int MAX)
 	{
-		int MAX = 5;
 		returnResult * res;
 		cudaMallocManaged((void **) &res, 1);
 		//	cudaDeviceSetLimit(cudaLimitMallocHeapSize, 128 * 1024 * 1024 * 8); //See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#heap-memory-allocation
