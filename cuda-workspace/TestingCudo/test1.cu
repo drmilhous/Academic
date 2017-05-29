@@ -32,10 +32,7 @@ __global__ void testIter(returnResult * res)
 				temp[index]->ok = '1';
 			}
 	}
-int main(void)
-	{
-		bar();
-	}
+
 void foobared()
 	{
 		int size = 10;
@@ -77,9 +74,9 @@ void foobared()
 			}
 
 	}
-void bar()
+int main(void)
 	{
-		int MAX = 5;
+		int MAX = 5 * 2;
 		int deviceCount;
 		cudaGetDeviceCount(&deviceCount);
 		int device;
