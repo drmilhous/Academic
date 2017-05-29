@@ -89,7 +89,7 @@ void bar()
 				cudaGetDeviceProperties(&deviceProp, device);
 				printf("Device %d has compute capability %d.%d.\n", device, deviceProp.major, deviceProp.minor);
 			} //	 - See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/#multi-device-system
-		device = 0;
+		device = 3;
 		printf("Starting on device %d MAX=%d \n", device,MAX);
 		cudaSetDevice(device);
 		path ** p = scanChars();
