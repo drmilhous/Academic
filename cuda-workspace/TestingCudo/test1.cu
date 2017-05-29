@@ -20,7 +20,7 @@ __device__ int pow2(int x);
 __device__ grid * cloneGrid(grid * g);
 char convert(int x);
 void bar();
-int foo(path ** p);
+int foo(path ** p, int MAX);
 __global__ void testIter(returnResult * res)
 	{
 		grid * g = allocateGridDevice(res->result[0]->size);
