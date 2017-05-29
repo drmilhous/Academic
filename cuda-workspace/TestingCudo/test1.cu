@@ -20,8 +20,7 @@ void printGrid(grid * g);
 __device__ int pow2(int x);
 __device__ grid * cloneGrid(grid * g);
 char convert(int x);
-void bar();
-int foo(path ** p, int MAX);
+int foo(path ** p, int MAX, int breaker);
 __global__ void testIter(returnResult * res)
 	{
 		grid * g = allocateGridDevice(res->result[0]->size);
@@ -34,59 +33,32 @@ __global__ void testIter(returnResult * res)
 			}
 	}
 
-void foobared()
+int main(int argc, char ** argv)
 	{
-		int size = 10;
-		grid ** result;
-		int i;
-		int last = 0;
-		int gridSize;
-		returnResult * res;
-		cudaMallocManaged((void **) &res, 1);
-		res->threads = 1;
-		//cudaDeviceSetLimit(cudaLimitMallocHeapSize, 128 * 1024 * 1024 * 16);
-		gridSize = 1057 * res->threads;
-		cudaMallocManaged((void **) &result, sizeof(grid *) * gridSize);
-		for (i = 0; i < gridSize; i++)
-			{
-				result[i] = allocateGrid(size);
-			}
-		printf("Allocated Bytes %d\n", allocated);
-		for (int breaker = 1050; breaker < 1000000; breaker += 1000)
-			{
-				printf("Starting %d\n", breaker);
-				res->result = result;
-				res->breaker = breaker;
-				res->size = gridSize;
-				testIter<<<1, res->threads>>>(res);
-				cudaDeviceSynchronize();
-				for (i = 0; i < gridSize; i++)
-					{
-						if (result[i]->ok == '1')
-							{
-								last = i;
-							}
-					}
-				printf("Size %d Grid #%d", gridSize, last);
-				printf("Grid #%d", 0);
-				printGrid(result[0]);
-				printf("Grid #%d", last);
-				printGrid(result[last]);
-			}
-
-	}
-int main(void)
-	{
-		int MAX = 5 * 2;
-		int deviceCount;
-		cudaGetDeviceCount(&deviceCount);
+		int MAX;
 		int device;
+		int breaker = 100000 * 10 * 10 * 10;
 		for (device = 0; device < deviceCount; ++device)
 			{
 				cudaDeviceProp deviceProp;
 				cudaGetDeviceProperties(&deviceProp, device);
 				printf("Device %d has compute capability %d.%d.\n", device, deviceProp.major, deviceProp.minor);
 			} //	 - See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/#multi-device-system
+		if(argc == 4)
+		{
+			MAX = atoi(argv[1]);
+			device = atoi(argv[2]);
+			breaker = atoi(argv[3]);
+		}
+		else
+		{
+			printf("ARGS = MAX DEV BREAKER\n");
+			MAX = 5 * 2;
+		}
+		
+		int deviceCount;
+		cudaGetDeviceCount(&deviceCount);
+		
 		device = 3;
 		printf("Starting on device %d MAX=%d \n", device, MAX);
 		cudaSetDevice(device);
@@ -96,6 +68,90 @@ int main(void)
 				foo(&p[1],MAX);
 			}
 	}
+int foo(path ** p, int MAX, int breaker)
+	{
+		returnResult * res;
+		cudaMallocManaged((void **) &res, 1);
+		//	cudaDeviceSetLimit(cudaLimitMallocHeapSize, 128 * 1024 * 1024 * 8); //See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#heap-memory-allocation
+		int nBYn = N * N;
+		int size = N;
+		grid * g = allocateGrid(size);
+
+		grid ** result;
+		int i;
+		int last = 0;
+		location * larray;
+		cudaMallocManaged((void **) &larray, sizeof(location) * nBYn);
+		for (int row = 0; row < N; row++)
+			{
+				for (int col = 0; col < N; col++)
+					{
+						int offset = row * N + col;
+						larray[offset].x = row;
+						larray[offset].y = col;
+						larray[offset].full = PART;
+					}
+			}
+		larray[0].full = PART;
+		printPath(p[0]);
+		printPath(p[1]);
+		printPath(p[2]);
+		printPath(p[3]);
+		res->threads = 100;
+		int gridSize = 1 * res->threads;
+		int amount = gridSize * sizeof(grid *);
+		printf("Allocated Bytes %d\n", amount);
+		cudaMallocManaged((void **) &result, amount);
+		for (i = 0; i < gridSize; i++)
+			{
+				result[i] = allocateGrid(size);
+			}
+		amount = res->threads * sizeof(grid *) * (MAX + 1);
+		printf("Allocated Bytes for GStack %d\n", amount);
+		cudaMallocManaged((void **) &res->gridStack, amount);
+		for (i = 0; i < res->threads * (MAX + 1); i++)
+			{
+				res->gridStack[i] = allocateGrid(size);
+			}
+		amount = sizeof(location) * (MAX + 1) * res->threads;
+		printf("Allocated Bytes for LStack %d\n", amount);
+		cudaMallocManaged((void **) &res->locationStack, amount);
+		//for(int breaker =100000; breaker < 10000000; breaker+=100000)
+			{
+
+				
+				printf("Starting %d\n", breaker);
+				res->result = result;
+				res->breaker = breaker;
+				res->size = gridSize;
+				res->MAX = MAX;
+				clock_t begin = clock();
+				compute2<<<1, res->threads>>>(res, g, p, larray);
+				//compute2<<<10, 10>>>(res, g, p, larray);
+				cudaDeviceSynchronize();
+				clock_t end = clock();
+				double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
+				printf("Time spent %lf iteration Max %d\n", time_spent, breaker);
+				for (i = 0; i < gridSize; i++)
+					{
+						if (result[i]->ok == '1')
+							{
+								last = i;
+								printf("Grid #%d\n", i);
+								printGrid(result[i]);
+							}
+					}
+				printf("Size %d Grid #%d", gridSize, last);
+				/*printf("Grid #%d", 0);
+				 printGrid(result[0]);
+				 printf("Grid #%d", last);
+				 printGrid(result[last]);*/
+				//printf("Done %d\n", breaker);
+			}
+		return 0;
+	}
+
+
 __global__ void compute2(returnResult * res, grid * g, path ** pathlist, location * l)
 	{
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
@@ -275,121 +331,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		printf("The total is %d breaker %d\n", i, breaker);
 	}
 
-int foo(path ** p, int MAX)
-	{
-		returnResult * res;
-		cudaMallocManaged((void **) &res, 1);
-		//	cudaDeviceSetLimit(cudaLimitMallocHeapSize, 128 * 1024 * 1024 * 8); //See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#heap-memory-allocation
-		int nBYn = N * N;
-		int size = N;
-		grid * g = allocateGrid(size);
 
-		grid ** result;
-		int i;
-		int last = 0;
-		location * larray;
-		cudaMallocManaged((void **) &larray, sizeof(location) * nBYn);
-		for (int row = 0; row < N; row++)
-			{
-				for (int col = 0; col < N; col++)
-					{
-						int offset = row * N + col;
-						larray[offset].x = row;
-						larray[offset].y = col;
-						larray[offset].full = PART;
-					}
-			}
-		larray[0].full = PART;
-		printPath(p[0]);
-		printPath(p[1]);
-		printPath(p[2]);
-		printPath(p[3]);
-		res->threads = 100;
-		//res->threads = 100;
-		//res->threads = nBYn;
-		//int gridSize = 100;
-		int gridSize = 1 * res->threads;
-		int amount = gridSize * sizeof(grid *);
-		printf("Allocated Bytes %d\n", amount);
-		cudaMallocManaged((void **) &result, amount);
-		for (i = 0; i < gridSize; i++)
-			{
-				result[i] = allocateGrid(size);
-			}
-		amount = res->threads * sizeof(grid *) * (MAX + 1);
-		printf("Allocated Bytes for GStack %d\n", amount);
-		cudaMallocManaged((void **) &res->gridStack, amount);
-		for (i = 0; i < res->threads * (MAX + 1); i++)
-			{
-				res->gridStack[i] = allocateGrid(size);
-			}
-		amount = sizeof(location) * (MAX + 1) * res->threads;
-		printf("Allocated Bytes for LStack %d\n", amount);
-		cudaMallocManaged((void **) &res->locationStack, amount);
-		//for(int breaker =100000; breaker < 10000000; breaker+=100000)
-			{
-
-				int breaker = 100000 * 10 * 10 * 10;
-				printf("Starting %d\n", breaker);
-				res->result = result;
-				res->breaker = breaker;
-				res->size = gridSize;
-				res->MAX = MAX;
-				clock_t begin = clock();
-				compute2<<<1, res->threads>>>(res, g, p, larray);
-				//compute2<<<10, 10>>>(res, g, p, larray);
-				cudaDeviceSynchronize();
-				clock_t end = clock();
-				double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
-				printf("Time spent %lf iteration Max %d\n", time_spent, breaker);
-				for (i = 0; i < gridSize; i++)
-					{
-						if (result[i]->ok == '1')
-							{
-								last = i;
-								printf("Grid #%d\n", i);
-								printGrid(result[i]);
-							}
-					}
-				printf("Size %d Grid #%d", gridSize, last);
-				/*printf("Grid #%d", 0);
-				 printGrid(result[0]);
-				 printf("Grid #%d", last);
-				 printGrid(result[last]);*/
-				//printf("Done %d\n", breaker);
-			}
-		/*i = 0;
-		 for (int row = 0; row < N; row++)
-		 {
-		 for (int col = 0; col < N; col++)
-		 {
-
-		 for(int j = 0; j <MAX * 3; j+=3)
-		 {
-		 int idx = (row * size + col) * MAX*3 +j;
-		 if (result[idx]->ok == '1')
-		 {
-		 printf("(%d,%d,%d)\n", row, col, j);
-		 printGrid(result[idx]);
-		 }
-		 i++;
-		 }
-		 }
-		 }
-		 */
-		/*for( int i = 0; i < nBYn * MAX * 3; i++)
-		 {
-		 if (result[i]->ok == '1')
-		 {
-		 //printf("(%d,%d,%d)\n", row, col, j);
-		 puts("");
-		 printGrid(result[i]);
-		 }
-		 }
-		 */
-		//cudaFree(array);
-		return 0;
-	}
 
 __device__ int updateLocation(location * loc, path * p, int size)
 	{
