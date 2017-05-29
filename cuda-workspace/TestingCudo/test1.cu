@@ -14,6 +14,7 @@ __device__ void cloneToGrid(grid * g, grid * g2);
 __device__ void eliminateValue(cell **c, int row, int col, int max, int value);
 __device__ int check(grid * g, int row, int col, int number);
 __device__ grid * allocateGridDevice(int size);
+__device__ int updateLocation(location * loc, path * p);
 __global__ void testIter(returnResult * res);
 void printGrid(grid * g);
 __device__ int pow2(int x);
@@ -201,61 +202,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 						printcount++;
 						//done = 1;
 					}
-				if (loc->full == PART)
-					{
-						if (p->direction == LEFT)
-							{
-								loc->ny++;
-								if (loc->ny >= g->size)
-									pop = 1;
-							}
-						else
-							{
-								loc->nx++;
-								if (loc->nx >= g->size)
-									pop = 1;
-							}
-					}
-				else
-					{
-						if (p->direction == LEFT)
-							{
-								loc->ny++;
-								if (loc->ny >= g->size)
-									{
-										loc->ny = 0;
-										loc->y++;
-										if (loc->y >= g->size)
-											{
-												loc->y = 0;
-												loc->x++;
-												if (loc->x >= g->size)
-													{
-														pop = 1;
-													}
-											}
-									}
-							}
-						else
-							{
-								loc->nx++;
-								if (loc->nx >= g->size)
-									{
-										loc->nx = 0;
-										loc->x++;
-										if (loc->x >= g->size)
-											{
-												loc->x = 0;
-												loc->y++;
-												if (loc->y >= g->size)
-													{
-														pop = 1;
-													}
-											}
-									}
-							}
-					}
-
+				pop = updateLocation(loc, p);
 				if (checkValue == 0 && count < MAX && pop == 0) //rec value
 					{
 						uint8_t type = PART;
@@ -322,7 +269,6 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 				if (breaker == res->breaker)
 					{
 						done = 1;
-
 						printf("Breaker Max hit!");
 					}
 			}
@@ -443,6 +389,66 @@ int foo(path ** p, int MAX)
 		 */
 		//cudaFree(array);
 		return 0;
+	}
+
+__device__ int updateLocation(location * loc, path * p)
+	{
+		int pop = 0;
+		if (loc->full == PART)
+					{
+						if (p->direction == LEFT)
+							{
+								loc->ny++;
+								if (loc->ny >= g->size)
+									pop = 1;
+							}
+						else
+							{
+								loc->nx++;
+								if (loc->nx >= g->size)
+									pop = 1;
+							}
+					}
+				else
+					{
+						if (p->direction == LEFT)
+							{
+								loc->ny++;
+								if (loc->ny >= g->size)
+									{
+										loc->ny = 0;
+										loc->y++;
+										if (loc->y >= g->size)
+											{
+												loc->y = 0;
+												loc->x++;
+												if (loc->x >= g->size)
+													{
+														pop = 1;
+													}
+											}
+									}
+							}
+						else
+							{
+								loc->nx++;
+								if (loc->nx >= g->size)
+									{
+										loc->nx = 0;
+										loc->x++;
+										if (loc->x >= g->size)
+											{
+												loc->x = 0;
+												loc->y++;
+												if (loc->y >= g->size)
+													{
+														pop = 1;
+													}
+											}
+									}
+							}
+					}
+			return pop;
 	}
 
 __device__ int pow2(int x)
