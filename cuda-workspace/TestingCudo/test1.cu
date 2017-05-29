@@ -64,7 +64,7 @@ int main(int argc, char ** argv)
 		path ** p = scanChars();
 		if (p != NULL)
 			{
-				foo(&p[1],MAX);
+				foo(&p[1],MAX, breaker);
 			}
 	}
 int foo(path ** p, int MAX, int breaker)
