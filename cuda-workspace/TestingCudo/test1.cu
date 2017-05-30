@@ -57,9 +57,7 @@ int main(int argc, char ** argv)
 			printf("ARGS = MAX DEV BREAKER\n");
 			MAX = 5 * 2;
 		}
-
-		device = 3;
-		printf("Starting on device %d MAX=%d \n", device, MAX);
+		printf("Starting on device %d MAX %d breaker \n", device, MAX, breaker);
 		cudaSetDevice(device);
 		path ** p = scanChars();
 		if (p != NULL)
