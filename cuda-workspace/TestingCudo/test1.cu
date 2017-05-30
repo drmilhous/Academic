@@ -167,7 +167,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		int index = idx * (MAX + 1);
 		grid ** gridStack = &res->gridStack[index];
 		location * locStack = &res->locationStack[index];
-		printf("Index %d xx = %d gridIndex\n", idx, xx, index);
+		//printf("Index %d xx = %d gridIndex\n", idx, xx, index);
 		grid ** result = &res->result[xx];
 		int gridSize = res->size / res->threads;
 		int breaker = 0;
