@@ -16,23 +16,12 @@ __device__ void eliminateValue(cell **c, int row, int col, int max, int value);
 __device__ int check(grid * g, int row, int col, int number);
 __device__ grid * allocateGridDevice(int size);
 __device__ int updateLocation(location * loc, path * p, int size);
-__global__ void testIter(returnResult * res);
 void printGrid(grid * g);
 __device__ int pow2(int x);
 __device__ grid * cloneGrid(grid * g);
 char convert(int x);
 int foo(path ** p, int MAX, int breaker);
-__global__ void testIter(returnResult * res)
-	{
-		grid * g = allocateGridDevice(res->result[0]->size);
-		grid ** temp = res->result;
-		for (int i = 0; i < res->breaker; i++)
-			{
-				int index = i % res->size;
-				cloneToGrid(g, temp[index]);
-				temp[index]->ok = '1';
-			}
-	}
+
 
 int main(int argc, char ** argv)
 	{
@@ -106,6 +95,7 @@ grid * getGrids(path ** p, int MAX, int size)
 	clock_t end = clock();
 	double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
 	printf("Time spent %lf\n", time_spent);
+	int last = 0;
 	for (int i = 0; i < gridSize; i++)
 			{
 				if (result[i]->ok == '1')
