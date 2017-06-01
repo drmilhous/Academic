@@ -166,7 +166,7 @@ gridResult * getGrids(path ** p, int MAX, int size)
 							printGrid(result[i]);
 						}
 			}
-	gridResult* grids = malloc(sizeof(gridResult));
+	gridResult* grids = (gridResult *)malloc(sizeof(gridResult));
 	grids->grids = result;
 	grids->size = last;
 	printf("Size %d Grid #%d\n", gridSize, last);
