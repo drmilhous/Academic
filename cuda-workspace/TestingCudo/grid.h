@@ -57,6 +57,7 @@ typedef struct returnResult
 	int breaker;
 	location * locationStack;
 	grid ** gridStack;
+
 }returnResult;
 
 grid * allocateGrid(int size);
