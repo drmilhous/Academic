@@ -86,6 +86,8 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 		{
 			result[i] = allocateGrid(size);
 			cloneToGridLocal(grids->grids[i],result[i]);
+			result[i]->count = 0;
+			result[i]->iterations = 0;
 		}
 	amount = res->threads * sizeof(grid *) * (MAX + 1);
 	printf("Allocated Bytes for GStack %d\n", amount);
@@ -116,7 +118,15 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 							printGrid(result[i]);
 						}
 			}
-	printf("Size %d Grid #%d\n", gridSize, last);
+	int iter = 0;
+	int total = 0;
+	for (int i = 0; i < gridSize; i++)
+		{
+			total += result[i]->count;
+			iter += result[i]->iterations;
+		}
+	printf("Size Grid total iter\n");
+	printf("%d, %d,%d,%d"gridSize, last,total, iter);
 }
 
 
@@ -447,7 +457,9 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 						printf("Breaker Max hit!");
 					}*/
 			}
-		printf("The total is %d breaker %d\n", i, breaker);
+		g->count = i;
+		g->interations = breaker;
+		//printf("The total is %d breaker %d\n", i, breaker);
 	}
 
 

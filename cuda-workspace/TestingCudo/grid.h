@@ -36,6 +36,8 @@ typedef struct grid
 	//int yy;
 	uint8_t x;
 	uint8_t y;
+	int count;
+	int iterations;
 	} grid;
 
 typedef struct location
@@ -58,6 +60,7 @@ typedef struct returnResult
 	int threads;
 	location * locationStack;
 	grid ** gridStack;
+	
 
 }returnResult;
 
