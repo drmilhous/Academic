@@ -12,7 +12,7 @@ __global__ void compute2(returnResult * res, grid * g, path ** pathList, locatio
 __global__ void compute3(returnResult * res, grid ** g, path ** pathlist, location * l);
 __device__ void computeIterative(returnResult * res, grid * g, path ** pathList, location * baseLoc);
 __device__ void add(grid ** base, grid ** last, grid * newList);
-__device__ void cloneToGrid(grid * g, grid * g2);
+__global__ void cloneToGrid(grid * g, grid * g2);
 __device__ void eliminateValue(cell **c, int row, int col, int max, int value);
 __device__ int check(grid * g, int row, int col, int number);
 __device__ grid * allocateGridDevice(int size);
@@ -77,13 +77,14 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 	res->threads = grids->size;
 	int base = 512;
 	int blocks = (grids->size % base)+1;
-	int gridSize = 1;
+	int gridSize = 1 * res->threads;
 	int amount = gridSize * sizeof(grid *);
 	printf("Allocated Bytes %d\n", amount);
 	cudaMallocManaged((void **) &result, amount);
 	for (int i = 0; i < gridSize; i++)
 		{
 			result[i] = allocateGrid(size);
+			cloneToGrid(grids->grids[i],result[i]);
 		}
 	amount = res->threads * sizeof(grid *) * (MAX + 1);
 	printf("Allocated Bytes for GStack %d\n", amount);
@@ -563,7 +564,7 @@ char convert(int x)
 		return res;
 	}
 
-__device__ void cloneToGrid(grid * g, grid * g2)
+__global__ void cloneToGrid(grid * g, grid * g2)
 	{
 		g2->size = g->size;
 		g2->ok = g->ok;
