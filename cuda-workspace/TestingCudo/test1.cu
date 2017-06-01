@@ -22,6 +22,7 @@ __device__ int pow2(int x);
 __device__ grid * cloneGrid(grid * g);
 char convert(int x);
 int foo(path ** p, int MAX, int breaker);
+void processGrids(gridResult * grids, path ** path,int MAX, int size);
 
 
 int main(int argc, char ** argv)
