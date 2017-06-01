@@ -62,9 +62,63 @@ int main(int argc, char ** argv)
 		path ** p = scanChars();
 		if (p != NULL)
 			{
-				foo(&p[0],MAX, breaker);
+				//foo(&p[0],MAX, breaker);
+				getGrids(p,MAX,N);
 			}
 	}
+grid * getGrids(path ** p, int MAX, int size)
+{
+	returnResult * res;
+	cudaMallocManaged((void **) &res, 1);
+	grid * g = allocateGrid(size);
+	grid ** result;
+	location * larray;
+	cudaMallocManaged((void **) &larray, sizeof(location));
+	larray[0].x = 0;
+	larray[0].y = 0;
+	larray[0].full = FULL;
+	res->threads = 1;
+	int gridSize = 1000;
+	int amount = gridSize * sizeof(grid *);
+	printf("Allocated Bytes %d\n", amount);
+	cudaMallocManaged((void **) &result, amount);
+	for (i = 0; i < gridSize; i++)
+		{
+			result[i] = allocateGrid(size);
+		}
+	amount = res->threads * sizeof(grid *) * (MAX + 1);
+	printf("Allocated Bytes for GStack %d\n", amount);
+	cudaMallocManaged((void **) &res->gridStack, amount);
+	for (i = 0; i < res->threads * (MAX + 1); i++)
+		{
+			res->gridStack[i] = allocateGrid(size);
+		}
+	amount = sizeof(location) * (MAX + 1) * res->threads;
+	printf("Allocated Bytes for LStack %d\n", amount);
+	cudaMallocManaged((void **) &res->locationStack, amount);
+	res->result = result;
+	res->size = gridSize;
+	res->MAX = MAX;
+	clock_t begin = clock();
+	compute2<<<1, res->threads>>>(res, g, p, larray);
+	cudaDeviceSynchronize();
+	clock_t end = clock();
+	double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
+	printf("Time spent %lf iteration Max %d\n", time_spent, breaker);
+	for (i = 0; i < gridSize; i++)
+			{
+				if (result[i]->ok == '1')
+						{
+							last = i;
+							printf("Grid #%d\n", i);
+							printGrid(result[i]);
+						}
+			}
+	printf("Size %d Grid #%d\n", gridSize, last);
+	return result;
+}
+
+
 int foo(path ** p, int MAX, int breaker)
 	{
 		returnResult * res;
@@ -252,6 +306,8 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 						//printf("breaker@@ = %d offset %d\n", breaker, offset);
 						cloneToGrid(currentGrid, result[offset]);
 						result[offset]->ok = '1';
+						result[offset]->x = lastx;
+						result[offset]->y = lasty;
 						printcount++;
 						//done = 1;
 					}
@@ -319,11 +375,11 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 						//printf("Breaker %d PrintCount  %d\n", breaker, printcount);
 						bmax *= 1.2;
 					}
-				if (breaker == res->breaker)
+			/*	if (breaker == res->breaker)
 					{
 						done = 1;
 						printf("Breaker Max hit!");
-					}
+					}*/
 			}
 		printf("The total is %d breaker %d\n", i, breaker);
 	}

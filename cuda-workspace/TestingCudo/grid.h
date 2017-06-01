@@ -34,6 +34,8 @@ typedef struct grid
 	//int xx;
 	char ok;
 	//int yy;
+	uint8_t x;
+	uint8_t y;
 	} grid;
 
 typedef struct location
