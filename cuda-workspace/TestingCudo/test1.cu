@@ -105,7 +105,7 @@ grid * getGrids(path ** p, int MAX, int size)
 	cudaDeviceSynchronize();
 	clock_t end = clock();
 	double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
-	printf("Time spent %lf iteration Max %d\n", time_spent, breaker);
+	printf("Time spent %lf\n", time_spent);
 	for (int i = 0; i < gridSize; i++)
 			{
 				if (result[i]->ok == '1')
