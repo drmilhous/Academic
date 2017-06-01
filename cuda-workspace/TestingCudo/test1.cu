@@ -75,7 +75,8 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 		larray[i].full = PART;
 	}
 	res->threads = grids->size;
-	int blocks = (grids->size % 512)+1;
+	int base = 512;
+	int blocks = (grids->size % base)+1;
 	int gridSize = 1;
 	int amount = gridSize * sizeof(grid *);
 	printf("Allocated Bytes %d\n", amount);
@@ -98,7 +99,7 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 	res->size = gridSize;
 	res->MAX = MAX;
 	clock_t begin = clock();
-	compute3<<<blocks, 512>>>(res, grids->grids, p, larray);
+	compute3<<<blocks, base>>>(res, grids->grids, p, larray);
 	cudaDeviceSynchronize();
 	clock_t end = clock();
 	double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
@@ -162,8 +163,8 @@ gridResult * getGrids(path ** p, int MAX, int size)
 				if (result[i]->ok == '1')
 						{
 							last = i;
-							printf("Grid #%d\n", i);
-							printGrid(result[i]);
+							//printf("Grid #%d\n", i);
+							//printGrid(result[i]);
 						}
 			}
 	gridResult* grids = (gridResult *)malloc(sizeof(gridResult));
