@@ -70,8 +70,8 @@ void processGrids(gridResult * grids, path ** path,int MAX, int size)
 	cudaMallocManaged((void **) &larray, sizeof(location) * grids->size);
 	for(int i = 0; i < grids->size; i++)
 	{
-		larray[i].x = grids->grids[i].x;
-		larray[i].y = grids->grids[i].y;
+		larray[i].x = grids->grids[i]->x;
+		larray[i].y = grids->grids[i]->y;
 		larray[i].full = PART;
 	res->threads = grids->size;
 	int blocks = (grids->size % 512)+1;
