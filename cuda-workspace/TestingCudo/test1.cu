@@ -73,6 +73,7 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 		larray[i].x = grids->grids[i]->x;
 		larray[i].y = grids->grids[i]->y;
 		larray[i].full = PART;
+	}
 	res->threads = grids->size;
 	int blocks = (grids->size % 512)+1;
 	int gridSize = 1;
@@ -113,7 +114,6 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 						}
 			}
 	printf("Size %d Grid #%d\n", gridSize, last);
-	return result;
 }
 
 
