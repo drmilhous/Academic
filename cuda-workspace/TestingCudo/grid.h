@@ -56,7 +56,6 @@ typedef struct returnResult
 	grid ** result;
 	int size;
 	int threads;
-	int breaker;
 	location * locationStack;
 	grid ** gridStack;
 

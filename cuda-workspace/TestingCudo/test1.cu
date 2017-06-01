@@ -7,6 +7,7 @@
 #define N 10
 int allocated = 0;
 void initCell(cell * c);
+grid * getGrids(path ** p, int MAX, int size);
 __global__ void compute2(returnResult * res, grid * g, path ** pathList, location * l);
 __device__ void computeIterative(returnResult * res, grid * g, path ** pathList, location * baseLoc);
 __device__ void add(grid ** base, grid ** last, grid * newList);
@@ -82,14 +83,14 @@ grid * getGrids(path ** p, int MAX, int size)
 	int amount = gridSize * sizeof(grid *);
 	printf("Allocated Bytes %d\n", amount);
 	cudaMallocManaged((void **) &result, amount);
-	for (i = 0; i < gridSize; i++)
+	for (int i = 0; i < gridSize; i++)
 		{
 			result[i] = allocateGrid(size);
 		}
 	amount = res->threads * sizeof(grid *) * (MAX + 1);
 	printf("Allocated Bytes for GStack %d\n", amount);
 	cudaMallocManaged((void **) &res->gridStack, amount);
-	for (i = 0; i < res->threads * (MAX + 1); i++)
+	for (int i = 0; i < res->threads * (MAX + 1); i++)
 		{
 			res->gridStack[i] = allocateGrid(size);
 		}
@@ -105,7 +106,7 @@ grid * getGrids(path ** p, int MAX, int size)
 	clock_t end = clock();
 	double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
 	printf("Time spent %lf iteration Max %d\n", time_spent, breaker);
-	for (i = 0; i < gridSize; i++)
+	for (int i = 0; i < gridSize; i++)
 			{
 				if (result[i]->ok == '1')
 						{
@@ -173,7 +174,7 @@ int foo(path ** p, int MAX, int breaker)
 				
 				printf("Starting %d\n", breaker);
 				res->result = result;
-				res->breaker = breaker;
+				//res->breaker = breaker;
 				res->size = gridSize;
 				res->MAX = MAX;
 				clock_t begin = clock();
