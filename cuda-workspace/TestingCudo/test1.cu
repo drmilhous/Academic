@@ -56,7 +56,7 @@ int main(int argc, char ** argv)
 				//foo(&p[0],MAX, breaker);
 				gridResult * grids = getGrids(p,0,N);
 				p[0] = p[0]->next;
-				processGrids(grids, p,max, N);
+				processGrids(grids, p,MAX, N);
 			}
 	}
 void processGrids(gridResult * grids, path ** path,int MAX, int size)
@@ -97,7 +97,7 @@ void processGrids(gridResult * grids, path ** path,int MAX, int size)
 	res->size = gridSize;
 	res->MAX = MAX;
 	clock_t begin = clock();
-	compute3<<<blocks, 512>>>(res, grids, p, larray);
+	compute3<<<blocks, 512>>>(res, grids->grids, p, larray);
 	cudaDeviceSynchronize();
 	clock_t end = clock();
 	double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
