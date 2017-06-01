@@ -118,8 +118,8 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 							//printGrid(result[i]);
 						}
 			}
-	int iter = 0;
-	int total = 0;
+	long iter = 0;
+	long total = 0;
 	for (int i = 0; i < gridSize; i++)
 		{
 			total += grids->grids[i]->count;
@@ -128,7 +128,7 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 	printf("Grid #%d\n", last);
 	printGrid(result[last]);
 	printf("Size Grid total iter\n");
-	printf("%d, %d , %d, %d\n",gridSize, last,total, iter);
+	printf("%d, %d , %ld, %ld\n",gridSize, last,total, iter);
 }
 
 
@@ -302,7 +302,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		//printf("Index %d xx = %d gridIndex\n", idx, xx, index);
 		grid ** result = &res->result[xx];
 		int gridSize = res->size / res->threads;
-		int breaker = 0;
+		long breaker = 0;
 		int bmax = 2;
 		int printcount = 0;
 		int count = 0;
@@ -314,7 +314,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		loc->full = baseLoc[idx].full;
 
 		//location * freeHead = NULL;
-		int i = 0;
+		long i = 0;
 		int checkValue;
 		int value;
 		int done = 0;
