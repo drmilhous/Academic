@@ -63,7 +63,7 @@ typedef struct returnResult
 
 typedef struct gridResult{
 	grid ** grids;
-	int count;
+	int size;
 }gridResut;
 
 
