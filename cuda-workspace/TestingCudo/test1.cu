@@ -7,7 +7,7 @@
 #define N 10
 int allocated = 0;
 void initCell(cell * c);
-grid * getGrids(path ** p, int MAX, int size);
+grid ** getGrids(path ** p, int MAX, int size);
 __global__ void compute2(returnResult * res, grid * g, path ** pathList, location * l);
 __device__ void computeIterative(returnResult * res, grid * g, path ** pathList, location * baseLoc);
 __device__ void add(grid ** base, grid ** last, grid * newList);
@@ -56,7 +56,7 @@ int main(int argc, char ** argv)
 				getGrids(p,MAX,N);
 			}
 	}
-grid * getGrids(path ** p, int MAX, int size)
+grid ** getGrids(path ** p, int MAX, int size)
 {
 	returnResult * res;
 	cudaMallocManaged((void **) &res, 1);
