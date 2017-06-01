@@ -61,9 +61,9 @@ typedef struct returnResult
 
 }returnResult;
 
-typedef gridResult{
-grid ** grids;
-int count;
+typedef struct gridResult{
+	grid ** grids;
+	int count;
 }gridResut;
 
 
