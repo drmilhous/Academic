@@ -565,7 +565,7 @@ char convert(int x)
 		return res;
 	}
 
-__global__ void cloneToGrid(grid * g, grid * g2)
+__device__ void cloneToGrid(grid * g, grid * g2)
 	{
 		g2->size = g->size;
 		g2->ok = g->ok;
