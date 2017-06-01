@@ -59,7 +59,7 @@ int main(int argc, char ** argv)
 				processGrids(grids, p,MAX, N);
 			}
 	}
-void processGrids(gridResult * grids, path ** path,int MAX, int size)
+void processGrids(gridResult * grids, path ** p,int MAX, int size)
 {
 
 	returnResult * res;
