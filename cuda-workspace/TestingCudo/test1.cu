@@ -12,7 +12,8 @@ __global__ void compute2(returnResult * res, grid * g, path ** pathList, locatio
 __global__ void compute3(returnResult * res, grid ** g, path ** pathlist, location * l);
 __device__ void computeIterative(returnResult * res, grid * g, path ** pathList, location * baseLoc);
 __device__ void add(grid ** base, grid ** last, grid * newList);
-__global__ void cloneToGrid(grid * g, grid * g2);
+__device__ void cloneToGrid(grid * g, grid * g2);
+void cloneToGridLocal(grid * g, grid * g2);
 __device__ void eliminateValue(cell **c, int row, int col, int max, int value);
 __device__ int check(grid * g, int row, int col, int number);
 __device__ grid * allocateGridDevice(int size);
@@ -84,7 +85,7 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 	for (int i = 0; i < gridSize; i++)
 		{
 			result[i] = allocateGrid(size);
-			cloneToGrid(grids->grids[i],result[i]);
+			cloneToGridLocal(grids->grids[i],result[i]);
 		}
 	amount = res->threads * sizeof(grid *) * (MAX + 1);
 	printf("Allocated Bytes for GStack %d\n", amount);
@@ -565,6 +566,19 @@ char convert(int x)
 	}
 
 __global__ void cloneToGrid(grid * g, grid * g2)
+	{
+		g2->size = g->size;
+		g2->ok = g->ok;
+		for (int row = 0; row < g->size; row++)
+			{
+				for (int col = 0; col < g->size; col++)
+					{
+						g2->cells[row][col].bitmap = g->cells[row][col].bitmap;
+						g2->cells[row][col].value = g->cells[row][col].value;
+					}
+			}
+	}
+void cloneToGridLocal(grid * g, grid * g2)
 	{
 		g2->size = g->size;
 		g2->ok = g->ok;
