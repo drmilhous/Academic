@@ -61,6 +61,12 @@ typedef struct returnResult
 
 }returnResult;
 
+typedef gridResult{
+grid ** grids;
+int count;
+}gridResut;
+
+
 grid * allocateGrid(int size);
 
 char convertChar(char u);

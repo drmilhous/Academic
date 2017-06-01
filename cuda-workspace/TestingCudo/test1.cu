@@ -7,8 +7,9 @@
 #define N 10
 int allocated = 0;
 void initCell(cell * c);
-grid ** getGrids(path ** p, int MAX, int size);
+gridResult * getGrids(path ** p, int MAX, int size);
 __global__ void compute2(returnResult * res, grid * g, path ** pathList, location * l);
+__global__ void compute3(returnResult * res, grid ** g, path ** pathlist, location * l);
 __device__ void computeIterative(returnResult * res, grid * g, path ** pathList, location * baseLoc);
 __device__ void add(grid ** base, grid ** last, grid * newList);
 __device__ void cloneToGrid(grid * g, grid * g2);
@@ -36,15 +37,14 @@ int main(int argc, char ** argv)
 				cudaGetDeviceProperties(&deviceProp, device);
 				printf("Device %d has compute capability %d.%d.\n", device, deviceProp.major, deviceProp.minor);
 			} //	 - See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/#multi-device-system
-		if(argc == 4)
+		if(argc == 3)
 		{
 			MAX = atoi(argv[1]);
 			device = atoi(argv[2]);
-			breaker = atoi(argv[3]);
 		}
 		else
 		{
-			printf("ARGS = MAX DEV BREAKER\n");
+			printf("ARGS = MAX DEV\n");
 			MAX = 5 * 2;
 		}
 		printf("Starting on device %d MAX %d breaker %d\n", device, MAX, breaker);
@@ -53,10 +53,70 @@ int main(int argc, char ** argv)
 		if (p != NULL)
 			{
 				//foo(&p[0],MAX, breaker);
-				getGrids(p,MAX,N);
+				gridResult * grids = getGrids(p,0,N);
+				p[0] = p[0]->next;
+				processGrids(grids, p,max, N);
 			}
 	}
-grid ** getGrids(path ** p, int MAX, int size)
+void processGrids(gridResult * grids, path ** path,int MAX, int size)
+{
+
+	returnResult * res;
+	cudaMallocManaged((void **) &res, 1);
+	grid * g = allocateGrid(size);
+	grid ** result;
+	location * larray;
+	cudaMallocManaged((void **) &larray, sizeof(location) * grids->size);
+	for(int i = 0; i < grids->size; i++)
+	{
+		larray[i].x = grids->grids[i].x;
+		larray[i].y = grids->grids[i].y;
+		larray[i].full = PART;
+	res->threads = grids->size;
+	int blocks = (grids->size % 512)+1;
+	int gridSize = 1;
+	int amount = gridSize * sizeof(grid *);
+	printf("Allocated Bytes %d\n", amount);
+	cudaMallocManaged((void **) &result, amount);
+	for (int i = 0; i < gridSize; i++)
+		{
+			result[i] = allocateGrid(size);
+		}
+	amount = res->threads * sizeof(grid *) * (MAX + 1);
+	printf("Allocated Bytes for GStack %d\n", amount);
+	cudaMallocManaged((void **) &res->gridStack, amount);
+	for (int i = 0; i < res->threads * (MAX + 1); i++)
+		{
+			res->gridStack[i] = allocateGrid(size);
+		}
+	amount = sizeof(location) * (MAX + 1) * res->threads;
+	printf("Allocated Bytes for LStack %d\n", amount);
+	cudaMallocManaged((void **) &res->locationStack, amount);
+	res->result = result;
+	res->size = gridSize;
+	res->MAX = MAX;
+	clock_t begin = clock();
+	compute3<<<blocks, 512>>>(res, grids, p, larray);
+	cudaDeviceSynchronize();
+	clock_t end = clock();
+	double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
+	printf("Time spent %lf\n", time_spent);
+	int last = 0;
+	for (int i = 0; i < gridSize; i++)
+			{
+				if (result[i]->ok == '1')
+						{
+							last = i;
+							printf("Grid #%d\n", i);
+							printGrid(result[i]);
+						}
+			}
+	printf("Size %d Grid #%d\n", gridSize, last);
+	return result;
+}
+
+
+gridResult * getGrids(path ** p, int MAX, int size)
 {
 	returnResult * res;
 	cudaMallocManaged((void **) &res, 1);
@@ -105,8 +165,11 @@ grid ** getGrids(path ** p, int MAX, int size)
 							printGrid(result[i]);
 						}
 			}
+	gridResult* grids = malloc(sizeof(gridResult));
+	grids->grids = result;
+	grids->size = last;
 	printf("Size %d Grid #%d\n", gridSize, last);
-	return result;
+	return grids;
 }
 
 
@@ -200,6 +263,14 @@ __global__ void compute2(returnResult * res, grid * g, path ** pathlist, locatio
 		if (idx < res->threads)
 			{
 				computeIterative(res, g, pathlist, l);
+			}
+	}
+__global__ void compute3(returnResult * res, grid ** g, path ** pathlist, location * l)
+	{
+		int idx = blockIdx.x * blockDim.x + threadIdx.x;
+		if (idx < res->threads)
+			{
+				computeIterative(res, g[idx], pathlist, l);
 			}
 	}
 __device__ void computeIterative(returnResult * res, grid * g, path ** pathList, location * baseLoc)
