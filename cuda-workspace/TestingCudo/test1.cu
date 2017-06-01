@@ -86,8 +86,8 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 		{
 			result[i] = allocateGrid(size);
 			cloneToGridLocal(grids->grids[i],result[i]);
-			result[i]->count = 0;
-			result[i]->iterations = 0;
+			grids->grids[i]->count = 0;
+			grids->grids[i]->iterations = 0;
 		}
 	amount = res->threads * sizeof(grid *) * (MAX + 1);
 	printf("Allocated Bytes for GStack %d\n", amount);
@@ -122,8 +122,8 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 	int total = 0;
 	for (int i = 0; i < gridSize; i++)
 		{
-			total += result[i]->count;
-			iter += result[i]->iterations;
+			total += grids->grids[i]->count;
+			iter += grids->grids[i]->iterations;
 		}
 	printf("Size Grid total iter\n");
 	printf("%d, %d , %d, %d\n",gridSize, last,total, iter);
