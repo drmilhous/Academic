@@ -75,7 +75,7 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 		larray[i].y = grids->grids[i]->y;
 		larray[i].full = PART;
 	}
-	res->threads = 1664;
+	res->threads = 1536;
 	int base = 128;
 	//int blocks = (grids->size % base)+1;
 	int blocks = res->threads / base;
@@ -145,7 +145,7 @@ gridResult * getGrids(path ** p, int MAX, int size)
 	larray[0].y = 0;
 	larray[0].full = FULL;
 	res->threads = 1;
-	int gridSize = 50000;
+	int gridSize = 10000;
 	int amount = gridSize * sizeof(grid *);
 	printf("Allocated Bytes %d\n", amount);
 	cudaMallocManaged((void **) &result, amount);
