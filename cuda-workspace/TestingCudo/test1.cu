@@ -75,14 +75,15 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 		larray[i].y = grids->grids[i]->y;
 		larray[i].full = PART;
 	}
-	res->threads = grids->size;
-	int base = 512;
-	int blocks = (grids->size % base)+1;
+	res->threads = 1664;
+	int base = 128;
+	//int blocks = (grids->size % base)+1;
+	int blocks = res->threads / base;
 	int gridSize = 1 * res->threads;
 	int amount = gridSize * sizeof(grid *);
 	printf("Allocated Bytes %d\n", amount);
 	cudaMallocManaged((void **) &result, amount);
-	for (int i = 0; i < gridSize; i++)
+	for (int i = 0; i < grids->size; i++)
 		{
 			result[i] = allocateGrid(size);
 			cloneToGridLocal(grids->grids[i],result[i]);
@@ -286,7 +287,12 @@ __global__ void compute3(returnResult * res, grid ** g, path ** pathlist, locati
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		if (idx < res->threads)
 			{
-				computeIterative(res, g[idx], pathlist, l);
+				int index = idx;
+				while(index < res->size)
+				{
+					computeIterative(res, g[index], pathlist, &l[index]);
+					index += res->threads;
+				}
 			}
 	}
 __device__ void computeIterative(returnResult * res, grid * g, path ** pathList, location * baseLoc)
@@ -309,9 +315,9 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		//location * loc = &baseLoc[idx];
 		location * loc = &locStack[count];
 		//copy location data
-		loc->x = baseLoc[idx].x;
-		loc->y = baseLoc[idx].y;
-		loc->full = baseLoc[idx].full;
+		loc->x = baseLoc[0].x;
+		loc->y = baseLoc[0].y;
+		loc->full = baseLoc[0].full;
 
 		//location * freeHead = NULL;
 		long i = 0;
