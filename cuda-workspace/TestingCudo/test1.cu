@@ -468,6 +468,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		g->count = i;
 		g->iterations = breaker;
 		//printf("The total is %d breaker %d\n", i, breaker);
+		free(currentGrid);
 	}
 
 
