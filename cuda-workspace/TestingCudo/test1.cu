@@ -145,7 +145,7 @@ gridResult * getGrids(path ** p, int MAX, int size)
 	larray[0].y = 0;
 	larray[0].full = FULL;
 	res->threads = 1;
-	int gridSize = 1000;
+	int gridSize = 50000;
 	int amount = gridSize * sizeof(grid *);
 	printf("Allocated Bytes %d\n", amount);
 	cudaMallocManaged((void **) &result, amount);
