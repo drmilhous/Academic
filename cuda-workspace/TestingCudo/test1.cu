@@ -55,8 +55,8 @@ int main(int argc, char ** argv)
 		if (p != NULL)
 			{
 				//foo(&p[0],MAX, breaker);
-				gridResult * grids = getGrids(p,0,N);
-				p[0] = p[0]->next;
+				gridResult * grids = getGrids(p,1,N);
+				p[0] = p[0]->next->next;
 				processGrids(grids, p,MAX, N);
 			}
 	}
@@ -79,7 +79,7 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 	int base = 128;
 	//int blocks = (grids->size % base)+1;
 	int blocks = res->threads / base;
-	int gridSize = 1 * res->threads;
+	int gridSize = grids->size;
 	int amount = gridSize * sizeof(grid *);
 	printf("Allocated Bytes %d\n", amount);
 	cudaMallocManaged((void **) &result, amount);
