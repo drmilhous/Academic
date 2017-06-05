@@ -288,7 +288,7 @@ __global__ void compute3(returnResult * res, grid ** g, path ** pathlist, locati
 		if (idx < res->threads)
 			{
 				int index = idx;
-				while(index < res->size)
+				while(index <= res->size)
 				{
 					computeIterative(res, g[index], pathlist, &l[index]);
 					index += res->threads;
