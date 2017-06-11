@@ -63,7 +63,7 @@ path ** scanChars()
 		 }*/
 		printf("Count is  = %d\n", index);
 		fclose(database);
-		printPath(p[0]);
+		printPath(pathList[0]);
 		return pathList;
 	}
 path * allocate(char c, char c1, char* c2, int direction)
