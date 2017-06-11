@@ -37,7 +37,7 @@ int main(int argc, char ** argv)
 			{
 				cudaDeviceProp deviceProp;
 				cudaGetDeviceProperties(&deviceProp, device);
-				printf("Device %d has compute capability %d.%d.\n", device, deviceProp.major, deviceProp.minor);
+				//printf("Device %d has compute capability %d.%d.\n", device, deviceProp.major, deviceProp.minor);
 			} //	 - See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/#multi-device-system
 		if(argc == 3)
 		{
@@ -49,7 +49,7 @@ int main(int argc, char ** argv)
 			printf("ARGS = MAX DEV\n");
 			MAX = 5 * 2;
 		}
-		printf("Starting on device %d MAX %d breaker %d\n", device, MAX, breaker);
+		printf("Starting on device %d MAX %d\n", device, MAX);
 		cudaSetDevice(device);
 		path ** p = scanChars();
 		if (p != NULL)
@@ -80,7 +80,7 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 	int blocks = (grids->size % base)+1;
 	int gridSize = 1 * res->threads;
 	int amount = gridSize * sizeof(grid *);
-	printf("Allocated Bytes %d\n", amount);
+	//printf("Allocated Bytes %d\n", amount);
 	cudaMallocManaged((void **) &result, amount);
 	for (int i = 0; i < gridSize; i++)
 		{
@@ -90,14 +90,14 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 			grids->grids[i]->iterations = 0;
 		}
 	amount = res->threads * sizeof(grid *) * (MAX + 1);
-	printf("Allocated Bytes for GStack %d\n", amount);
+	//printf("Allocated Bytes for GStack %d\n", amount);
 	cudaMallocManaged((void **) &res->gridStack, amount);
 	for (int i = 0; i < res->threads * (MAX + 1); i++)
 		{
 			res->gridStack[i] = allocateGrid(size);
 		}
 	amount = sizeof(location) * (MAX + 1) * res->threads;
-	printf("Allocated Bytes for LStack %d\n", amount);
+	//printf("Allocated Bytes for LStack %d\n", amount);
 	cudaMallocManaged((void **) &res->locationStack, amount);
 	res->result = result;
 	res->size = gridSize;
@@ -107,7 +107,7 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 	cudaDeviceSynchronize();
 	clock_t end = clock();
 	double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
-	printf("Time spent %lf\n", time_spent);
+	//printf("Time spent %lf\n", time_spent);
 	int last = 0;
 	for (int i = 0; i < gridSize; i++)
 			{
@@ -127,8 +127,8 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 		}
 	printf("Grid #%d\n", last);
 	printGrid(result[last]);
-	printf("Size Grid total iter\n");
-	printf("%d, %d , %ld, %ld\n",gridSize, last,total, iter);
+	printf("## Size,Grid,total,iter, time\n");
+	printf("## %d, %d , %ld, %ld, %lf\n",gridSize, last,total, iter, time_spent);
 }
 
 
@@ -146,21 +146,21 @@ gridResult * getGrids(path ** p, int MAX, int size)
 	res->threads = 1;
 	int gridSize = 1000;
 	int amount = gridSize * sizeof(grid *);
-	printf("Allocated Bytes %d\n", amount);
+	//printf("Allocated Bytes %d\n", amount);
 	cudaMallocManaged((void **) &result, amount);
 	for (int i = 0; i < gridSize; i++)
 		{
 			result[i] = allocateGrid(size);
 		}
 	amount = res->threads * sizeof(grid *) * (MAX + 1);
-	printf("Allocated Bytes for GStack %d\n", amount);
+	//printf("Allocated Bytes for GStack %d\n", amount);
 	cudaMallocManaged((void **) &res->gridStack, amount);
 	for (int i = 0; i < res->threads * (MAX + 1); i++)
 		{
 			res->gridStack[i] = allocateGrid(size);
 		}
 	amount = sizeof(location) * (MAX + 1) * res->threads;
-	printf("Allocated Bytes for LStack %d\n", amount);
+	//printf("Allocated Bytes for LStack %d\n", amount);
 	cudaMallocManaged((void **) &res->locationStack, amount);
 	res->result = result;
 	res->size = gridSize;
@@ -170,7 +170,7 @@ gridResult * getGrids(path ** p, int MAX, int size)
 	cudaDeviceSynchronize();
 	clock_t end = clock();
 	double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
-	printf("Time spent %lf\n", time_spent);
+	//printf("Time spent %lf\n", time_spent);
 	int last = 0;
 	for (int i = 0; i < gridSize; i++)
 			{
@@ -184,7 +184,7 @@ gridResult * getGrids(path ** p, int MAX, int size)
 	gridResult* grids = (gridResult *)malloc(sizeof(gridResult));
 	grids->grids = result;
 	grids->size = last;
-	printf("Size %d Grid #%d\n", gridSize, last);
+	//printf("Size %d Grid #%d\n", gridSize, last);
 	return grids;
 }
 
