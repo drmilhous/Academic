@@ -10,7 +10,7 @@ path ** scanChars()
 		path ** pathList;
 		cudaMallocManaged((void **) &pathList, (sizeof(path *)) * count);
 		path * p = getPath(test);
-		printPath(p);
+		
 		FILE * database;
 		char buffer[30];
 
@@ -63,6 +63,7 @@ path ** scanChars()
 		 }*/
 		printf("Count is  = %d\n", index);
 		fclose(database);
+		printPath(p[0]);
 		return pathList;
 	}
 path * allocate(char c, char c1, char* c2, int direction)
