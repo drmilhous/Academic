@@ -104,7 +104,7 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 	res->MAX = MAX;
 	clock_t begin = clock();
 	compute3<<<blocks, base>>>(res, grids->grids, p, larray);
-	cudaDeviceSynchronize();
+	//cudaDeviceSynchronize();
 	clock_t end = clock();
 	double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
 	//printf("Time spent %lf\n", time_spent);
