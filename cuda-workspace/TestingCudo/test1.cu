@@ -356,11 +356,15 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 				int lastx = loc->x;
 				
 				value = p->letters[0];
-				checkValue = check(currentGrid, loc->x, loc->y, value);
+				checkValue = 0; 
 				if(loc->x >= g->size || loc->y >= g->size || loc->nx >= g->size || loc->ny >= g->size)
 				{
 					checkValue = 1;
 					pop = 1;
+				}
+				if(checkValue == 0)
+				{
+					checkValue = check(currentGrid, loc->x, loc->y, value);
 				}
 				if (checkValue == 0)
 					{
