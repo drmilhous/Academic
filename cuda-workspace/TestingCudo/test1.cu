@@ -354,7 +354,6 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 				p = loc->p;
 				int lasty = loc->y;
 				int lastx = loc->x;
-				
 				value = p->letters[0];
 				checkValue = 0; 
 				if(loc->x >= g->size || loc->y >= g->size || loc->nx >= g->size || loc->ny >= g->size)
@@ -391,11 +390,11 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 									}
 							}
 					}
-				if(idx == 839 && count >= MAX-1)
+				/*if(idx == 839 && count >= MAX-1)
 				{
 					printf("V IDX=%d loc (%d,%d) (%d,%d) value%d \n", idx,loc->x, loc->y, loc->nx, loc->ny, checkValue);
 					printGridDev(currentGrid);
-				}
+				}*/
 				if (checkValue == 0 && count == MAX)
 					{
 						i++;
@@ -406,7 +405,6 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 						result[offset]->x = lastx;
 						result[offset]->y = lasty;
 						printcount++;
-						//done = 1;
 					}
 				updateLocation(loc, p, g->size);
 				if (checkValue == 0 && count < MAX && pop == 0) //rec value
@@ -428,8 +426,6 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 							}
 						if (nextLoc != NULL)
 							{
-								//temp = &locStack[count];
-								//temp->child = 0;
 								count++;
 								temp = &locStack[count];
 								temp->full = type;
@@ -468,11 +464,6 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 									{
 										done = 1;
 									}
-							//	else
-								{
-							//		temp = &locStack[count];
-							//		temp->child = 1;
-								}
 							}
 					}
 			}
