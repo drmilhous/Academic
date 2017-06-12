@@ -78,7 +78,7 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 	res->threads = grids->size;
 	int base = 128;
 	int blocks = (grids->size % base)+1;
-	int gridSize = 2 * res->threads;
+	int gridSize = 1 * res->threads;
 	int amount = gridSize * sizeof(grid *);
 	//printf("Allocated Bytes %d\n", amount);
 	cudaMallocManaged((void **) &result, amount);
