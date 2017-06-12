@@ -419,7 +419,8 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 							}
 						if (nextLoc != NULL)
 							{
-								loc->child = 0;
+								temp = &locStack[count];
+								temp->child = 0;
 								count++;
 								temp = &locStack[count];
 								temp->full = type;
