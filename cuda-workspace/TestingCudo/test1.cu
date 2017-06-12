@@ -24,7 +24,8 @@ __device__ grid * cloneGrid(grid * g);
 char convert(int x);
 int foo(path ** p, int MAX, int breaker);
 void processGrids(gridResult * grids, path ** path,int MAX, int size);
-
+__device__ void printGridDev(grid * g);
+__device__ char convertDev(int x);
 
 int main(int argc, char ** argv)
 	{
@@ -385,7 +386,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 				if(checkValue == 0)
 				{
 					printf("V IDX=%d loc x%d y%d nx%d ny%d \n", idx,loc->x, loc->y, loc->nx, loc->ny);
-					printGrid(currentGrid);
+					printGridDev(currentGrid);
 				}
 				if (checkValue == 0 && count == MAX)
 					{
@@ -755,6 +756,52 @@ void printGrid(grid * g)
 							{
 								//
 								printC = convert(value);
+								value = 0;
+								printf("  %c  ", printC);
+							}
+
+					}
+				printf("\n");
+			}
+	}
+__device__ char convertDev(int x)
+	{
+		char res = 'a';
+		if (x >= 0)
+			{
+				int amount = int(x) + (int) res;
+				res = (char) amount;
+			}
+		else
+			{
+				res = ' ';
+			}
+		return res;
+	}
+
+__device__ void printGridDev(grid * g)
+	{
+		int n = g->size;
+		//printf("X=%d Y=%d %c\n", x, y, g->ok);
+		printf("-- Grid -- \n");
+		for (int row = 0; row < n; row++)
+			{
+				printf("%01d# ", row);
+				for (int col = 0; col < n; col++)
+					{
+						cell c = g->cells[row][col];
+						//printf("[%02d][%02d]%02X ",row, col, c[row * N + col].bitmap);
+						int value = c.value;
+						char printC = ' ';
+						if (value < 0)
+							{
+								value = c.bitmap;
+								printf(" %03X%c", value, printC);
+							}
+						else
+							{
+								//
+								printC = convertDev(value);
 								value = 0;
 								printf("  %c  ", printC);
 							}
