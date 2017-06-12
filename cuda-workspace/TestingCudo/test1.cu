@@ -173,6 +173,7 @@ gridResult * getGrids(path ** p, int MAX, int size)
 	double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
 	//printf("Time spent %lf\n", time_spent);
 	int last = 0;
+	int valid = 0;
 	for (int i = 0; i < gridSize; i++)
 			{
 				if (result[i]->ok == '1')
@@ -180,11 +181,13 @@ gridResult * getGrids(path ** p, int MAX, int size)
 							last = i;
 							//printf("Grid #%d\n", i);
 							//printGrid(result[i]);
+							valid ++;
 						}
 			}
 	gridResult* grids = (gridResult *)malloc(sizeof(gridResult));
 	grids->grids = result;
-	grids->size = last;
+	grids->size = last+1;
+	printf("Valid = %d", valid);
 	//printf("Size %d Grid #%d\n", gridSize, last);
 	return grids;
 }
