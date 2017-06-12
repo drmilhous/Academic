@@ -344,7 +344,6 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		loc->p = p;
 		loc->next = NULL;
 		int pop;
-
 		while (done == 0)
 			{
 				loc = &locStack[count];
@@ -385,7 +384,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 					}
 				if(idx == 839 && count >= MAX-1)
 				{
-					printf("V IDX=%d loc x%d y%d nx%d ny%d value%d \n", idx,loc->x, loc->y, loc->nx, loc->ny, checkValue);
+					printf("V IDX=%d loc (%d,%d) (%d,%d) value%d \n", idx,loc->x, loc->y, loc->nx, loc->ny, checkValue);
 					printGridDev(currentGrid);
 				}
 				if (checkValue == 0 && count == MAX)
@@ -401,7 +400,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 						//done = 1;
 					}
 				pop = updateLocation(loc, p, g->size);
-				if (checkValue == 0 && count < MAX) //rec value
+				if (checkValue == 0 && count < MAX && pop == 1) //rec value
 					{
 						uint8_t type = PART;
 						path * nextLoc = NULL;
