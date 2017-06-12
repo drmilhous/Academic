@@ -386,7 +386,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 				if(idx == 839 && count == MAX)
 				{
 					printf("V IDX=%d loc x%d y%d nx%d ny%d value%d \n", idx,loc->x, loc->y, loc->nx, loc->ny, checkValue);
-					//printGridDev(currentGrid);
+					printGridDev(currentGrid);
 				}
 				if (checkValue == 0 && count == MAX)
 					{
