@@ -787,7 +787,7 @@ __device__ void printGridDev(grid * g)
 						if (value < 0)
 							{
 								value = c.bitmap;
-								printf(" ");
+								printf("_");
 							}
 						else
 							{
