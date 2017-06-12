@@ -343,6 +343,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		//loc->currentG = gridStack[count];
 		loc->p = p;
 		loc->next = NULL;
+		loc->child = 0;
 		int pop;
 		while (done == 0)
 			{
