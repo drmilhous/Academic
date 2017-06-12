@@ -76,7 +76,7 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 		larray[i].full = PART;
 	}
 	res->threads = grids->size;
-	int base = 512;
+	int base = 128;
 	int blocks = (grids->size % base)+1;
 	int gridSize = 1 * res->threads;
 	int amount = gridSize * sizeof(grid *);
@@ -85,9 +85,10 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 	for (int i = 0; i < gridSize; i++)
 		{
 			result[i] = allocateGrid(size);
-			cloneToGridLocal(grids->grids[i],result[i]);
 			grids->grids[i]->count = 0;
 			grids->grids[i]->iterations = 0;
+			grids->grids[i]->ok = '0';
+			cloneToGridLocal(grids->grids[i],result[i]);
 		}
 	amount = res->threads * sizeof(grid *) * (MAX + 1);
 	//printf("Allocated Bytes for GStack %d\n", amount);
