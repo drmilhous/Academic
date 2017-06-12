@@ -400,7 +400,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 						//done = 1;
 					}
 				pop = updateLocation(loc, p, g->size);
-				if (checkValue == 0 && count < MAX) //rec value
+				if (checkValue == 0 && count < MAX && pop == 0) //rec value
 					{
 						uint8_t type = PART;
 						path * nextLoc = NULL;
