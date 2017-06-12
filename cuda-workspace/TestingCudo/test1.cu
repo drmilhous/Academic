@@ -357,6 +357,11 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 				
 				value = p->letters[0];
 				checkValue = check(currentGrid, loc->x, loc->y, value);
+				if(loc->x >= size || loc->y >= size || loc->nx >= size || loc->ny >= size)
+				{
+					checkValue = 1;
+					pop = 1;
+				}
 				if (checkValue == 0)
 					{
 						currentGrid->cells[loc->x][loc->y].value = value;
@@ -399,7 +404,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 						printcount++;
 						//done = 1;
 					}
-				pop = updateLocation(loc, p, g->size);
+				updateLocation(loc, p, g->size);
 				if (checkValue == 0 && count < MAX && pop == 0) //rec value
 					{
 						uint8_t type = PART;
@@ -438,11 +443,10 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 									}
 								temp->p = nextLoc;
 								cloneToGrid(currentGrid, gridStack[count]);
-								pop = 0;
 								//	printf("Push count=%d loc x%d y%d nx%d ny%d \n", count,loc->x, loc->y, loc->nx, loc->ny);
 							}
 					}
-				//else
+				else
 					{
 						
 						if (pop == 1 ) //pop off the list
