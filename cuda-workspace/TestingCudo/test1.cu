@@ -786,16 +786,15 @@ __device__ void printGridDev(grid * g)
 						if (value < 0)
 							{
 								value = c.bitmap;
-								printf(" %03X%c", value, printC);
+								printf(" ");
 							}
 						else
 							{
 								//
 								printC = convertDev(value);
 								value = 0;
-								printf("  %c  ", printC);
+								printf("%c", printC);
 							}
-
 					}
 				printf("\n");
 			}
