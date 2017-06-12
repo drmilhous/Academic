@@ -91,14 +91,14 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 			grids->grids[i]->ok = '0';
 			cloneToGridLocal(grids->grids[i],result[i]);
 		}
-	amount = res->threads * sizeof(grid *) * (MAX + 1);
+	amount = res->threads * sizeof(grid *) * (MAX + 2);
 	//printf("Allocated Bytes for GStack %d\n", amount);
 	cudaMallocManaged((void **) &res->gridStack, amount);
-	for (int i = 0; i < res->threads * (MAX + 1); i++)
+	for (int i = 0; i < res->threads * (MAX + 2); i++)
 		{
 			res->gridStack[i] = allocateGrid(size);
 		}
-	amount = sizeof(location) * (MAX + 1) * res->threads;
+	amount = sizeof(location) * (MAX + 2) * res->threads;
 	//printf("Allocated Bytes for LStack %d\n", amount);
 	cudaMallocManaged((void **) &res->locationStack, amount);
 	res->result = result;
