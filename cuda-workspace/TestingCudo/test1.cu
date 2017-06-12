@@ -460,7 +460,8 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 									}
 								else
 								{
-									loc->child = 1;
+									temp = &locStack[count];
+									temp->child = 1;
 								}
 							}
 					}
