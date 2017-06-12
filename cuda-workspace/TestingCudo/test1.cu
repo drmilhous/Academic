@@ -50,7 +50,7 @@ int main(int argc, char ** argv)
 			printf("ARGS = MAX DEV\n");
 			MAX = 5 * 2;
 		}
-		//printf("Starting on device %d MAX %d\n", device, MAX);
+		printf("Starting on device %d MAX %d\n", device, MAX);
 		cudaSetDevice(device);
 		path ** p = scanChars();
 		if (p != NULL)
