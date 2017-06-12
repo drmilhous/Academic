@@ -50,6 +50,7 @@ typedef struct location
 	struct grid * currentG;
 	path * p;
 	uint8_t full;
+	uint8_t child;
 }location;
 
 typedef struct returnResult
