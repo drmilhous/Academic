@@ -343,7 +343,6 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		//loc->currentG = gridStack[count];
 		loc->p = p;
 		loc->next = NULL;
-		loc->child = 0;
 		int pop;
 		while (done == 0)
 			{
@@ -420,8 +419,8 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 							}
 						if (nextLoc != NULL)
 							{
-								temp = &locStack[count];
-								temp->child = 0;
+								//temp = &locStack[count];
+								//temp->child = 0;
 								count++;
 								temp = &locStack[count];
 								temp->full = type;
@@ -439,13 +438,14 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 									}
 								temp->p = nextLoc;
 								cloneToGrid(currentGrid, gridStack[count]);
+								pop = 0;
 								//	printf("Push count=%d loc x%d y%d nx%d ny%d \n", count,loc->x, loc->y, loc->nx, loc->ny);
 							}
 					}
 				//else
 					{
 						
-						if ((pop == 1 && loc->child == 1) || count == MAX) //pop off the list
+						if (pop == 1 ) //pop off the list
 							{
 								if (loc->full == FULL)
 									{
@@ -460,10 +460,10 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 									{
 										done = 1;
 									}
-								else
+							//	else
 								{
-									temp = &locStack[count];
-									temp->child = 1;
+							//		temp = &locStack[count];
+							//		temp->child = 1;
 								}
 							}
 					}
