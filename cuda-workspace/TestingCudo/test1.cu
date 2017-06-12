@@ -155,14 +155,14 @@ gridResult * getGrids(path ** p, int MAX, int size)
 		{
 			result[i] = allocateGrid(size);
 		}
-	amount = res->threads * sizeof(grid *) * (MAX + 1);
+	amount = res->threads * sizeof(grid *) * (MAX + 2);
 	//printf("Allocated Bytes for GStack %d\n", amount);
 	cudaMallocManaged((void **) &res->gridStack, amount);
-	for (int i = 0; i < res->threads * (MAX + 1); i++)
+	for (int i = 0; i < res->threads * (MAX + 2); i++)
 		{
 			res->gridStack[i] = allocateGrid(size);
 		}
-	amount = sizeof(location) * (MAX + 1) * res->threads;
+	amount = sizeof(location) * (MAX + 2) * res->threads;
 	//printf("Allocated Bytes for LStack %d\n", amount);
 	cudaMallocManaged((void **) &res->locationStack, amount);
 	res->result = result;
@@ -302,7 +302,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		int MAX = res->MAX;
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		int xx = res->size / res->threads * idx;
-		int index = idx * (MAX + 1);
+		int index = idx * (MAX + 2);
 		grid ** gridStack = &res->gridStack[index];
 		location * locStack = &res->locationStack[index];
 		//printf("Index %d xx = %d gridIndex\n", idx, xx, index);
