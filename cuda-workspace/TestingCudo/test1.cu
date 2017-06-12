@@ -354,7 +354,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 				p = loc->p;
 				int lasty = loc->y;
 				int lastx = loc->x;
-				printf("IDX=%d loc x%d y%d nx%d ny%d \n", idx,loc->x, loc->y, loc->nx, loc->ny);
+				
 				value = p->letters[0];
 				checkValue = check(currentGrid, loc->x, loc->y, value);
 				if (checkValue == 0)
@@ -382,6 +382,10 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 									}
 							}
 					}
+				if(checkValue == 0)
+				{
+					printf("V IDX=%d loc x%d y%d nx%d ny%d \n", idx,loc->x, loc->y, loc->nx, loc->ny);
+				}
 				if (checkValue == 0 && count == MAX)
 					{
 						i++;
