@@ -443,7 +443,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 				//else
 					{
 						
-						if (pop == 1 && loc->child == 1) //pop off the list
+						if ((pop == 1 && loc->child == 1) || count == MAX) //pop off the list
 							{
 								if (loc->full == FULL)
 									{
