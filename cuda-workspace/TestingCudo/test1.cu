@@ -125,7 +125,7 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 		{
 			total += grids->grids[i]->count;
 			iter += grids->grids[i]->iterations;
-			printf("C=%d I=%d\n", grids->grids[i]->count,grids->grids[i]->iterations);
+			//printf("C=%d I=%d\n", grids->grids[i]->count,grids->grids[i]->iterations);
 		}
 	printf("Grid #%d\n", last);
 	printGrid(result[last]);
@@ -354,7 +354,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 				p = loc->p;
 				int lasty = loc->y;
 				int lastx = loc->x;
-				//	printf("Count=%d loc x%d y%d nx%d ny%d \n", count,loc->x, loc->y, loc->nx, loc->ny);
+				printf("IDX=%d loc x%d y%d nx%d ny%d \n", idx,loc->x, loc->y, loc->nx, loc->ny);
 				value = p->letters[0];
 				checkValue = check(currentGrid, loc->x, loc->y, value);
 				if (checkValue == 0)
