@@ -50,7 +50,7 @@ int main(int argc, char ** argv)
 			printf("ARGS = MAX DEV\n");
 			MAX = 5 * 2;
 		}
-		printf("Starting on device %d MAX %d\n", device, MAX);
+		//printf("Starting on device %d MAX %d\n", device, MAX);
 		cudaSetDevice(device);
 		path ** p = scanChars();
 		if (p != NULL)
@@ -460,16 +460,6 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 									}
 							}
 					}
-				if (bmax == breaker)
-					{
-						//printf("Breaker %d PrintCount  %d\n", breaker, printcount);
-						bmax *= 1.2;
-					}
-			/*	if (breaker == res->breaker)
-					{
-						done = 1;
-						printf("Breaker Max hit!");
-					}*/
 			}
 		g->count = i;
 		g->iterations = breaker;
