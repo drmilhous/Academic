@@ -125,6 +125,7 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 		{
 			total += grids->grids[i]->count;
 			iter += grids->grids[i]->iterations;
+			printf("C=%d I=%d\n", grids->grids[i]->count,grids->grids[i]->iterations);
 		}
 	printf("Grid #%d\n", last);
 	printGrid(result[last]);
