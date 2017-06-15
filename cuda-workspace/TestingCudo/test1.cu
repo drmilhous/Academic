@@ -63,6 +63,32 @@ int main(int argc, char ** argv)
 				int currentSize = grids->size;
 				int processSize = 1664;
 				int done = 0;
+
+				//allocate memory
+				returnResult * res;
+				cudaMallocManaged((void **) &res, 1);
+				location * larray;
+				cudaMallocManaged((void **) &larray, sizeof(location) * processSize);
+				
+				int amount = processSize * sizeof(grid *);
+	//printf("Allocated Bytes %d\n", amount);
+				cudaMallocManaged((void **) &result, amount);
+				for (int i = 0; i < processSize; i++)
+				{
+					result[i] = allocateGrid(N);
+				}
+				cudaMallocManaged((void **) &res->gridStack, amount);
+				for (int i = 0; i < res->threads * (MAX + 2); i++)
+				{
+					res->gridStack[i] = allocateGrid(N));
+				}
+					amount = sizeof(location) * (MAX + 2) * processSize;
+					//printf("Allocated Bytes for LStack %d\n", amount);
+				cudaMallocManaged((void **) &res->locationStack, amount);
+
+
+
+
 				while(done == 0)
 				{
 					
@@ -75,7 +101,7 @@ int main(int argc, char ** argv)
 						grids->size = processSize;
 					}
 					printf("Starting size=%d\n", grids->size);
-					processGrids(grids, p,MAX, N);
+					processGrids(grids, p,MAX, N, res, larray, result);
 					grids->grids = &grids->grids[grids->size];
 					offset ++;
 					if(offset * processSize > currentSize)
@@ -84,17 +110,39 @@ int main(int argc, char ** argv)
 					}
 					
 				}
+					for (int i = 0; i < res->threads * (MAX + 2); i++)
+					{
+			for(int j = 0; j < size; j++)
+			{
+				cudaFree(res->gridStack[i]->cells[j]);
+			}
+			cudaFree(res->gridStack[i]->cells);
+			cudaFree(res->gridStack[i]);
+		}
+	cudaFree(res->gridStack);
+	for (int i = 0; i < gridSize; i++)
+		{
+			for(int j = 0; j < size; j++)
+			{
+				cudaFree(result[i]->cells[j]);
+			}
+			cudaFree(result[i]->cells);
+			cudaFree(result[i]);
+		}
+	cudaFree(result);
+	cudaFree(res->locationStack);
+	cudaFree(larray);
+	cudaFree(res);
 			}
 	}
-void processGrids(gridResult * grids, path ** p,int MAX, int size)
+void processGrids(gridResult * grids, path ** p,int MAX, int size, returnResult * res,location * larray, grid ** result)
 {
 
-	returnResult * res;
-	cudaMallocManaged((void **) &res, 1);
-	grid * g = allocateGrid(size);
-	grid ** result;
-	location * larray;
-	cudaMallocManaged((void **) &larray, sizeof(location) * grids->size);
+	
+	
+	//grid * g = allocateGrid(size);
+	
+	
 	for(int i = 0; i < grids->size; i++)
 	{
 		larray[i].x = grids->grids[i]->x;
@@ -102,7 +150,7 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 		larray[i].full = PART;
 	}
 	res->threads = grids->size;
-	int base = 32;
+	int base = 16;
 	int blocks = (grids->size / base);
 	if((grids->size % base) != 0)
 	{
@@ -111,10 +159,10 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 	int gridSize = 1 * res->threads;
 	int amount = gridSize * sizeof(grid *);
 	//printf("Allocated Bytes %d\n", amount);
-	cudaMallocManaged((void **) &result, amount);
+	//cudaMallocManaged((void **) &result, amount);
 	for (int i = 0; i < gridSize; i++)
 		{
-			result[i] = allocateGrid(size);
+			//		result[i] = allocateGrid(size);
 			grids->grids[i]->count = 0;
 			grids->grids[i]->iterations = 0;
 			grids->grids[i]->ok = '0';
@@ -122,14 +170,14 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 		}
 	amount = res->threads * sizeof(grid *) * (MAX + 2);
 	//printf("Allocated Bytes for GStack %d\n", amount);
-	cudaMallocManaged((void **) &res->gridStack, amount);
-	for (int i = 0; i < res->threads * (MAX + 2); i++)
-		{
-			res->gridStack[i] = allocateGrid(size);
-		}
-	amount = sizeof(location) * (MAX + 2) * res->threads;
+	//cudaMallocManaged((void **) &res->gridStack, amount);
+	//for (int i = 0; i < res->threads * (MAX + 2); i++)
+	//	{
+	//		res->gridStack[i] = allocateGrid(size);
+	//	}
+	//amount = sizeof(location) * (MAX + 2) * res->threads;
 	//printf("Allocated Bytes for LStack %d\n", amount);
-	cudaMallocManaged((void **) &res->locationStack, amount);
+	//cudaMallocManaged((void **) &res->locationStack, amount);
 	res->result = result;
 	res->size = gridSize;
 	res->MAX = MAX;
@@ -164,30 +212,8 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 	printf("## Size,Grid,total,iter, time\n");
 	printf("## %d, %d , %ld, %ld, %lf\n",gridSize, last,total, iter, time_spent);
 
-	for (int i = 0; i < res->threads * (MAX + 2); i++)
-		{
-			for(int j = 0; j < size; j++)
-			{
-				cudaFree(res->gridStack[i]->cells[j]);
-			}
-			cudaFree(res->gridStack[i]->cells);
-			cudaFree(res->gridStack[i]);
-		}
-	cudaFree(res->gridStack);
-	for (int i = 0; i < gridSize; i++)
-		{
-			for(int j = 0; j < size; j++)
-			{
-				cudaFree(result[i]->cells[j]);
-			}
-			cudaFree(result[i]->cells);
-			cudaFree(result[i]);
-		}
-	cudaFree(result);
-	cudaFree(res->locationStack);
-	cudaFree(larray);
-	cudaFree(res);
-	cudaDeviceSynchronize();
+
+	//cudaDeviceSynchronize();
 }
 
 
