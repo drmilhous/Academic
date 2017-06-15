@@ -75,11 +75,12 @@ int main(int argc, char ** argv)
 					printf("Starting size=%d\n", grids->size);
 					processGrids(grids, p,MAX, N);
 					grids->grids = &grids->grids[grids->size];
-					offset ++;
+					
 					if(offset * processSize > currentSize)
 					{
 						done = 1;
 					}
+					offset ++;
 				}
 			}
 	}
