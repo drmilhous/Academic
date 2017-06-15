@@ -120,7 +120,7 @@ int main(int argc, char ** argv)
 			cudaFree(res->gridStack[i]);
 		}
 	cudaFree(res->gridStack);
-	for (int i = 0; i < gridSize; i++)
+	for (int i = 0; i < processSize; i++)
 		{
 			for(int j = 0; j < N; j++)
 			{
