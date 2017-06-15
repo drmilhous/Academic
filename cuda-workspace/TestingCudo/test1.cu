@@ -547,10 +547,10 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		//printf("The total is %d breaker %d\n", i, breaker);
 		for(int j = 0; j < g->size; j++)
 			{
-				cudaFree(currentGrid->cells[j]);
+				free(currentGrid->cells[j]);
 			}
-		cudaFree(currentGrid->cells);
-		cudaFree(currentGrid);
+		free(currentGrid->cells);
+		free(currentGrid);
 	}
 
 
