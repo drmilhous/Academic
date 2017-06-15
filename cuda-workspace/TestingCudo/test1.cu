@@ -164,6 +164,7 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 			{
 				cudaFree(res->gridStack[i]->cells[j]);
 			}
+			cudaFree(res->gridStack[i]->cells);
 			cudaFree(res->gridStack[i]);
 		}
 	cudaFree(res->gridStack);
@@ -173,9 +174,13 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 			{
 				cudaFree(result[i]->cells[j]);
 			}
+			cudaFree(result[i]->cells);
 			cudaFree(result[i]);
 		}
-		cudaFree(result);
+	cudaFree(result);
+	cudaFree(res->locationStack);
+	cudaFree(larray);
+	cudaFree(res);
 }
 
 
