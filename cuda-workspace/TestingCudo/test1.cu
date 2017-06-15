@@ -23,7 +23,7 @@ __device__ int pow2(int x);
 __device__ grid * cloneGrid(grid * g);
 char convert(int x);
 int foo(path ** p, int MAX, int breaker);
-void processGrids(gridResult * grids, path ** path,int MAX, int size);
+void processGrids(gridResult * grids, path ** p,int MAX, int size, returnResult * res,location * larray, grid ** result);
 __device__ void printGridDev(grid * g);
 __device__ char convertDev(int x);
 void printDevProp(cudaDeviceProp devProp);
@@ -66,10 +66,10 @@ int main(int argc, char ** argv)
 
 				//allocate memory
 				returnResult * res;
+				grid ** result;
 				cudaMallocManaged((void **) &res, 1);
 				location * larray;
 				cudaMallocManaged((void **) &larray, sizeof(location) * processSize);
-				
 				int amount = processSize * sizeof(grid *);
 	//printf("Allocated Bytes %d\n", amount);
 				cudaMallocManaged((void **) &result, amount);
