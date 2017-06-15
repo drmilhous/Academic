@@ -152,10 +152,21 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 			iter += grids->grids[i]->iterations;
 			//printf("C=%d I=%d\n", grids->grids[i]->count,grids->grids[i]->iterations);
 		}
+	
 	printf("Grid #%d\n", last);
 	printGrid(result[last]);
 	printf("## Size,Grid,total,iter, time\n");
 	printf("## %d, %d , %ld, %ld, %lf\n",gridSize, last,total, iter, time_spent);
+
+	for (int i = 0; i < res->threads * (MAX + 2); i++)
+		{
+			for(int j = 0; j < size; j++)
+			{
+				cudaFree(res->gridStack[j]->cells);
+			}
+			cudaFree(res->gridStack[i]);
+		}
+	cudaFree(res->gridStack);
 }
 
 
