@@ -26,7 +26,8 @@ int foo(path ** p, int MAX, int breaker);
 void processGrids(gridResult * grids, path ** path,int MAX, int size);
 __device__ void printGridDev(grid * g);
 __device__ char convertDev(int x);
-
+void printDevProp(cudaDeviceProp devProp);
+int getCores(cudaDeviceProp devProp);
 int main(int argc, char ** argv)
 	{
 		int MAX;
@@ -37,6 +38,7 @@ int main(int argc, char ** argv)
 			{
 				cudaDeviceProp deviceProp;
 				cudaGetDeviceProperties(&deviceProp, device);
+				printDevProp(deviceProp);
 				//printf("Device %d has compute capability %d.%d.\n", device, deviceProp.major, deviceProp.minor);
 			} //	 - See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/#multi-device-system
 		if(argc == 3)
@@ -891,3 +893,46 @@ __device__ void printGridDev(grid * g)
 				printf("\n");
 			}
 	}
+
+void printDevProp(cudaDeviceProp devProp)
+{   
+	printf("%s\n", devProp.name);
+	printf("Major revision number:         %d\n", devProp.major);
+	printf("Minor revision number:         %d\n", devProp.minor);
+	printf("Total global memory:           %u", devProp.totalGlobalMem);
+	printf(" bytes\n");
+	printf("Number of multiprocessors:     %d\n", devProp.multiProcessorCount);
+	printf("Total amount of shared memory per block: %u\n",devProp.sharedMemPerBlock);
+	printf("Total registers per block:     %d\n", devProp.regsPerBlock);
+	printf("Warp size:                     %d\n", devProp.warpSize);
+	printf("Maximum memory pitch:          %u\n", devProp.memPitch);
+	printf("Total amount of constant memory:         %u\n",   devProp.totalConstMem);
+	printf("Cores:         %d\n", getCores(devProp)  );
+return;
+}
+int getCores(cudaDeviceProp devProp)
+{  
+    int cores = 0;
+    int mp = devProp.multiProcessorCount;
+    switch (devProp.major){
+     case 2: // Fermi
+      if (devProp.minor == 1) cores = mp * 48;
+      else cores = mp * 32;
+      break;
+     case 3: // Kepler
+      cores = mp * 192;
+      break;
+     case 5: // Maxwell
+      cores = mp * 128;
+      break;
+     case 6: // Pascal
+      if (devProp.minor == 1) cores = mp * 128;
+      else if (devProp.minor == 0) cores = mp * 64;
+      else printf("Unknown device type\n");
+      break;
+     default:
+      printf("Unknown device type\n"); 
+      break;
+      }
+    return cores;
+}
