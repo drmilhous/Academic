@@ -59,7 +59,7 @@ int main(int argc, char ** argv)
 				p[0] = p[0]->next->next;
 				int offset = 0;
 				int currentSize = grids->size;
-				int processSize = 1664;
+				int processSize = 1536;
 				int done = 0;
 				while(done == 0)
 				{
