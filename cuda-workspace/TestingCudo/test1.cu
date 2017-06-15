@@ -31,7 +31,6 @@ int main(int argc, char ** argv)
 	{
 		int MAX;
 		int device;
-		int breaker = 100000 * 10 * 10 * 10;
 		int deviceCount;
 		cudaGetDeviceCount(&deviceCount);
 		for (device = 0; device < deviceCount; ++device)
@@ -47,8 +46,8 @@ int main(int argc, char ** argv)
 		}
 		else
 		{
-			printf("ARGS = MAX DEV\n");
-			MAX = 5 * 2;
+			printf("MAX DEV")
+			exit(-1);
 		}
 		printf("Starting on device %d MAX %d\n", device, MAX);
 		cudaSetDevice(device);
