@@ -80,7 +80,7 @@ int main(int argc, char ** argv)
 				cudaMallocManaged((void **) &res->gridStack, amount);
 				for (int i = 0; i < res->threads * (MAX + 2); i++)
 				{
-					res->gridStack[i] = allocateGrid(N));
+					res->gridStack[i] = allocateGrid(N);
 				}
 					amount = sizeof(location) * (MAX + 2) * processSize;
 					//printf("Allocated Bytes for LStack %d\n", amount);
