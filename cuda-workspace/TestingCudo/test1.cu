@@ -104,7 +104,7 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 	int blocks = (grids->size / base);
 	if((grids->size % base) != 0)
 	{
-		base +=1;
+		blocks +=1;
 	}
 	int gridSize = 1 * res->threads;
 	int amount = gridSize * sizeof(grid *);
