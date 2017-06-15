@@ -181,6 +181,7 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 	cudaFree(res->locationStack);
 	cudaFree(larray);
 	cudaFree(res);
+	cudaDeviceSynchronize();
 }
 
 
