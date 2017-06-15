@@ -162,11 +162,20 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 		{
 			for(int j = 0; j < size; j++)
 			{
-				cudaFree(res->gridStack[j]->cells);
+				cudaFree(res->gridStack[i]->cells[j]);
 			}
 			cudaFree(res->gridStack[i]);
 		}
 	cudaFree(res->gridStack);
+	for (int i = 0; i < gridSize; i++)
+		{
+			for(int j = 0; j < size; j++)
+			{
+				cudaFree(result[i]->cells[j]);
+			}
+			cudaFree(result[i]);
+		}
+		cudaFree(result);
 }
 
 
