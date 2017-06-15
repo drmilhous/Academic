@@ -46,7 +46,7 @@ int main(int argc, char ** argv)
 		}
 		else
 		{
-			printf("MAX DEV")
+			printf("MAX DEV\n");
 			exit(-1);
 		}
 		printf("Starting on device %d MAX %d\n", device, MAX);
@@ -55,9 +55,32 @@ int main(int argc, char ** argv)
 		if (p != NULL)
 			{
 				//foo(&p[0],MAX, breaker);
-				gridResult * grids = getGrids(p,0,N);
-				p[0] = p[0]->next;
-				processGrids(grids, p,MAX, N);
+				gridResult * grids = getGrids(p,1,N);
+				p[0] = p[0]->next->next;
+				int offset = 0;
+				int currentSize = grids->size;
+				int processSize = 1280;
+				int done = 0;
+				while(done == 0)
+				{
+					
+					if((processSize * offset)  > currentSize)
+					{
+						grids->size = currentSize - (processSize * offset); // remainder
+					}
+					else
+					{
+						grids->size = processSize;
+					}
+					printf("Starting size=%d\n", grids->size);
+					processGrids(grids, p,MAX, N);
+					grids->grids = &grids->grids[grids->size];
+					offset ++;
+					if(offset * processSize < currentSize)
+					{
+						done = 1;
+					}
+				}
 			}
 	}
 void processGrids(gridResult * grids, path ** p,int MAX, int size)
