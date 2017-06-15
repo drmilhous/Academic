@@ -76,7 +76,7 @@ int main(int argc, char ** argv)
 					processGrids(grids, p,MAX, N);
 					grids->grids = &grids->grids[grids->size];
 					offset ++;
-					if(offset * processSize < currentSize)
+					if(offset * processSize > currentSize)
 					{
 						done = 1;
 					}
