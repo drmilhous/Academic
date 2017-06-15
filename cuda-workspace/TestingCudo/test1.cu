@@ -240,6 +240,30 @@ gridResult * getGrids(path ** p, int MAX, int size)
 	grids->size = last+1;
 	printf("Valid = %d", valid);
 	//printf("Size %d Grid #%d\n", gridSize, last);
+
+	for (int i = 0; i < res->threads * (MAX + 2); i++)
+		{
+			for(int j = 0; j < size; j++)
+			{
+				cudaFree(res->gridStack[i]->cells[j]);
+			}
+			cudaFree(res->gridStack[i]->cells);
+			cudaFree(res->gridStack[i]);
+		}
+	cudaFree(res->gridStack);
+	/*for (int i = 0; i < gridSize; i++)
+		{
+			for(int j = 0; j < size; j++)
+			{
+				cudaFree(result[i]->cells[j]);
+			}
+			cudaFree(result[i]->cells);
+			cudaFree(result[i]);
+		}
+	cudaFree(result);*/
+	cudaFree(res->locationStack);
+	cudaFree(larray);
+	cudaFree(res);
 	return grids;
 }
 
