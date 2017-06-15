@@ -59,7 +59,7 @@ int main(int argc, char ** argv)
 				p[0] = p[0]->next->next;
 				int offset = 0;
 				int currentSize = grids->size;
-				int processSize = 1280;
+				int processSize = 1664;
 				int done = 0;
 				while(done == 0)
 				{
@@ -101,7 +101,11 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 	}
 	res->threads = grids->size;
 	int base = 128;
-	int blocks = (grids->size / base)+1;
+	int blocks = (grids->size / base);
+	if((grids->size % base) != 0)
+	{
+		base +=1;
+	}
 	int gridSize = 1 * res->threads;
 	int amount = gridSize * sizeof(grid *);
 	//printf("Allocated Bytes %d\n", amount);
