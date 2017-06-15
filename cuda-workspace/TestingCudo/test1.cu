@@ -78,7 +78,7 @@ int main(int argc, char ** argv)
 					result[i] = allocateGrid(N);
 				}
 				cudaMallocManaged((void **) &res->gridStack, amount);
-				for (int i = 0; i < res->threads * (MAX + 2); i++)
+				for (int i = 0; i < processSize * (MAX + 2); i++)
 				{
 					res->gridStack[i] = allocateGrid(N);
 				}
@@ -110,7 +110,7 @@ int main(int argc, char ** argv)
 					}
 					
 				}
-					for (int i = 0; i < res->threads * (MAX + 2); i++)
+					for (int i = 0; i < processSize * (MAX + 2); i++)
 					{
 			for(int j = 0; j < N; j++)
 			{
