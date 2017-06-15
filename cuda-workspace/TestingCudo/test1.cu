@@ -100,7 +100,7 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 		larray[i].full = PART;
 	}
 	res->threads = grids->size;
-	int base = 256;
+	int base = 128;
 	int blocks = (grids->size % base)+1;
 	int gridSize = 1 * res->threads;
 	int amount = gridSize * sizeof(grid *);
