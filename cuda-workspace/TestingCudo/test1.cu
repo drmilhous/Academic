@@ -314,7 +314,7 @@ __global__ void compute2(returnResult * res, grid * g, path ** pathlist, locatio
 __global__ void compute3(returnResult * res, grid ** g, path ** pathlist, location * l)
 	{
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
-		printf("Index %d\n", idx);
+		//printf("Index %d\n", idx);
 		if (idx < res->threads)
 			{
 				computeIterative(res, g[idx], pathlist, l);
