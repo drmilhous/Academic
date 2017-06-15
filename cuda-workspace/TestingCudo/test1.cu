@@ -112,7 +112,7 @@ int main(int argc, char ** argv)
 				}
 					for (int i = 0; i < res->threads * (MAX + 2); i++)
 					{
-			for(int j = 0; j < size; j++)
+			for(int j = 0; j < N; j++)
 			{
 				cudaFree(res->gridStack[i]->cells[j]);
 			}
@@ -122,7 +122,7 @@ int main(int argc, char ** argv)
 	cudaFree(res->gridStack);
 	for (int i = 0; i < gridSize; i++)
 		{
-			for(int j = 0; j < size; j++)
+			for(int j = 0; j < N; j++)
 			{
 				cudaFree(result[i]->cells[j]);
 			}
