@@ -100,8 +100,8 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 		larray[i].full = PART;
 	}
 	res->threads = grids->size;
-	int base = 128;
-	int blocks = (grids->size % base);
+	int base = 512;
+	int blocks = (grids->size % base)+1;
 	int gridSize = 1 * res->threads;
 	int amount = gridSize * sizeof(grid *);
 	//printf("Allocated Bytes %d\n", amount);
