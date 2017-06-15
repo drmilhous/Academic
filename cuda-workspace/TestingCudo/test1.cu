@@ -102,7 +102,7 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 		larray[i].full = PART;
 	}
 	res->threads = grids->size;
-	int base = 512;
+	int base = 256;
 	int blocks = (grids->size / base);
 	if((grids->size % base) != 0)
 	{
