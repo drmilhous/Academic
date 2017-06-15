@@ -313,6 +313,7 @@ __global__ void compute2(returnResult * res, grid * g, path ** pathlist, locatio
 __global__ void compute3(returnResult * res, grid ** g, path ** pathlist, location * l)
 	{
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
+		printf("Index %d\n", idx);
 		if (idx < res->threads)
 			{
 				computeIterative(res, g[idx], pathlist, l);
@@ -328,7 +329,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		int index = idx * (MAX + 2);
 		grid ** gridStack = &res->gridStack[index];
 		location * locStack = &res->locationStack[index];
-		printf("Index %d xx = %d gridIndex\n", idx, xx, index);
+		
 		grid ** result = &res->result[xx];
 		int gridSize = res->size / res->threads;
 		long breaker = 0;
