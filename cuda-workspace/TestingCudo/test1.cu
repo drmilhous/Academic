@@ -128,6 +128,7 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size)
 	res->size = gridSize;
 	res->MAX = MAX;
 	clock_t begin = clock();
+	printf("STarting block=%d threads%d\n",blocks,base);
 	compute3<<<blocks, base>>>(res, grids->grids, p, larray);
 	cudaDeviceSynchronize();
 	clock_t end = clock();
