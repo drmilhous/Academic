@@ -34,10 +34,10 @@ int main(int argc, char ** argv)
 		int device1;
 		int deviceCount;
 		cudaGetDeviceCount(&deviceCount);
-		for (device = 0; device < deviceCount; ++device)
+		for (device1 = 0; device1 < deviceCount; ++device1)
 			{
 				cudaDeviceProp deviceProp;
-				cudaGetDeviceProperties(&deviceProp, device);
+				cudaGetDeviceProperties(&deviceProp, device1);
 				printDevProp(deviceProp);
 				//printf("Device %d has compute capability %d.%d.\n", device, deviceProp.major, deviceProp.minor);
 			} //	 - See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/#multi-device-system
