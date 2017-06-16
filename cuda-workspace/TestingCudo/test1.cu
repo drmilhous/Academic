@@ -174,13 +174,13 @@ void processGrids(gridResult * grids, path ** p,int dev1, int dev2, int MAX, int
 	cudaSetDevice(dev2);
 	returnResult * res2;
 	cudaMallocManaged((void **) &res2, 1);
-	res2->locationStack = &larray[offset];
+	//res2->locationStack = ;
 	res2->gridStack = &grids->grids[offset];
 	res2->MAX = res->MAX;
 	res2->size = res->size;
 	res2->result = &res->result[offset];
 	res2->threads = res->threads;
-	compute3<<<blocks, base>>>(res2, res2->gridStack, p,res2->locationStack);
+	compute3<<<blocks, base>>>(res2, res2->gridStack, p,&larray[offset]);
 	cudaDeviceSynchronize();
 	clock_t end = clock();
 	double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
