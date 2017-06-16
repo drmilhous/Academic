@@ -23,7 +23,7 @@ __device__ int pow2(int x);
 __device__ grid * cloneGrid(grid * g);
 char convert(int x);
 int foo(path ** p, int MAX, int breaker);
-void processGrids(gridResult * grids, path ** p,int MAX, int size, returnResult * res,location * larray, grid ** result);
+void processGrids(gridResult * grids, path ** p,int dev1, int dev2, int MAX, int size, returnResult * res,location * larray, grid ** result);
 __device__ void printGridDev(grid * g);
 __device__ char convertDev(int x);
 void printDevProp(cudaDeviceProp devProp);
