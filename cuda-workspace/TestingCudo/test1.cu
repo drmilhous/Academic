@@ -145,7 +145,7 @@ void processGrids(gridResult * grids, path ** p,int dev1, int dev2, int MAX, int
 		larray[i].y = grids->grids[i]->y;
 		larray[i].full = PART;
 	}
-	res->threads = dataSize/2;
+	
 	//res->threads = grids->size;
 	int base = 16;
 	int blocks = (grids->size / base);
@@ -163,7 +163,8 @@ void processGrids(gridResult * grids, path ** p,int dev1, int dev2, int MAX, int
 		}
 	
 	res->result = result;
-	res->size = gridSize;
+	res->size = dataSize/2;
+	res->threads = dataSize/2;
 	res->MAX = MAX;
 	clock_t begin = clock();
 	printf("STarting block=%d threads%d\n",blocks,base);
