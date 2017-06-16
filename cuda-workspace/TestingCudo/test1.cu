@@ -31,7 +31,7 @@ int getCores(cudaDeviceProp devProp);
 int main(int argc, char ** argv)
 	{
 		int MAX;
-		int device;
+		int device1;
 		int deviceCount;
 		cudaGetDeviceCount(&deviceCount);
 		for (device = 0; device < deviceCount; ++device)
@@ -41,18 +41,21 @@ int main(int argc, char ** argv)
 				printDevProp(deviceProp);
 				//printf("Device %d has compute capability %d.%d.\n", device, deviceProp.major, deviceProp.minor);
 			} //	 - See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/#multi-device-system
-		if(argc == 3)
+		int processSize = 1664;
+		if(argc == 5)
 		{
 			MAX = atoi(argv[1]);
-			device = atoi(argv[2]);
+			device1 = atoi(argv[2]);
+			device2 = atoi(argv[3]);
+			processSize = atoi(argv[4]);
 		}
 		else
 		{
-			printf("MAX DEV\n");
+			printf("MAX DEV DEV CORES\n");
 			exit(-1);
 		}
-		printf("Starting on device %d MAX %d\n", device, MAX);
-		cudaSetDevice(device);
+		printf("Starting  MAX %d on device %d %d\n",MAX,device1,device2);
+		cudaSetDevice(device1);
 		path ** p = scanChars();
 		if (p != NULL)
 			{
@@ -61,7 +64,7 @@ int main(int argc, char ** argv)
 				p[0] = p[0]->next->next;
 				int offset = 0;
 				int currentSize = grids->size;
-				int processSize = 1664;
+				
 				int done = 0;
 
 				//allocate memory
@@ -71,7 +74,7 @@ int main(int argc, char ** argv)
 				location * larray;
 				cudaMallocManaged((void **) &larray, sizeof(location) * processSize);
 				int amount = processSize * sizeof(grid *);
-	//printf("Allocated Bytes %d\n", amount);
+				//printf("Allocated Bytes %d\n", amount);
 				cudaMallocManaged((void **) &result, amount);
 				for (int i = 0; i < processSize; i++)
 				{
@@ -82,16 +85,11 @@ int main(int argc, char ** argv)
 				{
 					res->gridStack[i] = allocateGrid(N);
 				}
-					amount = sizeof(location) * (MAX + 2) * processSize;
+				amount = sizeof(location) * (MAX + 2) * processSize;
 					//printf("Allocated Bytes for LStack %d\n", amount);
 				cudaMallocManaged((void **) &res->locationStack, amount);
-
-
-
-
 				while(done == 0)
 				{
-					
 					if((processSize * (offset +1))  > currentSize)
 					{
 						grids->size = currentSize - (processSize * offset); // remainder
@@ -158,26 +156,14 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size, returnResult 
 	}
 	int gridSize = 1 * res->threads;
 	int amount = gridSize * sizeof(grid *);
-	//printf("Allocated Bytes %d\n", amount);
-	//cudaMallocManaged((void **) &result, amount);
 	for (int i = 0; i < gridSize; i++)
 		{
-			//		result[i] = allocateGrid(size);
 			grids->grids[i]->count = 0;
 			grids->grids[i]->iterations = 0;
 			grids->grids[i]->ok = '0';
 			cloneToGridLocal(grids->grids[i],result[i]);
 		}
 	amount = res->threads * sizeof(grid *) * (MAX + 2);
-	//printf("Allocated Bytes for GStack %d\n", amount);
-	//cudaMallocManaged((void **) &res->gridStack, amount);
-	//for (int i = 0; i < res->threads * (MAX + 2); i++)
-	//	{
-	//		res->gridStack[i] = allocateGrid(size);
-	//	}
-	//amount = sizeof(location) * (MAX + 2) * res->threads;
-	//printf("Allocated Bytes for LStack %d\n", amount);
-	//cudaMallocManaged((void **) &res->locationStack, amount);
 	res->result = result;
 	res->size = gridSize;
 	res->MAX = MAX;
