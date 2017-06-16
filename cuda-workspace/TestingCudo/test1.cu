@@ -32,6 +32,7 @@ int main(int argc, char ** argv)
 	{
 		int MAX;
 		int device1;
+		int device2;
 		int deviceCount;
 		cudaGetDeviceCount(&deviceCount);
 		for (device1 = 0; device1 < deviceCount; ++device1)
