@@ -263,6 +263,7 @@ gridResult * getGrids(path ** p, int MAX, int size)
 	//clock_t begin = clock();
 	compute2<<<1, res->threads>>>(res, g, p, larray);
 	cudaDeviceSynchronize();
+	cudaStreamSynchronize(0);
 	//clock_t end = clock();
 	//double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
 	//printf("Time spent %lf\n", time_spent);
