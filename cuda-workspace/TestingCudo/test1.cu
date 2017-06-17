@@ -137,12 +137,6 @@ int main(int argc, char ** argv)
 	}
 void processGrids(gridResult * grids, path ** p,int MAX, int size, returnResult * res,location * larray, grid ** result)
 {
-
-	
-	
-	//grid * g = allocateGrid(size);
-	
-	
 	for(int i = 0; i < grids->size; i++)
 	{
 		larray[i].x = grids->grids[i]->x;
@@ -157,27 +151,14 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size, returnResult 
 		blocks +=1;
 	}
 	int gridSize = 1 * res->threads;
-	int amount = gridSize * sizeof(grid *);
-	//printf("Allocated Bytes %d\n", amount);
-	//cudaMallocManaged((void **) &result, amount);
+	int amount;
 	for (int i = 0; i < gridSize; i++)
 		{
-			//		result[i] = allocateGrid(size);
 			grids->grids[i]->count = 0;
 			grids->grids[i]->iterations = 0;
 			grids->grids[i]->ok = '0';
 			cloneToGridLocal(grids->grids[i],result[i]);
 		}
-	amount = res->threads * sizeof(grid *) * (MAX + 2);
-	//printf("Allocated Bytes for GStack %d\n", amount);
-	//cudaMallocManaged((void **) &res->gridStack, amount);
-	//for (int i = 0; i < res->threads * (MAX + 2); i++)
-	//	{
-	//		res->gridStack[i] = allocateGrid(size);
-	//	}
-	//amount = sizeof(location) * (MAX + 2) * res->threads;
-	//printf("Allocated Bytes for LStack %d\n", amount);
-	//cudaMallocManaged((void **) &res->locationStack, amount);
 	res->result = result;
 	res->size = gridSize;
 	res->MAX = MAX;
@@ -187,15 +168,12 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size, returnResult 
 	cudaDeviceSynchronize();
 	clock_t end = clock();
 	double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
-	//printf("Time spent %lf\n", time_spent);
 	int last = 0;
 	for (int i = 0; i < gridSize; i++)
 			{
 				if (result[i]->ok == '1')
 						{
-							last = i;
-							//printf("Grid #%d\n", i);
-							//printGrid(result[i]);
+							last = i; //printf("Grid #%d\n", i);//printGrid(result[i]);
 						}
 			}
 	long iter = 0;
@@ -204,16 +182,11 @@ void processGrids(gridResult * grids, path ** p,int MAX, int size, returnResult 
 		{
 			total += grids->grids[i]->count;
 			iter += grids->grids[i]->iterations;
-			//printf("C=%d I=%d\n", grids->grids[i]->count,grids->grids[i]->iterations);
 		}
-	
 	printf("Grid #%d\n", last);
 	printGrid(result[last]);
 	printf("## Size,Grid,total,iter, time\n");
 	printf("## %d, %d , %ld, %ld, %lf\n",gridSize, last,total, iter, time_spent);
-
-
-	//cudaDeviceSynchronize();
 }
 
 
