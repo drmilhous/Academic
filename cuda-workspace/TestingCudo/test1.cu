@@ -149,26 +149,22 @@ int main(int argc, char ** argv)
 	}
 
 void processGrids(deviceData * dd, int numberOfDevices)
-{
+{	
 	deviceData * d = dd;
 	clock_t begin = clock();
+	int dataSize;
 	for(int dev = 0; dev < numberOfDevices; dev++,d++)
 	{
-		int dataSize = d->grids->size;
+		dataSize = d->grids->size;
 		//*********************INIT GRIDS*******************
 		for(int i = 0; i < dataSize; i++)
 		{
-			d->larray[i].x = d->grids->grids[i]->x;
-			d->larray[i].y = d->grids->grids[i]->y;
+			d->larray[i].x =  d->grids->grids[i]->x;
+			d->larray[i].y =  d->grids->grids[i]->y;
 			d->larray[i].full = PART;
 		}
 	
-		int base = 16;
-		int blocks = (dataSize/ base);
-		if((dataSize % base) != 0)
-		{
-			blocks +=1;
-		}
+		
 		for (int i = 0; i < dataSize; i++)
 		{
 			d->grids->grids[i]->count = 0;
@@ -176,12 +172,21 @@ void processGrids(deviceData * dd, int numberOfDevices)
 			d->grids->grids[i]->ok = '0';
 			cloneToGridLocal(d->grids->grids[i],d->result[i]);
 		}
-	
+	}
 		//d->res->result = d->result;
 		//d->res->size = dataSize;
 		//d->res->threads = dataSize;
 		//d->res->MAX = MAX;
-
+	d = dd;
+	for(int dev = 0; dev < numberOfDevices; dev++, d++)
+	{
+		dataSize = d->grids->size;
+		int base = 16;
+		int blocks = (dataSize/ base);
+		if((dataSize % base) != 0)
+		{
+			blocks +=1;
+		}
 		printf("STarting block=%d threads%d\n",blocks,base);
 		cudaSetDevice(d->device);
 		compute3<<<blocks, base>>>(d->res, d->grids->grids, d->p, d->larray);
