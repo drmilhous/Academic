@@ -70,6 +70,17 @@ typedef struct gridResult{
 	int size;
 }gridResut;
 
+typedef struct deviceData{
+	gridResult * grids;
+	int device;
+	int MAX;
+	path ** p;
+	int size;
+	returnResult * res;
+	location * larray;
+	grid ** result;
+
+} deviceData;
 
 grid * allocateGrid(int size);
 
