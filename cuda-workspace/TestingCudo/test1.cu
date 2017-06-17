@@ -73,12 +73,12 @@ int main(int argc, char ** argv)
 				int done = 0;
 
 				//**********************ALLOCATE memory**********************
-				deviceData * d = malloc(sizeof(deviceData) * devCount);
+				deviceData * d =(deviceData *) malloc(sizeof(deviceData) * devCount);
 				for(int i = 0; i < devCount; i++)
 				{
 					location * larray = allocateLocationArray(processSize);
-					grid ** result = allocateGridResult( processSize,  N);
-					returnResult * res = allocateReturnResult(processSize,N, MAX);
+					grid ** result = allocateGridResult( processSize);
+					returnResult * res = allocateReturnResult(processSize,MAX);
 					d[i].larray = larray;
 					d[i].result = result;
 					d[i].res = res;
