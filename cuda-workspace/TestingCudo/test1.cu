@@ -180,7 +180,7 @@ void processGrids(deviceData * dd, int numberOfDevices)
 	d = dd;
 	for(int dev = 0; dev < numberOfDevices; dev++, d++)
 	{
-		dataSize = d->grids->size;
+		dataSize = processSize;
 		int base = 16;
 		int blocks = (dataSize/ base);
 		if((dataSize % base) != 0)
