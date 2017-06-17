@@ -28,7 +28,6 @@ __device__ void printGridDev(grid * g);
 __device__ char convertDev(int x);
 void printDevProp(cudaDeviceProp devProp);
 int getCores(cudaDeviceProp devProp);
-
 returnResult * allocateReturnResult(int processSize, int N, int MAX);
 grid ** allocateGridResult(int processSize, int N);
 location * allocateLocationArray(int processSize);
@@ -83,7 +82,6 @@ int main(int argc, char ** argv)
 					d[i].larray = larray;
 					d[i].result = result;
 					d[i].res = res;
-					d[i].grids = grids;
 					d[i].device =devs[i];	
 					d[i].MAX = MAX;
 					d[i].p = p;
@@ -98,6 +96,10 @@ int main(int argc, char ** argv)
 						if((processSize * (offset +1))  > currentSize)
 						{
 							grids->size = currentSize - (processSize * offset); // remainder
+							if(i +1 < devCount)
+							{
+								devCount --;
+							}
 						}
 						else
 						{
@@ -106,6 +108,7 @@ int main(int argc, char ** argv)
 						d[i].grids = grids;
 						d[i].size = grids->size;
 						grids->grids = &grids->grids[grids->size];
+						offset++;
 						
 					}
 					printf("Starting size=%d\n", grids->size);
