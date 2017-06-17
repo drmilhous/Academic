@@ -74,7 +74,8 @@ int main(int argc, char ** argv)
 				int done = 0;
 
 				//**********************ALLOCATE memory**********************
-				deviceData * d =(deviceData *) malloc(sizeof(deviceData) * devCount);
+				deviceData * d;
+				cudaMallocManaged((void **) &d, sizeof(deviceData) * devCount));
 				for(int i = 0; i < devCount; i++)
 				{
 					location * larray = allocateLocationArray(processSize);
@@ -86,7 +87,6 @@ int main(int argc, char ** argv)
 					d[i].device =devs[i];	
 					d[i].MAX = MAX;
 					d[i].p = p;
-					
 				}
 				
 				//**********************PROCESS GRIDS**********************
@@ -114,8 +114,8 @@ int main(int argc, char ** argv)
 					}
 					printf("Starting size=%d\n", grids->size);
 					processGrids(d, devCount);
-					grids->grids = &grids->grids[grids->size];
-					offset ++;
+					//grids->grids = &grids->grids[grids->size];
+					//offset ++;
 					if(offset * processSize > currentSize)
 					{
 						done = 1;
