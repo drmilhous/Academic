@@ -23,7 +23,8 @@ __device__ int pow2(int x);
 __device__ grid * cloneGrid(grid * g);
 char convert(int x);
 int foo(path ** p, int MAX, int breaker);
-void processGrids(gridResult * grids, path ** p,int dev1, int dev2, int MAX, int size, returnResult * res,location * larray, grid ** result);
+//void processGrids(gridResult * grids, path ** p,int dev1, int dev2, int MAX, int size, returnResult * res,location * larray, grid ** result);
+void processGrids(deviceData * dd, int numberOfDevices);
 __device__ void printGridDev(grid * g);
 __device__ char convertDev(int x);
 void printDevProp(cudaDeviceProp devProp);
@@ -121,7 +122,7 @@ int main(int argc, char ** argv)
 					}
 					
 				}
-				for (int i = 0; i < processSize * (MAX + 1); i++)
+				/*for (int i = 0; i < processSize * (MAX + 1); i++)
 				{
 					for(int j = 0; j < N; j++)
 					{
@@ -143,7 +144,7 @@ int main(int argc, char ** argv)
 				cudaFree(result);
 				cudaFree(res->locationStack);
 				cudaFree(larray);
-				cudaFree(res);
+				cudaFree(res);*/
 				}
 	}
 
@@ -187,15 +188,16 @@ void processGrids(deviceData * dd, int numberOfDevices)
 	}
 	cudaDeviceSynchronize();
 	clock_t end = clock();
-	deviceData * d = dd;
+	d = dd;
 	for(int dev = 0; dev < numberOfDevices; dev++,d++)
 	{
 		double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
 		//printf("Time spent %lf\n", time_spent);
 		int last = 0;
+		int dataSize = d->grids->size;
 		for (int i = 0; i < dataSize; i++)
 			{
-				if (result[i]->ok == '1')
+				if (d->result[i]->ok == '1')
 						{
 							last = i;
 							//printf("Grid #%d\n", i);
@@ -254,11 +256,11 @@ gridResult * getGrids(path ** p, int MAX, int size)
 	res->result = result;
 	res->size = gridSize;
 	res->MAX = MAX;
-	clock_t begin = clock();
+	//clock_t begin = clock();
 	compute2<<<1, res->threads>>>(res, g, p, larray);
 	cudaDeviceSynchronize();
-	clock_t end = clock();
-	double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
+	//clock_t end = clock();
+	//double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
 	//printf("Time spent %lf\n", time_spent);
 	int last = 0;
 	int valid = 0;
