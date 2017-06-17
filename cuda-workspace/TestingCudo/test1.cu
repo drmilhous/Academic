@@ -28,8 +28,8 @@ __device__ void printGridDev(grid * g);
 __device__ char convertDev(int x);
 void printDevProp(cudaDeviceProp devProp);
 int getCores(cudaDeviceProp devProp);
-returnResult * allocateReturnResult(int processSize, int N, int MAX);
-grid ** allocateGridResult(int processSize, int N);
+returnResult * allocateReturnResult(int processSize, int MAX);
+grid ** allocateGridResult(int processSize);
 location * allocateLocationArray(int processSize);
 
 int main(int argc, char ** argv)
@@ -975,7 +975,7 @@ location * allocateLocationArray(int processSize)
 	return larray;
 }
 
-grid ** allocateGridResult(int processSize,int N)
+grid ** allocateGridResult(int processSize)
 {
 	grid ** result;
 	int amount = processSize * sizeof(grid *);
@@ -987,7 +987,7 @@ grid ** allocateGridResult(int processSize,int N)
 	return result;
 }
 
-returnResult * allocateReturnResult(int processSize, int N, int MAX)
+returnResult * allocateReturnResult(int processSize, int MAX)
 {
 	returnResult * res;
 	cudaMallocManaged((void **) &res, 1);
