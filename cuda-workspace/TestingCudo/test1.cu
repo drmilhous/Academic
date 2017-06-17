@@ -975,7 +975,7 @@ location * allocateLocationArray(int processSize)
 	return larray;
 }
 
-grid ** allocateGridResult(int processSize, int N)
+grid ** allocateGridResult(int processSize,int N)
 {
 	grid ** result;
 	int amount = processSize * sizeof(grid *);
