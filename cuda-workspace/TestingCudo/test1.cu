@@ -74,8 +74,8 @@ int main(int argc, char ** argv)
 				int done = 0;
 
 				//**********************ALLOCATE memory**********************
-				deviceData * d;
-				cudaMallocManaged((void **) &d, sizeof(deviceData) * devCount);
+				deviceData * d = (deviceData)malloc(sizeof(deviceData) * devCount);
+				//cudaMallocManaged((void **) &d, sizeof(deviceData) * devCount);
 				for(int i = 0; i < devCount; i++)
 				{
 					location * larray = allocateLocationArray(processSize);
