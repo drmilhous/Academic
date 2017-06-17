@@ -38,7 +38,7 @@ int main(int argc, char ** argv)
 		int device1;
 		int deviceCount;
 		int devCount = 2;
-		int * devs = malloc(devCount * sizeof(int));
+		int * devs = (int *)malloc(devCount * sizeof(int));
 		cudaGetDeviceCount(&deviceCount);
 		for (device1 = 0; device1 < deviceCount; ++device1)
 			{
