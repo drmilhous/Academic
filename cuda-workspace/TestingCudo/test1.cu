@@ -23,7 +23,7 @@ __device__ int pow2(int x);
 __device__ grid * cloneGrid(grid * g);
 char convert(int x);
 int foo(path ** p, int MAX, int breaker);
-void processGrids(gridResult * grids, path ** p,int MAX, int size, returnResult * res,location * larray, grid ** result);
+void processGrids(gridResult * grids, path ** p, int MAX, int size, returnResult * res, location * larray, grid ** result);
 __device__ void printGridDev(grid * g);
 __device__ char convertDev(int x);
 void printDevProp(cudaDeviceProp devProp);
@@ -41,238 +41,239 @@ int main(int argc, char ** argv)
 				printDevProp(deviceProp);
 				//printf("Device %d has compute capability %d.%d.\n", device, deviceProp.major, deviceProp.minor);
 			} //	 - See more at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/#multi-device-system
-		if(argc == 3)
-		{
-			MAX = atoi(argv[1]);
-			device = atoi(argv[2]);
-		}
+		if (argc == 3)
+			{
+				MAX = atoi(argv[1]);
+				device = atoi(argv[2]);
+			}
 		else
-		{
-			printf("MAX DEV\n");
-			exit(-1);
-		}
+			{
+				printf("MAX DEV\n");
+				exit(-1);
+			}
 		printf("Starting on device %d MAX %d\n", device, MAX);
 		cudaSetDevice(device);
 		path ** p = scanChars();
 		if (p != NULL)
 			{
 				//foo(&p[0],MAX, breaker);
-				gridResult * grids = getGrids(p,1,N);
+				gridResult * grids = getGrids(p, 1, N);
 				p[0] = p[0]->next->next;
 				int offset = 0;
 				int currentSize = grids->size;
 				int processSize = 1664;
 				int done = 0;
-
-				//allocate memory
+				//******************************************************************************
+				//    _    _ _                 _         __  __
+				//   / \  | | | ___   ___ __ _| |_ ___  |  \/  | ___ _ __ ___   ___  _ __ _   _
+				//  / _ \ | | |/ _ \ / __/ _` | __/ _ \ | |\/| |/ _ \ '_ ` _ \ / _ \| '__| | | |
+				// / ___ \| | | (_) | (_| (_| | ||  __/ | |  | |  __/ | | | | | (_) | |  | |_| |
+				///_/   \_\_|_|\___/ \___\__,_|\__\___| |_|  |_|\___|_| |_| |_|\___/|_|   \__, |
+				//                                                                        |___/
+				//******************************************************************************
 				returnResult * res;
 				grid ** result;
 				cudaMallocManaged((void **) &res, 1);
 				location * larray;
 				cudaMallocManaged((void **) &larray, sizeof(location) * processSize);
 				int amount = processSize * sizeof(grid *);
-	//printf("Allocated Bytes %d\n", amount);
 				cudaMallocManaged((void **) &result, amount);
 				for (int i = 0; i < processSize; i++)
-				{
-					result[i] = allocateGrid(N);
-				}
+					{
+						result[i] = allocateGrid(N);
+					}
 				cudaMallocManaged((void **) &res->gridStack, amount);
 				for (int i = 0; i < processSize * (MAX + 2); i++)
-				{
-					res->gridStack[i] = allocateGrid(N);
-				}
-					amount = sizeof(location) * (MAX + 2) * processSize;
-					//printf("Allocated Bytes for LStack %d\n", amount);
+					{
+						res->gridStack[i] = allocateGrid(N);
+					}
+				amount = sizeof(location) * (MAX + 2) * processSize;
+				//printf("Allocated Bytes for LStack %d\n", amount);
 				cudaMallocManaged((void **) &res->locationStack, amount);
-
-
-
-
-				while(done == 0)
-				{
-					
-					if((processSize * (offset +1))  > currentSize)
+				while (done == 0)
 					{
-						grids->size = currentSize - (processSize * offset); // remainder
+						if ((processSize * (offset + 1)) > currentSize)
+							{
+								grids->size = currentSize - (processSize * offset); // remainder
+							}
+						else
+							{
+								grids->size = processSize;
+							}
+						printf("Starting size=%d\n", grids->size);
+						processGrids(grids, p, MAX, N, res, larray, result);
+						grids->grids = &grids->grids[grids->size];
+						offset++;
+						if (offset * processSize > currentSize)
+							{
+								done = 1;
+							}
+
 					}
-					else
+				for (int i = 0; i < processSize * (MAX + 2); i++)
 					{
-						grids->size = processSize;
+						for (int j = 0; j < N; j++)
+							{
+								cudaFree(res->gridStack[i]->cells[j]);
+							}
+						cudaFree(res->gridStack[i]->cells);
+						cudaFree(res->gridStack[i]);
 					}
-					printf("Starting size=%d\n", grids->size);
-					processGrids(grids, p,MAX, N, res, larray, result);
-					grids->grids = &grids->grids[grids->size];
-					offset ++;
-					if(offset * processSize > currentSize)
+				cudaFree(res->gridStack);
+				for (int i = 0; i < processSize; i++)
 					{
-						done = 1;
+						for (int j = 0; j < N; j++)
+							{
+								cudaFree(result[i]->cells[j]);
+							}
+						cudaFree(result[i]->cells);
+						cudaFree(result[i]);
 					}
-					
-				}
-					for (int i = 0; i < processSize * (MAX + 2); i++)
-					{
-			for(int j = 0; j < N; j++)
-			{
-				cudaFree(res->gridStack[i]->cells[j]);
-			}
-			cudaFree(res->gridStack[i]->cells);
-			cudaFree(res->gridStack[i]);
-		}
-	cudaFree(res->gridStack);
-	for (int i = 0; i < processSize; i++)
-		{
-			for(int j = 0; j < N; j++)
-			{
-				cudaFree(result[i]->cells[j]);
-			}
-			cudaFree(result[i]->cells);
-			cudaFree(result[i]);
-		}
-	cudaFree(result);
-	cudaFree(res->locationStack);
-	cudaFree(larray);
-	cudaFree(res);
+				cudaFree(result);
+				cudaFree(res->locationStack);
+				cudaFree(larray);
+				cudaFree(res);
 			}
 	}
-void processGrids(gridResult * grids, path ** p,int MAX, int size, returnResult * res,location * larray, grid ** result)
-{
-	for(int i = 0; i < grids->size; i++)
+void processGrids(gridResult * grids, path ** p, int MAX, int size, returnResult * res, location * larray, grid ** result)
 	{
-		larray[i].x = grids->grids[i]->x;
-		larray[i].y = grids->grids[i]->y;
-		larray[i].full = PART;
-	}
-	res->threads = grids->size;
-	int base = 16;
-	int blocks = (grids->size / base);
-	if((grids->size % base) != 0)
-	{
-		blocks +=1;
-	}
-	int gridSize = 1 * res->threads;
-	int amount;
-	for (int i = 0; i < gridSize; i++)
-		{
-			grids->grids[i]->count = 0;
-			grids->grids[i]->iterations = 0;
-			grids->grids[i]->ok = '0';
-			cloneToGridLocal(grids->grids[i],result[i]);
-		}
-	res->result = result;
-	res->size = gridSize;
-	res->MAX = MAX;
-	clock_t begin = clock();
-	printf("STarting block=%d threads%d\n",blocks,base);
-	compute3<<<blocks, base>>>(res, grids->grids, p, larray);
-	cudaDeviceSynchronize();
-	clock_t end = clock();
-	double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
-	int last = 0;
-	for (int i = 0; i < gridSize; i++)
+		for (int i = 0; i < grids->size; i++)
+			{
+				larray[i].x = grids->grids[i]->x;
+				larray[i].y = grids->grids[i]->y;
+				larray[i].full = PART;
+			}
+		res->threads = grids->size;
+		int base = 16;
+		int blocks = (grids->size / base);
+		if ((grids->size % base) != 0)
+			{
+				blocks += 1;
+			}
+		int gridSize = 1 * res->threads;
+		int amount;
+		for (int i = 0; i < gridSize; i++)
+			{
+				grids->grids[i]->count = 0;
+				grids->grids[i]->iterations = 0;
+				grids->grids[i]->ok = '0';
+				cloneToGridLocal(grids->grids[i], result[i]);
+			}
+		res->result = result;
+		res->size = gridSize;
+		res->MAX = MAX;
+		clock_t begin = clock();
+		printf("STarting block=%d threads%d\n", blocks, base);
+		compute3<<<blocks, base>>>(res, grids->grids, p, larray);
+		cudaDeviceSynchronize();
+		clock_t end = clock();
+		double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
+		int last = -1;
+		for (int i = 0; i < gridSize; i++)
 			{
 				if (result[i]->ok == '1')
-						{
-							last = i; //printf("Grid #%d\n", i);//printGrid(result[i]);
-						}
+					{
+						last = i; //printf("Grid #%d\n", i);//printGrid(result[i]);
+					}
 			}
-	long iter = 0;
-	long total = 0;
-	for (int i = 0; i < gridSize; i++)
+		long iter = 0;
+		long total = 0;
+		for (int i = 0; i < gridSize; i++)
+			{
+				total += grids->grids[i]->count;
+				iter += grids->grids[i]->iterations;
+			}
+		if(last <= 0)
 		{
-			total += grids->grids[i]->count;
-			iter += grids->grids[i]->iterations;
+			printf("Grid #%d\n", last);
+			printGrid(result[last]);
 		}
-	printf("Grid #%d\n", last);
-	printGrid(result[last]);
-	printf("## Size,Grid,total,iter, time\n");
-	printf("## %d, %d , %ld, %ld, %lf\n",gridSize, last,total, iter, time_spent);
-}
-
+		printf("## Size,Grid,total,iter, time\n");
+		printf("## %d, %d , %ld, %ld, %lf\n", gridSize, last, total, iter, time_spent);
+	}
 
 gridResult * getGrids(path ** p, int MAX, int size)
-{
-	returnResult * res;
-	cudaMallocManaged((void **) &res, 1);
-	grid * g = allocateGrid(size);
-	grid ** result;
-	location * larray;
-	cudaMallocManaged((void **) &larray, sizeof(location));
-	larray[0].x = 0;
-	larray[0].y = 0;
-	larray[0].full = FULL;
-	res->threads = 1;
-	int gridSize = 10000;
-	int amount = gridSize * sizeof(grid *);
-	//printf("Allocated Bytes %d\n", amount);
-	cudaMallocManaged((void **) &result, amount);
-	for (int i = 0; i < gridSize; i++)
-		{
-			result[i] = allocateGrid(size);
-		}
-	amount = res->threads * sizeof(grid *) * (MAX + 2);
-	//printf("Allocated Bytes for GStack %d\n", amount);
-	cudaMallocManaged((void **) &res->gridStack, amount);
-	for (int i = 0; i < res->threads * (MAX + 2); i++)
-		{
-			res->gridStack[i] = allocateGrid(size);
-		}
-	amount = sizeof(location) * (MAX + 2) * res->threads;
-	//printf("Allocated Bytes for LStack %d\n", amount);
-	cudaMallocManaged((void **) &res->locationStack, amount);
-	res->result = result;
-	res->size = gridSize;
-	res->MAX = MAX;
-	clock_t begin = clock();
-	compute2<<<1, res->threads>>>(res, g, p, larray);
-	cudaDeviceSynchronize();
-	clock_t end = clock();
-	double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
-	//printf("Time spent %lf\n", time_spent);
-	int last = 0;
-	int valid = 0;
-	for (int i = 0; i < gridSize; i++)
+	{
+		returnResult * res;
+		cudaMallocManaged((void **) &res, 1);
+		grid * g = allocateGrid(size);
+		grid ** result;
+		location * larray;
+		cudaMallocManaged((void **) &larray, sizeof(location));
+		larray[0].x = 0;
+		larray[0].y = 0;
+		larray[0].full = FULL;
+		res->threads = 1;
+		int gridSize = 10000;
+		int amount = gridSize * sizeof(grid *);
+		//printf("Allocated Bytes %d\n", amount);
+		cudaMallocManaged((void **) &result, amount);
+		for (int i = 0; i < gridSize; i++)
+			{
+				result[i] = allocateGrid(size);
+			}
+		amount = res->threads * sizeof(grid *) * (MAX + 2);
+		//printf("Allocated Bytes for GStack %d\n", amount);
+		cudaMallocManaged((void **) &res->gridStack, amount);
+		for (int i = 0; i < res->threads * (MAX + 2); i++)
+			{
+				res->gridStack[i] = allocateGrid(size);
+			}
+		amount = sizeof(location) * (MAX + 2) * res->threads;
+		//printf("Allocated Bytes for LStack %d\n", amount);
+		cudaMallocManaged((void **) &res->locationStack, amount);
+		res->result = result;
+		res->size = gridSize;
+		res->MAX = MAX;
+		clock_t begin = clock();
+		compute2<<<1, res->threads>>>(res, g, p, larray);
+		cudaDeviceSynchronize();
+		clock_t end = clock();
+		double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
+		//printf("Time spent %lf\n", time_spent);
+		int last = 0;
+		int valid = 0;
+		for (int i = 0; i < gridSize; i++)
 			{
 				if (result[i]->ok == '1')
-						{
-							last = i;
-							//printf("Grid #%d\n", i);
-							//printGrid(result[i]);
-							valid ++;
-						}
+					{
+						last = i;
+						//printf("Grid #%d\n", i);
+						//printGrid(result[i]);
+						valid++;
+					}
 			}
-	gridResult* grids = (gridResult *)malloc(sizeof(gridResult));
-	grids->grids = result;
-	grids->size = last+1;
-	printf("Valid = %d", valid);
-	//printf("Size %d Grid #%d\n", gridSize, last);
+		gridResult* grids = (gridResult *) malloc(sizeof(gridResult));
+		grids->grids = result;
+		grids->size = last + 1;
+		printf("Valid = %d", valid);
+		//printf("Size %d Grid #%d\n", gridSize, last);
 
-	for (int i = 0; i < res->threads * (MAX + 2); i++)
-		{
-			for(int j = 0; j < size; j++)
+		for (int i = 0; i < res->threads * (MAX + 2); i++)
 			{
-				cudaFree(res->gridStack[i]->cells[j]);
+				for (int j = 0; j < size; j++)
+					{
+						cudaFree(res->gridStack[i]->cells[j]);
+					}
+				cudaFree(res->gridStack[i]->cells);
+				cudaFree(res->gridStack[i]);
 			}
-			cudaFree(res->gridStack[i]->cells);
-			cudaFree(res->gridStack[i]);
-		}
-	cudaFree(res->gridStack);
-	/*for (int i = 0; i < gridSize; i++)
-		{
-			for(int j = 0; j < size; j++)
-			{
-				cudaFree(result[i]->cells[j]);
-			}
-			cudaFree(result[i]->cells);
-			cudaFree(result[i]);
-		}
-	cudaFree(result);*/
-	cudaFree(res->locationStack);
-	cudaFree(larray);
-	cudaFree(res);
-	return grids;
-}
-
+		cudaFree(res->gridStack);
+		/*for (int i = 0; i < gridSize; i++)
+		 {
+		 for(int j = 0; j < size; j++)
+		 {
+		 cudaFree(result[i]->cells[j]);
+		 }
+		 cudaFree(result[i]->cells);
+		 cudaFree(result[i]);
+		 }
+		 cudaFree(result);*/
+		cudaFree(res->locationStack);
+		cudaFree(larray);
+		cudaFree(res);
+		return grids;
+	}
 
 int foo(path ** p, int MAX, int breaker)
 	{
@@ -325,7 +326,6 @@ int foo(path ** p, int MAX, int breaker)
 		//for(int breaker =100000; breaker < 10000000; breaker+=100000)
 			{
 
-				
 				printf("Starting %d\n", breaker);
 				res->result = result;
 				//res->breaker = breaker;
@@ -357,7 +357,6 @@ int foo(path ** p, int MAX, int breaker)
 		return 0;
 	}
 
-
 __global__ void compute2(returnResult * res, grid * g, path ** pathlist, location * l)
 	{
 		int idx = blockIdx.x * blockDim.x + threadIdx.x;
@@ -385,7 +384,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		int index = idx * (MAX + 2);
 		grid ** gridStack = &res->gridStack[index];
 		location * locStack = &res->locationStack[index];
-		
+
 		grid ** result = &res->result[xx];
 		int gridSize = res->size / res->threads;
 		long breaker = 0;
@@ -435,16 +434,16 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 				int lasty = loc->y;
 				int lastx = loc->x;
 				value = p->letters[0];
-				checkValue = 0; 
-				if(loc->x >= g->size || loc->y >= g->size || loc->nx >= g->size || loc->ny >= g->size)
-				{
-					checkValue = 1;
-					pop = 1;
-				}
-				if(checkValue == 0)
-				{
-					checkValue = check(currentGrid, loc->x, loc->y, value);
-				}
+				checkValue = 0;
+				if (loc->x >= g->size || loc->y >= g->size || loc->nx >= g->size || loc->ny >= g->size)
+					{
+						checkValue = 1;
+						pop = 1;
+					}
+				if (checkValue == 0)
+					{
+						checkValue = check(currentGrid, loc->x, loc->y, value);
+					}
 				if (checkValue == 0)
 					{
 						currentGrid->cells[loc->x][loc->y].value = value;
@@ -471,10 +470,10 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 							}
 					}
 				/*if(idx == 839 && count >= MAX-1)
-				{
-					printf("V IDX=%d loc (%d,%d) (%d,%d) value%d \n", idx,loc->x, loc->y, loc->nx, loc->ny, checkValue);
-					printGridDev(currentGrid);
-				}*/
+				 {
+				 printf("V IDX=%d loc (%d,%d) (%d,%d) value%d \n", idx,loc->x, loc->y, loc->nx, loc->ny, checkValue);
+				 printGridDev(currentGrid);
+				 }*/
 				if (checkValue == 0 && count == MAX)
 					{
 						i++;
@@ -528,8 +527,8 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 					}
 				else
 					{
-						
-						if (pop == 1 ) //pop off the list
+
+						if (pop == 1) //pop off the list
 							{
 								if (loc->full == FULL)
 									{
@@ -550,7 +549,7 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		g->count = i;
 		g->iterations = breaker;
 		//printf("The total is %d breaker %d\n", i, breaker);
-		for(int j = 0; j < g->size; j++)
+		for (int j = 0; j < g->size; j++)
 			{
 				free(currentGrid->cells[j]);
 			}
@@ -558,66 +557,64 @@ __device__ void computeIterative(returnResult * res, grid * g, path ** pathList,
 		free(currentGrid);
 	}
 
-
-
 __device__ int updateLocation(location * loc, path * p, int size)
 	{
 		int pop = 0;
 		if (loc->full == PART)
+			{
+				if (p->direction == LEFT)
 					{
-						if (p->direction == LEFT)
+						loc->ny++;
+						if (loc->ny >= size)
+							pop = 1;
+					}
+				else
+					{
+						loc->nx++;
+						if (loc->nx >= size)
+							pop = 1;
+					}
+			}
+		else
+			{
+				if (p->direction == LEFT)
+					{
+						loc->ny++;
+						if (loc->ny >= size)
 							{
-								loc->ny++;
-								if (loc->ny >= size)
-									pop = 1;
-							}
-						else
-							{
-								loc->nx++;
-								if (loc->nx >= size)
-									pop = 1;
+								loc->ny = 0;
+								loc->y++;
+								if (loc->y >= size)
+									{
+										loc->y = 0;
+										loc->x++;
+										if (loc->x >= size)
+											{
+												pop = 1;
+											}
+									}
 							}
 					}
 				else
 					{
-						if (p->direction == LEFT)
+						loc->nx++;
+						if (loc->nx >= size)
 							{
-								loc->ny++;
-								if (loc->ny >= size)
+								loc->nx = 0;
+								loc->x++;
+								if (loc->x >= size)
 									{
-										loc->ny = 0;
+										loc->x = 0;
 										loc->y++;
 										if (loc->y >= size)
 											{
-												loc->y = 0;
-												loc->x++;
-												if (loc->x >= size)
-													{
-														pop = 1;
-													}
-											}
-									}
-							}
-						else
-							{
-								loc->nx++;
-								if (loc->nx >= size)
-									{
-										loc->nx = 0;
-										loc->x++;
-										if (loc->x >= size)
-											{
-												loc->x = 0;
-												loc->y++;
-												if (loc->y >= size)
-													{
-														pop = 1;
-													}
+												pop = 1;
 											}
 									}
 							}
 					}
-			return pop;
+			}
+		return pop;
 	}
 
 __device__ int pow2(int x)
@@ -894,44 +891,50 @@ __device__ void printGridDev(grid * g)
 	}
 
 void printDevProp(cudaDeviceProp devProp)
-{   
-	printf("%s\n", devProp.name);
-	printf("Major revision number:         %d\n", devProp.major);
-	printf("Minor revision number:         %d\n", devProp.minor);
-	printf("Total global memory:           %u", devProp.totalGlobalMem);
-	printf(" bytes\n");
-	printf("Number of multiprocessors:     %d\n", devProp.multiProcessorCount);
-	printf("Total amount of shared memory per block: %u\n",devProp.sharedMemPerBlock);
-	printf("Total registers per block:     %d\n", devProp.regsPerBlock);
-	printf("Warp size:                     %d\n", devProp.warpSize);
-	printf("Maximum memory pitch:          %u\n", devProp.memPitch);
-	printf("Total amount of constant memory:         %u\n",   devProp.totalConstMem);
-	printf("Cores:         %d\n", getCores(devProp)  );
-return;
-}
+	{
+		printf("%s\n", devProp.name);
+		printf("Major revision number:         %d\n", devProp.major);
+		printf("Minor revision number:         %d\n", devProp.minor);
+		printf("Total global memory:           %u", devProp.totalGlobalMem);
+		printf(" bytes\n");
+		printf("Number of multiprocessors:     %d\n", devProp.multiProcessorCount);
+		printf("Total amount of shared memory per block: %u\n", devProp.sharedMemPerBlock);
+		printf("Total registers per block:     %d\n", devProp.regsPerBlock);
+		printf("Warp size:                     %d\n", devProp.warpSize);
+		printf("Maximum memory pitch:          %u\n", devProp.memPitch);
+		printf("Total amount of constant memory:         %u\n", devProp.totalConstMem);
+		printf("Cores:         %d\n", getCores(devProp));
+		return;
+	}
 int getCores(cudaDeviceProp devProp)
-{  
-    int cores = 0;
-    int mp = devProp.multiProcessorCount;
-    switch (devProp.major){
-     case 2: // Fermi
-      if (devProp.minor == 1) cores = mp * 48;
-      else cores = mp * 32;
-      break;
-     case 3: // Kepler
-      cores = mp * 192;
-      break;
-     case 5: // Maxwell
-      cores = mp * 128;
-      break;
-     case 6: // Pascal
-      if (devProp.minor == 1) cores = mp * 128;
-      else if (devProp.minor == 0) cores = mp * 64;
-      else printf("Unknown device type\n");
-      break;
-     default:
-      printf("Unknown device type\n"); 
-      break;
-      }
-    return cores;
-}
+	{
+		int cores = 0;
+		int mp = devProp.multiProcessorCount;
+		switch (devProp.major)
+			{
+		case 2: // Fermi
+			if (devProp.minor == 1)
+				cores = mp * 48;
+			else
+				cores = mp * 32;
+			break;
+		case 3: // Kepler
+			cores = mp * 192;
+			break;
+		case 5: // Maxwell
+			cores = mp * 128;
+			break;
+		case 6: // Pascal
+			if (devProp.minor == 1)
+				cores = mp * 128;
+			else if (devProp.minor == 0)
+				cores = mp * 64;
+			else
+				printf("Unknown device type\n");
+			break;
+		default:
+			printf("Unknown device type\n");
+			break;
+			}
+		return cores;
+	}
