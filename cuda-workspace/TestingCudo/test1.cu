@@ -6,19 +6,17 @@
 #include "grid.h"
 #define N 10
 int allocated = 0;
-void initCell(cell * c);
+
 gridResult * getGrids(path ** p, int MAX, int size);
 __global__ void compute2(returnResult * res, grid * g, path ** pathList, location * l);
 __global__ void compute3(returnResult * res, grid ** g, path ** pathlist, location * l);
 __device__ void computeIterative(returnResult * res, grid * g, path ** pathList, location * baseLoc);
 __device__ void add(grid ** base, grid ** last, grid * newList);
 __device__ void cloneToGrid(grid * g, grid * g2);
-void cloneToGridLocal(grid * g, grid * g2);
 __device__ void eliminateValue(cell **c, int row, int col, int max, int value);
 __device__ int check(grid * g, int row, int col, int number);
 __device__ grid * allocateGridDevice(int size);
 __device__ int updateLocation(location * loc, path * p, int size);
-void printGrid(grid * g);
 __device__ int pow2(int x);
 __device__ grid * cloneGrid(grid * g);
 char convert(int x);
@@ -683,19 +681,7 @@ __device__ void cloneToGrid(grid * g, grid * g2)
 					}
 			}
 	}
-void cloneToGridLocal(grid * g, grid * g2)
-	{
-		g2->size = g->size;
-		g2->ok = g->ok;
-		for (int row = 0; row < g->size; row++)
-			{
-				for (int col = 0; col < g->size; col++)
-					{
-						g2->cells[row][col].bitmap = g->cells[row][col].bitmap;
-						g2->cells[row][col].value = g->cells[row][col].value;
-					}
-			}
-	}
+
 
 grid * allocateGrid(int size)
 	{
@@ -811,38 +797,6 @@ __device__ int check(grid * g, int row, int col, int number)
 				result = (mask & bits);
 			}
 		return result;
-	}
-
-void printGrid(grid * g)
-	{
-		int n = g->size;
-		//printf("X=%d Y=%d %c\n", x, y, g->ok);
-		printf("-- Grid -- \n");
-		for (int row = 0; row < n; row++)
-			{
-				printf("%01d# ", row);
-				for (int col = 0; col < n; col++)
-					{
-						cell c = g->cells[row][col];
-						//printf("[%02d][%02d]%02X ",row, col, c[row * N + col].bitmap);
-						int value = c.value;
-						char printC = ' ';
-						if (value < 0)
-							{
-								value = c.bitmap;
-								printf(" %03X%c", value, printC);
-							}
-						else
-							{
-								//
-								printC = convert(value);
-								value = 0;
-								printf("  %c  ", printC);
-							}
-
-					}
-				printf("\n");
-			}
 	}
 __device__ char convertDev(int x)
 	{

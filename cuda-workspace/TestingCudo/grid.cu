@@ -2,6 +2,50 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
+void printGrid(grid * g)
+	{
+		int n = g->size;
+		//printf("X=%d Y=%d %c\n", x, y, g->ok);
+		printf("-- Grid -- \n");
+		for (int row = 0; row < n; row++)
+			{
+				printf("%01d# ", row);
+				for (int col = 0; col < n; col++)
+					{
+						cell c = g->cells[row][col];
+						//printf("[%02d][%02d]%02X ",row, col, c[row * N + col].bitmap);
+						int value = c.value;
+						char printC = ' ';
+						if (value < 0)
+							{
+								value = c.bitmap;
+								printf(" %03X%c", value, printC);
+							}
+						else
+							{
+								//
+								printC = convert(value);
+								value = 0;
+								printf("  %c  ", printC);
+							}
+
+					}
+				printf("\n");
+			}
+	}
+void cloneToGridLocal(grid * g, grid * g2)
+	{
+		g2->size = g->size;
+		g2->ok = g->ok;
+		for (int row = 0; row < g->size; row++)
+			{
+				for (int col = 0; col < g->size; col++)
+					{
+						g2->cells[row][col].bitmap = g->cells[row][col].bitmap;
+						g2->cells[row][col].value = g->cells[row][col].value;
+					}
+			}
+	}
 path ** scanChars()
 	{
 		char test[100] = "HEBJCE  -> BJAGDHCHJEGJ";

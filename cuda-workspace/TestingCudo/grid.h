@@ -72,12 +72,13 @@ typedef struct gridResult{
 
 
 grid * allocateGrid(int size);
-
+void initCell(cell * c);
+void printGrid(grid * g);
 char convertChar(char u);
 int convertUpper(char u);
 path * allocate(char c, char c1, char* c2, int direction);
 path ** scanChars();
 path * getPath(char * line);
 void printPath(path * p);
-
+void cloneToGridLocal(grid * g, grid * g2);
 #endif
