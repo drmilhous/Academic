@@ -79,8 +79,8 @@ __device__ int testAndSet(Grid * g, int number, int x, int y)
 			ok = (mask & (rbits | cbits));
 			if(ok == 0)
 			{
-				g->col[x] |= mask;
-				g->row[y] |= mask;
+				g->col[y] |= mask;
+				g->row[x] |= mask;
 				g->Cells[x][y] = convertDev(number);
 			}
 		}
