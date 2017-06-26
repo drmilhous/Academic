@@ -6,18 +6,18 @@
 #include "FastGrid.h"
 #include <ctype.h>
 #define DEL '-'
-__global__ void compute(Grid * g, int threads);
+__global__ void compute(Grid * g, int threads, State * s, int maxDepth);
 Grid * allocateGrid(int size);
 void printDevProp(cudaDeviceProp devProp);
 int getCores(cudaDeviceProp devProp);
 __device__ int pow2(int x);
 __device__ char convertDev(int x);
 __device__ int testAndSet(Grid * g, int number, int x, int y);
+State * allocateStateStack(int threads, int maxDepth);
 
 int main(int argc, char ** argv)
 	{
 		Grid * g;	
-		char *cvalue = NULL;
 		int device;
 		int N;
 		int c;
@@ -27,44 +27,63 @@ int main(int argc, char ** argv)
     		switch (c)
       		{
 				  case 'n':
-				  //printf("%c", c);
-				  	cvalue = optarg;
-				  	N = atoi(cvalue);
-					  break;
+				  		N = atoi(optarg);
+					  	break;
 				  case 'd':
-				  	cvalue = optarg;
-				  	device = atoi(optarg);
+				  		device = atoi(optarg);
+						break;
 				  case 'i':
-					output = optarg;
-				  break;
+						output = optarg;
+				  		break;
 			}
 		}
 		cudaSetDevice(device);
 		g = allocateGrid(N);
 		printf("Allocated \n");
-		int threads = 1;
-		int blocks = threads/1;
+		int threads = 100;
+		int blocks = threads/10;
 		int threadBlocks = threads / blocks;
 		printGrid(g,N);
 		Path ** path = scanChars(output);
-		printPath(path[0]); 
-		compute<<<blocks, threadBlocks>>>(g, threads);
+		printPath(path[0]);
+		int depth = 100;
+		State * stateStack = allocateStateStack(threads, depth); 
+		compute<<<blocks, threadBlocks>>>(g, threads, stateStack, depth);
 		cudaDeviceSynchronize();
-		printGrid(g,N);
+		//printGrid(g,N);
+		for(int i = 0; i < threads * depth; i++)
+		{
+			printGrid(&stateStack[i].grid, N);
+		}
 	}
 
-
-__global__ void compute(Grid * g, int threads)
+State * allocateStateStack(int threads, int maxDepth)
+{
+	State * s;
+	cudaMallocManaged((void **) &s, sizeof(State) * threads * maxDepth);
+	for(int i = 0; i < threads * maxDepth; i++)
+	{
+		s->count = 0;
+		s->iterations = 0;
+	}
+	return s;
+}
+__global__ void compute(Grid * g, int threads, State * s, int maxDepth)
 {
 	int idx = blockIdx.x * blockDim.x + threadIdx.x;
+	
 		if (idx < threads)
 			{
-				int value = testAndSet(g,0,1,3);
-				printf("value = %d\n", value);
-				value = testAndSet(g,1,1,7);
+				s = &s[idx * maxDepth];
+				for(int i = 0; i < maxDepth; i++)
+				{
+					int value = testAndSet(&s[i].grid,0,1,3);
+				}
+				//printf("value = %d\n", value);
+				/*value = testAndSet(g,1,1,7);
 				printf("value = %d\n", value);
 				value = testAndSet(g,0,1,7);
-				printf("value = %d\n", value);
+				printf("value = %d\n", value);*/
 			}
 }
 

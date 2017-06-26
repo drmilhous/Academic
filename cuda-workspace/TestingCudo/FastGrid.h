@@ -36,16 +36,16 @@ typedef struct Location{
 } Location;
 
 typedef struct State{
-    Grid * grid;
-    Location * location;
+    Grid grid;
+    Location location;
     Path * path;
     long count;
     long iterations;
 }State;
 
 typedef struct GridLocPath{
-    Grid * grid;
-    Location * location;
+    Grid grid;
+    Location location;
     Path * path;
 } GridLocPath;
 
