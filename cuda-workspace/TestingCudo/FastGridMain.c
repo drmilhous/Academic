@@ -72,15 +72,26 @@ int main(int argc, char ** argv)
 
 void initThreads(State * s, int threads, int depth, int N, Path ** path)
 {
-	State t = s;
-	Path ** temp;
+	State* t = s;
+	Path * current;
+	Path ** base;
 	for(int i = 0; i < threads; i++)
 	{
-		temp = path;
+		current = &path[0];
+		base = path;
 		for(int d = 0; d < depth; d++)
 		{
-			int index = i * depth + d;
-			s->path = temp[0];
+			if(temp == NULL || temp->next == NULL) 
+			{
+				base++;
+				temp = &base[0];
+			}
+			else
+			{
+				temp = temp->next;
+			}		
+			t->path = temp;
+			t++;
 		}
 	}
 	for (int row = 0; row < N; row++)
