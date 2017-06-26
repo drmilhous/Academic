@@ -15,7 +15,7 @@ int main(int argc, char ** argv)
 	{
 		Grid * g;	
 		char *cvalue = NULL;
-		int device = 0;
+		int device;
 		int N;
 		int c;
 		while ((c = getopt (argc, argv, "nd:")) != -1)
@@ -23,8 +23,10 @@ int main(int argc, char ** argv)
     		switch (c)
       		{
 				  case 'n':
-				  	N = atoi(optarg);
+				  	cvalue = optarg;
+				  	N = atoi(cvalue);
 				  case 'd':
+				  	cvalue = optarg;
 				  	device = atoi(optarg);
 				  break;
 			}
