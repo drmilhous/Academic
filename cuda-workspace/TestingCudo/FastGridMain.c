@@ -8,12 +8,13 @@
 #define DEL '-'
 __global__ void compute(Grid * g, int threads, State * s, int maxDepth);
 Grid * allocateGrid(int size);
+void initGridData(Grid * g, int size);
 void printDevProp(cudaDeviceProp devProp);
 int getCores(cudaDeviceProp devProp);
 __device__ int pow2(int x);
 __device__ char convertDev(int x);
 __device__ int testAndSet(Grid * g, int number, int x, int y);
-State * allocateStateStack(int threads, int maxDepth);
+State * allocateStateStack(int threads, int maxDepth, int N);
 
 int main(int argc, char ** argv)
 	{
@@ -47,7 +48,7 @@ int main(int argc, char ** argv)
 		Path ** path = scanChars(output);
 		printPath(path[0]);
 		int depth = 100;
-		State * stateStack = allocateStateStack(threads, depth); 
+		State * stateStack = allocateStateStack(threads, depth, N); 
 		compute<<<blocks, threadBlocks>>>(g, threads, stateStack, depth);
 		cudaDeviceSynchronize();
 		//printGrid(g,N);
@@ -57,14 +58,15 @@ int main(int argc, char ** argv)
 		}
 	}
 
-State * allocateStateStack(int threads, int maxDepth)
+State * allocateStateStack(int threads, int maxDepth, int N)
 {
 	State * s;
 	cudaMallocManaged((void **) &s, sizeof(State) * threads * maxDepth);
 	for(int i = 0; i < threads * maxDepth; i++)
 	{
-		s->count = 0;
-		s->iterations = 0;
+		initGridData(&s[i].grid,N);
+		s[i].count = 0;
+		s[i].iterations = 0;
 	}
 	return s;
 }
@@ -131,7 +133,11 @@ Grid * allocateGrid(int size)
 	{
 		Grid * g = NULL;
 		cudaMallocManaged((void **) &g, sizeof(Grid));
-
+		initGridData(g, size);
+		return g;
+	}
+void initGridData(Grid * g, int size)
+{
 		cudaMallocManaged((void **) &g->row, size * sizeof(int));
 		cudaMallocManaged((void **) &g->col, size * sizeof(int));
 
@@ -153,7 +159,7 @@ Grid * allocateGrid(int size)
 			}
 		
 		g->ok = '0';
-		return g;
+		
 	}
 
 
