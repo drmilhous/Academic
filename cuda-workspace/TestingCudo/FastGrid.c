@@ -171,6 +171,7 @@ void printGrid(Grid * g, int N)
 		{
 			printf(" %03X ",g->col[i]);
 		}
+		printf("\n     ");
 		for (int row = 0; row < N; row++)
 			{
 				printf("%01d|%03X| ", row,g->row[row]);
