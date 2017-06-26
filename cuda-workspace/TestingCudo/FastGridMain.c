@@ -6,6 +6,7 @@
 #include "FastGrid.h"
 #include <ctype.h>
 #define DEL '-'
+__device__ void printGridDev(Grid * g, int N);
 __global__ void compute(Grid * g,int N ,int threads, State * s, int maxDepth);
 Grid * allocateGrid(int size);
 void initGridData(Grid * g, int size);
@@ -146,7 +147,21 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 	s[depth].path = s[depth-1].path;
 	int count = 0;
 	int maxCount = 10;
-	while(depth > 0)
+
+
+
+	for(int i = 0; i < N; i++)
+	{
+		printf("depth[%d] x[%d] y[%d] nx[%d] ny[%d]\n", depth,s[depth].location.x, s[depth].location.y, s[depth].location.nextX, s[depth].location.nextY );
+		cloneState(s[depth-1], s[depth],N);
+		value = setAll(&s[depth].grid, s[depth].path, &s[depth].location, N);
+		printGridDev(s[depth-1].grid, N);
+		value = updateLocation(&s[depth-1].location, s[depth].path, N);
+	}
+
+}
+/*
+	while(depth > 0 && depth == 100)
 	{
 		printf("depth[%d] x[%d] y[%d] nx[%d] ny[%d]\n", depth,s[depth].location.x, s[depth].location.y, s[depth].location.nextX, s[depth].location.nextY );
 		cloneState(s[depth-1], s[depth],N);
@@ -186,7 +201,7 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 		}
 		
 	}
-}
+}*/
 
 __device__ int updateLocation(Location * loc, Path * p, int size)
 	{
@@ -458,4 +473,23 @@ __device__ int pow2(int x)
 					}
 			}
 		return sum;
+	}
+__device__ void printGridDev(Grid * g, int N)
+	{
+		printf("-- Grid -- \n       ");
+		for (int i= 0; i < N; i++)
+		{
+			printf(" %03X ",g->col[i]);
+		}
+		printf("\n");
+		for (int row = 0; row < N; row++)
+			{
+				printf("%01d|%03X| ", row,g->row[row]);
+				for (int col = 0; col < N; col++)
+					{
+						char c = g->Cells[row][col];
+						printf("  %c  ", c);
+					}
+				printf("\n");
+			}
 	}
