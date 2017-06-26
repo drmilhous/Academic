@@ -119,6 +119,7 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 	int direction;
 	initLocation(&s[depth]);
 	depth++;
+	s[depth].path = s[depth-1].path;
 	while(depth > 0)
 	{
 		cloneState(s[depth-1], s[depth],N);
