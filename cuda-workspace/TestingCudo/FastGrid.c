@@ -166,7 +166,6 @@ Path ** scanChars()
 
 void printGrid(Grid * g, int N)
 	{
-		//printf("X=%d Y=%d %c\n", x, y, g->ok);
 		printf("-- Grid -- \n");
 		for (int i= 0; i < N; i++)
 		{
@@ -177,37 +176,12 @@ void printGrid(Grid * g, int N)
 				printf("%01d|%03X| ", row,g->row[row]);
 				for (int col = 0; col < N; col++)
 					{
-						char c = g->Cell[row][col];
-						printf("  %c  ", printC);
+						char c = g->Cells[row][col];
+						printf("  %c  ", c);
 					}
 				printf("\n");
 			}
 	}
-	/*
-void cloneToGridLocal(grid * g, grid * g2)
-	{
-		g2->size = g->size;
-		g2->ok = g->ok;
-		for (int row = 0; row < g->size; row++)
-			{
-				for (int col = 0; col < g->size; col++)
-					{
-						g2->cells[row][col].bitmap = g->cells[row][col].bitmap;
-						g2->cells[row][col].value = g->cells[row][col].value;
-					}
-			}
-	}
-*/
-
-
-
-/*
- __global__ void add( int *a, int *b, int *c )
- {
- int tid = blockIdx.x; // handle the data at this index
- if (tid < N)
- c[tid] = a[tid] + b[tid];
- }*/
 
 
 
