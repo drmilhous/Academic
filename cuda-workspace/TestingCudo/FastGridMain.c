@@ -82,11 +82,11 @@ __global__ void compute(Grid * g, int threads, State * s, int maxDepth)
 		if (idx < threads)
 			{
 				s = &s[idx * maxDepth];
-				computeLocal(s, 0, maxDepth);
-				//for(int i = 0; i < maxDepth; i++)
-				//{
-			//		int value = testAndSet(&s[i].grid,0,1,3);
-			//	}
+				//computeLocal(s, 0, maxDepth);
+				for(int i = 0; i < maxDepth; i++)
+				{
+					int value = testAndSet(&s[i].grid,0,1,3);
+				}
 				//printf("value = %d\n", value);
 				/*value = testAndSet(g,1,1,7);
 				printf("value = %d\n", value);
