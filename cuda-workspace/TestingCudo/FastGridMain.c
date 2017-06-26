@@ -15,20 +15,21 @@ int main(int argc, char ** argv)
 	{
 		Grid * g;	
 		char *cvalue = NULL;
+		int device = 0;
 		int N;
 		int c;
-		while ((c = getopt (argc, argv, "n:")) != -1)
+		while ((c = getopt (argc, argv, "nd:")) != -1)
 		{
     		switch (c)
       		{
 				  case 'n':
-				  cvalue = optarg;
-				  printf("'%s'\n",cvalue);
-				  N = atoi(cvalue);
-				  printf("'%d'\n",N);
+				  	N = atoi(optarg);
+				  case 'd':
+				  	device = atoi(optarg);
 				  break;
 			}
 		}
+		cudaSetDevice(device);
 		g = allocateGrid(N);
 		printf("Allocated \n");
 		printGrid(g,N);
