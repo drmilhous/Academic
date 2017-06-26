@@ -71,8 +71,8 @@ void initThreads(State * s, int depth, int N, Path * path)
 			{
 				for (int col = 0; col < N; col++)
 					{
-						s->location.x = col;
-						s->location.y = row;
+						s->location.x = row;
+						s->location.y = col;
 						s->path = path;
 						s = &s[depth];
 					}
