@@ -23,7 +23,9 @@ int main(int argc, char ** argv)
     		switch (c)
       		{
 				  case 'n':
+				  //printf("%c", c);
 				  	cvalue = optarg;
+				printf("%c'%s'", c,optarg);
 				  	N = atoi(cvalue);
 					  break;
 				  case 'd':
