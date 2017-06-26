@@ -54,7 +54,11 @@ int main(int argc, char ** argv)
 		//printGrid(g,N);
 		for(int i = 0; i < threads * depth; i++)
 		{
-			printGrid(&stateStack[i].grid, N);
+			if(i % depth == depth-1)
+			{
+				printf("Grid %d\n", i);
+				printGrid(&stateStack[i].grid, N);
+			}
 		}
 	}
 
@@ -77,16 +81,25 @@ __global__ void compute(Grid * g, int threads, State * s, int maxDepth)
 		if (idx < threads)
 			{
 				s = &s[idx * maxDepth];
-				for(int i = 0; i < maxDepth; i++)
-				{
-					int value = testAndSet(&s[i].grid,0,1,3);
-				}
+				//for(int i = 0; i < maxDepth; i++)
+				//{
+			//		int value = testAndSet(&s[i].grid,0,1,3);
+			//	}
 				//printf("value = %d\n", value);
 				/*value = testAndSet(g,1,1,7);
 				printf("value = %d\n", value);
 				value = testAndSet(g,0,1,7);
 				printf("value = %d\n", value);*/
 			}
+}
+__device__ void computeLocal(State * s, int depth, int max)
+{
+	int value = testAndSet(&s[depth].grid,0,1,3);
+	if(depth < max)
+	{
+		computeLocal(s,depth+1);
+	}
+
 }
 
 __device__ int testAndSet(Grid * g, int number, int x, int y)
