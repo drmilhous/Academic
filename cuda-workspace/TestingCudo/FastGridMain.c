@@ -59,7 +59,7 @@ __global__ void compute(Grid * g, int threads)
 			{
 				int value = testAndSet(g,0,1,3);
 				printf("value = %d\n", value);
-				value = testAndSet(g,1,2,7);
+				value = testAndSet(g,1,1,7);
 				printf("value = %d\n", value);
 				value = testAndSet(g,0,1,7);
 				printf("value = %d\n", value);
