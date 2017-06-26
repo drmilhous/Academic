@@ -25,7 +25,7 @@ int main(int argc, char ** argv)
 				  case 'n':
 				  //printf("%c", c);
 				  	cvalue = optarg;
-					printf("%c'%s'", c,optarg);
+					printf("%c'%s'\n", c,optarg);
 					fflush(stdout);
 				  	N = atoi(cvalue);
 					  break;
