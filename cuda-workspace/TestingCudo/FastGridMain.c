@@ -148,7 +148,7 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 	int maxCount = 10;
 	while(depth > 0)
 	{
-		printf("depth[%d] x[%d] y[%d] nx[%d] ny[%d]", depth,s[depth].location.x, s[depth].location.y, s[depth].location.nextX, s[depth].location.nextY );
+		printf("depth[%d] x[%d] y[%d] nx[%d] ny[%d]\n", depth,s[depth].location.x, s[depth].location.y, s[depth].location.nextX, s[depth].location.nextY );
 		cloneState(s[depth-1], s[depth],N);
 		value = setAll(&s[depth].grid, s[depth].path, &s[depth].location, N);
 		if(depth == max-1) // end case
