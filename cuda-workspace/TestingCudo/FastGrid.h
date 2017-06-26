@@ -32,7 +32,7 @@ typedef struct Location{
     uint8_t y;
     uint8_t nextX;
     uint8_t nextY;
-    uint8_t Type;
+    uint8_t type;
 } Location;
 
 typedef struct State{

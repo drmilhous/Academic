@@ -16,6 +16,7 @@ __device__ char convertDev(int x);
 __device__ int testAndSet(Grid * g, int number, int x, int y);
 State * allocateStateStack(int threads, int maxDepth, int N);
 __device__ void computeLocal(State * s, int depth, int max);
+void initThreads(State * s, int depth, int N);
 
 int main(int argc, char ** argv)
 	{
@@ -48,20 +49,34 @@ int main(int argc, char ** argv)
 		printGrid(g,N);
 		Path ** path = scanChars(output);
 		printPath(path[0]);
-		int depth = 100;
+		int depth = 3;
 		State * stateStack = allocateStateStack(threads, depth, N); 
+		initThreads(stateStack, depth,N);
 		compute<<<blocks, threadBlocks>>>(g, threads, stateStack, depth);
 		cudaDeviceSynchronize();
 		//printGrid(g,N);
 		for(int i = 0; i < threads * depth; i++)
 		{
-			if(i % depth == depth-1)
+			if(i % depth == 0)
 			{
 				printf("Grid %d\n", i);
 				printGrid(&stateStack[i].grid, N);
 			}
 		}
 	}
+
+void initThreads(State * s, int depth, int N)
+{
+	for (int row = 0; row < N; row++)
+			{
+				for (int col = 0; col < N; col++)
+					{
+						s->location.x = col;
+						s->location.y = row;
+						s = &s[depth];
+					}
+			}
+}
 
 State * allocateStateStack(int threads, int maxDepth, int N)
 {
@@ -82,11 +97,11 @@ __global__ void compute(Grid * g, int threads, State * s, int maxDepth)
 		if (idx < threads)
 			{
 				s = &s[idx * maxDepth];
-				//computeLocal(s, 0, maxDepth);
-				for(int i = 0; i < maxDepth; i++)
+				computeLocal(s, 0, maxDepth);
+				/*for(int i = 0; i < maxDepth; i++)
 				{
 					int value = testAndSet(&s[i].grid,0,1,3);
-				}
+				}*/
 				//printf("value = %d\n", value);
 				/*value = testAndSet(g,1,1,7);
 				printf("value = %d\n", value);
@@ -96,12 +111,9 @@ __global__ void compute(Grid * g, int threads, State * s, int maxDepth)
 }
 __device__ void computeLocal(State * s, int depth, int max)
 {
-	int value = testAndSet(&s[depth].grid,0,1,3);
-	if(depth < max)
-	{
-		computeLocal(s,depth+1, max);
-	}
-
+	int x = s[depth].location.x;
+	int y = s[depth].location.y;
+	int value = testAndSet(&s[depth].grid,s[depth].path->letters[0],x,y);
 }
 
 __device__ int testAndSet(Grid * g, int number, int x, int y)
