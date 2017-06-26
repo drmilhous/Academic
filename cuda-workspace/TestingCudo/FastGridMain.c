@@ -16,7 +16,7 @@ __device__ char convertDev(int x);
 __device__ int testAndSet(Grid * g, int number, int x, int y);
 State * allocateStateStack(int threads, int maxDepth, int N);
 __device__ void computeLocal(State * s, int depth, int max);
-void initThreads(State * s, int depth, int N);
+void initThreads(State * s, int depth, int N, Path * path);
 
 int main(int argc, char ** argv)
 	{
@@ -51,7 +51,7 @@ int main(int argc, char ** argv)
 		printPath(path[0]);
 		int depth = 3;
 		State * stateStack = allocateStateStack(threads, depth, N); 
-		initThreads(stateStack, depth,N);
+		initThreads(stateStack, depth,N, path[0]);
 		compute<<<blocks, threadBlocks>>>(g, threads, stateStack, depth);
 		cudaDeviceSynchronize();
 		//printGrid(g,N);
@@ -65,7 +65,7 @@ int main(int argc, char ** argv)
 		}
 	}
 
-void initThreads(State * s, int depth, int N)
+void initThreads(State * s, int depth, int N, Path * path)
 {
 	for (int row = 0; row < N; row++)
 			{
@@ -73,6 +73,7 @@ void initThreads(State * s, int depth, int N)
 					{
 						s->location.x = col;
 						s->location.y = row;
+						s->path = path;
 						s = &s[depth];
 					}
 			}
