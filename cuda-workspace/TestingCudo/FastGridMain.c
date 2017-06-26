@@ -18,7 +18,7 @@ int main(int argc, char ** argv)
 		int device;
 		int N;
 		int c;
-		while ((c = getopt (argc, argv, "nd:")) != -1)
+		while ((c = getopt (argc, argv, "n:d:")) != -1)
 		{
     		switch (c)
       		{
