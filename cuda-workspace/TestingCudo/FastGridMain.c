@@ -10,6 +10,9 @@ __global__ void compute(Grid * g, int threads);
 Grid * allocateGrid(int size);
 void printDevProp(cudaDeviceProp devProp);
 int getCores(cudaDeviceProp devProp);
+__device__ int pow2(int x);
+__device__ char convertDev(int x);
+__device__ int testAndSet(Grid * g, int number, int x, int y);
 
 int main(int argc, char ** argv)
 	{
@@ -38,8 +41,8 @@ int main(int argc, char ** argv)
 		cudaSetDevice(device);
 		g = allocateGrid(N);
 		printf("Allocated \n");
-		int threads = 100;
-		int blocks = threads/10;
+		int threads = 1;
+		int blocks = threads/1;
 		int threadBlocks = threads / blocks;
 		printGrid(g,N);
 	
@@ -54,10 +57,50 @@ __global__ void compute(Grid * g, int threads)
 	int idx = blockIdx.x * blockDim.x + threadIdx.x;
 		if (idx < threads)
 			{
-				g->Cells[blockIdx.x][threadIdx.x] = 'a';
+				int value = testAndSet(g,0,1,3);
+				printf("value = %d\n", value);
 			}
 }
 
+__device__ int testAndSet(Grid * g, int number, int x, int y)
+{
+	int ok = 0;
+	int value = g->Cells[x][y];
+	int mask;
+	if (value != DEL && value != number)
+		{
+			ok = 1;
+		}
+	else
+		{
+			mask = pow2(number);
+			int cbits = g->col[y];
+			int rbits = g->row[x];
+			ok = (mask & (rbits | cbits));
+			if(ok == 0)
+			{
+				g->col[x] |= mask;
+				g->row[y] |= mask;
+				g->Cells[x][y] = convertDev(number);
+			}
+		}
+	return ok;
+}
+
+__device__ char convertDev(int x)
+	{
+		char res = 'a';
+		if (x >= 0)
+			{
+				int amount = int(x) + (int) res;
+				res = (char) amount;
+			}
+		else
+			{
+				res = ' ';
+			}
+		return res;
+	}
 
 Grid * allocateGrid(int size)
 	{
@@ -136,4 +179,20 @@ int getCores(cudaDeviceProp devProp)
 			break;
 			}
 		return cores;
+	}
+__device__ int pow2(int x)
+	{
+		int sum = 1;
+		if (x == 0)
+			{
+				sum = 1;
+			}
+		else
+			{
+				for (int i = 0; i < x; i++)
+					{
+						sum = sum * 2;
+					}
+			}
+		return sum;
 	}
