@@ -25,6 +25,7 @@ int main(int argc, char ** argv)
 				  case 'n':
 				  	cvalue = optarg;
 				  	N = atoi(cvalue);
+					  break;
 				  case 'd':
 				  	cvalue = optarg;
 				  	device = atoi(optarg);
