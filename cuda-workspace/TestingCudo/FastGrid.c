@@ -166,12 +166,12 @@ Path ** scanChars()
 
 void printGrid(Grid * g, int N)
 	{
-		printf("-- Grid -- \n");
+		printf("-- Grid -- \n      ");
 		for (int i= 0; i < N; i++)
 		{
 			printf(" %03X ",g->col[i]);
 		}
-		printf("\n     ");
+		printf("\n");
 		for (int row = 0; row < N; row++)
 			{
 				printf("%01d|%03X| ", row,g->row[row]);
