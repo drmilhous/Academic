@@ -144,8 +144,11 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 	initLocation(&s[depth]);
 	depth++;
 	s[depth].path = s[depth-1].path;
+	int count = 0;
+	int maxCount = 10;
 	while(depth > 0)
 	{
+		prinf("depth[%d] x[%d] y[%d] nx[%d] ny[%d]", depth,s[depth].location.x, s[depth].location.y, s[depth].locatin.nx, s[depth].location.ny );
 		cloneState(s[depth-1], s[depth],N);
 		value = setAll(&s[depth].grid, s[depth].path, &s[depth].location, N);
 		if(depth == max-1) // end case
@@ -175,6 +178,11 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 					value = updateLocation(&s[depth].location, s[depth].path, N);
 				}
 			}
+		}
+		count ++;
+		if(count > maxCount)
+		{
+			break;
 		}
 		
 	}
