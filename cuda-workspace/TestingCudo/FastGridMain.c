@@ -6,7 +6,7 @@
 #include "FastGrid.h"
 #include <ctype.h>
 #define DEL '-'
-__global__ void compute(Grid * g, int threads, State * s, int maxDepth);
+__global__ void compute(Grid * g,int N ,int threads, State * s, int maxDepth);
 Grid * allocateGrid(int size);
 void initGridData(Grid * g, int size);
 void printDevProp(cudaDeviceProp devProp);
@@ -15,9 +15,12 @@ __device__ int pow2(int x);
 __device__ char convertDev(int x);
 __device__ int testAndSet(Grid * g, int number, int x, int y);
 State * allocateStateStack(int threads, int maxDepth, int N);
-__device__ void computeLocal(State * s, int depth, int max);
+__device__ void computeLocal(State * s, int N, int depth, int max);
 void initThreads(State * s, int depth, int N, Path * path);
-
+__device__ void cloneState(State s1, State s2, int N);
+__device__ void cloneGrid(Grid * oldGrid, Grid * newGrid, int size);
+__device__ void cloneLocation(Location srcLoc, Location destLoc);
+__device__ void initLocation(State * s);
 int main(int argc, char ** argv)
 	{
 		Grid * g;	
@@ -52,7 +55,7 @@ int main(int argc, char ** argv)
 		int depth = 3;
 		State * stateStack = allocateStateStack(threads, depth, N); 
 		initThreads(stateStack, depth,N, path[0]);
-		compute<<<blocks, threadBlocks>>>(g, threads, stateStack, depth);
+		compute<<<blocks, threadBlocks>>>(g,N ,threads, stateStack, depth);
 		cudaDeviceSynchronize();
 		//printGrid(g,N);
 		for(int i = 0; i < threads * depth; i++)
@@ -91,14 +94,14 @@ State * allocateStateStack(int threads, int maxDepth, int N)
 	}
 	return s;
 }
-__global__ void compute(Grid * g, int threads, State * s, int maxDepth)
+__global__ void compute(Grid * g, int N, int threads, State * s, int maxDepth)
 {
 	int idx = blockIdx.x * blockDim.x + threadIdx.x;
 	
 		if (idx < threads)
 			{
 				s = &s[idx * maxDepth];
-				computeLocal(s, 0, maxDepth);
+				computeLocal(s,N, 0, maxDepth);
 				/*for(int i = 0; i < maxDepth; i++)
 				{
 					int value = testAndSet(&s[i].grid,0,1,3);
@@ -110,11 +113,67 @@ __global__ void compute(Grid * g, int threads, State * s, int maxDepth)
 				printf("value = %d\n", value);*/
 			}
 }
-__device__ void computeLocal(State * s, int depth, int max)
+__device__ void computeLocal(State * s,int N, int depth, int max)
 {
-	int x = s[depth].location.x;
-	int y = s[depth].location.y;
-	int value = testAndSet(&s[depth].grid,s[depth].path->letters[0],x,y);
+	int value;
+	int direction;
+	initLocation(&s[depth]);
+	depth++;
+	while(depth > 0)
+	{
+		cloneState(s[depth-1], s[depth],N);
+		value = testAndSet(&s[depth].grid,s[depth].path->letters[0],s[depth].location.x,s[depth].location.y);
+		if(value == 0)
+		{
+			
+		}
+	}
+}
+
+__device__ void initLocation(State * s)
+{
+	Location* loc = &s->location;
+	if(s->path->direction == LEFT)
+	{
+		loc->nextX = loc->x;
+		loc->nextY = 0;
+	}
+	else
+	{
+		loc->nextX= 0;
+		loc->nextY = loc->y;
+	}
+}
+
+__device__ void cloneState(State s1, State s2, int N)
+{
+	cloneGrid(&s1.grid, &s2.grid, N);
+	cloneLocation(s1.location, s2.location);
+}
+
+__device__ void cloneLocation(Location srcLoc, Location destLoc)
+{
+	destLoc.x = srcLoc.x;
+	destLoc.y = srcLoc.y;
+	destLoc.nextX = srcLoc.nextX;
+	destLoc.nextY = srcLoc.nextY;
+	destLoc.type = srcLoc.type;
+}
+__device__ void cloneGrid(Grid * srcGrid, Grid * newGrid, int size)
+{
+	for (int i = 0; i < size; i++)
+		{	
+			newGrid->col[i] = srcGrid->col[i];
+			newGrid->row[i] = srcGrid->row[i];
+		}
+	for (int row = 0; row < size; row++)
+		{
+			for (int col = 0; col < size; col++)
+				{
+					newGrid->Cells[row][col] = srcGrid->Cells[row][col];
+				}
+		}
+	newGrid->ok = srcGrid->ok;
 }
 
 __device__ int testAndSet(Grid * g, int number, int x, int y)
