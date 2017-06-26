@@ -51,7 +51,7 @@ typedef struct GridLocPath{
 
 
 Path * allocate(char c, char c1, char* c2, int direction);
-Path ** scanChars();
+Path ** scanChars(char * filePath);
 char convertChar(char u);
 int convertUpper(char u);
 Path * getPath(char * line);

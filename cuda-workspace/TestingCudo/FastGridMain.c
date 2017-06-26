@@ -21,20 +21,21 @@ int main(int argc, char ** argv)
 		int device;
 		int N;
 		int c;
-		while ((c = getopt (argc, argv, "n:d:")) != -1)
+		char * output;
+		while ((c = getopt (argc, argv, "n:d:i:")) != -1)
 		{
     		switch (c)
       		{
 				  case 'n':
 				  //printf("%c", c);
 				  	cvalue = optarg;
-					printf("%c'%s'\n", c,optarg);
-					fflush(stdout);
 				  	N = atoi(cvalue);
 					  break;
 				  case 'd':
 				  	cvalue = optarg;
 				  	device = atoi(optarg);
+				  case 'i':
+					output = optarg;
 				  break;
 			}
 		}
@@ -45,7 +46,8 @@ int main(int argc, char ** argv)
 		int blocks = threads/1;
 		int threadBlocks = threads / blocks;
 		printGrid(g,N);
-	
+		Path ** path = scanChars(output);
+		printPath(path[0]); 
 		compute<<<blocks, threadBlocks>>>(g, threads);
 		cudaDeviceSynchronize();
 		printGrid(g,N);

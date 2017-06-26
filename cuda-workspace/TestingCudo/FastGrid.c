@@ -99,19 +99,18 @@ Path * allocate(char c, char c1, char* c2, int direction)
 		return p;
 	}
 
-Path ** scanChars()
+Path ** scanChars(char * filePath)
 	{
-		char test[100] = "HEBJCE  -> BJAGDHCHJEGJ";
 		int count = 100;
 		int index = 0;
 		Path ** PathList;
 		cudaMallocManaged((void **) &PathList, (sizeof(Path *)) * count);
-		Path * p = getPath(test);
+		Path * p;
 		
 		FILE * database;
 		char buffer[30];
 
-		database = fopen("output.txt", "r");
+		database = fopen(filePath, "r");
 
 		if (NULL == database)
 			{
@@ -148,19 +147,10 @@ Path ** scanChars()
 								count *= 1.5;
 
 							}
-
-						//printf("> %s\n", buffer);
-						//	getPath(buffer);
 					}
 			}
-
-		/*for (int i = 0; i < count; i++)
-		 {
-		 printPath(PathList[i]);
-		 }*/
 		printf("Count is  = %d\n", index);
 		fclose(database);
-		printPath(PathList[0]);
 		return PathList;
 	}
 
