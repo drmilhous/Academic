@@ -16,7 +16,7 @@ __device__ char convertDev(int x);
 __device__ int testAndSet(Grid * g, int number, int x, int y);
 State * allocateStateStack(int threads, int maxDepth, int N);
 __device__ void computeLocal(State * s, int N, int depth, int max);
-void initThreads(State * s, int depth, int N, Path * path);
+void initThreads(State * s, int threads, int depth, int N, Path ** path);
 __device__ void cloneState(State s1, State s2, int N);
 __device__ void cloneGrid(Grid * oldGrid, Grid * newGrid, int size);
 __device__ void cloneLocation(Location* srcLoc, Location* destLoc);
