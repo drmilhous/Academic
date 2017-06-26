@@ -15,6 +15,7 @@ __device__ int pow2(int x);
 __device__ char convertDev(int x);
 __device__ int testAndSet(Grid * g, int number, int x, int y);
 State * allocateStateStack(int threads, int maxDepth, int N);
+__device__ void computeLocal(State * s, int depth, int max);
 
 int main(int argc, char ** argv)
 	{
@@ -81,6 +82,7 @@ __global__ void compute(Grid * g, int threads, State * s, int maxDepth)
 		if (idx < threads)
 			{
 				s = &s[idx * maxDepth];
+				computeLocal(s, 0, maxDepth);
 				//for(int i = 0; i < maxDepth; i++)
 				//{
 			//		int value = testAndSet(&s[i].grid,0,1,3);
@@ -97,7 +99,7 @@ __device__ void computeLocal(State * s, int depth, int max)
 	int value = testAndSet(&s[depth].grid,0,1,3);
 	if(depth < max)
 	{
-		computeLocal(s,depth+1);
+		computeLocal(s,depth+1, max);
 	}
 
 }
