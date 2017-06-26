@@ -6,7 +6,7 @@
 #include "FastGrid.h"
 #include <ctype.h>
 #define DEL '-'
-
+__global__ void compute(Grid * g, int threads);
 Grid * allocateGrid(int size);
 void printDevProp(cudaDeviceProp devProp);
 int getCores(cudaDeviceProp devProp);
@@ -38,9 +38,24 @@ int main(int argc, char ** argv)
 		cudaSetDevice(device);
 		g = allocateGrid(N);
 		printf("Allocated \n");
+		int threads = 100;
+		int blocks = threads/10;
+		int threadBlocks = threads / blocks;
+		printGrid(g,N);
+	
+		compute<<<blocks, threadBlocks>>>(g, threads);
 		printGrid(g,N);
 	}
 
+
+__global__ void compute(Grid * g, int threads)
+{
+	int idx = blockIdx.x * blockDim.x + threadIdx.x;
+		if (idx < threads)
+			{
+				g->Cells[blockIdx.x][threadIdx.x] = 'a';
+			}
+}
 
 
 Grid * allocateGrid(int size)

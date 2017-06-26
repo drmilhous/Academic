@@ -166,7 +166,7 @@ Path ** scanChars()
 
 void printGrid(Grid * g, int N)
 	{
-		printf("-- Grid -- \n      ");
+		printf("-- Grid -- \n       ");
 		for (int i= 0; i < N; i++)
 		{
 			printf(" %03X ",g->col[i]);
