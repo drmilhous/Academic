@@ -81,16 +81,16 @@ void initThreads(State * s, int threads, int depth, int N, Path ** path)
 		base = path;
 		for(int d = 0; d < depth; d++)
 		{
-			if(temp == NULL || temp->next == NULL) 
+			if(current == NULL || current->next == NULL) 
 			{
 				base++;
-				temp = &base[0];
+				current = &base[0];
 			}
 			else
 			{
-				temp = temp->next;
+				current = current->next;
 			}		
-			t->path = temp;
+			t->path = current;
 			t++;
 		}
 	}
@@ -104,24 +104,6 @@ void initThreads(State * s, int threads, int depth, int N, Path ** path)
 						s = &s[depth];
 					}
 			}
-}
-
-Path getNextPath(Path ** p)
-{
-	Path result = NULL;
-	if(p != NULL)
-	{
-		if(p->next == NULL)
-			{
-				p++;
-			}
-		else
-			{	
-
-			}
-	}
-	return result;
-	
 }
 
 State * allocateStateStack(int threads, int maxDepth, int N)
