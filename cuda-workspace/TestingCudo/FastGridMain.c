@@ -21,6 +21,7 @@ __device__ void cloneState(State s1, State s2, int N);
 __device__ void cloneGrid(Grid * oldGrid, Grid * newGrid, int size);
 __device__ void cloneLocation(Location srcLoc, Location destLoc);
 __device__ void initLocation(State * s);
+__device__ int setAll(Grid * g, Path * p, Location * l, int N);
 int main(int argc, char ** argv)
 	{
 		Grid * g;	
@@ -123,13 +124,90 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 	while(depth > 0)
 	{
 		cloneState(s[depth-1], s[depth],N);
-		value = testAndSet(&s[depth].grid,s[depth].path->letters[0],s[depth].location.x,s[depth].location.y);
-		if(value == 0)
+		value = setAll(&s[depth].grid, s[depth].path, &s[depth].location, N);
+		if(depth == max-1) // end case
 		{
-			
+			if(value == 0)
+			{
+				//printf("Valid");
+			}
+			depth --;
 		}
+		else // recursive case
+		{
+			if(value == 0)
+			{
+				depth++;
+			}
+			else
+			{
+				
+			}
+		}
+		
 	}
 }
+
+__device__ int updateLocation(Location * loc, Path * p, int size)
+	{
+		int pop = 0;
+		if (loc->type == PART)
+			{
+				if (p->direction == LEFT)
+					{
+						loc->nextY++;
+						if (loc->nextY >= size)
+							pop = 1;
+					}
+				else
+					{
+						loc->nextX++;
+						if (loc->nextX >= size)
+							pop = 1;
+					}
+			}
+		else
+			{
+				if (p->direction == LEFT)
+					{
+						loc->nextY++;
+						if (loc->nextY >= size)
+							{
+								loc->nextY = 0;
+								loc->y++;
+								if (loc->y >= size)
+									{
+										loc->y = 0;
+										loc->x++;
+										if (loc->x >= size)
+											{
+												pop = 1;
+											}
+									}
+							}
+					}
+				else
+					{
+						loc->nextX++;
+						if (loc->nextX >= size)
+							{
+								loc->nextX = 0;
+								loc->x++;
+								if (loc->x >= size)
+									{
+										loc->x = 0;
+										loc->y++;
+										if (loc->y >= size)
+											{
+												pop = 1;
+											}
+									}
+							}
+					}
+			}
+		return pop;
+	}
+
 
 __device__ void initLocation(State * s)
 {
@@ -176,6 +254,31 @@ __device__ void cloneGrid(Grid * srcGrid, Grid * newGrid, int size)
 		}
 	newGrid->ok = srcGrid->ok;
 }
+__device__ int setAll(Grid * g, Path * p, Location * l, int N)
+{
+	int value = testAndSet(g,p->letters[0],l->x,l->y);
+	int nx = l->nextX;
+	int ny = l->nextY;
+	int direction;
+	int letter;
+	if(value == 0)
+	{
+		if (p->direction == LEFT) //Do UP/DOWN
+			direction = l->y > l->nextY ? -1 : 1;
+		else
+			direction = l->x > l->nextX ? -1 : 1;
+		for (int offset = 0; offset < 3 && value == 0; offset++)
+			{
+				if (p->direction == LEFT) //Do UP/DOWN
+					ny = (l->nextY + (offset * direction) + N) % N;
+				else
+					nx = (l->nextX + (offset * direction) + N) % N;
+				letter = p->letters[offset + 1];
+				value |= testAndSet(g,letter,nx,ny);
+			}
+	}
+}
+
 
 __device__ int testAndSet(Grid * g, int number, int x, int y)
 {
