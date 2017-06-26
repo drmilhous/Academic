@@ -19,9 +19,10 @@ __device__ void computeLocal(State * s, int N, int depth, int max);
 void initThreads(State * s, int depth, int N, Path * path);
 __device__ void cloneState(State s1, State s2, int N);
 __device__ void cloneGrid(Grid * oldGrid, Grid * newGrid, int size);
-__device__ void cloneLocation(Location srcLoc, Location destLoc);
+__device__ void cloneLocation(Location* srcLoc, Location* destLoc);
 __device__ void initLocation(State * s);
 __device__ int setAll(Grid * g, Path * p, Location * l, int N);
+__device__ int updateLocation(Location * loc, Path * p, int size);
 int main(int argc, char ** argv)
 	{
 		Grid * g;	
@@ -47,21 +48,21 @@ int main(int argc, char ** argv)
 		cudaSetDevice(device);
 		g = allocateGrid(N);
 		printf("Allocated \n");
-		int threads = 100;
-		int blocks = threads/10;
+		int threads = 1;
+		int blocks = threads/1;
 		int threadBlocks = threads / blocks;
 		printGrid(g,N);
 		Path ** path = scanChars(output);
 		printPath(path[0]);
 		int depth = 3;
 		State * stateStack = allocateStateStack(threads, depth, N); 
-		initThreads(stateStack, depth,N, path[0]);
+		initThreads(stateStack, threads, depth,N, path);
 		compute<<<blocks, threadBlocks>>>(g,N ,threads, stateStack, depth);
 		cudaDeviceSynchronize();
 		//printGrid(g,N);
 		for(int i = 0; i < threads * depth; i++)
 		{
-			if(i % depth == 0)
+			//if(i % depth == 0)
 			{
 				printf("Grid %d\n", i);
 				printGrid(&stateStack[i].grid, N);
@@ -69,18 +70,47 @@ int main(int argc, char ** argv)
 		}
 	}
 
-void initThreads(State * s, int depth, int N, Path * path)
+void initThreads(State * s, int threads, int depth, int N, Path ** path)
 {
+	State t = s;
+	Path ** temp;
+	for(int i = 0; i < threads; i++)
+	{
+		temp = path;
+		for(int d = 0; d < depth; d++)
+		{
+			int index = i * depth + d;
+			s->path = temp[0];
+		}
+	}
 	for (int row = 0; row < N; row++)
 			{
 				for (int col = 0; col < N; col++)
 					{
 						s->location.x = row;
 						s->location.y = col;
-						s->path = path;
+						
 						s = &s[depth];
 					}
 			}
+}
+
+Path getNextPath(Path ** p)
+{
+	Path result = NULL;
+	if(p != NULL)
+	{
+		if(p->next == NULL)
+			{
+				p++;
+			}
+		else
+			{	
+
+			}
+	}
+	return result;
+	
 }
 
 State * allocateStateStack(int threads, int maxDepth, int N)
@@ -117,7 +147,6 @@ __global__ void compute(Grid * g, int N, int threads, State * s, int maxDepth)
 __device__ void computeLocal(State * s,int N, int depth, int max)
 {
 	int value;
-	int direction;
 	initLocation(&s[depth]);
 	depth++;
 	s[depth].path = s[depth-1].path;
@@ -141,7 +170,16 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 			}
 			else
 			{
-				
+				value = updateLocation(&s[depth].location, s[depth].path, N);
+				if(value == 0)
+				{
+					depth++;	
+				}
+				while(value != 0 && depth > 0)
+				{
+					depth --;
+					value = updateLocation(&s[depth].location, s[depth].path, N);
+				}
 			}
 		}
 		
@@ -227,16 +265,16 @@ __device__ void initLocation(State * s)
 __device__ void cloneState(State s1, State s2, int N)
 {
 	cloneGrid(&s1.grid, &s2.grid, N);
-	cloneLocation(s1.location, s2.location);
+	cloneLocation(&s1.location, &s2.location);
 }
 
-__device__ void cloneLocation(Location srcLoc, Location destLoc)
+__device__ void cloneLocation(Location* srcLoc, Location* destLoc)
 {
-	destLoc.x = srcLoc.x;
-	destLoc.y = srcLoc.y;
-	destLoc.nextX = srcLoc.nextX;
-	destLoc.nextY = srcLoc.nextY;
-	destLoc.type = srcLoc.type;
+	destLoc->x = srcLoc->x;
+	destLoc->y = srcLoc->y;
+	destLoc->nextX = srcLoc->nextX;
+	destLoc->nextY = srcLoc->nextY;
+	destLoc->type = srcLoc->type;
 }
 __device__ void cloneGrid(Grid * srcGrid, Grid * newGrid, int size)
 {
@@ -277,6 +315,7 @@ __device__ int setAll(Grid * g, Path * p, Location * l, int N)
 				value |= testAndSet(g,letter,nx,ny);
 			}
 	}
+	return value;
 }
 
 
@@ -359,14 +398,14 @@ void printDevProp(cudaDeviceProp devProp)
 		printf("%s\n", devProp.name);
 		printf("Major revision number:         %d\n", devProp.major);
 		printf("Minor revision number:         %d\n", devProp.minor);
-		printf("Total global memory:           %u", devProp.totalGlobalMem);
+		printf("Total global memory:           %u", (uint32_t)devProp.totalGlobalMem);
 		printf(" bytes\n");
 		printf("Number of multiprocessors:     %d\n", devProp.multiProcessorCount);
-		printf("Total amount of shared memory per block: %u\n", devProp.sharedMemPerBlock);
+		printf("Total amount of shared memory per block: %u\n", (uint32_t)devProp.sharedMemPerBlock);
 		printf("Total registers per block:     %d\n", devProp.regsPerBlock);
 		printf("Warp size:                     %d\n", devProp.warpSize);
-		printf("Maximum memory pitch:          %u\n", devProp.memPitch);
-		printf("Total amount of constant memory:         %u\n", devProp.totalConstMem);
+		printf("Maximum memory pitch:          %u\n", (uint32_t)devProp.memPitch);
+		printf("Total amount of constant memory:         %u\n",  (uint32_t) devProp.totalConstMem);
 		printf("Cores:         %d\n", getCores(devProp));
 		return;
 	}
