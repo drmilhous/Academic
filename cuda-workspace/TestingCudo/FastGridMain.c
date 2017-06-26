@@ -44,6 +44,7 @@ int main(int argc, char ** argv)
 		printGrid(g,N);
 	
 		compute<<<blocks, threadBlocks>>>(g, threads);
+		cudaDeviceSynchronize();
 		printGrid(g,N);
 	}
 
