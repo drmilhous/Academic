@@ -85,7 +85,7 @@ void initThreads(State * s, int threads, int depth, int N, Path ** path)
 			if(current == NULL || current->next == NULL) 
 			{
 				base++;
-				current = &base[0];
+				current = base[0];
 			}
 			else
 			{
