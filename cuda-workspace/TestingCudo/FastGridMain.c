@@ -146,7 +146,7 @@ __global__ void compute(Grid * g, int N, int threads, State * s, int maxDepth)
 __device__ void computeLocal(State * s,int N, int depth, int max)
 {
 	int value;
-	int hasNext;
+	int hasNext = 0;
 	depth++;
 	initLocation(&s[depth]);
 	int count = 0;
