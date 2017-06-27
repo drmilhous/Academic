@@ -121,6 +121,7 @@ State * allocateStateStack(int threads, int maxDepth, int N)
 	for(int i = 0; i < threads * maxDepth; i++)
 	{
 		initGridData(&s[i].grid,N);
+		printGrid(&s[i].grid,N);
 		s[i].count = 0;
 		s[i].iterations = 0;
 	}
