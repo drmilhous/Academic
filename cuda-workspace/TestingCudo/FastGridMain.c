@@ -146,21 +146,25 @@ __global__ void compute(Grid * g, int N, int threads, State * s, int maxDepth)
 __device__ void computeLocal(State * s,int N, int depth, int max)
 {
 	int value;
+	int hasNext;
 	depth++;
 	initLocation(&s[depth]);
 	int count = 0;
 	int maxCount = 10;
 
-	for(int i = 0; i < N; i++)
+	for(int i = 0; i < N && hasNext == 0; i++)
 	{
 		printf("depth[%d] x[%d] y[%d] nx[%d] ny[%d]\n", depth,s[depth].location.x, s[depth].location.y, s[depth].location.nextX, s[depth].location.nextY );
 		cloneState(s[depth-1], s[depth],N);
 		value = setAll(&s[depth].grid, s[depth].path, &s[depth].location, N);
-		printf("Before\n");
-		printGridDev(&s[depth-1].grid, N);
-		printf("After\n");
-		printGridDev(&s[depth].grid, N);
-		value = updateLocation(&s[depth].location, s[depth].path, N);
+		//printf("Before\n");
+		//printGridDev(&s[depth-1].grid, N);
+		//printf("After\n");
+		if(value == 0)
+		{
+			printGridDev(&s[depth].grid, N);
+		}
+		hasNext = updateLocation(&s[depth].location, s[depth].path, N);
 	}
 
 }
