@@ -494,8 +494,8 @@ __device__ void printGridDev(Grid * g, int N)
 				for (int col = 0; col < N; col++)
 					{
 						char c = g->Cells[row][col];
-						//printf("  %c  ", c);
-						printf(" %02X ", c);
+						printf("  %c  ", c);
+						//printf(" %02X ", c);
 					}
 				printf("\n");
 			}
