@@ -58,6 +58,12 @@ int main(int argc, char ** argv)
 		int depth = 3;
 		State * stateStack = allocateStateStack(threads, depth, N); 
 		initThreads(stateStack, threads, depth,N, path);
+		for(int i = 0; i < threads * depth; i++)
+		{
+				printf("initial Grid %d\n", i);
+				printGrid(&stateStack[i].grid, N);
+		}
+		printf("---------------------------------");
 		compute<<<blocks, threadBlocks>>>(g,N ,threads, stateStack, depth);
 		cudaDeviceSynchronize();
 		//printGrid(g,N);
