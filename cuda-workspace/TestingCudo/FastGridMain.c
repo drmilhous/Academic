@@ -26,7 +26,7 @@ __device__ int setAll(Grid * g, Path * p, Location * l, int N);
 __device__ int updateLocation(Location * loc, Path * p, int size);
 int main(int argc, char ** argv)
 	{
-		Grid * g;	
+		Grid * g;
 		int device;
 		int N;
 		int c;
@@ -56,7 +56,7 @@ int main(int argc, char ** argv)
 		Path ** path = scanChars(output);
 		printPath(path[0]);
 		int depth = 3;
-		State * stateStack = allocateStateStack(threads, depth, N); 
+		State * stateStack = allocateStateStack(threads, depth, N);
 		initThreads(stateStack, threads, depth,N, path);
 		stateStack[0].location.x = 1;
 		stateStack[0].location.y = 2;
@@ -85,7 +85,9 @@ void initThreads(State * s, int threads, int depth, int N, Path ** path)
 		t++;
 		for(int d = 0; d < depth-1; d++)
 		{
-			if(current == NULL || current->next == NULL) 
+			t->path = current;
+			t++;
+			if(current == NULL || current->next == NULL)
 			{
 				base++;
 				current = base[0];
@@ -93,9 +95,8 @@ void initThreads(State * s, int threads, int depth, int N, Path ** path)
 			else
 			{
 				current = current->next;
-			}		
-			t->path = current;
-			t++;
+			}
+			
 		}
 	}
 	/*for (int row = 0; row < N; row++)
@@ -104,7 +105,7 @@ void initThreads(State * s, int threads, int depth, int N, Path ** path)
 					{
 						s->location.x = row;
 						s->location.y = col;
-						
+
 						s = &s[depth];
 					}
 			}*/
@@ -126,7 +127,7 @@ State * allocateStateStack(int threads, int maxDepth, int N)
 __global__ void compute(Grid * g, int N, int threads, State * s, int maxDepth)
 {
 	int idx = blockIdx.x * blockDim.x + threadIdx.x;
-	
+
 		if (idx < threads)
 			{
 				s = &s[idx * maxDepth];
@@ -188,7 +189,7 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 				value = updateLocation(&s[depth].location, s[depth].path, N);
 				if(value == 0)
 				{
-					depth++;	
+					depth++;
 				}
 				while(value != 0 && depth > 0)
 				{
@@ -202,7 +203,7 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 		{
 			break;
 		}
-		
+
 	}
 }*/
 
@@ -299,7 +300,7 @@ __device__ void cloneLocation(Location* srcLoc, Location* destLoc)
 __device__ void cloneGrid(Grid * srcGrid, Grid * newGrid, int size)
 {
 	for (int i = 0; i < size; i++)
-		{	
+		{
 			newGrid->col[i] = srcGrid->col[i];
 			newGrid->row[i] = srcGrid->row[i];
 		}
@@ -407,9 +408,9 @@ void initGridData(Grid * g, int size)
 						g->Cells[row][col] = DEL;
 					}
 			}
-		
+
 		g->ok = '0';
-		
+
 	}
 
 
