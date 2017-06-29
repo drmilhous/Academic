@@ -32,6 +32,8 @@ typedef struct Location{
     uint8_t y;
     uint8_t nextX;
     uint8_t nextY;
+    uint8_t lastX;
+    uint8_t lastY;
     uint8_t type;
 } Location;
 
