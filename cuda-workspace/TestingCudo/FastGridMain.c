@@ -168,6 +168,9 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 			if(depth < max)
 			{
 				depth++;
+				s[depth].location.x = s[depth-1].location.lastX;
+				s[depth].location.y = s[depth-1].location.lastY;
+				initLocation(&s[depth]);
 			}
 			else
 			{
@@ -360,6 +363,8 @@ __device__ int setAll(Grid * g, Path * p, Location * l, int N)
 					nx = (l->nextX + (offset * direction) + N) % N;
 				letter = p->letters[offset + 1];
 				value |= testAndSet(g,letter,nx,ny);
+				l->lastX = nx;
+				l->lastY = ny;
 			}
 	}
 	return value;
