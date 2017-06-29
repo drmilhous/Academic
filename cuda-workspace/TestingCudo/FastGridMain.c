@@ -154,6 +154,8 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 
 	for(int i = 0; i < N && hasNext == 0; i++)
 	{
+		int pop = 0;
+		hasNext = 0;
 		printf("depth[%d] x[%d] y[%d] nx[%d] ny[%d]\n", depth,s[depth].location.x, s[depth].location.y, s[depth].location.nextX, s[depth].location.nextY );
 		cloneState(s[depth-1], s[depth],N);
 		value = setAll(&s[depth].grid, s[depth].path, &s[depth].location, N);
@@ -163,8 +165,28 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 		if(value == 0)
 		{
 			printGridDev(&s[depth].grid, N);
+			if(depth < max)
+			{
+				depth++;
+			}
+			else
+			{
+				pop = 1;
+			}
 		}
-		hasNext = updateLocation(&s[depth].location, s[depth].path, N);
+		else
+		{
+			pop = 1;
+		}
+		if(pop == 1)
+		{
+			hasNext = 1;
+			while(hasNext != 0 && depth > 0)
+			{
+				depth--;
+				hasNext = updateLocation(&s[depth].location, s[depth].path, N);
+			}
+		}
 	}
 
 }
