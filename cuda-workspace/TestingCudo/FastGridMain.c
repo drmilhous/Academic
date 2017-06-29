@@ -180,7 +180,7 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 		}
 		if(pop == 1)
 		{
-			hasNext = 1;
+			hasNext = updateLocation(&s[depth].location, s[depth].path, N);
 			while(hasNext != 0 && depth > 0)
 			{
 				depth--;
