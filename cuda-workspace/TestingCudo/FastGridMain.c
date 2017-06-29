@@ -10,6 +10,7 @@ __device__ void printGridDev(Grid * g,Path * p, int N);
 __device__	void printPathDev(Path * p);
 __global__ void compute(Grid * g,int N ,int threads, State * s, int maxDepth);
 Grid * allocateGrid(int size);
+__device__ char convertCharDev(char u);
 void initGridData(Grid * g, int size);
 void printDevProp(cudaDeviceProp devProp);
 int getCores(cudaDeviceProp devProp);
@@ -549,7 +550,15 @@ __device__	void printPathDev(Path * p)
 					}
 				else
 					{
-						printf("[%c]->[%c%c%c]%c\n", convertChar(p->letters[0]), convertChar(p->letters[1]), convertChar(p->letters[2]), convertChar(p->letters[3]), dir);
+						printf("[%c]->[%c%c%c]%c\n", convertCharDev(p->letters[0]), convertCharDev(p->letters[1]), convertCharDev(p->letters[2]), convertCharDev(p->letters[3]), dir);
 						//printf("[%d]->[%d%d%d]%c\n", p->letters[0], p->letters[1], p->letters[2], p->letters[3], dir);
 					}
+	}
+
+	__device__ char convertCharDev(char u)
+	{
+		int x = (int) u;
+		int A = (int) 'A';
+		x = x + A;
+		return (char) x;
 	}
