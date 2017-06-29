@@ -168,6 +168,7 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 			if(depth < max)
 			{
 				depth++;
+				cloneState(s[depth-1], s[depth],N);
 				s[depth].location.x = s[depth-1].location.lastX;
 				s[depth].location.y = s[depth-1].location.lastY;
 				initLocation(&s[depth]);
