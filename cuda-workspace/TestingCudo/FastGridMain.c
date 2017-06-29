@@ -151,10 +151,10 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 	initLocation(&s[depth]);
 	int count = 0;
 	int maxCount = 10;
-
+	int pop;
 	for(int i = 0; i < 30; i++)
 	{
-		int pop = 0;
+		pop = 0;
 		hasNext = 0;
 		printf("depth[%d] x[%d] y[%d] nx[%d] ny[%d]\n", depth,s[depth].location.x, s[depth].location.y, s[depth].location.nextX, s[depth].location.nextY );
 		cloneState(s[depth-1], s[depth],N);
