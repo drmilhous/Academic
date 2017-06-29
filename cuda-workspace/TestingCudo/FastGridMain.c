@@ -175,6 +175,7 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 			}
 			else
 			{
+				printf("Popping\n");
 				pop = 1;
 			}
 		}
