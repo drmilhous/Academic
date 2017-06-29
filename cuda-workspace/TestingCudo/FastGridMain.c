@@ -6,7 +6,8 @@
 #include "FastGrid.h"
 #include <ctype.h>
 #define DEL '-'
-__device__ void printGridDev(Grid * g, int N);
+__device__ void printGridDev(Grid * g,Path * p, int N);
+__device__	void printPathDev(Path * p);
 __global__ void compute(Grid * g,int N ,int threads, State * s, int maxDepth);
 Grid * allocateGrid(int size);
 void initGridData(Grid * g, int size);
@@ -163,7 +164,7 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 		//printf("Before\n");
 		//printGridDev(&s[depth-1].grid, N);
 		//printf("After\n");
-		printGridDev(&s[depth].grid, N);
+		printGridDev(&s[depth].grid,s[depth].path, N);
 		if(value == 0)
 		{
 			if(depth < max)
@@ -512,9 +513,10 @@ __device__ int pow2(int x)
 			}
 		return sum;
 	}
-__device__ void printGridDev(Grid * g, int N)
+__device__ void printGridDev(Grid * g,Path * p ,int N)
 	{
 		printf("-- Grid -- \n       ");
+		printPathDev(p);
 		for (int i= 0; i < N; i++)
 		{
 			printf(" %03X ",g->col[i]);
@@ -531,4 +533,23 @@ __device__ void printGridDev(Grid * g, int N)
 					}
 				printf("\n");
 			}
+	}
+
+__device__	void printPathDev(Path * p)
+	{
+		char dir = p->direction == UP ? 'U' : 'L';
+		if (p->domain != NULL)
+					{
+						printf("[%s]->[%s]\n", p->domain, p->pass);
+					}
+				int value = (int) p->letters[0];
+				if (value > 30)
+					{
+						printf("[%c]->[%c%c%c]%c\n", p->letters[0], p->letters[1], p->letters[2], p->letters[3], dir);
+					}
+				else
+					{
+						printf("[%c]->[%c%c%c]%c\n", convertChar(p->letters[0]), convertChar(p->letters[1]), convertChar(p->letters[2]), convertChar(p->letters[3]), dir);
+						//printf("[%d]->[%d%d%d]%c\n", p->letters[0], p->letters[1], p->letters[2], p->letters[3], dir);
+					}
 	}
