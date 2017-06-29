@@ -162,9 +162,9 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 		//printf("Before\n");
 		//printGridDev(&s[depth-1].grid, N);
 		//printf("After\n");
+		printGridDev(&s[depth].grid, N);
 		if(value == 0)
 		{
-			printGridDev(&s[depth].grid, N);
 			if(depth < max)
 			{
 				depth++;
