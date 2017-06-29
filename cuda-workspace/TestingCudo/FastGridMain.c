@@ -370,7 +370,15 @@ __device__ int setAll(Grid * g, Path * p, Location * l, int N)
 				value |= testAndSet(g,letter,nx,ny);
 				l->lastX = nx;
 				l->lastY = ny;
+				if(value != 0)
+				{
+					printf("Fail offset [%d,%d]\n",nx,ny );
+				}
 			}
+	}
+	else
+	{
+		printf("Fail offset [%d]\n", 0);
 	}
 	return value;
 }
