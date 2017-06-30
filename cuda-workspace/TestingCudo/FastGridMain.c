@@ -174,7 +174,7 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 		{
 			if(depth == max-1)
 			{
-				printGridDev(&s[depth].grid,s[depth].path, N);
+				//printGridDev(&s[depth].grid,s[depth].path, N);
 			}
 			if(depth < max-1)
 			{
