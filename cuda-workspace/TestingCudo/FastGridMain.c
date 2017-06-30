@@ -63,8 +63,10 @@ int main(int argc, char ** argv)
 		int threadBlocks = threads / blocks;
 		printGrid(g,N);
 		Path ** path = scanChars(output);
-		printPath(path[0]);
-		
+		for(int i = 0; i < depth/5; i++)
+		{
+			printPath(path[i]);
+		}
 		State * stateStack = allocateStateStack(threads, depth, N);
 		initThreads(stateStack, threads, depth,N, path);
 		stateStack[1].location.type = FULL;
