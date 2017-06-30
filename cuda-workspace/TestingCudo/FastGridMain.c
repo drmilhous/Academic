@@ -169,7 +169,7 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 		//printf("Before\n");
 		//printGridDev(&s[depth-1].grid, N);
 		//printf("After\n");
-		printGridDev(&s[depth].grid,s[depth].path, N);
+		//printGridDev(&s[depth].grid,s[depth].path, N);
 		if(value == 0)
 		{
 			if(depth < max-1)
@@ -184,7 +184,7 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 			}
 			else
 			{
-				printf("Popping\n");
+				//printf("Popping\n");
 				pop = 1;
 			}
 		}
