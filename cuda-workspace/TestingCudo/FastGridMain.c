@@ -196,7 +196,7 @@ __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth
 				//printGridDev(&s[depth].grid,s[depth].path, N);
 				if(counter < resSize)
 				{
-					cloneState(s[depth],res[counter]);
+					cloneState(s[depth],res[counter],N);
 					res[counter].grid.ok = '1';
 					counter++;
 				}
