@@ -389,7 +389,7 @@ __device__ int testAndSet(Grid * g, int number, int x, int y)
 	int ok = 0;
 	int value = g->Cells[x][y];
 	int mask;
-	if (value != DEL && value != number)
+	if (value != DEL && value != convertDev(number))
 		{
 			ok = 1;
 		}
@@ -403,7 +403,7 @@ __device__ int testAndSet(Grid * g, int number, int x, int y)
 			{
 				g->col[y] |= mask;
 				g->row[x] |= mask;
-				g->Cells[x][y] = number;
+				g->Cells[x][y] = convertDev(number);
 			}
 		}
 	return ok;
