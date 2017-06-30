@@ -66,15 +66,20 @@ int main(int argc, char ** argv)
 		stateStack[1].location.type = FULL;
 		int resSize = 10000 * threads;
 		State * resultList = allocateState(resSize, N);
+		printf("Starting \n");
+		clock_t begin = clock();
 		compute<<<blocks, threadBlocks>>>(g,N ,threads, stateStack,resultList,resSize, depth);
 		cudaDeviceSynchronize();
+		clock_t end = clock();
+		double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
+		printf("Time spent %lf\n", time_spent);
 		//printGrid(g,N);
 		for(int i = 0; i < resSize; i++)
 		{
 			if(resultList[i].grid.ok == '1')
 			{
-				printf("Grid #%d\n",i);
-				printGrid(&resultList[i].grid, N);
+				//printf("Grid #%d\n",i);
+				//printGrid(&resultList[i].grid, N);
 			}
 		}
 		for(int i = 0; i < threads * depth; i++)
@@ -84,7 +89,7 @@ int main(int argc, char ** argv)
 				printf("Grid %d\n", i);
 				printGrid(&stateStack[i].grid, N);
 				printf("Iterations %d\n",stateStack[i].iterations );
-				printf("Iterations %d\n",stateStack[i].count );
+				printf("Count %d\n",stateStack[i].count );
 			}
 		}
 	}
