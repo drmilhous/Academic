@@ -130,7 +130,7 @@ State * allocateState(int size, int N)
 	for(int i = 0; i < size; i++)
 	{
 		initGridData(&s[i].grid,N);
-		printGrid(&s[i].grid,N);
+		//printGrid(&s[i].grid,N);
 		s[i].count = 0;
 		s[i].iterations = 0;
 	}
@@ -194,6 +194,12 @@ __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth
 			if(depth == max-1)
 			{
 				//printGridDev(&s[depth].grid,s[depth].path, N);
+				if(counter < resSize)
+				{
+					cloneState(s[depth],res[counter]);
+					res[counter].grid.ok = '1';
+					counter++;
+				}
 			}
 			if(depth < max-1)
 			{
