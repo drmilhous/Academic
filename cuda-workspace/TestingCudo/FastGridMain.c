@@ -89,8 +89,8 @@ int main(int argc, char ** argv)
 				printGrid(&resultList[i].grid, N);
 			}
 		}
-		int *iter = (int *)malloc(depth * sizeof(int));
-		int *count = (int *)malloc(depth * sizeof(int));
+		long *iter = (long *)malloc(depth * sizeof(long));
+		long *count = (long *)malloc(depth * sizeof(long));
 		int offset = 0;
 		for(int i = 0; i < threads * depth; i++)
 		{
@@ -109,7 +109,7 @@ int main(int argc, char ** argv)
 		printf("Depth, Iterations,Count\n");
 		for(int i = 0; i < depth; i++)
 		{
-			printf("%d,%d,%d\n",i, iter[i],count[i]);
+			printf("%d,%ld,%ld\n",i, iter[i],count[i]);
 		}
 	}
 
