@@ -131,9 +131,9 @@ void initThreads(State * s, int threads, int depth, int N, Path ** path)
 			{
 				base++;
 				current = base[0];
-				current.type = FULL;
-				current.x = 0;
-				current.y = 0;
+				current->type = FULL;
+				current->x = 0;
+				current->y = 0;
 			}
 			else
 			{
