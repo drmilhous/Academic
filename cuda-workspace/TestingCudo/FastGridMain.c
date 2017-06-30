@@ -88,7 +88,7 @@ int main(int argc, char ** argv)
 		int offset = 0;
 		for(int i = 0; i < threads * depth; i++)
 		{
-			offset = (offset + 1) % depth;
+			
 			//if(i % depth == 0)
 			{
 				printf("Grid %d\n", i);
@@ -98,6 +98,7 @@ int main(int argc, char ** argv)
 				//printf("Iterations %d\n",stateStack[i].iterations );
 				//printf("Count %d\n",stateStack[i].count );
 			}
+			offset = (offset + 1) % depth;
 		}
 		printf("Depth, Iterations,Count\n");
 		for(int i = 0; i < depth; i++)
