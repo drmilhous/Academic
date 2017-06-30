@@ -63,7 +63,7 @@ int main(int argc, char ** argv)
 		int threadBlocks = threads / blocks;
 		printGrid(g,N);
 		Path ** path = scanChars(output);
-		for(int i = 0; i < depth/5; i++)
+		for(int i = 0; i <= (depth+1)/6; i++)
 		{
 			printPath(path[i]);
 		}
