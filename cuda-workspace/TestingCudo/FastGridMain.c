@@ -320,7 +320,7 @@ __device__ int updateLocation(Location * loc, Path * p, int size)
 									{
 										loc->x = 0;
 										loc->y++;
-										loc->nextY = y;
+										loc->nextY = loc->y;
 										if (loc->y >= size)
 											{
 												pop = 1;
