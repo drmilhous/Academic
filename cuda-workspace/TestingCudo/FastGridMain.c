@@ -186,6 +186,10 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 				s[depth].location.nextX = s[depth-1].location.nextX;
 				s[depth].location.nextY = s[depth-1].location.nextY;
 				initLocation(&s[depth]);
+				if(s[depth].location.x != s[depth].location.nextX && s[depth].location.y != s[depth].location.nextY )
+				{
+					printf("impossible\n");
+				}
 				
 			}
 			else
