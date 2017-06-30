@@ -54,8 +54,8 @@ int main(int argc, char ** argv)
 		cudaSetDevice(device);
 		g = allocateGrid(N);
 		printf("Allocated \n");
-		int threads = 1;
-		int blocks = threads/1;
+		int threads = 100;
+		int blocks = threads/10;
 		int threadBlocks = threads / blocks;
 		printGrid(g,N);
 		Path ** path = scanChars(output);
@@ -121,7 +121,7 @@ void initThreads(State * s, int threads, int depth, int N, Path ** path)
 			
 		}
 	}
-	/*for (int row = 0; row < N; row++)
+	for (int row = 0; row < N; row++)
 			{
 				for (int col = 0; col < N; col++)
 					{
@@ -130,7 +130,7 @@ void initThreads(State * s, int threads, int depth, int N, Path ** path)
 
 						s = &s[depth];
 					}
-			}*/
+			}
 }
 
 State * allocateStateStack(int threads, int maxDepth, int N)
