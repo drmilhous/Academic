@@ -63,6 +63,7 @@ int main(int argc, char ** argv)
 		initThreads(stateStack, threads, depth,N, path);
 		stateStack[0].location.x = 1;
 		stateStack[0].location.y = 2;
+		stateStack[0].location.type = FULL;
 		compute<<<blocks, threadBlocks>>>(g,N ,threads, stateStack, depth);
 		cudaDeviceSynchronize();
 		//printGrid(g,N);
