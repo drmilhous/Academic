@@ -389,8 +389,9 @@ __device__ int testAndSet(Grid * g, int number, int x, int y)
 	int ok = 0;
 	int value = g->Cells[x][y];
 	int mask;
-	if (value != DEL && value != convertDev(number))
+	if (value != DEL && value != number)
 		{
+			printf("%04X %04X\n",value, number);
 			ok = 1;
 		}
 	else
@@ -403,7 +404,7 @@ __device__ int testAndSet(Grid * g, int number, int x, int y)
 			{
 				g->col[y] |= mask;
 				g->row[x] |= mask;
-				g->Cells[x][y] = convertDev(number);
+				g->Cells[x][y] = number;
 			}
 		}
 	return ok;
@@ -412,7 +413,7 @@ __device__ int testAndSet(Grid * g, int number, int x, int y)
 __device__ char convertDev(int x)
 	{
 		char res = 'a';
-		if (x >= 0)
+		if (x != (int) DEL)
 			{
 				int amount = int(x) + (int) res;
 				res = (char) amount;
@@ -538,7 +539,8 @@ __device__ void printGridDev(Grid * g,Path * p ,int N)
 				printf("%01d|%03X| ", row,g->row[row]);
 				for (int col = 0; col < N; col++)
 					{
-						char c = g->Cells[row][col];
+						char x = g->Cells[row][col];
+						char c = convertCharDev(x);
 						printf("  %c  ", c);
 						//printf(" %02X ", c);
 					}
