@@ -64,6 +64,7 @@ int main(int argc, char ** argv)
 		State * stateStack = allocateStateStack(threads, depth, N);
 		initThreads(stateStack, threads, depth,N, path);
 		stateStack[1].location.type = FULL;
+		stateStack[1].location.type = PART;
 		int resSize = 10000 * threads;
 		State * resultList = allocateState(resSize, N);
 		printf("Starting \n");
