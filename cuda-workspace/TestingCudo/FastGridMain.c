@@ -58,7 +58,7 @@ int main(int argc, char ** argv)
 		printGrid(g,N);
 		Path ** path = scanChars(output);
 		printPath(path[0]);
-		int depth = 3;
+		int depth = 4;
 		State * stateStack = allocateStateStack(threads, depth, N);
 		initThreads(stateStack, threads, depth,N, path);
 		stateStack[0].location.x = 1;
