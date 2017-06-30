@@ -72,6 +72,7 @@ int main(int argc, char ** argv)
 			{
 				printf("Grid %d\n", i);
 				printGrid(&stateStack[i].grid, N);
+				printf("Iterations %d\n",stateStack[i].iterations );
 			}
 		}
 	}
