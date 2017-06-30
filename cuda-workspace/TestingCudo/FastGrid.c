@@ -167,7 +167,8 @@ void printGrid(Grid * g, int N)
 				printf("%01d|%03X| ", row,g->row[row]);
 				for (int col = 0; col < N; col++)
 					{
-						char c = g->Cells[row][col];
+						char x = g->Cells[row][col];
+						char c = convert(x);
 						printf("  %c  ", c);
 					}
 				printf("\n");
