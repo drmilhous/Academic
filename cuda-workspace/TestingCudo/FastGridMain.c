@@ -558,7 +558,7 @@ __device__	void printPathDev(Path * p)
 				int value = (int) p->letters[0];
 				if (value > 30)
 					{
-						printf("[%c]->[%c%c%c]%c\n", p->letters[0], p->letters[1], p->letters[2], p->letters[3], dir);
+						printf("[%c]-^[%c%c%c]%c\n", p->letters[0], p->letters[1], p->letters[2], p->letters[3], dir);
 					}
 				else
 					{
