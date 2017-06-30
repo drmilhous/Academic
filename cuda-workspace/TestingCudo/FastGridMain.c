@@ -91,8 +91,8 @@ int main(int argc, char ** argv)
 			
 			//if(i % depth == 0)
 			{
-				printf("Grid %d\n", i);
-				printGrid(&stateStack[i].grid, N);
+			//	printf("Grid %d\n", i);
+			//	printGrid(&stateStack[i].grid, N);
 				iter[offset] += stateStack[i].iterations;
 				count[offset] += stateStack[i].count;
 				//printf("Iterations %d\n",stateStack[i].iterations );
