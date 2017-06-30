@@ -540,7 +540,7 @@ __device__ void printGridDev(Grid * g,Path * p ,int N)
 				for (int col = 0; col < N; col++)
 					{
 						char x = g->Cells[row][col];
-						char c = convertCharDev(x);
+						char c = convertDev(x);
 						printf("  %c  ", c);
 						//printf(" %02X ", c);
 					}
