@@ -389,10 +389,17 @@ __device__ int testAndSet(Grid * g, int number, int x, int y)
 	int ok = 0;
 	int value = g->Cells[x][y];
 	int mask;
-	if (value != DEL && value != number)
+	if (value != DEL)
 		{
-			printf("%04X %04X\n",value, number);
-			ok = 1;
+			if(value == number)
+			{
+				ok = 0;
+			}
+			else
+			{
+				printf("!!%04X %04X\n",value, number);
+				ok = 1;
+			}
 		}
 	else
 		{
