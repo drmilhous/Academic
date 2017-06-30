@@ -36,7 +36,8 @@ int main(int argc, char ** argv)
 		int N;
 		int c;
 		char * output;
-		while ((c = getopt (argc, argv, "n:d:i:")) != -1)
+		int depth = 5;
+		while ((c = getopt (argc, argv, "n:d:i:w:")) != -1)
 		{
     		switch (c)
       		{
@@ -45,6 +46,9 @@ int main(int argc, char ** argv)
 					  	break;
 				  case 'd':
 				  		device = atoi(optarg);
+						break;
+				case 'w':
+				  		depth = atoi(optarg);
 						break;
 				  case 'i':
 						output = optarg;
@@ -60,7 +64,7 @@ int main(int argc, char ** argv)
 		printGrid(g,N);
 		Path ** path = scanChars(output);
 		printPath(path[0]);
-		int depth = 5;
+		
 		State * stateStack = allocateStateStack(threads, depth, N);
 		initThreads(stateStack, threads, depth,N, path);
 		stateStack[1].location.type = FULL;
