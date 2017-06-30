@@ -154,7 +154,8 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 	int count = 0;
 	int maxCount = 10;
 	int pop;
-	for(int i = 0; i < 30; i++)
+	while(hasNext == 0)
+	//for(int i = 0; i < 30; i++)
 	{
 		pop = 0;
 		hasNext = 0;
