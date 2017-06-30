@@ -154,7 +154,7 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 	int count = 0;
 	int maxCount = 10;
 	int pop;
-	while(hasNext == 0)
+	while(hasNext == 0 && depth > 0)
 	//for(int i = 0; i < 30; i++)
 	{
 		pop = 0;
@@ -190,7 +190,7 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 		if(pop == 1)
 		{
 			hasNext = updateLocation(&s[depth].location, s[depth].path, N);
-			while(hasNext != 0 && depth > 0)
+			while(hasNext != 0 && depth > 1)
 			{
 				depth--;
 				hasNext = updateLocation(&s[depth].location, s[depth].path, N);
