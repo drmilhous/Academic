@@ -69,6 +69,14 @@ int main(int argc, char ** argv)
 		compute<<<blocks, threadBlocks>>>(g,N ,threads, stateStack,resultList,resSize, depth);
 		cudaDeviceSynchronize();
 		//printGrid(g,N);
+		for(int i = 0; i < resSize; i++)
+		{
+			if(resultLIst[i].grid.ok == '1')
+			{
+				printf("Grid #%d\n",i);
+				printGrid(&resultList[i].grid, N);
+			}
+		}
 		for(int i = 0; i < threads * depth; i++)
 		{
 			//if(i % depth == 0)
