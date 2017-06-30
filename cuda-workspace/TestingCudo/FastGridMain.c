@@ -252,7 +252,7 @@ __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth
 			{
 				
 				depth++;
-				cloneState(s[depth-1], s[depth],N);
+				//cloneState(s[depth-1], s[depth],N);
 				s[depth].location.x = s[depth-1].location.lastX;
 				s[depth].location.y = s[depth-1].location.lastY;
 				s[depth].location.nextX = s[depth-1].location.nextX;
