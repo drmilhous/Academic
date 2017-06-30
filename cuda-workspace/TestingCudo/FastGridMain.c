@@ -83,8 +83,8 @@ int main(int argc, char ** argv)
 				printGrid(&resultList[i].grid, N);
 			}
 		}
-		int *iter = malloc(depth * sizeof(int));
-		int *count = malloc(depth * sizeof(int));
+		int *iter = (int *)malloc(depth * sizeof(int));
+		int *count = (int *)malloc(depth * sizeof(int));
 		int offset = 0;
 		for(int i = 0; i < threads * depth; i++)
 		{
