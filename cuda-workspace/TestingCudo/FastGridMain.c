@@ -84,6 +84,7 @@ int main(int argc, char ** argv)
 				printf("Grid %d\n", i);
 				printGrid(&stateStack[i].grid, N);
 				printf("Iterations %d\n",stateStack[i].iterations );
+				printf("Iterations %d\n",stateStack[i].count );
 			}
 		}
 	}
@@ -182,23 +183,24 @@ __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth
 		pop = 0;
 		hasNext = 0;
 		//cloneState(s[depth-1], s[depth],N);
-		if(s[depth].location.x != s[depth].location.nextX && s[depth].location.y != s[depth].location.nextY )
-			{
-				printf("impossible2\n");
-			}
+		//if(s[depth].location.x != s[depth].location.nextX && s[depth].location.y != s[depth].location.nextY )
+		//	{
+		//		printf("impossible2\n");
+		//	}
 		cloneGrid(&s[depth-1].grid, &s[depth].grid, N);
 		value = setAll(&s[depth].grid, s[depth].path, &s[depth].location, N);
-		printf("depth[%d] x[%d] y[%d] nx[%d] ny[%d] value(%d)\n", depth,s[depth].location.x, s[depth].location.y, s[depth].location.nextX, s[depth].location.nextY , value);
+		//printf("depth[%d] x[%d] y[%d] nx[%d] ny[%d] value(%d)\n", depth,s[depth].location.x, s[depth].location.y, s[depth].location.nextX, s[depth].location.nextY , value);
 		//printf("Before\n");
 		//printGridDev(&s[depth-1].grid, N);
 		//printf("After\n");
 		//printGridDev(&s[depth].grid,s[depth].path, N);
-		if(s[depth].location.x != s[depth].location.nextX && s[depth].location.y != s[depth].location.nextY )
-			{
-				printf("impossible2\n");
-			}
+		//if(s[depth].location.x != s[depth].location.nextX && s[depth].location.y != s[depth].location.nextY )
+		//	{
+		//		printf("impossible2\n");
+		//	}
 		if(value == 0)
 		{
+			s[depth].count++;
 			if(depth == max-1)
 			{
 				//printGridDev(&s[depth].grid,s[depth].path, N);
@@ -220,7 +222,6 @@ __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth
 				s[depth].location.nextY = s[depth-1].location.nextY;
 				initLocation(&s[depth]);
 				
-				
 			}
 			else
 			{
@@ -235,18 +236,10 @@ __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth
 		if(pop == 1)
 		{
 			hasNext = updateLocation(&s[depth].location, s[depth].path, N);
-			if(s[depth].location.x != s[depth].location.nextX && s[depth].location.y != s[depth].location.nextY )
-				{
-					printf("impossible3\n");
-				}
 			while(hasNext != 0 && depth > 1)
 			{
 				depth--;
 				hasNext = updateLocation(&s[depth].location, s[depth].path, N);
-				if(s[depth].location.x != s[depth].location.nextX && s[depth].location.y != s[depth].location.nextY )
-				{
-					printf("impossible5\n");
-				}
 			}
 		}
 	}
