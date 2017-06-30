@@ -139,7 +139,7 @@ void initThreads(State * s, int threads, int depth, int N, Path ** path)
 					{
 						s->location.x = row;
 						s->location.y = col;
-
+						s->location.type = PART;
 						s = &s[depth];
 					}
 			}
