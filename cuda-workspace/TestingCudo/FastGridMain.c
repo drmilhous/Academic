@@ -61,8 +61,6 @@ int main(int argc, char ** argv)
 		int depth = 3;
 		State * stateStack = allocateStateStack(threads, depth, N);
 		initThreads(stateStack, threads, depth,N, path);
-		stateStack[0].location.x = 1;
-		stateStack[0].location.y = 2;
 		stateStack[1].location.type = FULL;
 		compute<<<blocks, threadBlocks>>>(g,N ,threads, stateStack, depth);
 		cudaDeviceSynchronize();
