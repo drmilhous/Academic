@@ -403,7 +403,7 @@ __device__ int testAndSet(Grid * g, int number, int x, int y)
 			{
 				g->col[y] |= mask;
 				g->row[x] |= mask;
-				g->Cells[x][y] = convertDev(number);
+				g->Cells[x][y] = number;
 			}
 		}
 	return ok;
