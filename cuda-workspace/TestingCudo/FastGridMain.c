@@ -92,6 +92,8 @@ int main(int argc, char ** argv)
 		long *iter = (long *)malloc(depth * sizeof(long));
 		long *count = (long *)malloc(depth * sizeof(long));
 		int offset = 0;
+		long ti = 0;
+		
 		for(int i = 0; i < threads * depth; i++)
 		{
 			
@@ -106,10 +108,11 @@ int main(int argc, char ** argv)
 			}
 			offset = (offset + 1) % depth;
 		}
-		printf("Depth, Iterations,Count\n");
+		printf("Depth,Round Iterations, Total Iterations,Count\n");
 		for(int i = 0; i < depth; i++)
 		{
-			printf("%d,%ld,%ld\n",i, iter[i],count[i]);
+			ti += iter[i];
+			printf("%d,%ld,%ld,%ld,\n",i, iter[i],ti,count[i]);
 		}
 	}
 
