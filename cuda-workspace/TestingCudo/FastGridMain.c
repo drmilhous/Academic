@@ -168,7 +168,7 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 		printGridDev(&s[depth].grid,s[depth].path, N);
 		if(value == 0)
 		{
-			if(depth < max)
+			if(depth < max-1)
 			{
 				depth++;
 				cloneState(s[depth-1], s[depth],N);
