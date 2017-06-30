@@ -123,17 +123,23 @@ void initThreads(State * s, int threads, int depth, int N, Path ** path)
 		base = path;
 		current = path[0];
 		t++;
+		int full = 0;
 		for(int d = 0; d < depth-1; d++)
 		{
 			t->path = current;
+			if(full == 1)
+			{
+				t->location.type = FULL;
+				t->location.x = 0;
+				t->location.y = 0;
+				full = 0;
+			}
 			t++;
 			if(current == NULL || current->next == NULL)
 			{
 				base++;
 				current = base[0];
-				t->location.type = FULL;
-				t->location.x = 0;
-				t->location.y = 0;
+				full  = 1;
 			}
 			else
 			{
