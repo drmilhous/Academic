@@ -419,7 +419,7 @@ __device__ char convertDev(int x)
 			}
 		else
 			{
-				res = ' ';
+				res = DEL;
 			}
 		return res;
 	}
@@ -524,8 +524,10 @@ __device__ int pow2(int x)
 	}
 __device__ void printGridDev(Grid * g,Path * p ,int N)
 	{
-		printf("-- Grid -- \n       ");
+		printf("Path -> ");
 		printPathDev(p);
+		printf("-- Grid -- \n       ");
+		
 		for (int i= 0; i < N; i++)
 		{
 			printf(" %03X ",g->col[i]);
