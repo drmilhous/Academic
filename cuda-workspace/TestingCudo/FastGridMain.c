@@ -172,6 +172,10 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 		//printGridDev(&s[depth].grid,s[depth].path, N);
 		if(value == 0)
 		{
+			if(depth == max-1)
+			{
+				printGridDev(&s[depth].grid,s[depth].path, N);
+			}
 			if(depth < max-1)
 			{
 				
@@ -378,13 +382,13 @@ __device__ int setAll(Grid * g, Path * p, Location * l, int N)
 				l->lastY = ny;
 				if(value != 0)
 				{
-					printf("Fail offset [%d,%d]\n",nx,ny );
+					//printf("Fail offset [%d,%d]\n",nx,ny );
 				}
 			}
 	}
 	else
 	{
-		printf("Fail offset [%d]\n", 0);
+		//printf("Fail offset [%d]\n", 0);
 	}
 	return value;
 }
@@ -403,7 +407,7 @@ __device__ int testAndSet(Grid * g, int number, int x, int y)
 			}
 			else
 			{
-				printf("!!%04X %04X\n",value, number);
+				//printf("!!%04X %04X\n",value, number);
 				ok = 1;
 			}
 		}
