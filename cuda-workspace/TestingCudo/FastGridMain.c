@@ -8,18 +8,20 @@
 
 __device__ void printGridDev(Grid * g,Path * p, int N);
 __device__	void printPathDev(Path * p);
-__global__ void compute(Grid * g,int N ,int threads, State * s, int maxDepth);
+__global__ void compute(Grid * g,int N ,int threads, State * s,State * result, int resSize, int maxDepth);
 Grid * allocateGrid(int size);
 __device__ char convertCharDev(char u);
 void initGridData(Grid * g, int size);
 void printDevProp(cudaDeviceProp devProp);
 int getCores(cudaDeviceProp devProp);
 
+
 __device__ int pow2(int x);
 __device__ char convertDev(int x);
 __device__ int testAndSet(Grid * g, int number, int x, int y);
 State * allocateStateStack(int threads, int maxDepth, int N);
-__device__ void computeLocal(State * s, int N, int depth, int max);
+State * allocateState(int size, int N);
+__device__ void computeLocal(State * s,State * res,int resSize, int N, int depth, int max);
 void initThreads(State * s, int threads, int depth, int N, Path ** path);
 __device__ void cloneState(State s1, State s2, int N);
 __device__ void cloneGrid(Grid * oldGrid, Grid * newGrid, int size);
@@ -62,7 +64,9 @@ int main(int argc, char ** argv)
 		State * stateStack = allocateStateStack(threads, depth, N);
 		initThreads(stateStack, threads, depth,N, path);
 		stateStack[1].location.type = FULL;
-		compute<<<blocks, threadBlocks>>>(g,N ,threads, stateStack, depth);
+		int resSize = 10000 * threads;
+		State * resultList = allocateState(resSize, N);
+		compute<<<blocks, threadBlocks>>>(g,N ,threads, stateStack,resultList,resSize, depth);
 		cudaDeviceSynchronize();
 		//printGrid(g,N);
 		for(int i = 0; i < threads * depth; i++)
@@ -116,9 +120,14 @@ void initThreads(State * s, int threads, int depth, int N, Path ** path)
 
 State * allocateStateStack(int threads, int maxDepth, int N)
 {
+	return allocateState(threads * maxDepth, N);
+}
+
+State * allocateState(int size, int N)
+{
 	State * s;
-	cudaMallocManaged((void **) &s, sizeof(State) * threads * maxDepth);
-	for(int i = 0; i < threads * maxDepth; i++)
+	cudaMallocManaged((void **) &s, sizeof(State) *size);
+	for(int i = 0; i < size; i++)
 	{
 		initGridData(&s[i].grid,N);
 		printGrid(&s[i].grid,N);
@@ -127,14 +136,15 @@ State * allocateStateStack(int threads, int maxDepth, int N)
 	}
 	return s;
 }
-__global__ void compute(Grid * g, int N, int threads, State * s, int maxDepth)
+__global__ void compute(Grid * g, int N, int threads, State * s,State * result, int resSize, int maxDepth)
 {
 	int idx = blockIdx.x * blockDim.x + threadIdx.x;
 
 		if (idx < threads)
 			{
 				s = &s[idx * maxDepth];
-				computeLocal(s,N, 0, maxDepth);
+				int index = resSize/threads * idx;
+				computeLocal(s,&result[index],resSize/threads,N, 0, maxDepth);
 				/*for(int i = 0; i < maxDepth; i++)
 				{
 					int value = testAndSet(&s[i].grid,0,1,3);
@@ -146,7 +156,7 @@ __global__ void compute(Grid * g, int N, int threads, State * s, int maxDepth)
 				printf("value = %d\n", value);*/
 			}
 }
-__device__ void computeLocal(State * s,int N, int depth, int max)
+__device__ void computeLocal(State * s,State * res,int resSize, int N, int depth, int max)
 {
 	int value;
 	int hasNext = 0;
@@ -156,6 +166,7 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 	int count = 0;
 	int maxCount = 10;
 	int pop;
+	int counter = 0;
 	while(hasNext == 0 && depth > 0)
 	//for(int i = 0; i < 30; i++)
 	{
