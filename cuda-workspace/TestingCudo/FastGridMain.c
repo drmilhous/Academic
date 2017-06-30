@@ -65,7 +65,7 @@ int main(int argc, char ** argv)
 		initThreads(stateStack, threads, depth,N, path);
 		stateStack[1].location.type = FULL;
 		stateStack[1].location.type = PART;
-		int resSize = 10000 * threads;
+		int resSize = 1 * threads;
 		State * resultList = allocateState(resSize, N);
 		printf("Starting \n");
 		clock_t begin = clock();
@@ -79,8 +79,8 @@ int main(int argc, char ** argv)
 		{
 			if(resultList[i].grid.ok == '1')
 			{
-				//printf("Grid #%d\n",i);
-				//printGrid(&resultList[i].grid, N);
+				printf("Grid #%d\n",i);
+				printGrid(&resultList[i].grid, N);
 			}
 		}
 		for(int i = 0; i < threads * depth; i++)
