@@ -174,6 +174,20 @@ void printGrid(Grid * g, int N)
 				printf("\n");
 			}
 	}
+char convert(int x)
+	{
+		char res = 'a';
+		if (x != (int) DEL)
+			{
+				int amount = int(x) + (int) res;
+				res = (char) amount;
+			}
+		else
+			{
+				res = DEL;
+			}
+		return res;
+	}
 
 
 

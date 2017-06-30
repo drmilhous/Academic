@@ -10,6 +10,8 @@
 #define DEV 0
 #define MANAGED 1
 
+#define DEL '-'
+
 typedef struct Path
 	{
 	struct Path * next;
@@ -59,6 +61,6 @@ int convertUpper(char u);
 Path * getPath(char * line);
 void printPath(Path * p);
 void printGrid(Grid * g, int N);
-
+char convert(int x);
 //Grid * allocateGrid(int size);
 #endif

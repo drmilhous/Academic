@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include "FastGrid.h"
 #include <ctype.h>
-#define DEL '-'
+
 __device__ void printGridDev(Grid * g,Path * p, int N);
 __device__	void printPathDev(Path * p);
 __global__ void compute(Grid * g,int N ,int threads, State * s, int maxDepth);
@@ -14,6 +14,7 @@ __device__ char convertCharDev(char u);
 void initGridData(Grid * g, int size);
 void printDevProp(cudaDeviceProp devProp);
 int getCores(cudaDeviceProp devProp);
+
 __device__ int pow2(int x);
 __device__ char convertDev(int x);
 __device__ int testAndSet(Grid * g, int number, int x, int y);
