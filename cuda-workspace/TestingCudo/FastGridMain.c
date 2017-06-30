@@ -170,6 +170,10 @@ __device__ void computeLocal(State * s,int N, int depth, int max)
 		//printGridDev(&s[depth-1].grid, N);
 		//printf("After\n");
 		//printGridDev(&s[depth].grid,s[depth].path, N);
+		if(s[depth].location.x != s[depth].location.nextX && s[depth].location.y != s[depth].location.nextY )
+			{
+				printf("impossible2\n");
+			}
 		if(value == 0)
 		{
 			if(depth == max-1)
