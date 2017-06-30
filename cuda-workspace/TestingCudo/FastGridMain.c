@@ -71,7 +71,7 @@ int main(int argc, char ** argv)
 		//printGrid(g,N);
 		for(int i = 0; i < resSize; i++)
 		{
-			if(resultLIst[i].grid.ok == '1')
+			if(resultList[i].grid.ok == '1')
 			{
 				printf("Grid #%d\n",i);
 				printGrid(&resultList[i].grid, N);
