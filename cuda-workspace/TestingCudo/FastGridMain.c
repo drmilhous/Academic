@@ -17,7 +17,7 @@ void printDevProp(cudaDeviceProp devProp);
 int getCores(cudaDeviceProp devProp);
 
 void computeFull(StateList * initState,Path ** path, int N,int depth, int threads);
-
+void initThreadsState(StateList * l,  State * s, int threads, int depth, int N, Path ** path);
 
 __device__ int pow2(int x);
 __device__ char convertDev(int x);
@@ -104,7 +104,7 @@ void computeFull(StateList * initState,Path ** path, int N,int depth, int thread
 			printPath(path[i]);
 		}
 		State * stateStack = allocateStateStack(threads, depth, N);
-		initThreads(stateStack, threads, depth,N, path);
+		initThreadsState(initState,stateStack, threads, depth,N, path);
 		int resSize = 1 * threads;
 		State * resultList = allocateState(resSize, N);
 		printf("Starting \n");
