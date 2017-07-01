@@ -52,7 +52,11 @@ typedef struct GridLocPath{
     Location location;
     Path * path;
 } GridLocPath;
-
+typedef struct StateList
+{
+    State * states;
+    int count;
+}StateList;
 
 Path * allocate(char c, char c1, char* c2, int direction);
 Path ** scanChars(char * filePath);

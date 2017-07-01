@@ -8,7 +8,8 @@
 
 __device__ void printGridDev(Grid * g,Path * p, int N);
 __device__	void printPathDev(Path * p);
-__global__ void compute(Grid * g,int N ,int threads, State * s,State * result, int resSize, int maxDepth);
+StateList* getStates(int N, Path ** path);
+__global__ void compute(int N ,int threads, State * s,State * result, int resSize, int maxDepth);
 Grid * allocateGrid(int size);
 __device__ char convertCharDev(char u);
 void initGridData(Grid * g, int size);
@@ -56,13 +57,47 @@ int main(int argc, char ** argv)
 			}
 		}
 		cudaSetDevice(device);
-		g = allocateGrid(N);
+		//read the path from the file
+		Path ** path = scanChars(output);
 		printf("Allocated \n");
-		int threads = 100;
-		int blocks = threads/10;
+		StateList* statelist = getStates(N,path);
+
+
+	}
+StateList* getStates(int N, Path ** path)
+{
+	StateList* result = malloc(sizeof(StateList));
+	int depth = 2;
+	int threads = 1;
+	int blocks = threads/1;
+	int threadBlocks = threads / blocks;
+	State * stateStack = allocateStateStack(threads, depth, N);
+	initThreads(stateStack, threads, depth,N, path);
+	int resSize = 840;
+	State * resultList = allocateState(resSize, N);
+	stateStack[1].location.type = FULL;
+	stateStack[1].path = path[0];
+	compute<<<blocks, threadBlocks>>>(N ,threads, stateStack,resultList,resSize, depth);
+	cudaDeviceSynchronize();
+	result->count = 0;
+	for(int i = 0; i < resSize; i++)
+		{
+			if(resultList[i].grid.ok == '1')
+			{
+				result->count++;
+			}
+		}
+	printGrid(resultList[result->count], N);
+	result->states = resultList;
+	printf("State count %d\n", result->count);
+	return result;
+}
+void computeFull(State * initState, int N,int depth, int threads)
+	{
+		int blocks = threads/16;
 		int threadBlocks = threads / blocks;
 		printGrid(g,N);
-		Path ** path = scanChars(output);
+		
 		for(int i = 0; i <= (depth+1)/6; i++)
 		{
 			printPath(path[i]);
@@ -75,7 +110,7 @@ int main(int argc, char ** argv)
 		State * resultList = allocateState(resSize, N);
 		printf("Starting \n");
 		clock_t begin = clock();
-		compute<<<blocks, threadBlocks>>>(g,N ,threads, stateStack,resultList,resSize, depth);
+		compute<<<blocks, threadBlocks>>>(N ,threads, stateStack,resultList,resSize, depth);
 		cudaDeviceSynchronize();
 		clock_t end = clock();
 		double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
@@ -93,7 +128,6 @@ int main(int argc, char ** argv)
 		long *count = (long *)malloc(depth * sizeof(long));
 		int offset = 0;
 		long ti = 0;
-		
 		for(int i = 0; i < threads * depth; i++)
 		{
 			
@@ -151,7 +185,7 @@ void initThreads(State * s, int threads, int depth, int N, Path ** path)
 			
 		}
 	}
-	s++;
+/*	s++;
 	for (int row = 0; row < N; row++)
 			{
 				for (int col = 0; col < N; col++)
@@ -161,8 +195,10 @@ void initThreads(State * s, int threads, int depth, int N, Path ** path)
 						s->location.type = PART;
 						s = &s[depth];
 					}
-			}
+			}*/
 }
+
+
 
 State * allocateStateStack(int threads, int maxDepth, int N)
 {
@@ -182,7 +218,7 @@ State * allocateState(int size, int N)
 	}
 	return s;
 }
-__global__ void compute(Grid * g, int N, int threads, State * s,State * result, int resSize, int maxDepth)
+__global__ void compute(int N, int threads, State * s,State * result, int resSize, int maxDepth)
 {
 	int idx = blockIdx.x * blockDim.x + threadIdx.x;
 
@@ -255,8 +291,8 @@ __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth
 				//cloneState(s[depth-1], s[depth],N);
 				s[depth].location.x = s[depth-1].location.lastX;
 				s[depth].location.y = s[depth-1].location.lastY;
-				s[depth].location.nextX = s[depth-1].location.nextX;
-				s[depth].location.nextY = s[depth-1].location.nextY;
+			//	s[depth].location.nextX = s[depth-1].location.nextX;
+			//	s[depth].location.nextY = s[depth-1].location.nextY;
 				initLocation(&s[depth]);
 				
 			}
