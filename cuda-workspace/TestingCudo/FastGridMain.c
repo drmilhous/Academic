@@ -34,7 +34,6 @@ __device__ int setAll(Grid * g, Path * p, Location * l, int N);
 __device__ int updateLocation(Location * loc, Path * p, int size);
 int main(int argc, char ** argv)
 	{
-		Grid * g;
 		int device;
 		int N;
 		int c;
@@ -63,7 +62,7 @@ int main(int argc, char ** argv)
 		Path ** path = scanChars(output);
 		printf("Allocated \n");
 		StateList* statelist = getStates(N,path);
-		path[0] = path[0].next;
+		path[0] = path[0]->next;
 		computeFull(StateList,path, N, depth, 840);
 
 	}
