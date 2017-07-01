@@ -62,8 +62,8 @@ int main(int argc, char ** argv)
 		Path ** path = scanChars(output);
 		printf("Allocated \n");
 		StateList* statelist = getStates(N,path);
-		//path[0] = path[0]->next;
-		//computeFull(statelist,path, N, depth, 840);
+		path[0] = path[0]->next;
+		computeFull(statelist,path, N, depth, 840);
 
 	}
 StateList* getStates(int N, Path ** path)
