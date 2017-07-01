@@ -189,7 +189,7 @@ void initThreadsState(StateList * l,  State * s, int threads, int depth, int N, 
 			t = &t[depth];
 		}
 	}
-
+}
 
 
 void initThreads(State * s, int threads, int depth, int N, Path ** path)
