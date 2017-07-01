@@ -28,6 +28,7 @@ __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth
 void initThreads(State * s, int threads, int depth, int N, Path ** path);
 __device__ void cloneState(State s1, State s2, int N);
 __device__ void cloneGrid(Grid * oldGrid, Grid * newGrid, int size);
+void cloneGridHost(Grid * oldGrid, Grid * newGrid, int size);
 __device__ void cloneLocation(Location* srcLoc, Location* destLoc);
 __device__ void initLocation(State * s);
 __device__ int setAll(Grid * g, Path * p, Location * l, int N);
@@ -185,7 +186,7 @@ void initThreadsState(StateList * l,  State * s, int threads, int depth, int N, 
 		t = s;
 		for(int i = 0; i < l->count; i++)
 		{
-			cloneGrid(&(l->states[i]).grid, &t->grid, N);
+			cloneGridHost(&(l->states[i]).grid, &t->grid, N);
 			t = &t[depth];
 		}
 	}
@@ -496,6 +497,22 @@ __device__ void cloneLocation(Location* srcLoc, Location* destLoc)
 	destLoc->type = srcLoc->type;
 }
 __device__ void cloneGrid(Grid * srcGrid, Grid * newGrid, int size)
+{
+	for (int i = 0; i < size; i++)
+		{
+			newGrid->col[i] = srcGrid->col[i];
+			newGrid->row[i] = srcGrid->row[i];
+		}
+	for (int row = 0; row < size; row++)
+		{
+			for (int col = 0; col < size; col++)
+				{
+					newGrid->Cells[row][col] = srcGrid->Cells[row][col];
+				}
+		}
+	newGrid->ok = srcGrid->ok;
+}
+void cloneGridHost(Grid * srcGrid, Grid * newGrid, int size)
 {
 	for (int i = 0; i < size; i++)
 		{
