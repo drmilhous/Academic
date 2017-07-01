@@ -105,8 +105,6 @@ void computeFull(StateList * initState,Path ** path, int N,int depth, int thread
 		}
 		State * stateStack = allocateStateStack(threads, depth, N);
 		initThreads(stateStack, threads, depth,N, path);
-		stateStack[1].location.type = FULL;
-		stateStack[1].location.type = PART;
 		int resSize = 1 * threads;
 		State * resultList = allocateState(resSize, N);
 		printf("Starting \n");
@@ -150,6 +148,49 @@ void computeFull(StateList * initState,Path ** path, int N,int depth, int thread
 			printf("%d,%ld,%ld,%ld,\n",i, iter[i],ti,count[i]);
 		}
 	}
+void initThreadsState(StateList * l,  State * s, int threads, int depth, int N, Path ** path)
+{
+	State* t = s;
+	Path * current;
+	Path ** base;
+	for(int i = 0; i < threads; i++)
+	{
+		base = path;
+		current = path[0];
+		t++;
+		int full = 0;
+		for(int d = 0; d < depth-1; d++)
+		{
+			t->path = current;
+			if(full == 1)
+			{
+				t->location.type = FULL;
+				t->location.x = 0;
+				t->location.y = 0;
+				full = 0;
+			}
+			t++;
+			if(current == NULL || current->next == NULL)
+			{
+				base++;
+				current = base[0];
+				full  = 1;
+			}
+			else
+			{
+				current = current->next;
+			}
+			
+		}
+		t = s;
+		for(int i = 0; i < l->count; i++)
+		{
+			cloneState(&l->states[i].grid, &t->grid, N);
+			t = &t[depth];
+		}
+	}
+
+
 
 void initThreads(State * s, int threads, int depth, int N, Path ** path)
 {
