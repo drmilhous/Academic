@@ -89,6 +89,7 @@ StateList* getStates(int N, Path ** path)
 				result->count++;
 			}
 		}
+	printf("Count %d\n",result->count );
 	printGrid(&resultList[result->count].grid, N);
 	result->states = resultList;
 	printf("State count %d\n", result->count);
