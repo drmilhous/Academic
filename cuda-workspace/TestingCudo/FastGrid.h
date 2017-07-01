@@ -52,6 +52,7 @@ typedef struct GridLocPath{
     Location location;
     Path * path;
 } GridLocPath;
+
 typedef struct StateList
 {
     State * states;
