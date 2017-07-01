@@ -185,7 +185,7 @@ void initThreadsState(StateList * l,  State * s, int threads, int depth, int N, 
 		t = s;
 		for(int i = 0; i < l->count; i++)
 		{
-			cloneState(&l->states[i].grid, &t->grid, N);
+			cloneState(&(l->states[i]).grid, &t->grid, N);
 			t = &t[depth];
 		}
 	}
