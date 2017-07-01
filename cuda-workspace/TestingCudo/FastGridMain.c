@@ -69,7 +69,7 @@ int main(int argc, char ** argv)
 StateList* getStates(int N, Path ** path)
 {
 	StateList* result =(StateList *) malloc(sizeof(StateList));
-	int depth = 3;
+	int depth = 2;
 	int threads = 1;
 	int blocks = threads/1;
 	int threadBlocks = threads / blocks;
@@ -89,8 +89,8 @@ StateList* getStates(int N, Path ** path)
 				result->count++;
 			}
 		}
-	printf("Count %d\n",result->count );
-	printGrid(&resultList[result->count].grid, N);
+	printf("Count %d\n",result->count);
+	printGrid(&resultList[result->count-1].grid, N);
 	result->states = resultList;
 	printf("State count %d\n", result->count);
 	return result;
