@@ -16,7 +16,7 @@ void initGridData(Grid * g, int size);
 void printDevProp(cudaDeviceProp devProp);
 int getCores(cudaDeviceProp devProp);
 
-void computeFull(StateList * initState, int N,int depth, int threads);
+void computeFull(StateList * initState,Path * path, int N,int depth, int threads);
 
 
 __device__ int pow2(int x);
@@ -63,7 +63,8 @@ int main(int argc, char ** argv)
 		Path ** path = scanChars(output);
 		printf("Allocated \n");
 		StateList* statelist = getStates(N,path);
-		computeFull(StateList, N, depth, 840);
+		path[0] = path[0].next;
+		computeFull(StateList,path, N, depth, 840);
 
 	}
 StateList* getStates(int N, Path ** path)
@@ -89,12 +90,12 @@ StateList* getStates(int N, Path ** path)
 				result->count++;
 			}
 		}
-	printGrid(resultList[result->count], N);
+	printGrid(&resultList[result->count].grid, N);
 	result->states = resultList;
 	printf("State count %d\n", result->count);
 	return result;
 }
-void computeFull(StateList * initState, int N,int depth, int threads)
+void computeFull(StateList * initState,Path * path, int N,int depth, int threads)
 	{
 		int blocks = threads/16;
 		int threadBlocks = threads / blocks;
