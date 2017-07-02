@@ -183,13 +183,13 @@ void initThreadsState(StateList * l,  State * s, int threads, int depth, int N, 
 			}
 			
 		}
+	}
 		t = s;
 		for(int i = 0; i < l->count; i++)
 		{
 			cloneGridHost(&(l->states[i]).grid, &t->grid, N);
 			t = &t[depth];
 		}
-	}
 }
 
 
