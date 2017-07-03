@@ -100,7 +100,7 @@ void computeFull(StateList * initState,Path ** path, int N,int depth, int thread
 	{
 		int blocks = threads/16;
 		int threadBlocks = threads / blocks;
-		if(threads % block != 0)
+		if(threads % blocks != 0)
 		{
 			threadBlocks++;
 		}
