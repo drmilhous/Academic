@@ -26,7 +26,7 @@ State * allocateStateStack(int threads, int maxDepth, int N);
 State * allocateState(int size, int N);
 __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth, int max);
 void initThreads(State * s, int threads, int depth, int N, Path ** path);
-__device__ void cloneState(State s1, State s2, int N);
+__device__ void cloneState(State * s1, State * s2, int N);
 __device__ void cloneGrid(Grid * oldGrid, Grid * newGrid, int size);
 void cloneGridHost(Grid * oldGrid, Grid * newGrid, int size);
 __device__ void cloneLocation(Location* srcLoc, Location* destLoc);
@@ -290,7 +290,7 @@ __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth
 	int value;
 	int hasNext = 0;
 	depth++;
-	cloneState(s[depth-1], s[depth],N);
+	cloneState(&s[depth-1], &s[depth],N);
 	initLocation(&s[depth]);
 	int count = 0;
 	int maxCount = 10;
@@ -326,7 +326,7 @@ __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth
 				//printGridDev(&s[depth].grid,s[depth].path, N);
 				if(counter < resSize)
 				{
-					cloneState(s[depth],res[counter],N);
+					cloneState(&s[depth],&res[counter],N);
 					printf("LOC A%d,%d\n", s[depth].location.lastX, s[depth].location.lastY);
 					printf("LOC B%d,%d\n", res[counter].location.lastX, res[counter].location.lastY);
 					res[counter].grid.ok = '1';
@@ -488,10 +488,10 @@ __device__ void initLocation(State * s)
 	}
 }
 
-__device__ void cloneState(State s1, State s2, int N)
+__device__ void cloneState(State * s1, State * s2, int N)
 {
-	cloneGrid(&s1.grid, &s2.grid, N);
-	cloneLocation(&s1.location, &s2.location);
+	cloneGrid(&s1->grid, &s2->grid, N);
+	cloneLocation(&s1->location, &s2->location);
 }
 
 __device__ void cloneLocation(Location* srcLoc, Location* destLoc)
