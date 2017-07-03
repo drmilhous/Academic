@@ -327,7 +327,8 @@ __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth
 				if(counter < resSize)
 				{
 					cloneState(s[depth],res[counter],N);
-					printf("LOC %d%d\n", res[counter].location.lastX, res[counter].location.lastY);
+					printf("LOC A%d,%d\n", s[depth].location.lastX, s[depth].location.lastY);
+					printf("LOC B%d,%d\n", res[counter].location.lastX, res[counter].location.lastY);
 					res[counter].grid.ok = '1';
 					counter++;
 				}
