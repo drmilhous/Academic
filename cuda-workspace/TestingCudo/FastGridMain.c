@@ -496,6 +496,8 @@ __device__ void cloneLocation(Location* srcLoc, Location* destLoc)
 	destLoc->y = srcLoc->y;
 	destLoc->nextX = srcLoc->nextX;
 	destLoc->nextY = srcLoc->nextY;
+	destLoc->lastX = srcLoc->lastX;
+	destLoc->lastY = srcLoc->lastY;
 	destLoc->type = srcLoc->type;
 }
 __device__ void cloneGrid(Grid * srcGrid, Grid * newGrid, int size)
