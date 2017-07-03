@@ -78,7 +78,7 @@ StateList* getStates(int N, Path ** path)
 	initThreads(stateStack, threads, depth,N, path);
 	int resSize = 840;
 	State * resultList = allocateState(resSize, N);
-	stateStack[1].location.type = FULL;
+	stateStack[0].location.type = FULL;
 	stateStack[1].path = path[0];
 	compute<<<blocks, threadBlocks>>>(N ,threads, stateStack,resultList,resSize, depth);
 	cudaDeviceSynchronize();
