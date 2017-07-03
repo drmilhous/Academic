@@ -629,7 +629,7 @@ void initGridData(Grid * g, int size)
 {
 		cudaMallocManaged((void **) &g->row, size * sizeof(int));
 		cudaMallocManaged((void **) &g->col, size * sizeof(int));
-		if(g->col == NULL)
+		if(g->col == NULL || g->row == NULL)
 		{
 			printf("Error Allocating\n");
 			exit(-1);
