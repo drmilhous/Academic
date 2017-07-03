@@ -120,13 +120,20 @@ void computeFull(StateList * initState,Path ** path, int N,int depth, int thread
 		double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
 		printf("Time spent %lf\n", time_spent);
 		//printGrid(g,N);
+		int last = -1;
 		for(int i = 0; i < resSize; i++)
 		{
 			if(resultList[i].grid.ok == '1')
 			{
-				printf("Grid #%d\n",i);
-				printGrid(&resultList[i].grid, N);
+				last =i ;
+				//printf("Grid #%d\n",i);
+				//printGrid(&resultList[i].grid, N);
 			}
+		}
+		if(last > 0)
+		{
+				printf("Grid #%d\n",last);
+				printGrid(&resultList[last].grid, N);
 		}
 		long *iter = (long *)malloc(depth * sizeof(long));
 		long *count = (long *)malloc(depth * sizeof(long));
