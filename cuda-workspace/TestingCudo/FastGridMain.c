@@ -100,6 +100,10 @@ void computeFull(StateList * initState,Path ** path, int N,int depth, int thread
 	{
 		int blocks = threads/16;
 		int threadBlocks = threads / blocks;
+		if(threads % block != 0)
+		{
+			threadBlocks++;
+		}
 		for(int i = 0; i <= (depth+1)/6; i++)
 		{
 			printPath(path[i]);
