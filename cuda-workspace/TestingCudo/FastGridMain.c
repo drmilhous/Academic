@@ -185,6 +185,7 @@ void initThreadsState(StateList * l,  State * s, int threads, int depth, int N, 
 		}
 	}
 	t=s;
+	printf("L->count%d\n", l->count);
 		for(int i = 0; i < l->count; i++)
 		{
 			//copy x and y
