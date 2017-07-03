@@ -196,14 +196,14 @@ void initThreadsState(StateList * l,  State * s, int threads, int depth, int N, 
 		}
 	}
 	t=s;
-	printf("L->count%d\n", l->count);
+	//printf("L->count%d\n", l->count);
 		for(int i = 0; i < l->count; i++)
 		{
 			//copy x and y
 			cloneGridHost(&l->states[i].grid, &t->grid, N);
 			t->location.x = l->states[i].location.lastX;
 			t->location.y = l->states[i].location.lastY;
-			printf("Loc (%d,%d)\n",t->location.x,t->location.y );
+			//printf("Loc (%d,%d)\n",t->location.x,t->location.y );
 			t = &t[depth];
 		}
 }
