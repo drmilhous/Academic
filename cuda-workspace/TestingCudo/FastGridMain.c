@@ -120,8 +120,8 @@ void computeFull(StateList * initState,Path ** path, int N,int depth, int thread
 		{
 			if(resultList[i].grid.ok == '1')
 			{
-				printf("Grid #%d\n",i);
-				printGrid(&resultList[i].grid, N);
+				//printf("Grid #%d\n",i);
+				//printGrid(&resultList[i].grid, N);
 			}
 		}
 		long *iter = (long *)malloc(depth * sizeof(long));
@@ -190,6 +190,7 @@ void initThreadsState(StateList * l,  State * s, int threads, int depth, int N, 
 			cloneGridHost(&(l->states[i]).grid, &t->grid, N);
 			t->location.x = l->states[i].location.lastX;
 			t->location.y = l->states[i].location.lastY;
+			printf("Loc (%d,%d)\n",t->location.x,t->location.y );
 			t = &t[depth];
 		}
 }
