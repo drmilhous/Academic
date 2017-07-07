@@ -335,6 +335,14 @@ __device__ int printSol(State * s, int depth, int N)
 			printGridDev(&s[depth].grid,s[depth].path, N);
 		}
 	}
+	else if(depth == 4)
+	{
+		if(l->x == 0 && l->y == 8 && l->lastX == 0 && l->lastY == 6  && g->Cells[1][3] == 0 )
+		{
+			printf("Deth %d!!", depth);
+			printGridDev(&s[depth].grid,s[depth].path, N);
+		}
+	}
 	return printed;
 }
 __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth, int max)
@@ -345,8 +353,6 @@ __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth
 	depth++;
 	cloneState(&s[depth-1], &s[depth],N);
 	initLocation(&s[depth]);
-	int count = 0;
-	int maxCount = 10;
 	int pop;
 	int counter = 0;
 	while(hasNext == 0 && depth > 0)
