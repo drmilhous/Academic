@@ -297,6 +297,17 @@ __global__ void compute(int N, int threads, State * s,State * result, int resSiz
 				printf("value = %d\n", value);*/
 			}
 }
+__device__ void printSol(State * s, int depth, int N)
+{
+	Location* l = &s[depth].location;
+	if(depth == 1)
+	{
+		if(l->x == 7 && l->y == 7 && l->lastX == 3 && l->lastY == 7)
+		{
+			printGridDev(&s[depth].grid,s[depth].path, N);
+		}
+	}
+}
 __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth, int max)
 {
 	int value;
@@ -309,57 +320,35 @@ __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth
 	int pop;
 	int counter = 0;
 	while(hasNext == 0 && depth > 0)
-	//for(int i = 0; i < 30; i++)
 	{
 		s[depth].iterations++;
 		pop = 0;
 		hasNext = 0;
-		//cloneState(s[depth-1], s[depth],N);
-		//if(s[depth].location.x != s[depth].location.nextX && s[depth].location.y != s[depth].location.nextY )
-		//	{
-		//		printf("impossible2\n");
-		//	}
 		cloneGrid(&s[depth-1].grid, &s[depth].grid, N);
 		value = setAll(&s[depth].grid, s[depth].path, &s[depth].location, N);
-		//printf("depth[%d] x[%d] y[%d] nx[%d] ny[%d] value(%d)\n", depth,s[depth].location.x, s[depth].location.y, s[depth].location.nextX, s[depth].location.nextY , value);
-		//printf("Before\n");
-		//printGridDev(&s[depth-1].grid, N);
-		//printf("After\n");
-		//printGridDev(&s[depth].grid,s[depth].path, N);
-		//if(s[depth].location.x != s[depth].location.nextX && s[depth].location.y != s[depth].location.nextY )
-		//	{
-		//		printf("impossible2\n");
-		//	}
 		if(value == 0)
 		{
+			printSol(s,depth, N);
 			s[depth].count++;
 			if(depth == max-1)
 			{
-				//printGridDev(&s[depth].grid,s[depth].path, N);
 				if(counter < resSize)
 				{
 					cloneState(&s[depth],&res[counter],N);
-				//	printf("LOC A%d,%d\n", s[depth].location.lastX, s[depth].location.lastY);
-				//	printf("LOC B%d,%d\n", res[counter].location.lastX, res[counter].location.lastY);
 					res[counter].grid.ok = '1';
 					counter++;
 				}
 			}
 			if(depth < max-1)
-			{
-				
+			{	
 				depth++;
-				//cloneState(s[depth-1], s[depth],N);
 				s[depth].location.x = s[depth-1].location.lastX;
 				s[depth].location.y = s[depth-1].location.lastY;
-			//	s[depth].location.nextX = s[depth-1].location.nextX;
-			//	s[depth].location.nextY = s[depth-1].location.nextY;
 				initLocation(&s[depth]);
 				
 			}
 			else
 			{
-				//printf("Popping\n");
 				pop = 1;
 			}
 		}
@@ -379,49 +368,6 @@ __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth
 	}
 
 }
-/*
-	while(depth > 0 && depth == 100)
-	{
-		printf("depth[%d] x[%d] y[%d] nx[%d] ny[%d]\n", depth,s[depth].location.x, s[depth].location.y, s[depth].location.nextX, s[depth].location.nextY );
-		cloneState(s[depth-1], s[depth],N);
-		value = setAll(&s[depth].grid, s[depth].path, &s[depth].location, N);
-		if(depth == max-1) // end case
-		{
-			if(value == 0)
-			{
-				//printf("Valid");
-			}
-			depth --;
-		}
-		else // recursive case
-		{
-			if(value == 0)
-			{
-				depth++;
-			}
-			else
-			{
-				value = updateLocation(&s[depth].location, s[depth].path, N);
-				if(value == 0)
-				{
-					depth++;
-				}
-				while(value != 0 && depth > 0)
-				{
-					depth --;
-					value = updateLocation(&s[depth].location, s[depth].path, N);
-				}
-			}
-		}
-		count ++;
-		if(count > maxCount)
-		{
-			break;
-		}
-
-	}
-}*/
-
 __device__ int updateLocation(Location * loc, Path * p, int size)
 	{
 		int pop = 0;
