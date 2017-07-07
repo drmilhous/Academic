@@ -80,6 +80,7 @@ int ** getSol(char * solString, int N)
 	int ** result = NULL;
 	FILE * database;
 	char buffer[30];
+	printf("Lading Sol\n");
 	database = fopen(solString, "r");
 	if (NULL == database)
 			{
