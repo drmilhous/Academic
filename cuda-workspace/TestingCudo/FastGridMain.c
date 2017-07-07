@@ -300,7 +300,7 @@ __global__ void compute(int N, int threads, State * s,State * result, int resSiz
 __device__ void printSol(State * s, int depth, int N)
 {
 	Location* l = &s[depth].location;
-	if(depth == 1)
+	if(depth == 0)
 	{
 		if(l->x == 7 && l->y == 7 && l->lastX == 3 && l->lastY == 7)
 		{
@@ -312,6 +312,7 @@ __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth
 {
 	int value;
 	int hasNext = 0;
+	printSol(s,depth, N);
 	depth++;
 	cloneState(&s[depth-1], &s[depth],N);
 	initLocation(&s[depth]);
