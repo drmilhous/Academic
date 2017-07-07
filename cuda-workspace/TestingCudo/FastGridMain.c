@@ -313,7 +313,7 @@ __device__ int printSol(State * s, int depth, int N)
 	}
 	else if(depth == 1)
 	{
-		if(l->x == 7 && l->y == 3 && l->lastX == 0 && l->lastY == 3 )
+		if(l->x == 7 && l->y == 3 && l->lastX == 0 && l->lastY == 3 &&l->nextX == 2 && l->nextY == 3  )
 		{
 			printf("Deth %d!!", depth);
 			printGridDev(&s[depth].grid,s[depth].path, N);
