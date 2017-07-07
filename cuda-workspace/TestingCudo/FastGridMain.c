@@ -327,6 +327,14 @@ __device__ int printSol(State * s, int depth, int N)
 			printGridDev(&s[depth].grid,s[depth].path, N);
 		}
 	}
+	else if(depth == 3)
+	{
+		if(l->x == 0 && l->y == 8 && l->lastX == 0 && l->lastY == 8  && g->Cells[1][3] == 0 )
+		{
+			printf("Deth %d!!", depth);
+			printGridDev(&s[depth].grid,s[depth].path, N);
+		}
+	}
 	return printed;
 }
 __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth, int max)
