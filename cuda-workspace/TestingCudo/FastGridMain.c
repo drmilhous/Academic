@@ -686,8 +686,11 @@ __device__ int pow2(int x)
 	}
 __device__ void printGridDev(Grid * g,Path * p ,int N)
 	{
-		printf("Path -> ");
-		printPathDev(p);
+		if(p != NULL)
+		{
+			printf("Path -> ");
+			printPathDev(p);
+		}
 		printf("-- Grid -- \n       ");
 		
 		for (int i= 0; i < N; i++)
