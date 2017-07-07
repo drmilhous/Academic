@@ -384,7 +384,7 @@ __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth
 		value = setAll(&s[depth].grid, s[depth].path, &s[depth].location, N);
 		if(value == 0)
 		{
-			if(print == 1)
+			if(print == 0)
 				printSol(s,depth, N, sol);
 			s[depth].count++;
 			if(depth == max-1)
