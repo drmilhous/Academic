@@ -70,7 +70,7 @@ int main(int argc, char ** argv)
 		path[0] = path[0]->next;
 		if(sol != NULL)
 		{
-
+			getSol(sol, N);
 		}
 		computeFull(statelist,path, N, depth, 840);
 
