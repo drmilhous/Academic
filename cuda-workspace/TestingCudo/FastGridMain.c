@@ -297,16 +297,18 @@ __global__ void compute(int N, int threads, State * s,State * result, int resSiz
 				printf("value = %d\n", value);*/
 			}
 }
-__device__ void printSol(State * s, int depth, int N)
+__device__ int printSol(State * s, int depth, int N)
 {
 	Location* l = &s[depth].location;
 	Grid * g = &s[depth].grid;
+	int printed = 0;
 	if(depth == 0)
 	{
 		if(l->x == 7 && l->y == 3 && g->Cells[7][7] == 4 )
 		{
 			printf("Deth %d!!", depth);
 			printGridDev(&s[depth].grid,s[depth].path, N);
+			printed = 1;
 		}
 	}
 	else if(depth == 1)
@@ -317,12 +319,13 @@ __device__ void printSol(State * s, int depth, int N)
 			printGridDev(&s[depth].grid,s[depth].path, N);
 		}
 	}
+	return printed;
 }
 __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth, int max)
 {
 	int value;
 	int hasNext = 0;
-	printSol(s,depth, N);
+	int print = printSol(s,depth, N);
 	depth++;
 	cloneState(&s[depth-1], &s[depth],N);
 	initLocation(&s[depth]);
@@ -339,7 +342,8 @@ __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth
 		value = setAll(&s[depth].grid, s[depth].path, &s[depth].location, N);
 		if(value == 0)
 		{
-			printSol(s,depth, N);
+			if(print == 1)
+				printSol(s,depth, N);
 			s[depth].count++;
 			if(depth == max-1)
 			{
