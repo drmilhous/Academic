@@ -9,14 +9,14 @@
 __device__ void printGridDev(Grid * g,Path * p, int N);
 __device__	void printPathDev(Path * p);
 StateList* getStates(int N, Path ** path);
-__global__ void compute(int N ,int threads, State * s,State * result, int resSize, int maxDepth);
+__global__ void compute(int N ,int threads, State * s,State * result, int resSize, int maxDepth, int ** sol);
 Grid * allocateGrid(int size);
 __device__ char convertCharDev(char u);
 void initGridData(Grid * g, int size);
 void printDevProp(cudaDeviceProp devProp);
 int getCores(cudaDeviceProp devProp);
 
-void computeFull(StateList * initState,Path ** path, int N,int depth, int threads);
+void computeFull(StateList * initState,Path ** path, int N,int depth, int threads, int ** sol);
 void initThreadsState(StateList * l,  State * s, int threads, int depth, int N, Path ** path);
 int ** getSol(char * solString,int N);
 __device__ int pow2(int x);
@@ -24,7 +24,7 @@ __device__ char convertDev(int x);
 __device__ int testAndSet(Grid * g, int number, int x, int y);
 State * allocateStateStack(int threads, int maxDepth, int N);
 State * allocateState(int size, int N);
-__device__ void computeLocal(State * s,State * res,int resSize, int N, int depth, int max);
+__device__ void computeLocal(State * s,State * res,int resSize, int N, int depth, int max, int ** sol);
 void initThreads(State * s, int threads, int depth, int N, Path ** path);
 __device__ void cloneState(State * s1, State * s2, int N);
 __device__ void cloneGrid(Grid * oldGrid, Grid * newGrid, int size);
@@ -68,16 +68,22 @@ int main(int argc, char ** argv)
 		printf("Allocated \n");
 		StateList* statelist = getStates(N,path);
 		path[0] = path[0]->next;
+		int ** s;
 		if(sol != NULL)
 		{
-			getSol(sol, N);
+			s = getSol(sol, N);
 		}
-		computeFull(statelist,path, N, depth, 840);
+		computeFull(statelist,path, N, depth, 840, s);
 
 	}
 int ** getSol(char * solString, int N)
 {
 	int ** result = NULL;
+	cudaMallocManaged((void **) &result, sizeof(int *) * N);
+	for(int i = 0; i < N; i++)
+	{
+		cudaMallocManaged((void **) &result[i], sizeof(int) * N);
+	}
 	FILE * database;
 	char buffer[30];
 	printf("Lading Sol\n");
@@ -87,20 +93,21 @@ int ** getSol(char * solString, int N)
 				perror("opening database");
 				return NULL;
 			}
-		
+	int row = 0;
 		while (EOF != fscanf(database, "%[^\n]\n", buffer))
 			{
 				char * b = buffer;		
-				printf("'%s'\n", b);
+				//printf("'%s'\n", b);
 				for(int i = 0; i < N; i++)
 				{
 					int x = convertUpper(b[i]);
-					printf("%d ",x );
+					result[row][i] = x;
+					//printf("%d ",x );
 				}
-				printf("\n");
+				row++;
+				//printf("\n");
 			}
 	fclose(database);
-
 	return result;
 }
 StateList* getStates(int N, Path ** path)
@@ -116,7 +123,7 @@ StateList* getStates(int N, Path ** path)
 	State * resultList = allocateState(resSize, N);
 	stateStack[0].location.type = FULL;
 	stateStack[1].path = path[0];
-	compute<<<blocks, threadBlocks>>>(N ,threads, stateStack,resultList,resSize, depth);
+	compute<<<blocks, threadBlocks>>>(N ,threads, stateStack,resultList,resSize, depth, NULL);
 	cudaDeviceSynchronize();
 	result->count = 0;
 	for(int i = 0; i < resSize; i++)
@@ -132,7 +139,7 @@ StateList* getStates(int N, Path ** path)
 	printf("State count %d\n", result->count);
 	return result;
 }
-void computeFull(StateList * initState,Path ** path, int N,int depth, int threads)
+void computeFull(StateList * initState,Path ** path, int N,int depth, int threads, int ** sol)
 	{
 		int blocks = threads/16;
 		int threadBlocks = threads / blocks;
@@ -150,7 +157,7 @@ void computeFull(StateList * initState,Path ** path, int N,int depth, int thread
 		State * resultList = allocateState(resSize, N);
 		printf("Starting \n");
 		clock_t begin = clock();
-		compute<<<blocks, threadBlocks>>>(N ,threads, stateStack,resultList,resSize, depth);
+		compute<<<blocks, threadBlocks>>>(N ,threads, stateStack,resultList,resSize, depth,sol );
 		cudaDeviceSynchronize();
 		clock_t end = clock();
 		double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
@@ -313,7 +320,7 @@ State * allocateState(int size, int N)
 	}
 	return s;
 }
-__global__ void compute(int N, int threads, State * s,State * result, int resSize, int maxDepth)
+__global__ void compute(int N, int threads, State * s,State * result, int resSize, int maxDepth, int ** sol)
 {
 	int idx = blockIdx.x * blockDim.x + threadIdx.x;
 
@@ -321,7 +328,7 @@ __global__ void compute(int N, int threads, State * s,State * result, int resSiz
 			{
 				s = &s[idx * maxDepth];
 				int index = resSize/threads * idx;
-				computeLocal(s,&result[index],resSize/threads,N, 0, maxDepth);
+				computeLocal(s,&result[index],resSize/threads,N, 0, maxDepth, sol);
 				/*for(int i = 0; i < maxDepth; i++)
 				{
 					int value = testAndSet(&s[i].grid,0,1,3);
@@ -333,91 +340,33 @@ __global__ void compute(int N, int threads, State * s,State * result, int resSiz
 				printf("value = %d\n", value);*/
 			}
 }
-__device__ int printSol(State * s, int depth, int N)
+__device__ int printSol(State * s, int depth, int N, int ** sol)
 {
-	Location* l = &s[depth].location;
 	Grid * g = &s[depth].grid;
-	int printed = 0;
-	if(depth == 0)
+	int ok = 0;
+	for(int row = 0; row < N && ok == 0; row++)
 	{
-		if(l->x == 7 && l->y == 3 && g->Cells[7][7] == 4 )
+		for(int col = 0; col < N && ok == 0; col++)
 		{
-			printf("Deth %d!!", depth);
-			printGridDev(&s[depth].grid,s[depth].path, N);
-			printed = 1;
+			if(g->Cells[row][col] != DEL && sol[row][col] != g->Cells[row][col])
+			{
+				ok = 1;
+			}
 		}
 	}
-	else if(depth == 1)
+	if(ok == 0)
 	{
-		if(l->x == 7 && l->y == 3 && l->lastX == 0 && l->lastY == 3 &&l->nextX == 2 && l->nextY == 3  )
-		{
-			printf("Deth %d!!", depth);
-			printGridDev(&s[depth].grid,s[depth].path, N);
-		}
+		printf("Deth %d!!", depth);
+		printGridDev(&s[depth].grid,s[depth].path, N);
 	}
-	else if(depth == 2)
-	{
-		if(l->x == 0 && l->y == 3 && l->lastX == 0 && l->lastY == 8 &&l->nextX ==  0 && l->nextY == 6 && g->Cells[1][3] == 0 )
-		{
-			printf("Deth %d!!", depth);
-			printGridDev(&s[depth].grid,s[depth].path, N);
-		}
-	}
-	else if(depth == 3)
-	{
-		if(l->x == 0 && l->y == 8 && l->lastX == 0 && l->lastY == 8  && g->Cells[1][3] == 0 && g->Cells[0][6] == 1)
-		{
-			printf("Deth %d!!", depth);
-			printGridDev(&s[depth].grid,s[depth].path, N);
-		}
-	}
-	else if(depth == 4)
-	{
-		if(l->x == 0 && l->y == 8 && l->lastX == 0 && l->lastY == 1  && g->Cells[1][3] == 0 && g->Cells[0][9] == 2)
-		{
-			printf("Deth %d!!", depth);
-			printGridDev(&s[depth].grid,s[depth].path, N);
-		}
-	}
-	else if(depth == 5)
-	{
-		if(l->x == 0 && l->y == 1 && l->lastX == 2 && l->lastY == 1  && g->Cells[1][3] == 0 && g->Cells[0][9] == 2 && g->Cells[0][8] == 7)
-		{
-			printf("Deth %d!!", depth);
-			printGridDev(&s[depth].grid,s[depth].path, N);
-		}
-	}
-	else if(depth == 6)
-	{
-		if(l->x == 7 && l->y == 2 && l->nextX == 7 && l->nextY == 1  && g->Cells[1][3] == 0 && g->Cells[0][9] == 2 && g->Cells[0][8] == 7)
-		{
-			printf("Deth %d!!", depth);
-			printGridDev(&s[depth].grid,s[depth].path, N);
-		}
-	}
-	else if(depth == 7)
-	{
-		if(l->x == 7 && l->y == 9 && l->nextX == 2 && l->nextY == 9  && g->Cells[7][2] == 2 && g->Cells[1][3] == 0 && g->Cells[0][9] == 2 && g->Cells[0][8] == 7)
-		{
-			printf("Deth %d!!", depth);
-			printGridDev(&s[depth].grid,s[depth].path, N);
-		}
-	}
-	else if(depth == 8)
-	{
-		if(l->x == 0 && l->y == 9 && l->nextX == 0 && l->nextY == 6  && g->Cells[7][2] == 2 && g->Cells[1][3] == 0 && g->Cells[0][9] == 2 && g->Cells[0][8] == 7)
-		{
-			printf("Deth %d!!", depth);
-			printGridDev(&s[depth].grid,s[depth].path, N);
-		}
-	}
-	return printed;
+
+	return ok;
 }
-__device__ void computeLocal(State * s,State * res,int resSize, int N, int depth, int max)
+__device__ void computeLocal(State * s,State * res,int resSize, int N, int depth, int max, int ** sol)
 {
 	int value;
 	int hasNext = 0;
-	int print = printSol(s,depth, N);
+	int print = printSol(s,depth, N, sol);
 	s[depth].iterations = 0;
 	if(depth > 0)
 		s[depth+1].iterations = 0;
@@ -436,7 +385,7 @@ __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth
 		if(value == 0)
 		{
 			if(print == 1)
-				printSol(s,depth, N);
+				printSol(s,depth, N, sol);
 			s[depth].count++;
 			if(depth == max-1)
 			{
