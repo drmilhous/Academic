@@ -300,9 +300,10 @@ __global__ void compute(int N, int threads, State * s,State * result, int resSiz
 __device__ void printSol(State * s, int depth, int N)
 {
 	Location* l = &s[depth].location;
+	Grid * g = &s[depth].grid;
 	if(depth == 0)
 	{
-		if(l->x == 7 && l->y == 7 && l->lastX == 3 && l->lastY == 7)
+		if(l->x == 3 && l->y == 7 && g->Cols[7][7] == 4)
 		{
 			printGridDev(&s[depth].grid,s[depth].path, N);
 		}
