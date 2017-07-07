@@ -345,7 +345,7 @@ __device__ int printSol(State * s, int depth, int N)
 	}
 	else if(depth == 5)
 	{
-		if(l->x == 0 && l->y == 1 && l->lastX == 2 && l->lastY == 1  && g->Cells[1][3] == 0 && g->Cells[0][9] == 2)
+		if(l->x == 0 && l->y == 1 && l->lastX == 2 && l->lastY == 1  && g->Cells[1][3] == 0 && g->Cells[0][9] == 2 && g->Cells[0][8] == 7)
 		{
 			printf("Deth %d!!", depth);
 			printGridDev(&s[depth].grid,s[depth].path, N);
