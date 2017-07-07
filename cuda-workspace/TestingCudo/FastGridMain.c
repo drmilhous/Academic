@@ -329,7 +329,7 @@ __device__ int printSol(State * s, int depth, int N)
 	}
 	else if(depth == 3)
 	{
-		if(l->x == 0 && l->y == 8 && l->lastX == 0 && l->lastY == 8  && g->Cells[1][3] == 0 )
+		if(l->x == 0 && l->y == 8 && l->lastX == 0 && l->lastY == 8  && g->Cells[1][3] == 0 && g->Cells[0][9] == 2 )
 		{
 			printf("Deth %d!!", depth);
 			printGridDev(&s[depth].grid,s[depth].path, N);
@@ -346,6 +346,14 @@ __device__ int printSol(State * s, int depth, int N)
 	else if(depth == 5)
 	{
 		if(l->x == 0 && l->y == 1 && l->lastX == 2 && l->lastY == 1  && g->Cells[1][3] == 0 && g->Cells[0][9] == 2 && g->Cells[0][8] == 7)
+		{
+			printf("Deth %d!!", depth);
+			printGridDev(&s[depth].grid,s[depth].path, N);
+		}
+	}
+	else if(depth == 6)
+	{
+		if(l->x == 7 && l->y == 2 && l->nextX == 7 && l->nextY == 1  && g->Cells[1][3] == 0 && g->Cells[0][9] == 2 && g->Cells[0][8] == 7)
 		{
 			printf("Deth %d!!", depth);
 			printGridDev(&s[depth].grid,s[depth].path, N);
