@@ -18,7 +18,7 @@ int getCores(cudaDeviceProp devProp);
 
 void computeFull(StateList * initState,Path ** path, int N,int depth, int threads);
 void initThreadsState(StateList * l,  State * s, int threads, int depth, int N, Path ** path);
-
+int ** getSol(char * solString,int N);
 __device__ int pow2(int x);
 __device__ char convertDev(int x);
 __device__ int testAndSet(Grid * g, int number, int x, int y);
@@ -40,7 +40,8 @@ int main(int argc, char ** argv)
 		int c;
 		char * output;
 		int depth = 5;
-		while ((c = getopt (argc, argv, "n:d:i:w:")) != -1)
+		char * sol = NULL;
+		while ((c = getopt (argc, argv, "n:d:i:w:s:")) != -1)
 		{
     		switch (c)
       		{
@@ -56,6 +57,9 @@ int main(int argc, char ** argv)
 				  case 'i':
 						output = optarg;
 				  		break;
+				case 's':
+						sol = optarg;
+						break;
 			}
 		}
 		cudaSetDevice(device);
@@ -64,9 +68,40 @@ int main(int argc, char ** argv)
 		printf("Allocated \n");
 		StateList* statelist = getStates(N,path);
 		path[0] = path[0]->next;
+		if(sol != NULL)
+		{
+
+		}
 		computeFull(statelist,path, N, depth, 840);
 
 	}
+int ** getSol(char * solString, int N)
+{
+	int ** result = NULL;
+	FILE * database;
+	char buffer[30];
+	database = fopen(solString, "r");
+	if (NULL == database)
+			{
+				perror("opening database");
+				return NULL;
+			}
+		
+		while (EOF != fscanf(database, "%[^\n]\n", buffer))
+			{
+				char * b = buffer;		
+				printf("'%s'\n", b);
+				for(int i = 0; i < N; i++)
+				{
+					int x = convertUpper(b[i]);
+					printf("%d ",x );
+				}
+				printf("\n");
+			}
+	fclose(database);
+
+	return result;
+}
 StateList* getStates(int N, Path ** path)
 {
 	StateList* result =(StateList *) malloc(sizeof(StateList));
@@ -362,6 +397,14 @@ __device__ int printSol(State * s, int depth, int N)
 	else if(depth == 7)
 	{
 		if(l->x == 7 && l->y == 9 && l->nextX == 2 && l->nextY == 9  && g->Cells[7][2] == 2 && g->Cells[1][3] == 0 && g->Cells[0][9] == 2 && g->Cells[0][8] == 7)
+		{
+			printf("Deth %d!!", depth);
+			printGridDev(&s[depth].grid,s[depth].path, N);
+		}
+	}
+	else if(depth == 8)
+	{
+		if(l->x == 0 && l->y == 9 && l->nextX == 0 && l->nextY == 6  && g->Cells[7][2] == 2 && g->Cells[1][3] == 0 && g->Cells[0][9] == 2 && g->Cells[0][8] == 7)
 		{
 			printf("Deth %d!!", depth);
 			printGridDev(&s[depth].grid,s[depth].path, N);
