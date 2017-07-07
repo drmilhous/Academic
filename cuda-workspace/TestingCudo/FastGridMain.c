@@ -303,7 +303,7 @@ __device__ void printSol(State * s, int depth, int N)
 	Grid * g = &s[depth].grid;
 	if(depth == 0)
 	{
-		if(l->x == 3 && l->y == 7 && g->Cells[7][7] == 4)
+		if(l->x == 3 && l->y == 7 )
 		{
 			printGridDev(&s[depth].grid,s[depth].path, N);
 		}
