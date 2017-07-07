@@ -342,8 +342,9 @@ __global__ void compute(int N, int threads, State * s,State * result, int resSiz
 }
 __device__ int printSol(State * s, int depth, int N, int ** sol)
 {
-	Grid * g = &s[depth].grid;
 	int ok = 0;
+	Grid * g = &s[depth].grid;
+	
 	for(int row = 0; row < N && ok == 0; row++)
 	{
 		for(int col = 0; col < N && ok == 0; col++)
@@ -366,7 +367,9 @@ __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth
 {
 	int value;
 	int hasNext = 0;
-	int print = printSol(s,depth, N, sol);
+	int print  = 1;
+	if(sol != NULL)
+		print = printSol(s,depth, N, sol);
 	s[depth].iterations = 0;
 	if(depth > 0)
 		s[depth+1].iterations = 0;
@@ -384,7 +387,7 @@ __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth
 		value = setAll(&s[depth].grid, s[depth].path, &s[depth].location, N);
 		if(value == 0)
 		{
-			if(print == 0)
+			if(print == 0 && sol != NULL)
 				printSol(s,depth, N, sol);
 			s[depth].count++;
 			if(depth == max-1)
