@@ -358,6 +358,9 @@ __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth
 	int value;
 	int hasNext = 0;
 	int print = printSol(s,depth, N);
+	s[depth].iterations = 0;
+	if(depth > 0)
+		s[depth+1].iterations = 0;
 	depth++;
 	cloneState(&s[depth-1], &s[depth],N);
 	initLocation(&s[depth]);
