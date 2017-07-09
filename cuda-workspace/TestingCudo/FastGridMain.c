@@ -168,13 +168,13 @@ void computeFull(StateList * initState,Path ** path, int N,int depth, int thread
 		if(time_spent > 60)
 		{
 			time_spent /= 60;
-			value = time_spent%60;
+			value = (int)time_spent%60;
 			printf("minutes %d ", value);
 			if(time_spent > 60)
 			{
 				time_spent /= 60;
-				value = time_spent%24;
-				printf("hours %d ", vaule);
+				value = (int)time_spent%24;
+				printf("hours %d ", value);
 				if(time_spent > 24)
 				{
 					time_spent /= 24;
