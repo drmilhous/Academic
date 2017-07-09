@@ -161,7 +161,25 @@ void computeFull(StateList * initState,Path ** path, int N,int depth, int thread
 		cudaDeviceSynchronize();
 		clock_t end = clock();
 		double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
+		//printf("Time spent %lf\n", time_spent);
 		printf("Time spent %lf\n", time_spent);
+		print("seconds %lf ", time_spent %60);
+		if(time_spent > 60)
+		{
+			time_spent /= 60;
+			printf("minutes %lf ", time_spent%60);
+			if(time_spent > 60)
+			{
+				time_spent /= 60;
+				printf("hours %lf ", time_spent%24)
+				if(time_spent > 24)
+				{
+					time_spent /= 24;
+					printf("days %lf ", time_spent%24)
+				}
+			}	
+		}
+		printf("\n");
 		//printGrid(g,N);
 		int last = -1;
 		for(int i = 0; i < resSize; i++)
