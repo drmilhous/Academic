@@ -163,7 +163,7 @@ void computeFull(StateList * initState,Path ** path, int N,int depth, int thread
 		double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
 		//printf("Time spent %lf\n", time_spent);
 		printf("Time spent %lf\n", time_spent);
-		printf("seconds %lf ", (time_spent % 60);
+		printf("seconds %lf ", (time_spent % 60));
 		if(time_spent > 60)
 		{
 			time_spent /= 60;
