@@ -182,6 +182,11 @@ void computeFull(StateList * initState,Path ** path, int N,int depth, int thread
 		long *count = (long *)malloc(depth * sizeof(long));
 		int offset = 0;
 		long ti = 0;
+		for(int i = 0; i < depth; i++)
+		{
+			iter[i] = 0;
+			count[i] = 0;
+		}
 		for(int i = 0; i < threads * depth; i++)
 		{
 			
