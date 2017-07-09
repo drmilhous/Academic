@@ -171,11 +171,11 @@ void computeFull(StateList * initState,Path ** path, int N,int depth, int thread
 			if(time_spent > 60)
 			{
 				time_spent /= 60;
-				printf("hours %lf ", time_spent%24)
+				printf("hours %lf ", time_spent%24);
 				if(time_spent > 24)
 				{
 					time_spent /= 24;
-					printf("days %lf ", time_spent%24)
+					printf("days %lf ", time_spent);
 				}
 			}	
 		}
