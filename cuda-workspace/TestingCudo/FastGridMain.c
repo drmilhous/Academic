@@ -402,8 +402,16 @@ __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth
 			if(depth < max-1)
 			{	
 				depth++;
-				s[depth].location.x = s[depth-1].location.lastX;
-				s[depth].location.y = s[depth-1].location.lastY;
+				if(s[depth].location.type == PART)
+				{
+					s[depth].location.x = s[depth-1].location.lastX;
+					s[depth].location.y = s[depth-1].location.lastY;
+				}
+				else if( depth > 0)
+				{
+					s[depth].location.x = 0;
+					s[depth].location.y = 0;
+				}
 				initLocation(&s[depth]);
 				
 			}
