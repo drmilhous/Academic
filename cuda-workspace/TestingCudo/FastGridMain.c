@@ -68,7 +68,7 @@ int main(int argc, char ** argv)
 		printf("Allocated \n");
 		StateList* statelist = getStates(N,path);
 		path[0] = path[0]->next;
-		int ** s;
+		int ** s = NULL;
 		if(sol != NULL)
 		{
 			s = getSol(sol, N);
