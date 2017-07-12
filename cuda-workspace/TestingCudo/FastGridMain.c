@@ -76,13 +76,13 @@ int main(int argc, char ** argv)
 		}
 
 		iter = (long *)malloc(depth * sizeof(long));
-		count = (long *)malloc(depth * sizeof(long));
+		counter = (long *)malloc(depth * sizeof(long));
 		long ti = 0;
 
 		for(int i = 0; i < depth; i++)
 		{
 			iter[i] = 0;
-			count[i] = 0;
+			counter[i] = 0;
 		}
 
 		int count = statelist->count;
