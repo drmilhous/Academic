@@ -5,7 +5,8 @@
 #include <unistd.h>
 #include "FastGrid.h"
 #include <ctype.h>
-
+long *iter;
+long *count;
 __device__ void printGridDev(Grid * g,Path * p, int N);
 __device__	void printPathDev(Path * p);
 StateList* getStates(int N, Path ** path);
@@ -73,6 +74,16 @@ int main(int argc, char ** argv)
 		{
 			s = getSol(sol, N);
 		}
+
+		iter = (long *)malloc(depth * sizeof(long));
+		count = (long *)malloc(depth * sizeof(long));
+
+		for(int i = 0; i < depth; i++)
+		{
+			iter[i] = 0;
+			count[i] = 0;
+		}
+
 		int count = statelist->count;
 		int threads = 1664;
 		int loops = count / threads;
@@ -94,6 +105,13 @@ int main(int argc, char ** argv)
 			computeFull(statelist,path, N, depth, statelist->count, s);
 			statelist->states = &statelist->states[threads];
 			remaining -= threads;
+		}
+
+		printf("Depth,Round Iterations, Total Iterations,Count\n");
+		for(int i = 0; i < depth; i++)
+		{
+			ti += iter[i];
+			printf("%d,%ld,%ld,%ld,\n",i, iter[i],ti,count[i]);
 		}
 
 	}
@@ -220,35 +238,18 @@ void computeFull(StateList * initState,Path ** path, int N,int depth, int thread
 				printf("Grid #%d\n",last);
 				printGrid(&resultList[last].grid, N);
 		}
-		long *iter = (long *)malloc(depth * sizeof(long));
-		long *count = (long *)malloc(depth * sizeof(long));
+		
 		int offset = 0;
 		long ti = 0;
-		for(int i = 0; i < depth; i++)
-		{
-			iter[i] = 0;
-			count[i] = 0;
-		}
+		
 		for(int i = 0; i < threads * depth; i++)
 		{
-			
-			//if(i % depth == 0)
-			{
-			//	printf("Grid %d\n", i);
-			//	printGrid(&stateStack[i].grid, N);
 				iter[offset] += stateStack[i].iterations;
 				count[offset] += stateStack[i].count;
-				//printf("Iterations %d\n",stateStack[i].iterations );
-				//printf("Count %d\n",stateStack[i].count );
 			}
 			offset = (offset + 1) % depth;
 		}
-		printf("Depth,Round Iterations, Total Iterations,Count\n");
-		for(int i = 0; i < depth; i++)
-		{
-			ti += iter[i];
-			printf("%d,%ld,%ld,%ld,\n",i, iter[i],ti,count[i]);
-		}
+		
 	}
 void initThreadsState(StateList * l,  State * s, int threads, int depth, int N, Path ** path)
 {
