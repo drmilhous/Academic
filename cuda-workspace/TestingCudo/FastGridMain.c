@@ -81,7 +81,7 @@ int main(int argc, char ** argv)
 			loops++;
 		}
 		int remaining = count;
-		for(int i = 0; i < loop; i++)
+		for(int i = 0; i < loops; i++)
 		{
 			if(remaining <= threads)
 			{
