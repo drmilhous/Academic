@@ -73,7 +73,28 @@ int main(int argc, char ** argv)
 		{
 			s = getSol(sol, N);
 		}
-		computeFull(statelist,path, N, depth, 1664, s);
+		int count = statelist->count;
+		int threads = 1664;
+		int loops = count / threads;
+		if(count %threads != 0)
+		{
+			loops++;
+		}
+		int remaining = count;
+		for(int i = 0; i < loop; i++)
+		{
+			if(remaining <= threads)
+			{
+				statelist->count = remaining;
+			}
+			else
+			{
+				statelist->count = threads;
+			}
+			computeFull(statelist,path, N, depth, statelist->count, s);
+			statelist->states = &statelist->states[threads];
+			remaining -= threads;
+		}
 
 	}
 int ** getSol(char * solString, int N)
