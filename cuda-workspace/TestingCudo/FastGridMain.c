@@ -119,7 +119,7 @@ StateList* getStates(int N, Path ** path)
 	int threadBlocks = threads / blocks;
 	State * stateStack = allocateStateStack(threads, depth, N);
 	initThreads(stateStack, threads, depth,N, path);
-	int resSize = 1664;
+	int resSize = 10000;
 	State * resultList = allocateState(resSize, N);
 	stateStack[0].location.type = FULL;
 	stateStack[1].path = path[0];
