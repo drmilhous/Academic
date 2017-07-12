@@ -77,7 +77,8 @@ int main(int argc, char ** argv)
 
 		iter = (long *)malloc(depth * sizeof(long));
 		count = (long *)malloc(depth * sizeof(long));
-
+		long ti = 0;
+		
 		for(int i = 0; i < depth; i++)
 		{
 			iter[i] = 0;
@@ -240,7 +241,7 @@ void computeFull(StateList * initState,Path ** path, int N,int depth, int thread
 		}
 		
 		int offset = 0;
-		long ti = 0;
+		
 		
 		for(int i = 0; i < threads * depth; i++)
 		{
