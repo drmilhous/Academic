@@ -73,7 +73,7 @@ int main(int argc, char ** argv)
 		{
 			s = getSol(sol, N);
 		}
-		computeFull(statelist,path, N, depth, 840, s);
+		computeFull(statelist,path, N, depth, 1664, s);
 
 	}
 int ** getSol(char * solString, int N)
