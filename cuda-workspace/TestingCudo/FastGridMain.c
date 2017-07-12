@@ -6,7 +6,7 @@
 #include "FastGrid.h"
 #include <ctype.h>
 long *iter;
-long *count;
+long *counter;
 __device__ void printGridDev(Grid * g,Path * p, int N);
 __device__	void printPathDev(Path * p);
 StateList* getStates(int N, Path ** path);
@@ -112,7 +112,7 @@ int main(int argc, char ** argv)
 		for(int i = 0; i < depth; i++)
 		{
 			ti += iter[i];
-			printf("%d,%ld,%ld,%ld,\n",i, iter[i],ti,count[i]);
+			printf("%d,%ld,%ld,%ld,\n",i, iter[i],ti,counter[i]);
 		}
 
 	}
@@ -246,7 +246,7 @@ void computeFull(StateList * initState,Path ** path, int N,int depth, int thread
 		for(int i = 0; i < threads * depth; i++)
 		{
 				iter[offset] += stateStack[i].iterations;
-				count[offset] += stateStack[i].count;
+				counter[offset] += stateStack[i].count;
 				offset = (offset + 1) % depth;
 		}
 		
