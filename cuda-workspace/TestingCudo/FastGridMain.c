@@ -42,10 +42,11 @@ int main(int argc, char ** argv)
 		char * output;
 		int depth = 5;
 		char * sol = NULL;
+		int threads = 1664;
 		int deviceCount;
 		cudaGetDeviceCount(&deviceCount);
 		cudaDeviceProp deviceProp;
-		while ((c = getopt (argc, argv, "pn:d:i:w:s:")) != -1)
+		while ((c = getopt (argc, argv, "pn:d:i:w:s:c:")) != -1)
 		{
     		switch (c)
       		{
@@ -71,7 +72,10 @@ int main(int argc, char ** argv)
 							printDevProp(deviceProp);
 						} 
 						break;
-			}
+				case 'c':
+						threads = atoi(optarg);
+						break;
+			}	
 		}
 		cudaSetDevice(device);
 		//read the path from the file
@@ -96,7 +100,7 @@ int main(int argc, char ** argv)
 		}
 
 		int count = statelist->count;
-		int threads = 1664;
+		
 		int loops = count / threads;
 		if(count %threads != 0)
 		{
