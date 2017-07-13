@@ -7,6 +7,7 @@
 #include <ctype.h>
 long *iter;
 long *counter;
+long timeTotal;
 __device__ void printGridDev(Grid * g,Path * p, int N);
 __device__	void printPathDev(Path * p);
 StateList* getStates(int N, Path ** path);
@@ -44,6 +45,7 @@ int main(int argc, char ** argv)
 		char * sol = NULL;
 		int threads = 1664;
 		int deviceCount;
+		timeTotal = 0;
 		cudaGetDeviceCount(&deviceCount);
 		cudaDeviceProp deviceProp;
 		while ((c = getopt (argc, argv, "pn:d:i:w:s:c:")) != -1)
@@ -121,7 +123,7 @@ int main(int argc, char ** argv)
 			statelist->states = &statelist->states[threads];
 			remaining -= threads;
 		}
-
+		printf("Total time %ld", timeTotal);
 		printf("Depth,Round Iterations, Total Iterations,Count\n");
 		for(int i = 0; i < depth; i++)
 		{
@@ -216,6 +218,7 @@ void computeFull(StateList * initState,Path ** path, int N,int depth, int thread
 		clock_t end = clock();
 		double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
 		//printf("Time spent %lf\n", time_spent);
+		timeTotal += time_spent;
 		printf("Time spent %lf\n", time_spent);
 		int value = (int)time_spent % 60;
 		printf("seconds %d ", value);
