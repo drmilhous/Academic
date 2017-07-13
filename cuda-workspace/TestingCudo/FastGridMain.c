@@ -123,7 +123,7 @@ int main(int argc, char ** argv)
 			statelist->states = &statelist->states[threads];
 			remaining -= threads;
 		}
-		printf("Total time %ld", timeTotal);
+		printf("Total time %ld seconds\n", timeTotal);
 		printf("Depth,Round Iterations, Total Iterations,Count\n");
 		for(int i = 0; i < depth; i++)
 		{
