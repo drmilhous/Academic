@@ -42,7 +42,10 @@ int main(int argc, char ** argv)
 		char * output;
 		int depth = 5;
 		char * sol = NULL;
-		while ((c = getopt (argc, argv, "n:d:i:w:s:")) != -1)
+		int deviceCount;
+		cudaGetDeviceCount(&deviceCount);
+		cudaDeviceProp deviceProp;
+		while ((c = getopt (argc, argv, "pn:d:i:w:s:")) != -1)
 		{
     		switch (c)
       		{
@@ -60,6 +63,13 @@ int main(int argc, char ** argv)
 				  		break;
 				case 's':
 						sol = optarg;
+						break;
+				case 'p':
+						for (int dev = 0; dev < deviceCount; ++dev)
+						{
+							cudaGetDeviceProperties(&deviceProp, dev);
+							printDevProp(deviceProp);
+						} 
 						break;
 			}
 		}
