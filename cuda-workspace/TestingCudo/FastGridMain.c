@@ -831,17 +831,17 @@ __device__ void printGridDev(Grid * g,Path * p ,int N)
 		
 		for (int i= 0; i < N; i++)
 		{
-			printf(" %03X ",g->col[i]);
+			printf(" %05X ",g->col[i]);
 		}
 		printf("\n");
 		for (int row = 0; row < N; row++)
 			{
-				printf("%01d|%03X| ", row,g->row[row]);
+				printf("%01d|%05X| ", row,g->row[row]);
 				for (int col = 0; col < N; col++)
 					{
 						char x = g->Cells[row][col];
 						char c = convertDev(x);
-						printf("  %c  ", c);
+						printf("   %c   ", c);
 						//printf(" %02X ", c);
 					}
 				printf("\n");
