@@ -8,15 +8,16 @@
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="print"/>
 			<item value="compute"/>
 		</list>
 		<list key="replacehistory">
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item value="283" key="DIALOG_WIDTH"/>
-		<item value="1|Sans|10.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
-		<item value="400" key="DIALOG_HEIGHT"/>
+		<item value="287" key="DIALOG_WIDTH"/>
+		<item value="1|.SF NS Text|13.0|0|COCOA|1|.SFNSText" key="DIALOG_FONT_NAME"/>
+		<item value="417" key="DIALOG_HEIGHT"/>
 		<item value="1369" key="DIALOG_X_ORIGIN"/>
 		<item value="573" key="DIALOG_Y_ORIGIN"/>
 	</section>

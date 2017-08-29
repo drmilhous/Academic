@@ -1,0 +1,44 @@
+09:47:25 **** Build of configuration Debug for project Sample ****
+make all 
+Building file: ../src/particleSystem.cpp
+Invoking: NVCC Compiler
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc -I"/Developer/NVIDIA/CUDA-8.0/samples/5_Simulations" -I"/Developer/NVIDIA/CUDA-8.0/samples/common/inc" -I"/Users/miller/Academic/cuda-workspace/Sample" -G -g -O0 -gencode arch=compute_52,code=sm_52  -odir "src" -M -o "src/particleSystem.d" "../src/particleSystem.cpp"
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc -I"/Developer/NVIDIA/CUDA-8.0/samples/5_Simulations" -I"/Developer/NVIDIA/CUDA-8.0/samples/common/inc" -I"/Users/miller/Academic/cuda-workspace/Sample" -G -g -O0 --compile  -x c++ -o  "src/particleSystem.o" "../src/particleSystem.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/particleSystem.cpp
+ 
+Building file: ../src/particleSystem_cuda.cu
+Invoking: NVCC Compiler
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc -I"/Developer/NVIDIA/CUDA-8.0/samples/5_Simulations" -I"/Developer/NVIDIA/CUDA-8.0/samples/common/inc" -I"/Users/miller/Academic/cuda-workspace/Sample" -G -g -O0 -gencode arch=compute_52,code=sm_52  -odir "src" -M -o "src/particleSystem_cuda.d" "../src/particleSystem_cuda.cu"
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc -I"/Developer/NVIDIA/CUDA-8.0/samples/5_Simulations" -I"/Developer/NVIDIA/CUDA-8.0/samples/common/inc" -I"/Users/miller/Academic/cuda-workspace/Sample" -G -g -O0 --compile --relocatable-device-code=false -gencode arch=compute_52,code=compute_52 -gencode arch=compute_52,code=sm_52  -x cu -o  "src/particleSystem_cuda.o" "../src/particleSystem_cuda.cu"
+Finished building: ../src/particleSystem_cuda.cu
+ 
+Building file: ../src/particles.cpp
+Invoking: NVCC Compiler
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc -I"/Developer/NVIDIA/CUDA-8.0/samples/5_Simulations" -I"/Developer/NVIDIA/CUDA-8.0/samples/common/inc" -I"/Users/miller/Academic/cuda-workspace/Sample" -G -g -O0 -gencode arch=compute_52,code=sm_52  -odir "src" -M -o "src/particles.d" "../src/particles.cpp"
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc -I"/Developer/NVIDIA/CUDA-8.0/samples/5_Simulations" -I"/Developer/NVIDIA/CUDA-8.0/samples/common/inc" -I"/Users/miller/Academic/cuda-workspace/Sample" -G -g -O0 --compile  -x c++ -o  "src/particles.o" "../src/particles.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/particles.cpp
+ 
+Building file: ../src/render_particles.cpp
+Invoking: NVCC Compiler
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc -I"/Developer/NVIDIA/CUDA-8.0/samples/5_Simulations" -I"/Developer/NVIDIA/CUDA-8.0/samples/common/inc" -I"/Users/miller/Academic/cuda-workspace/Sample" -G -g -O0 -gencode arch=compute_52,code=sm_52  -odir "src" -M -o "src/render_particles.d" "../src/render_particles.cpp"
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc -I"/Developer/NVIDIA/CUDA-8.0/samples/5_Simulations" -I"/Developer/NVIDIA/CUDA-8.0/samples/common/inc" -I"/Users/miller/Academic/cuda-workspace/Sample" -G -g -O0 --compile  -x c++ -o  "src/render_particles.o" "../src/render_particles.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/render_particles.cpp
+ 
+Building file: ../src/shaders.cpp
+Invoking: NVCC Compiler
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc -I"/Developer/NVIDIA/CUDA-8.0/samples/5_Simulations" -I"/Developer/NVIDIA/CUDA-8.0/samples/common/inc" -I"/Users/miller/Academic/cuda-workspace/Sample" -G -g -O0 -gencode arch=compute_52,code=sm_52  -odir "src" -M -o "src/shaders.d" "../src/shaders.cpp"
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc -I"/Developer/NVIDIA/CUDA-8.0/samples/5_Simulations" -I"/Developer/NVIDIA/CUDA-8.0/samples/common/inc" -I"/Users/miller/Academic/cuda-workspace/Sample" -G -g -O0 --compile  -x c++ -o  "src/shaders.o" "../src/shaders.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/shaders.cpp
+ 
+Building target: Sample
+Invoking: NVCC Linker
+/Developer/NVIDIA/CUDA-8.0/bin/nvcc --cudart static -L"/Developer/NVIDIA/CUDA-8.0/samples/common/lib/darwin" -Xlinker -framework -Xlinker GLUT -Xlinker -framework -Xlinker OpenGL --relocatable-device-code=false -gencode arch=compute_52,code=compute_52 -gencode arch=compute_52,code=sm_52 -link -o  "Sample"  ./src/particleSystem.o ./src/particleSystem_cuda.o ./src/particles.o ./src/render_particles.o ./src/shaders.o  /Developer/NVIDIA/CUDA-8.0/samples/common/lib/darwin/libGLEW.a 
+Finished building target: Sample
+ 
+
+09:47:53 Build Finished (took 27s.991ms)
+
