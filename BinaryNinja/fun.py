@@ -32,7 +32,11 @@ def getAssemblyString(b):
 for f in bv.functions:
     if(f.name == "__ftol2"):
         print(f.name)
-        #f1 = open("fname.dot")
+        p = str(os.path.dirname(bv.file.filename))
+        filename =  p + "/" + f.name + ".dot"
+        print(filename)
+        f1 = open(filename, "w")
+        f1.write("digraph{")
         for block in f.basic_blocks:
     #        print(str(block) + "----->>>")
             d = block.dominators
@@ -42,7 +46,7 @@ for f in bv.functions:
             ass = getAssemblyString(block)
             m.update(ass)
             #print("\"{0:x}\"[label=\"{0:x}-{1:x}-->{2}\"] ".format(block.start,block.end,str(m.hexdigest())))
-            print("\"{0:x}\"[label=\"{0:x}-{1:x}\"] ".format(block.start, block.end, str(m.hexdigest())))
+            f1.write("\"{0:x}\"[label=\"{0:x}-{1:x}\"] ".format(block.start, block.end, str(m.hexdigest())))
     #        print(d)
             for dom in d:
                 ok = True
@@ -55,10 +59,12 @@ for f in bv.functions:
                     #print("{0} -> {1}".format(dd.start,b1.start))
                     if dd.start == block.start:
                         ok = False
-                print("dom->" + str(dom))
-                print("dom2->" + str(dom2))
+                #print("dom->" + str(dom))
+                #print("dom2->" + str(dom2))
                 if dom.start != block.start and ok == True :
-                    print("\"{0:x}\" -> \"{1:x}\"".format(dom.start,block.start))
+                    f1.write("\"{0:x}\" -> \"{1:x}\"".format(dom.start,block.start))
                 #print(x.get_disassembly_text())
                 #help(x)
                 #exit()
+        f1.write("}")
+        f1.close()
