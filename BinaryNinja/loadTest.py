@@ -5,7 +5,7 @@ binaryninja_api_path = "/Applications/Binary Ninja.app/Contents/Resources/python
 sys.path.append(binaryninja_api_path)
 import binaryninja
 from binaryninja import PluginCommandContext, PluginCommand
-bv = binaryninja.BinaryViewType.open("ConsoleApplication1-Virtual.bndb")
+bv = binaryninja.BinaryViewType.get_view_of_file("ConsoleApplication1-Virtual.bndb")
 print y
 bv = binaryninja.BinaryViewType["PE"].open("ConsoleApplication1-Virtual.exe")
 bv.update_analysis_and_wait()
