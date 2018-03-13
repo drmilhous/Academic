@@ -28,43 +28,28 @@ def getAssemblyString(b):
         if b.start <= addr and b.end > addr:
             code += line
     return code
-    
+dir="dot"
 for f in bv.functions:
-    if(f.name == "__ftol2"):
+    if(f.name == "__ftol2") or True:
         print(f.name)
-        p = str(os.path.dirname(bv.file.filename))
-        filename =  p + "/" + f.name + ".dot"
+        path1 = os.path.dirname("/Users/mattmiller/Academic/BinaryNinja/")+"/" + dir + "/"#os.path.dirname(bv.file.filename)
+        if not os.path.isdir(path1):
+            os.mkdir(path1)
+        filename =  path1+ "/" + f.name + ".dot"
         print(filename)
         f1 = open(filename, "w")
-        f1.write("digraph{")
+        f1.write("digraph{\n")
+        f1.write("node [shape=record];\n")
         for block in f.basic_blocks:
-    #        print(str(block) + "----->>>")
-            d = block.dominators
-            #for block1 in f.basic_blocks:
-            #    if block1 != block:
+            d = block.dominator_tree_children
             m = hashlib.md5()
             ass = getAssemblyString(block)
             m.update(ass)
             #print("\"{0:x}\"[label=\"{0:x}-{1:x}-->{2}\"] ".format(block.start,block.end,str(m.hexdigest())))
-            f1.write("\"{0:x}\"[label=\"{0:x}-{1:x}\"] ".format(block.start, block.end, str(m.hexdigest())))
-    #        print(d)
+            f1.write("\"0x{0:x}\"[label=\"0x{0:x}| {3:s}| {2:s}\"] ".format(block.start, block.end, str(m.hexdigest()),ass))
             for dom in d:
-                ok = True
-                dom2 = "hi"
-                for b1 in f.basic_blocks:
-                    if b1.start == dom.start:
-                        dom2 = b1.dominators
-
-                for dd in dom2:
-                    #print("{0} -> {1}".format(dd.start,b1.start))
-                    if dd.start == block.start:
-                        ok = False
-                #print("dom->" + str(dom))
-                #print("dom2->" + str(dom2))
-                if dom.start != block.start and ok == True :
-                    f1.write("\"{0:x}\" -> \"{1:x}\"".format(dom.start,block.start))
-                #print(x.get_disassembly_text())
-                #help(x)
-                #exit()
+                if dom.start != block.start:
+                    f1.write("\"0x{0:x}\" -> \"0x{1:x}\"".format(block.start, dom.start))
+                    
         f1.write("}")
         f1.close()
