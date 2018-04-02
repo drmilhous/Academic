@@ -5,7 +5,9 @@
 #include <unistd.h>
 #include "FastGrid.h"
 #include <ctype.h>
-
+long *iter;
+long *counter;
+long timeTotal;
 __device__ void printGridDev(Grid * g,Path * p, int N);
 __device__	void printPathDev(Path * p);
 StateList* getStates(int N, Path ** path);
@@ -41,7 +43,12 @@ int main(int argc, char ** argv)
 		char * output;
 		int depth = 5;
 		char * sol = NULL;
-		while ((c = getopt (argc, argv, "n:d:i:w:s:")) != -1)
+		int threads = 1664;
+		int deviceCount;
+		timeTotal = 0;
+		cudaGetDeviceCount(&deviceCount);
+		cudaDeviceProp deviceProp;
+		while ((c = getopt (argc, argv, "pn:d:i:w:s:c:")) != -1)
 		{
     		switch (c)
       		{
@@ -60,7 +67,17 @@ int main(int argc, char ** argv)
 				case 's':
 						sol = optarg;
 						break;
-			}
+				case 'p':
+						for (int dev = 0; dev < deviceCount; ++dev)
+						{
+							cudaGetDeviceProperties(&deviceProp, dev);
+							printDevProp(deviceProp);
+						} 
+						break;
+				case 'c':
+						threads = atoi(optarg);
+						break;
+			}	
 		}
 		cudaSetDevice(device);
 		//read the path from the file
@@ -73,7 +90,46 @@ int main(int argc, char ** argv)
 		{
 			s = getSol(sol, N);
 		}
-		computeFull(statelist,path, N, depth, 840, s);
+
+		iter = (long *)malloc(depth * sizeof(long));
+		counter = (long *)malloc(depth * sizeof(long));
+		long ti = 0;
+
+		for(int i = 0; i < depth; i++)
+		{
+			iter[i] = 0;
+			counter[i] = 0;
+		}
+
+		int count = statelist->count;
+		
+		int loops = count / threads;
+		if(count %threads != 0)
+		{
+			loops++;
+		}
+		int remaining = count;
+		for(int i = 0; i < loops; i++)
+		{
+			if(remaining <= threads)
+			{
+				statelist->count = remaining;
+			}
+			else
+			{
+				statelist->count = threads;
+			}
+			computeFull(statelist,path, N, depth, statelist->count, s);
+			statelist->states = &statelist->states[threads];
+			remaining -= threads;
+		}
+		printf("Total time %ld seconds\n", timeTotal);
+		printf("Depth,Round Iterations, Total Iterations,Count\n");
+		for(int i = 0; i < depth; i++)
+		{
+			ti += iter[i];
+			printf("%d,%ld,%ld,%ld,\n",i, iter[i],ti,counter[i]);
+		}
 
 	}
 int ** getSol(char * solString, int N)
@@ -119,7 +175,7 @@ StateList* getStates(int N, Path ** path)
 	int threadBlocks = threads / blocks;
 	State * stateStack = allocateStateStack(threads, depth, N);
 	initThreads(stateStack, threads, depth,N, path);
-	int resSize = 840;
+	int resSize = 10000;
 	State * resultList = allocateState(resSize, N);
 	stateStack[0].location.type = FULL;
 	stateStack[1].path = path[0];
@@ -162,6 +218,7 @@ void computeFull(StateList * initState,Path ** path, int N,int depth, int thread
 		clock_t end = clock();
 		double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
 		//printf("Time spent %lf\n", time_spent);
+		timeTotal += time_spent;
 		printf("Time spent %lf\n", time_spent);
 		int value = (int)time_spent % 60;
 		printf("seconds %d ", value);
@@ -199,35 +256,18 @@ void computeFull(StateList * initState,Path ** path, int N,int depth, int thread
 				printf("Grid #%d\n",last);
 				printGrid(&resultList[last].grid, N);
 		}
-		long *iter = (long *)malloc(depth * sizeof(long));
-		long *count = (long *)malloc(depth * sizeof(long));
+		
 		int offset = 0;
-		long ti = 0;
-		for(int i = 0; i < depth; i++)
-		{
-			iter[i] = 0;
-			count[i] = 0;
-		}
+		
+		
 		for(int i = 0; i < threads * depth; i++)
 		{
-			
-			//if(i % depth == 0)
-			{
-			//	printf("Grid %d\n", i);
-			//	printGrid(&stateStack[i].grid, N);
 				iter[offset] += stateStack[i].iterations;
-				count[offset] += stateStack[i].count;
-				//printf("Iterations %d\n",stateStack[i].iterations );
-				//printf("Count %d\n",stateStack[i].count );
-			}
-			offset = (offset + 1) % depth;
+				counter[offset] += stateStack[i].count;
+				offset = (offset + 1) % depth;
 		}
-		printf("Depth,Round Iterations, Total Iterations,Count\n");
-		for(int i = 0; i < depth; i++)
-		{
-			ti += iter[i];
-			printf("%d,%ld,%ld,%ld,\n",i, iter[i],ti,count[i]);
-		}
+		
+		
 	}
 void initThreadsState(StateList * l,  State * s, int threads, int depth, int N, Path ** path)
 {
@@ -791,17 +831,17 @@ __device__ void printGridDev(Grid * g,Path * p ,int N)
 		
 		for (int i= 0; i < N; i++)
 		{
-			printf(" %03X ",g->col[i]);
+			printf(" %05X ",g->col[i]);
 		}
 		printf("\n");
 		for (int row = 0; row < N; row++)
 			{
-				printf("%01d|%03X| ", row,g->row[row]);
+				printf("%01d|%05X| ", row,g->row[row]);
 				for (int col = 0; col < N; col++)
 					{
 						char x = g->Cells[row][col];
 						char c = convertDev(x);
-						printf("  %c  ", c);
+						printf("   %c   ", c);
 						//printf(" %02X ", c);
 					}
 				printf("\n");
