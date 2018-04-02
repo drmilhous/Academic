@@ -10,7 +10,7 @@ binaryninja_api_path = "/Applications/Binary Ninja.app/Contents/Resources/python
 sys.path.append(binaryninja_api_path)
 import binaryninja
 from binaryninja import PluginCommandContext, PluginCommand
-def do_nothing(bv,function, d):
+def do_nothing(bv,function, d)'):
 	#show_message_box("Do Something", "Congratulations! You have successfully done nothing.\n\n" +
 	#				 "Pat yourself on the Rump.", MessageBoxButtonSet.OKButtonSet, MessageBoxIcon.ErrorIcon)
 	#print(function)
