@@ -513,28 +513,87 @@ __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth
 	}
 
 }
+__device__ int incrementXY(Location * loc, Path * p, int size)
+{
+	int pop = 0;
+	if (p->direction == LEFT)
+		{
+			loc->y++;
+			if (loc->y >= size)
+				{
+					loc->y = 0;
+					loc->x++;
+					if (loc->x >= size)
+						{
+							pop = 1;
+						}
+				}	
+		}
+	else
+		{
+			loc->x++;
+			if (loc->x >= size)
+				{
+					loc->x = 0;
+					loc->y++;
+					if (loc->y >= size)
+						{
+							pop = 1;
+						}
+				}
+		}
+	loc->nextX = loc->x;
+	loc->nextY = loc->y;
+	return pop;
+}
+
 __device__ int updateLocation(Location * loc, Path * p, int size)
 	{
 		int pop = 0;
-		if (loc->type == PART)
-			{
-		          if ((loc->edge & SPECIAL) == SPECIAL)
-                		{
-       		                 if((loc->edge & BACK) == BACK)
-       	        	         {
-                        	        loc->edge = (FORWARD | SPECIAL);
-                       		 }
-                        	else if((loc->edge & FORWARD) == FORWARD)
-                        	{
-                                	loc->edge = (DONE| SPECIAL);
+		
+        if ((loc->edge & SPECIAL) == SPECIAL)
+      		{
+				if (loc->type == PART)
+				{
+	                 if((loc->edge & BACK) == BACK)
+	      	         {
+	              	        loc->edge = (FORWARD | SPECIAL);
+	             	 }
+	              	else if((loc->edge & FORWARD) == FORWARD)
+	              	{
+	                      	loc->edge = (DONE| SPECIAL);
 
-                        	}
-                       	 	else if((loc->edge & DONE) == DONE)
-                        	{
-                                	 pop = 1;
-                        	}
-                		}
-			else{
+	              	}
+	             	 	else if((loc->edge & DONE) == DONE)
+	              	{
+	                      	 pop = 1;
+	              	}
+				}
+				else //FULL
+				{
+		             if((loc->edge & BACK) == BACK)
+		      	         {
+		              	        loc->edge = (FORWARD | SPECIAL);
+		             	 }
+		              	else if((loc->edge & FORWARD) == FORWARD)
+		              	{
+		                      	loc->edge = (DONE| SPECIAL);
+
+		              	}
+		             	else if((loc->edge & DONE) == DONE)
+		              	{
+							pop = incrementXY(loc,p,size);
+							if(pop == 0)
+							{
+								loc->edge = (BACK | SPECIAL);	//go to next one.
+							}
+						}	
+				}
+      		}
+		/* *************************Not SPECIAL ***********************/
+		else if (loc->type == PART)
+			{
+		          
 				if (p->direction == LEFT)
 					{
 						loc->nextY++;
@@ -547,7 +606,6 @@ __device__ int updateLocation(Location * loc, Path * p, int size)
 						if (loc->nextX >= size)
 							pop = 1;
 					}
-				}
 			}
 		else
 			{
