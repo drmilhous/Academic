@@ -172,7 +172,7 @@ void printGrid(Grid * g, int N)
 						char c = convert(x);
 						printf("   %c   ", c);
                         //printf("  %c  ", c);
-						if (c == '-')
+						if (c != '-')
 						{
 							count++;
 						}
