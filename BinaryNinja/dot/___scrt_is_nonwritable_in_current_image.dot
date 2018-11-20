@@ -1,0 +1,29 @@
+digraph{
+node [shape=record];
+"0x401f94"[label="0x401f94|  push
+ push
+ call
+ and dword  [ ebp -0x4 ] , 
+ mov eax , 
+ cmp word  [ ] ,  ax
+| 42810c5350ea6948c427fb437bed2f36"] "0x401f94" -> "0x40200f""0x401f94" -> "0x401fb2""0x401f94" -> "0x402018""0x40200f"[label="0x40200f|  mov dword  [ ebp -0x4 ] , 
+ xor al ,  al
+| cc26f96bf23ec4549c2fe12c39ae5b03"] "0x401fb2"[label="0x401fb2|  mov eax ,  dword  [ ]
+ cmp dword  [ eax + ] , 
+| ab52872b14b65f0192fc6eff0e744842"] "0x401fb2" -> "0x401fc3""0x401fc3"[label="0x401fc3|  mov ecx , 
+ cmp word  [ eax + ] ,  cx
+| d69168d4fc894b3bf78f7ee74fe59ebd"] "0x401fc3" -> "0x401fd1""0x401fd1"[label="0x401fd1|  mov eax ,  dword  [ ebp + ]
+ mov ecx , 
+ sub eax ,  ecx
+ push eax
+ push ecx
+ call
+ pop ecx
+ pop ecx
+ test eax ,  eax
+| bfb54a20fd1b4329e7e7a551e7e54708"] "0x401fd1" -> "0x401fe8""0x401fe8"[label="0x401fe8|  cmp dword  [ eax + ] , 
+| 0d370d1f9e6853ac04b4592f919d6e2d"] "0x401fe8" -> "0x401fee""0x401fee"[label="0x401fee|  mov dword  [ ebp -0x4 ] , 
+ mov al ,  0x1
+| 90dd456cf2f6c2605c8f0785496cd69d"] "0x402018"[label="0x402018|  call
+ retn
+| 673c46f8a24b1c6055bc49ff60112db5"] }

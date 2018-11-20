@@ -1,0 +1,76 @@
+digraph{
+node [shape=record];
+"0x4021c5"[label="0x4021c5|  push ebp
+ mov ebp ,  esp
+ sub esp , 
+ push ebx
+ push esi
+ push
+ call
+ test eax ,  eax
+| 220b23342c4e73e9aec7407e5019032e"] "0x4021c5" -> "0x4021e0""0x4021c5" -> "0x4021db""0x4021e0"[label="0x4021e0|  xor esi ,  esi
+ lea eax ,   [ ebp -0x324 ]
+ push
+ push esi
+ push eax
+ mov dword  [ ] ,  esi
+ call
+ add esp , 
+ mov dword  [ ebp -0x274 ] ,  eax
+ mov dword  [ ebp -0x278 ] ,  ecx
+ mov dword  [ ebp -0x27c ] ,  edx
+ mov dword  [ ebp -0x280 ] ,  ebx
+ mov dword  [ ebp -0x284 ] ,  esi
+ mov dword  [ ebp -0x288 ] ,  edi
+ mov word  [ ebp -0x25c ] ,  ss
+ mov word  [ ebp -0x268 ] ,  cs
+ mov word  [ ebp -0x28c ] ,  ds
+ mov word  [ ebp -0x290 ] ,  es
+ mov word  [ ebp -0x294 ] ,  fs
+ mov word  [ ebp -0x298 ] ,  gs
+ pushfd
+ pop dword  [ ebp -0x264 ]
+ mov eax ,  dword  [ ebp + ]
+ mov dword  [ ebp -0x26c ] ,  eax
+ lea eax ,   [ ebp + ]
+ mov dword  [ ebp -0x260 ] ,  eax
+ mov dword  [ ebp -0x324 ] , 
+ mov eax ,  dword  [ eax -0x4 ]
+ push
+ mov dword  [ ebp -0x270 ] ,  eax
+ lea eax ,   [ ebp -0x58 ]
+ push esi
+ push eax
+ call
+ mov eax ,  dword  [ ebp + ]
+ add esp , 
+ mov dword  [ ebp -0x58 ] , 
+ mov dword  [ ebp -0x54 ] , 
+ mov dword  [ ebp -0x4c ] ,  eax
+ call dword  [ ]
+ push esi
+ lea ebx ,   [ eax -0x1 ]
+ neg ebx
+ lea eax ,   [ ebp -0x58 ]
+ mov dword  [ ebp -0x8 ] ,  eax
+ lea eax ,   [ ebp -0x324 ]
+ sbb bl ,  bl
+ mov dword  [ ebp -0x4 ] ,  eax
+ inc bl
+ call dword  [ ]
+ lea eax ,   [ ebp -0x8 ]
+ push eax
+ call dword  [ ]
+ test eax ,  eax
+| 6820249eaef5099d2b41973ac4599782"] "0x4021e0" -> "0x4022da""0x4021e0" -> "0x4022cd""0x4021db"[label="0x4021db|  mov ecx ,  dword  [ ebp + ]
+ int 0x29
+| 372ed786c4dd4c9fa727c9e06cb4c49f"] "0x4022da"[label="0x4022da|  pop esi
+ pop ebx
+ mov esp ,  ebp
+ pop ebp
+ retn
+| a87a2d5e84a4fe9f00bf1ceefc827990"] "0x4022cd"[label="0x4022cd|  movzx eax ,  bl
+ neg eax
+ sbb eax ,  eax
+ and dword  [ ] ,  eax
+| 434e57e55876fca6ebf9f64eb2d56822"] }

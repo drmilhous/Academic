@@ -1,0 +1,50 @@
+digraph{
+node [shape=record];
+"0x4020b3"[label="0x4020b3|  push ebp
+ mov ebp ,  esp
+ sub esp , 
+ and dword  [ ebp -0xc ] , 
+ and dword  [ ebp -0x8 ] , 
+ mov eax ,  dword  [ ]
+ push esi
+ push edi
+ mov edi , 
+ mov esi , 
+ cmp eax ,  edi
+| 99894e703862aee0b654ee89779fc7c6"] "0x4020b3" -> "0x4020e3""0x4020b3" -> "0x4020d6""0x4020b3" -> "0x402149""0x4020e3"[label="0x4020e3|  lea eax ,   [ ebp -0xc ]
+ push eax
+ call dword  [ ]
+ mov eax ,  dword  [ ebp -0x8 ]
+ xor eax ,  dword  [ ebp -0xc ]
+ mov dword  [ ebp -0x4 ] ,  eax
+ call dword  [ ]
+ xor dword  [ ebp -0x4 ] ,  eax
+ call dword  [ ]
+ xor dword  [ ebp -0x4 ] ,  eax
+ lea eax ,   [ ebp -0x14 ]
+ push eax
+ call dword  [ ]
+ mov ecx ,  dword  [ ebp -0x10 ]
+ lea eax ,   [ ebp -0x4 ]
+ xor ecx ,  dword  [ ebp -0x14 ]
+ xor ecx ,  dword  [ ebp -0x4 ]
+ xor ecx ,  eax
+ cmp ecx ,  edi
+| 1dd9f0d77d338c323f5c774d32e82c59"] "0x4020e3" -> "0x40212b""0x4020e3" -> "0x402124""0x4020e3" -> "0x40213b""0x4020d6"[label="0x4020d6|  test esi ,  eax
+| bc1fec871ff845107c5822d1e44d1d0e"] "0x4020d6" -> "0x4020da""0x40212b"[label="0x40212b|  test esi ,  ecx
+| db6fb8b0110e8f14538bd0111ae6b62c"] "0x40212b" -> "0x40212f""0x402124"[label="0x402124|  mov ecx , 
+| 4fd86684907606af5ac517ae445a6500"] "0x4020da"[label="0x4020da|  not eax
+ mov dword  [ ] ,  eax
+| a5bb18b7281916990f3060b17316f31d"] "0x40213b"[label="0x40213b|  mov dword  [ ] ,  ecx
+ not ecx
+ mov dword  [ ] ,  ecx
+| 04d27da9d0f94fd65c3eafa3ddf6ae9e"] "0x40212f"[label="0x40212f|  mov eax ,  ecx
+ or eax , 
+ shl eax ,  0x10
+ or ecx ,  eax
+| 9d26ddf404a3f9d43946b390d48621aa"] "0x402149"[label="0x402149|  pop edi
+ pop esi
+ mov esp ,  ebp
+ pop ebp
+ retn
+| 60eb2132f1a113d96309805ee07c1445"] }

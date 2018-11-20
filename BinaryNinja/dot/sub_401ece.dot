@@ -1,0 +1,28 @@
+digraph{
+node [shape=record];
+"0x401ece"[label="0x401ece|  push ebp
+ mov ebp ,  esp
+ mov eax ,  dword  [ ebp + ]
+ push esi
+ mov ecx ,  dword  [ eax + ]
+ add ecx ,  eax
+ movzx eax ,  word  [ ecx + ]
+ lea edx ,   [ ecx + ]
+ add edx ,  eax
+ movzx eax ,  word  [ ecx + ]
+ imul esi ,  eax , 
+ add esi ,  edx
+ cmp edx ,  esi
+| 59dfbad784a154af2d9edce6f62439ae"] "0x401ece" -> "0x401f09""0x401ece" -> "0x401ef0""0x401ece" -> "0x401f0b""0x401f09"[label="0x401f09|  xor eax ,  eax
+| d18035cc2ea41b9ebbceb321ef806b9b"] "0x401ef0"[label="0x401ef0|  mov ecx ,  dword  [ ebp + ]
+| 9f496435c584e0acfa89a1fc16e8edaa"] "0x401ef0" -> "0x401ef3""0x401f02"[label="0x401f02|  add edx , 
+ cmp edx ,  esi
+| b456af3b6cec5bd08cc94fa8e4032787"] "0x401ef8"[label="0x401ef8|  mov eax ,  dword  [ edx + ]
+ add eax ,  dword  [ edx + ]
+ cmp ecx ,  eax
+| a1d13f2d1e5776f63431617bf2aa62fa"] "0x401ef8" -> "0x401f0e""0x401ef3"[label="0x401ef3|  cmp ecx ,  dword  [ edx + ]
+| 17c9b8fc5eb15b441c7f44b6d377378d"] "0x401ef3" -> "0x401f02""0x401ef3" -> "0x401ef8""0x401f0e"[label="0x401f0e|  mov eax ,  edx
+| 79d7b95bea307ff0b11ed7b75dacb7d1"] "0x401f0b"[label="0x401f0b|  pop esi
+ pop ebp
+ retn
+| 2e65bc3f39e9d11447f14015defae3c6"] }

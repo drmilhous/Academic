@@ -1,0 +1,22 @@
+digraph{
+node [shape=record];
+"0x401e8f"[label="0x401e8f|  call
+ test eax ,  eax
+| 526af846de999a886973805950fee337"] "0x401e8f" -> "0x401e9b""0x401e8f" -> "0x401e98""0x401e9b"[label="0x401e9b|  mov eax ,  dword  [ fs : ]
+ push esi
+ mov esi , 
+ mov edx ,  dword  [ eax + ]
+| 949585e02548b4169652dee0425325b3"] "0x401e9b" -> "0x401eb0""0x401e98"[label="0x401e98|  xor al ,  al
+ retn
+| dc65c03874415550ec56e20faf0fd02f"] "0x401eb0"[label="0x401eb0|  xor eax ,  eax
+ mov ecx ,  edx
+ lock cmpxchg dword  [ esi ] ,  ecx
+ test eax ,  eax
+| ed6a9e3e84e0373d43f6429f7ea7013c"] "0x401eb0" -> "0x401eac""0x401eb0" -> "0x401ebc""0x401eac"[label="0x401eac|  cmp edx ,  eax
+| a6be055427bcafb494eb4c8788eabbec"] "0x401eac" -> "0x401ec0""0x401ebc"[label="0x401ebc|  xor al ,  al
+ pop esi
+ retn
+| 2b2f30080d05cdb4b591abd029cb7896"] "0x401ec0"[label="0x401ec0|  mov al ,  0x1
+ pop esi
+ retn
+| 2709c1f2225d2c7628874bc511b08379"] }

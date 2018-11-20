@@ -1,0 +1,23 @@
+digraph{
+node [shape=record];
+"0x402063"[label="0x402063|  push ebp
+ mov ebp ,  esp
+ mov eax ,  dword  [ ]
+ mov ecx ,  eax
+ xor eax ,  dword  [ ]
+ and ecx , 
+ push dword  [ ebp + ]
+ ror eax ,  cl
+ cmp eax , 
+| 9dc6b51e0eae485071d956f9689fa1ef"] "0x402063" -> "0x402087""0x402063" -> "0x402080""0x402063" -> "0x402092""0x402087"[label="0x402087|  push
+ call
+ pop ecx
+| b8d12d842015059c6deb0218c0ac4049"] "0x402080"[label="0x402080|  call
+| 0c06567bc2ca58fbf1faca96e6ea685d"] "0x402092"[label="0x402092|  neg eax
+ pop ecx
+ sbb eax ,  eax
+ not eax
+ and eax ,  dword  [ ebp + ]
+ pop ebp
+ retn
+| 178804e23675695824ceb3cce16dd340"] }

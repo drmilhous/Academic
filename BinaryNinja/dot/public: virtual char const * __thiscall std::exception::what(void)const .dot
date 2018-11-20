@@ -1,0 +1,7 @@
+digraph{
+node [shape=record];
+"0x401ec1"[label="0x401ec1|  mov eax ,  dword  [ ecx + ]
+ test eax ,  eax
+| 67cfc53f6617e6c052b1cc78224d6dbb"] "0x401ec1" -> "0x401ecd""0x401ec1" -> "0x401ec8""0x401ecd"[label="0x401ecd|  retn
+| 2481afec6ac0175179046c788493b355"] "0x401ec8"[label="0x401ec8|  mov eax , 
+| fa72ce515a4854d312034a4911338a6d"] }
