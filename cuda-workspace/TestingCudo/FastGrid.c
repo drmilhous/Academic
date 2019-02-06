@@ -156,6 +156,7 @@ Path ** scanChars(char * filePath)
 
 void printGrid(Grid * g, int N)
 	{
+		int count = 0;
 		printf("-- Grid -- \n       ");
 		for (int i= 0; i < N; i++)
 		{
@@ -169,10 +170,13 @@ void printGrid(Grid * g, int N)
 					{
 						char x = g->Cells[row][col];
 						char c = convert(x);
+						if(c != '-')
+							count ++;
 						printf("   %c   ", c);
 					}
 				printf("\n");
 			}
+		printf("Filled %d of %d\n", count, N*N);
 	}
 char convert(int x)
 	{
