@@ -198,6 +198,10 @@ StateList* getStates(int N, Path ** path)
 void computeFull(StateList * initState,Path ** path, int N,int depth, int threads, int ** sol)
 	{
 		int blocks = threads/16;
+		if (blocks ==0)
+		{
+			blocks = 1;
+		}
 		int threadBlocks = threads / blocks;
 		if(threads % blocks != 0)
 		{
@@ -260,10 +264,12 @@ void computeFull(StateList * initState,Path ** path, int N,int depth, int thread
 		int offset = 0;
 		
 		
-		for(int i = 0; i < threads * depth; i++)
+		for(int i = 0; i <= threads * depth; i++)
 		{
 				iter[offset] += stateStack[i].iterations;
 				counter[offset] += stateStack[i].count;
+				//if( depth == offset+1)
+				//	printf("i %d off %d = count = %d\n", i, offset,stateStack[i].count);
 				offset = (offset + 1) % depth;
 		}
 		
@@ -312,6 +318,7 @@ void initThreadsState(StateList * l,  State * s, int threads, int depth, int N, 
 			cloneGridHost(&l->states[i].grid, &t->grid, N);
 			t->location.x = l->states[i].location.lastX;
 			t->location.y = l->states[i].location.lastY;
+			t->location.edge = l->states[i].location.edge;
 			//printf("Loc (%d,%d)\n",t->location.x,t->location.y );
 			t = &t[depth];
 		}
@@ -506,11 +513,87 @@ __device__ void computeLocal(State * s,State * res,int resSize, int N, int depth
 	}
 
 }
+__device__ int incrementXY(Location * loc, Path * p, int size)
+{
+	int pop = 0;
+	if (p->direction == LEFT)
+		{
+			loc->y++;
+			if (loc->y >= size)
+				{
+					loc->y = 0;
+					loc->x++;
+					if (loc->x >= size)
+						{
+							pop = 1;
+						}
+				}	
+		}
+	else
+		{
+			loc->x++;
+			if (loc->x >= size)
+				{
+					loc->x = 0;
+					loc->y++;
+					if (loc->y >= size)
+						{
+							pop = 1;
+						}
+				}
+		}
+	loc->nextX = loc->x;
+	loc->nextY = loc->y;
+	return pop;
+}
+
 __device__ int updateLocation(Location * loc, Path * p, int size)
 	{
 		int pop = 0;
-		if (loc->type == PART)
+		
+        if ((loc->edge & SPECIAL) == SPECIAL)
+      		{
+				if (loc->type == PART)
+				{
+	                 if((loc->edge & BACK) == BACK)
+	      	         {
+	              	        loc->edge = (FORWARD | SPECIAL);
+	             	 }
+	              	else if((loc->edge & FORWARD) == FORWARD)
+	              	{
+	                      	loc->edge = (DONE| SPECIAL);
+
+	              	}
+	             	 	else if((loc->edge & DONE) == DONE)
+	              	{
+	                      	 pop = 1;
+	              	}
+				}
+				else //FULL
+				{
+		             if((loc->edge & BACK) == BACK)
+		      	         {
+		              	        loc->edge = (FORWARD | SPECIAL);
+		             	 }
+		              	else if((loc->edge & FORWARD) == FORWARD)
+		              	{
+		                      	loc->edge = (DONE| SPECIAL);
+
+		              	}
+		             	else if((loc->edge & DONE) == DONE)
+		              	{
+							pop = incrementXY(loc,p,size);
+							if(pop == 0)
+							{
+								loc->edge = (BACK | SPECIAL);	//go to next one.
+							}
+						}	
+				}
+      		}
+		/* *************************Not SPECIAL ***********************/
+		else if (loc->type == PART)
 			{
+		          
 				if (p->direction == LEFT)
 					{
 						loc->nextY++;
@@ -572,15 +655,26 @@ __device__ int updateLocation(Location * loc, Path * p, int size)
 __device__ void initLocation(State * s)
 {
 	Location* loc = &s->location;
-	if(s->path->direction == LEFT)
+	Path * p = s->path;
+	if(p->letters[0] == p->letters[1])
 	{
+		loc->edge = (SPECIAL | BACK) ;
 		loc->nextX = loc->x;
-		loc->nextY = 0;
+		loc->nextY = loc->y;
 	}
 	else
 	{
-		loc->nextX= 0;
-		loc->nextY = loc->y;
+		loc->edge = NORMAL;
+		if(s->path->direction == LEFT)
+		{
+			loc->nextX = loc->x;
+			loc->nextY = 0;
+		}
+		else
+		{
+			loc->nextX= 0;
+			loc->nextY = loc->y;
+		}
 	}
 }
 
@@ -599,6 +693,7 @@ __device__ void cloneLocation(Location* srcLoc, Location* destLoc)
 	destLoc->lastX = srcLoc->lastX;
 	destLoc->lastY = srcLoc->lastY;
 	destLoc->type = srcLoc->type;
+	destLoc->edge = srcLoc->edge;
 }
 __device__ void cloneGrid(Grid * srcGrid, Grid * newGrid, int size)
 {
@@ -641,10 +736,24 @@ __device__ int setAll(Grid * g, Path * p, Location * l, int N)
 	int letter;
 	if(value == 0)
 	{
-		if (p->direction == LEFT) //Do UP/DOWN
-			direction = l->y > l->nextY ? -1 : 1;
+		if( l->edge == NORMAL)
+		{
+			if (p->direction == LEFT) //Do UP/DOWN
+				direction = l->y > l->nextY ? -1 : 1;
+			else
+				direction = l->x > l->nextX ? -1 : 1;
+		}
 		else
-			direction = l->x > l->nextX ? -1 : 1;
+		{
+			if((l->edge & BACK) == BACK)
+			{
+				direction = -1;
+			}
+			else if((l->edge & FORWARD) ==FORWARD)
+			{
+				direction = 1;
+			}
+		}
 		for (int offset = 0; offset < 3 && value == 0; offset++)
 			{
 				if (p->direction == LEFT) //Do UP/DOWN

@@ -1,0 +1,6 @@
+sed "s|/Users/miller/Academic/cuda-workspace/TestingCudo|/work/unklopers/millermj/Academic/cuda-workspace/TestingCudo|g" -i subdir.mk
+sed "s|/usr/bin/nvcc|/util/opt/cuda/8.0/bin/nvcc|g" -i subdir.mk 
+sed "s|/usr/bin/nvcc|/util/opt/cuda/8.0/bin/nvcc|g" -i makefile
+module load cuda/8.0
+module load compiler/gcc/5.4
+module load git

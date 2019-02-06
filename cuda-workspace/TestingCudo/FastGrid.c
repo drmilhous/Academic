@@ -173,10 +173,16 @@ void printGrid(Grid * g, int N)
 						if(c != '-')
 							count ++;
 						printf("   %c   ", c);
+                        //printf("  %c  ", c);
+						if (c != '-')
+						{
+							count++;
+						}
 					}
 				printf("\n");
 			}
-		printf("Filled %d of %d\n", count, N*N);
+
+		printf("Filled %d of %d\n", count, N * N);
 	}
 char convert(int x)
 	{

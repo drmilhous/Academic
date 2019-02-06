@@ -1,0 +1,35 @@
+023e6f6a756b3f6e6c3179a6f5d28c02->___scrt_acquire_startup_lock
+04e3213d39a8d7e828ab515419cd9cee->public: virtual void * __thiscall std::exception::`scalar deleting destructor'(unsigned int)
+04f2746dbe8acce152b853b007b50c04->___scrt_fastfail
+067b8f1a9c8ff90af8d63183ef6a4434->public: virtual void * __thiscall type_info::`scalar deleting destructor'(unsigned int)
+0a3d129c79f14f62776486ddfba26ddf->class std::basic_ostream<char,struct std::char_traits<char> > & __cdecl std::operator<<<struct std::char_traits<char> >(class std::basic_ostream<char,struct std::char_traits<char> > &,char const *)
+0cb75f044e2cd4f60bb9f48e68dadb4b->___isa_available_init
+16d68f19a7ccd42955aac44a0100427f->sub_401ece
+1f7ebbdd1248a8984f1be47a2c77f777->___scrt_initialize_onexit_tables
+273650db685ddffc30fb698b47be9479->___scrt_initialize_crt
+34eadbd3d13f299f0c0b64d5b1b2f801->__ftol2_sse_excpt
+365ac71d3ebc54d8146d5e43b4fbffc5->public: virtual char const * __thiscall std::exception::what(void)const 
+365f2983fc7b91b98f9a0ba10329976f->public: static unsigned int __cdecl std::char_traits<char>::length(char const *)
+454d3e2c133d4b9b2c546e34bc1e2d30->___report_gsfailure
+58c4204f3d4000a6c61dba32cc1882d7->___scrt_unhandled_exception_filter@4
+6a55a4b0c698582c3dff9856be1d8c65->_main
+6c6946f75dfdb2cf0951e31efd00f4d7->___scrt_uninitialize_crt
+717c32b1ddf048d69e6cb2d48a4f0ba3->public: __thiscall std::basic_ostream<char,struct std::char_traits<char> >::_Sentry_base::~_Sentry_base(void)
+7333d85d99cf8b5781efc6f8aefe5007->_start
+81ab2683079bcb6d0493fee5acab11f0->@_guard_check_icall@4
+85d730802d2621fb78cac0cfaf7d0e10->public: static BOOL __cdecl std::char_traits<char>::eq_int_type(int const &,int const &)
+97fff543b9c94547bc51a238802d6a0a->public: __thiscall std::basic_ostream<char,struct std::char_traits<char> >::sentry::sentry(class std::basic_ostream<char,struct std::char_traits<char> > &)
+988a69bb23ac3c94eadd76a6f194c8f4->___scrt_release_startup_lock
+Analyzing ConsoleApplication1-Virtual.bndb
+b0bad7615ee8abf388404afb760fbbdb->__onexit
+b0efa9796abcdb6e93dcaf330f0bcefc->FredFred
+b2011ca1485b819e4f2bd688e279b240->___security_init_cookie
+b6b0f329efa96f47796ddcd237123e2d->@__security_check_cookie@4
+be9e5b64955e0f1d957c8d285b72b56e->___scrt_is_nonwritable_in_current_image
+c3e74e4ea6fb5cdb79595ecfefccbdcf->void * __cdecl operator new(unsigned int)
+c45db9f1dbddc6bb6251d48d131725d7->___scrt_is_managed_app
+cdfb304a2cbaabf4dcc5528edf8b8f57->public: __thiscall std::basic_ostream<char,struct std::char_traits<char> >::sentry::~sentry(void)
+d31c42f7ef77ad93a4439240d3200560->__RTC_Initialize
+d31c42f7ef77ad93a4439240d3200560->__RTC_Terminate
+d83f1abf80a26085774c21e2ced09abc->public: __thiscall std::basic_ostream<char,struct std::char_traits<char> >::_Sentry_base::_Sentry_base(class std::basic_ostream<char,struct std::char_traits<char> > &)
+e08125b55e0b53013bb1a99811d89594->__initialize_default_precision

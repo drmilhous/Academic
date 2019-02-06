@@ -9,9 +9,12 @@
 #define PART 0
 #define DEV 0
 #define MANAGED 1
-
 #define DEL '-'
-
+#define NORMAL 1
+#define SPECIAL 2
+#define BACK 4
+#define FORWARD 8
+#define DONE 16
 typedef struct Path
 	{
 	struct Path * next;
@@ -37,6 +40,7 @@ typedef struct Location{
     uint8_t lastX;
     uint8_t lastY;
     uint8_t type;
+    uint8_t edge;
 } Location;
 
 typedef struct State{
