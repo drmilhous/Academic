@@ -11,7 +11,7 @@ if "darwin" in platform:
     binaryninja_api_path = "/Applications/Binary Ninja.app/Contents/Resources/python"
 elif "linux" in platform:
     binaryninja_api_path = "/bin/binaryninja/python/"
-    
+
 sys.path.append(binaryninja_api_path)
 import binaryninja
 from binaryninja import PluginCommandContext, PluginCommand, InstructionTextTokenType
@@ -28,9 +28,11 @@ else:
 
 if ".bndb" in chal:
     bv = binaryninja.BinaryViewType.get_view_of_file(chal)
+elif ".exe" in chal:
+    bv = binaryninja.BinaryViewType["PE"].open(chal)
 else:
     bv = binaryninja.BinaryViewType["ELF"].open(chal)
-    
+
 bv.update_analysis_and_wait()
 
 
@@ -43,7 +45,7 @@ for f in bv.functions:
     code = ""
     for i in f.instructions:
         ins = i[0]
-        addr = i[1] 
+        addr = i[1]
         for ii in ins:
             if ii.type == InstructionTextTokenType.PossibleAddressToken:
                 code += "a:"
@@ -64,10 +66,8 @@ for f in bv.functions:
             else:
                 s.add(ii.type)
             code+=str(ii) + " "
-        code += "\n"    
+        code += "\n"
     print(code)
-f.write("}\n")
-f.close()
+f1.write("}\n")
+f1.close()
 print(s)
-
- 
