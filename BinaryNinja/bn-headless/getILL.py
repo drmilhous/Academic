@@ -2,7 +2,14 @@ import sys
 import os
 import requests
 import time
-binaryninja_api_path = "/bin/binaryninja/python/"
+platform = sys.platform
+binaryninja_api_path = ""
+
+if "darwin" in platform:
+    binaryninja_api_path = "/Applications/Binary Ninja.app/Contents/Resources/python"
+elif "linux" in platform:
+    binaryninja_api_path = "/bin/binaryninja/python/"
+#binaryninja_api_path = "/bin/binaryninja/python/"
 sys.path.append(binaryninja_api_path)
 import binaryninja
 from binaryninja import PluginCommandContext, PluginCommand
@@ -10,10 +17,10 @@ from binaryninja import PluginCommandContext, PluginCommand
 def traverse_IL(il, indent):
   if isinstance(il, LowLevelILInstruction):
     print('\t'*indent + il.operation.name)
- 
+
     for o in il.operands:
       traverse_IL(o, indent+1)
- 
+
   else:
     print('\t'*indent + str(il))
 
@@ -28,8 +35,7 @@ bv.update_analysis_and_wait()
 for f in bv.functions:
     print("\nFunction " + f.name)
     for i in f.lifted_il:
-	for ins in i.disassembly_text:
-		print(ins)
+        for ins in i.disassembly_text:
+            print(ins)
 	#help(i)
 	#sys.exit(0)
-
